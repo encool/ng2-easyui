@@ -1,0 +1,21 @@
+<div style="width: 800px">
+    <h1>{{euGridOptions.title}}</h1>
+    <div style="display: flex;">
+        <span class="fill-remaining-space"></span>
+        <button md-icon-button 
+            [color]="action.style || defaultAtcions[action.curdType].style"
+            (click)="onAction(action)"
+            *ngFor="let action of euGridOptions.actions">
+            <md-icon class="md-24" 
+                [attr.aria-label]="action.name"
+                [attr.title]="action.name">
+                    {{action.icon || defaultAtcions[action.curdType].icon}}
+            </md-icon>
+        </button>
+
+    </div>
+    <ag-grid-angular style="width: 100%;" class="ag-blue" [gridOptions]="aggridOptions" (gridReady)="gridReady($event)">
+    </ag-grid-angular>
+    <md-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
+    </md-paginator>
+</div>
