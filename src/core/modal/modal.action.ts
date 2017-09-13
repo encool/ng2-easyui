@@ -1,5 +1,5 @@
-import { BaseAction } from './action'
-export abstract class ModalAction extends BaseAction {
+import { BaseAction } from '../../../core/action'
+export class ModalAction extends BaseAction {
     isCancel: boolean
     isClose: boolean
     isReset: boolean
