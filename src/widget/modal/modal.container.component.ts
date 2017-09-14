@@ -20,6 +20,7 @@ export class ModalContainerComponent implements OnInit {
         success,
         dismiss
     }
+    title: string
     actions: ModalAction[]
     cmpRef: ComponentRef<OnModalAction>
     @ViewChild('wrapper', { read: ViewContainerRef }) wrapperRef: ViewContainerRef;
@@ -31,6 +32,7 @@ export class ModalContainerComponent implements OnInit {
         @Inject(MD_DIALOG_DATA) public data: any) {
         // debugger
         this.euMdParams = data.euMdParams
+        this.title = this.euMdParams.title || "弹出表单"
         this.actions = this.euMdParams.modalActions
     }
 
