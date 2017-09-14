@@ -18,13 +18,13 @@ export class MdModalService extends EuModalService {
     }
 
     _default_actions: Array<ModalAction> = [
-        new ModalAction({ key: "cancel", name: "取消", order: 1, cancel: true, style: "default" }),
-        new ModalAction({ key: "close", name: "保存", order: 2, close: true })
+        new ModalAction({ key: "cancel", name: "取消", order: 1, isCancel: true, style: "default" }),
+        new ModalAction({ key: "close", name: "保存", order: 2, isClose: true })
     ]
 
     _confirm_actions: Array<ModalAction> = [
-        new ModalAction({ key: "cancel", name: "取消", order: 1, cancel: true, style: "default" }),
-        new ModalAction({ key: "close", name: "确定", order: 2, close: true })
+        new ModalAction({ key: "cancel", name: "取消", order: 1, isCancel: true, style: "default" }),
+        new ModalAction({ key: "close", name: "确定", order: 2, isClose: true })
     ]
     _smodalstack = []
     // _ref:ComponentRef<SimpleModalComponent>
@@ -32,14 +32,14 @@ export class MdModalService extends EuModalService {
         super()
     }
 
-    openMdDialog<T>(component: T, mdDialogConfig: MdDialogConfig, success?: Function, dismiss?: Function): void {
+    openMdDialog<T extends Type<any>>(component: T, mdDialogConfig: MdDialogConfig, success?: Function, dismiss?: Function): void {
         let dialogRef: MdDialogRef<T> = this.dialog.open<T>(component, mdDialogConfig);
 
-        dialogRef.afterClosed().subscribe(result => {
-            if (success) {
-                success(result)
-            }
-        });
+        // dialogRef.afterClosed().subscribe(result => {
+        //     if (success) {
+        //         success(result)
+        //     }
+        // });
     }
 
     openConfirm<T>(
@@ -75,20 +75,26 @@ export class MdModalService extends EuModalService {
     open(
         modalOptions: ModalConfig,
         success?: Function, dismiss?: Function) {
-        let data: any = modalOptions.data
+        let data: any = modalOptions.data || {}
         let euMdParams: any = {}
-        euMdParams.modalActions = modalOptions.modalActions
+        euMdParams.component = modalOptions.component
+        euMdParams.modalActions = modalOptions.modalActions == undefined ? this._default_actions : modalOptions.modalActions
         euMdParams.title = modalOptions.title
         euMdParams.message = modalOptions.message
+        euMdParams.success = success
+        euMdParams.dismiss = dismiss
         data.euMdParams = euMdParams
-
+        // debugger
         let mdDialogConfig: MdDialogConfig = {
             data: data,
             height: modalOptions.height,
-            width: modalOptions.width
+            position:{
+                top:"100px"
+            },
+            width: modalOptions.width || '800px',
+            viewContainerRef: modalOptions.viewContainerRef
         }
-        let component = modalOptions.component
-        this.openMdDialog(component, mdDialogConfig, success, dismiss)
+        this.openMdDialog(ModalContainerComponent, mdDialogConfig, success, dismiss)
         // let myComponentFactory = modalContext.componentFactoryResolver.resolveComponentFactory(SimpleModalComponent);
         // let _ref: ComponentRef<SimpleModalComponent> = modalContext.vcRef.createComponent(myComponentFactory);
         // // let _ref: ComponentRef<SimpleModalComponent> = this._modal_context.vcRef.createComponent(myComponentFactory);

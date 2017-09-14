@@ -1,4 +1,4 @@
-import { Type } from '@angular/core'
+import { Type, ViewContainerRef } from '@angular/core'
 import { ModalAction } from './modal.action'
 export declare class ModalConfig {
     /**
@@ -7,7 +7,7 @@ export declare class ModalConfig {
      * component instantiated inside of the dialog. This does not affect where the dialog
      * content will be rendered.
      */
-    // viewContainerRef?: ViewContainerRef;
+    viewContainerRef?: ViewContainerRef;
     /** ID for the dialog. If omitted, a unique one will be generated. */
     id?: string;
     /** The ARIA role of the dialog element. */

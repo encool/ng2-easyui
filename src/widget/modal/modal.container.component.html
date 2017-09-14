@@ -4,6 +4,7 @@
   </ng-template>    
 </md-dialog-content>
 <md-dialog-actions>
-  <button md-button [md-dialog-close]="true" tabindex="1">Install</button>
-  <button md-button md-dialog-close tabindex="-1">Cancel</button>
+  <!-- <button md-button [md-dialog-close]="true" tabindex="1">Install</button> -->
+  <span style="flex: 1 1 auto;"></span>
+  <button md-button *ngFor="let action of actions" (click)="onActionClick(action)">{{action.name}}</button>
 </md-dialog-actions>

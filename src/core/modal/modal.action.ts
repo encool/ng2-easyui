@@ -1,4 +1,4 @@
-import { BaseAction } from '../../../core/action'
+import { BaseAction } from '../action'
 export class ModalAction extends BaseAction {
     isCancel: boolean
     isClose: boolean
@@ -6,7 +6,6 @@ export class ModalAction extends BaseAction {
     constructor(options:
         BaseAction &
         {
-
             isCancel?: boolean
             isClose?: boolean
             isReset?: boolean

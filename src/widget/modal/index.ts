@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MdDialogModule } from '@angular/material';
+import { MdDialogModule, MdButtonModule } from '@angular/material';
 
 import { ModalContainerComponent } from './modal.container.component'
 import { MdModalService } from './md-modal.service'
@@ -9,7 +9,8 @@ import { MdModalService } from './md-modal.service'
 @NgModule({
     imports: [
         CommonModule,
-        MdDialogModule
+        MdDialogModule,
+        MdButtonModule
     ],
     exports: [
         ModalContainerComponent
@@ -21,9 +22,10 @@ import { MdModalService } from './md-modal.service'
         MdModalService
     ],
     entryComponents: [
-
+        ModalContainerComponent
     ]
 })
-export class EasyUIagGridModule { }
+export class EasyUIMdModalModule { }
 
-export * from '././modal.container.component'
+export * from './modal.container.component'
+export * from './md-modal.service'
