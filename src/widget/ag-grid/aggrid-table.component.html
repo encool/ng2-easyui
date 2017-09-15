@@ -1,12 +1,14 @@
 <div style="width: 800px">
     <h1>{{euGridOptions.title}}</h1>
     <div style="display: flex;">
-        <span class="fill-remaining-space"></span>
+        <span style="flex: 1 1 auto;"></span>
         <button md-icon-button 
             [color]="action.style || defaultAtcions[action.curdType].style"
             (click)="onAction(action)"
             *ngFor="let action of euGridOptions.actions">
             <md-icon class="md-24" 
+                [mdTooltip]="action.name" 
+                mdTooltipPosition="above"
                 [attr.aria-label]="action.name"
                 [attr.title]="action.name">
                     {{action.icon || defaultAtcions[action.curdType].icon}}
@@ -14,8 +16,14 @@
         </button>
 
     </div>
-    <ag-grid-angular style="width: 100%;" class="ag-blue" [gridOptions]="aggridOptions" (gridReady)="gridReady($event)">
-    </ag-grid-angular>
+    <!-- class="ag-blue"  -->
+    <div class="eu-md-table-container">
+        <ag-grid-angular style="width: 100%;" 
+            class="ag-theme-material" 
+            [gridOptions]="aggridOptions" 
+            (gridReady)="gridReady($event)">
+        </ag-grid-angular>
+    </div>
     <md-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
     </md-paginator>
 </div>

@@ -19,12 +19,12 @@ export class MdModalService extends EuModalService {
 
     _default_actions: Array<ModalAction> = [
         new ModalAction({ key: "cancel", name: "取消", order: 1, isCancel: true, style: "default" }),
-        new ModalAction({ key: "close", name: "保存", order: 2, isClose: true })
+        new ModalAction({ key: "close", name: "保存", order: 2, isClose: true, style: "primary" })
     ]
 
     _confirm_actions: Array<ModalAction> = [
         new ModalAction({ key: "cancel", name: "取消", order: 1, isCancel: true, style: "default" }),
-        new ModalAction({ key: "close", name: "确定", order: 2, isClose: true })
+        new ModalAction({ key: "close", name: "确定", order: 2, isClose: true, style: "primary" })
     ]
     _smodalstack = []
     // _ref:ComponentRef<SimpleModalComponent>
@@ -88,10 +88,10 @@ export class MdModalService extends EuModalService {
         let mdDialogConfig: MdDialogConfig = {
             data: data,
             height: modalOptions.height,
-            position:{
-                top:"100px"
+            position: {
+                top: "120px"
             },
-            width: modalOptions.width || '800px',
+            width: modalOptions.width,
             viewContainerRef: modalOptions.viewContainerRef
         }
         this.openMdDialog(ModalContainerComponent, mdDialogConfig, success, dismiss)
