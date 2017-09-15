@@ -16,8 +16,14 @@
         </button>
 
     </div>
-    <ag-grid-angular style="width: 100%;" class="ag-blue" [gridOptions]="aggridOptions" (gridReady)="gridReady($event)">
-    </ag-grid-angular>
+    <!-- class="ag-blue"  -->
+    <div class="eu-md-table-container">
+        <ag-grid-angular style="width: 100%;" 
+            class="ag-theme-material" 
+            [gridOptions]="aggridOptions" 
+            (gridReady)="gridReady($event)">
+        </ag-grid-angular>
+    </div>
     <md-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
     </md-paginator>
 </div>
