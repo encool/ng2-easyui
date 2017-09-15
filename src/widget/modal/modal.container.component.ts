@@ -37,6 +37,7 @@ export class ModalContainerComponent implements OnInit {
     }
 
     onActionClick(action: ModalAction): void {
+        // debugger
         if (action.isClose) {
             let result = this.cmpRef.instance.onModalClose()
             if (result instanceof Observable) {
@@ -54,14 +55,16 @@ export class ModalContainerComponent implements OnInit {
             }
 
         } else if (action.isCancel) {
-            let result = this.cmpRef.instance.onModalClose()
+            let result = this.cmpRef.instance.onModalDismiss()
             if (result instanceof Observable) {
                 result.subscribe(data => {
+                    this.dialogRef.close()                    
                     if (this.euMdParams.dismiss) {
                         this.euMdParams.dismiss(data, action)
                     }
                 })
             } else {
+                this.dialogRef.close()
                 if (this.euMdParams.dismiss) {
                     this.euMdParams.dismiss(result, action)
                 }
@@ -71,11 +74,13 @@ export class ModalContainerComponent implements OnInit {
                 let result = this.cmpRef.instance.onModalAction(action)
                 if (result instanceof Observable) {
                     result.subscribe(data => {
+                        this.dialogRef.close()                      
                         if (this.euMdParams.success) {
                             this.euMdParams.success(data, action)
                         }
                     })
                 } else {
+                    this.dialogRef.close()                    
                     if (this.euMdParams.success) {
                         this.euMdParams.success(result, action)
                     }

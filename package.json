@@ -31,8 +31,10 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
+    "@types/node": "^8.0.28",
     "ag-grid": "^13.1.2",
     "ag-grid-angular": "^13.1.1",
+    "mockjs": "^1.0.1-beta3",
     "ng2-easyform": "0.0.5"
   }
 }

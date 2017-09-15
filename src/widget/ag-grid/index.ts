@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MdButtonModule, MdIconModule, MdPaginatorModule } from '@angular/material';
+import { MdButtonModule, MdIconModule, MdPaginatorModule, MdTooltipModule, MdSnackBarModule } from '@angular/material';
 import { AgGridModule } from 'ag-grid-angular/main';
 
 import { AggridComponent } from './aggrid-table.component'
@@ -12,10 +12,12 @@ import { AggridComponent } from './aggrid-table.component'
         MdButtonModule,
         MdIconModule,
         MdPaginatorModule,
-        AgGridModule,
+        MdTooltipModule,
+        MdSnackBarModule,
+        AgGridModule.withComponents([]),
     ],
     exports: [
-        AggridComponent
+        AggridComponent,
     ],
     declarations: [
         AggridComponent

@@ -1,6 +1,6 @@
 import { Component, Inject, ViewContainerRef } from '@angular/core';
 
-import { EasyUIMdModalModule, MdModalService, ModalConfig } from '../../../'
+import { EasyUIMdModalModule, MdModalService, ModalConfig, EuModalService } from '../../'
 
 import { MD_DIALOG_DATA, MdDialog } from "@angular/material"
 
@@ -12,7 +12,7 @@ import { MD_DIALOG_DATA, MdDialog } from "@angular/material"
 export class AppComponent {
   title = 'app';
 
-  constructor(private mdModalService: MdModalService, private mdDialog: MdDialog, private viewContainerRef: ViewContainerRef) {
+  constructor(private mdModalService: EuModalService, private mdDialog: MdDialog, private viewContainerRef: ViewContainerRef) {
 
   }
 
@@ -24,7 +24,7 @@ export class AppComponent {
       },
       // viewContainerRef:this.viewContainerRef,
     }
-    this.mdModalService.open(mc,(result)=>{
+    this.mdModalService.open(mc, (result) => {
       debugger
     })
     // this.mdDialog.open(DialogDataExampleDialog, {
@@ -35,7 +35,7 @@ export class AppComponent {
   }
 }
 
-import { OnModalAction } from '../../../'
+import { OnModalAction } from '../../'
 
 @Component({
   selector: 'dialog-data-example-dialog',

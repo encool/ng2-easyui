@@ -1,10 +1,19 @@
 import { Component, Input, ViewChild, OnInit, Type } from "@angular/core";
-import { PageEvent, MdPaginator, MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { PageEvent, MdPaginator, MdDialog, MdDialogRef, MdSnackBar, MD_DIALOG_DATA } from '@angular/material';
 
 import { GridOptions, IDatasource, IDateParams, IGetRowsParams, ColDef } from "ag-grid/main";
 // import { StyledComponent } from "./styled-render.component";
 
-import { EuPageService, EuGridOptions, EuColModel, GridApi, EuGridAction } from '../../core/'
+import {
+    EuPageService,
+    EuGridOptions,
+    EuColModel,
+    GridApi,
+    EuGridAction,
+    EuGridEvent,
+    EuModalService,
+    ModalConfig
+} from '../../core/'
 
 import { localeText } from './aggrid-local'
 
@@ -62,7 +71,11 @@ export class AggridComponent implements GridApi, OnInit {
     }
     // MdPaginator Output
     // pageEvent: PageEvent;
-    constructor(private pageService: EuPageService, public dialog: MdDialog) {
+    constructor(
+        private euModalService: EuModalService,
+        private pageService: EuPageService,
+        public dialog: MdDialog,
+        public snackBar: MdSnackBar) {
         let cacheBlockSize = this.cacheBlockSize
         //infinite 模式使用
         this.myDataSource = {
@@ -110,17 +123,6 @@ export class AggridComponent implements GridApi, OnInit {
                 // debugger
                 return data[this.euGridOptions.primaryKey]
             }
-
-            // rowGroupPanelShow: 'always',
-            // pivotPanelShow: 'always',
-            // enableRangeSelection: true,
-            // autoGroupColumnDef: groupColumn,
-            // defaultColDef: {
-            //     editable: true,
-            //     enableRowGroup: true,
-            //     enablePivot: true,
-            //     enableValue: true
-            // }
         };
         // debugger
         this.url = this.euGridOptions.url
@@ -130,16 +132,19 @@ export class AggridComponent implements GridApi, OnInit {
     ngAfterViewInit() {
         // debugger
         this.paginator.page.subscribe(data => {
-            // debugger
+            debugger
             this.pageSize = this.paginator.pageSize
-            this.pageIndex = this.paginator.pageIndex
-            this.pageService.getPage(this.url, this.pageSize, this.pageIndex + 1, this.cond).then(data => {
-                this.length = data.total
-                this.rowData = data.contents
-                this.aggridOptions.api.setRowData(this.rowData);
-                // this.rowData = data
-            })
+            this.pageIndex = this.paginator.pageIndex + 1
+            this.refreshData(this.url, this.pageSize, this.pageIndex, this.cond)
+        })
+    }
 
+    refreshData(url: string, pageSize: number, pageIndex: number, cond: any) {
+        return this.pageService.getPage(url, pageSize, pageIndex, cond).then(data => {
+            this.length = data.total
+            this.rowData = data.contents
+            this.aggridOptions.api.setRowData(this.rowData);
+            // this.rowData = data
         })
     }
 
@@ -170,31 +175,47 @@ export class AggridComponent implements GridApi, OnInit {
     }
 
     openDialog(component: Type<any>, data: any): void {
-        let dialogRef = this.dialog.open(component, {
-            // width: '250px',
-            position: {
-                top: "120px"
-            },
+        let modalConfig: ModalConfig = {
+            component: component,
             data: data
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
+        }
+        this.euModalService.open(modalConfig, (result) => {
+            // debugger
             this.refresh()
-            // this.animal = result;
-        });
+        }, (result) => {
+            // debugger
+            this.refresh()
+        })
     }
 
     onAction(action: EuGridAction) {
         // debugger
+        let ids = this.getSelectedRowIds()
+        let datas = this.getSelectedDatas()
+        let ege: EuGridEvent = new EuGridEvent(
+            this.euGridOptions.gridId,
+            action,
+            ids.length > 0 ? ids[0] : undefined,
+            ids,
+            datas.length > 0 ? datas[0] : undefined,
+            datas,
+        )
         switch (action.curdType) {
             case EuGridAction.TYPE_CREATE:
                 let component = action.component || this.euGridOptions.defaultActionComponent
-                this.openDialog(component, { type: action.curdType })
+                this.openDialog(component, {
+                    euGridEvent: ege
+                })
                 break
             case EuGridAction.TYPE_UPDATE:
-                let component1 = action.component || this.euGridOptions.defaultActionComponent
-                this.openDialog(component1, { type: action.curdType })
+                if (ids.length == 1) {
+                    let component1 = action.component || this.euGridOptions.defaultActionComponent
+                    this.openDialog(component1, { euGridEvent: ege })
+                } else {
+                    this.snackBar.open('请选择一条记录！', '关闭', {
+                        duration: 800
+                    });
+                }
                 break
             case EuGridAction.TYPE_QUERY:
                 break
@@ -208,7 +229,7 @@ export class AggridComponent implements GridApi, OnInit {
     }
 
     refresh() {
-
+        this.refreshData(this.url, this.pageSize, this.pageIndex, this.cond)
     }
 
     addParams: (params, fresh?: boolean) => void
@@ -233,10 +254,10 @@ export class AggridComponent implements GridApi, OnInit {
     }
     //获取所有选中的行的主列值，返回数组
     getSelectedRowIds = () => {
-        let ids: any[]
+        let ids: any[] = []
         let datas: any[] = this.aggridOptions.api.getSelectedRows()
         datas.forEach(v => {
-            ids.push(v.this.euGridOptions.primaryKey)
+            ids.push(v[this.euGridOptions.primaryKey])
         })
         return ids
     }

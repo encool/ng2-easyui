@@ -5,6 +5,7 @@ import { MdDialogModule, MdButtonModule } from '@angular/material';
 
 import { ModalContainerComponent } from './modal.container.component'
 import { MdModalService } from './md-modal.service'
+import { EuModalService } from '../../core/'
 
 @NgModule({
     imports: [
@@ -19,7 +20,7 @@ import { MdModalService } from './md-modal.service'
         ModalContainerComponent
     ],
     providers: [
-        MdModalService
+        { provide: EuModalService, useClass: MdModalService, },
     ],
     entryComponents: [
         ModalContainerComponent

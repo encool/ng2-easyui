@@ -6,5 +6,5 @@
 <md-dialog-actions>
   <!-- <button md-button [md-dialog-close]="true" tabindex="1">Install</button> -->
   <span style="flex: 1 1 auto;"></span>
-  <button md-button *ngFor="let action of actions" (click)="onActionClick(action)">{{action.name}}</button>
+  <button md-raised-button *ngFor="let action of actions" [color]="action.style" (click)="onActionClick(action)">{{action.name}}</button>
 </md-dialog-actions>
