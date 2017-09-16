@@ -1,8 +1,18 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 
-import { EuGridOptions, EuColModel, EuGridEvent, AggridComponent, ColDef } from '../../../'
+import { EuGridOptions, EuColModel, EuGridEvent, AggridComponent, ColDef, ColGroupDef } from '../../../'
 
 import { ModalInfoComponent } from '../modal/modal.info.component'
+
+import {
+    FieldBase,
+    MdTextinputField,
+    MdTextareaField,
+    MdDatepickerField,
+    MdSelectField,
+    MdFormComponent,
+    MdCheckboxField
+} from 'ng2-easyform'
 
 @Component({
     selector: 'eu-aggrid-demo',
@@ -15,32 +25,31 @@ export class EuAggridDemoComponent implements OnInit {
 
     // EuColModels: EuColModel[]
     euGridOptions: EuGridOptions
-    agGridColDefs: ColDef[]
+    agGridColDefs: (ColDef | ColGroupDef)[]
 
     constructor(private _ngZone: NgZone) {
 
         this.agGridColDefs = [
+            // {
+            //     headerName: "编号",
+            //     field: "categoryNo",
+            //     children: [
+            //         {
+            //             headerName: "categoryNo",
+            //             field: "categoryNo",
+            //             checkboxSelection: true,
+            //             headerCheckboxSelection: true,
+            //         },
+            //         { headerName: "categoryName", field: "categoryName" },                    
+            //     ],
+            // },
             {
-                headerName: "编号",
+                headerName: "categoryNo",
                 field: "categoryNo",
                 checkboxSelection: true,
                 headerCheckboxSelection: true,
-                // filterParams: { newRowsAction: 'keep' },     
-                // width: 400,
-                // pinnedRowCellRendererFramework: StyledComponent,
-                // pinnedRowCellRendererParams: {
-                //     style: { 'font-weight': 'bold' }
-                // }
             },
-            {
-                headerName: "名称",
-                field: "categoryName",
-                // width: 399,
-                // pinnedRowCellRendererFramework: StyledComponent,
-                // pinnedRowCellRendererParams: {
-                //     style: { 'font-style': 'italic' }
-                // }
-            },
+            { headerName: "categoryName", field: "categoryName" },
             {
                 headerName: "URL",
                 field: "url",
@@ -59,7 +68,32 @@ export class EuAggridDemoComponent implements OnInit {
             // url: 'list/e/webdisplaycategory',
             url: "ls/list/form/webdiscategorymanage",
             defaultaction: true,
-            rowNum: 10
+            rowNum: 10,
+            queryfields: [
+                new MdTextinputField({
+                    key: "userName",
+                    label: "用户名",
+                    // required: true,
+                    span: 4,
+                    valueChange: (value) => {
+                        this
+                        // debugger
+                    }
+                }),
+                new MdDatepickerField({
+                    key: "bornTime",
+                    label: "出生日期",
+                    // required: true,
+                    span: 4,
+                }),
+                new MdDatepickerField({
+                    key: "inTime",
+                    label: "入职日期",
+                    // required: true,
+                    // disabled: true,
+                    span: 4,
+                }),
+            ]
         })
     }
 

@@ -14,6 +14,16 @@ export class PageService extends EuPageService {
         super(http)
     }
 
+    /**
+     * 
+     * @param url 
+     * @param rows 
+     * @param page 
+     * @param cond 
+     * @param sidx sort index
+     * @param sord sord col
+     * @param _search 
+     */
     getPage(url: string, rows: number, page: number,
         cond?: Object, sidx?: string, sord?: string, _search?: boolean): Promise<any> {
         let urlSearchParams = new URLSearchParams();

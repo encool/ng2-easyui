@@ -1,11 +1,9 @@
-<div style="width: 800px">
+<div [style.width]="tableWidth">
     <h1>{{euGridOptions.title}}</h1>
     <div style="display: flex;">
         <span style="flex: 1 1 auto;"></span>
-        <button md-icon-button 
-            [color]="action.style || defaultAtcions[action.curdType].style"
-            (click)="onAction(action)"
-            *ngFor="let action of euGridOptions.actions">
+        <button md-icon-button [color]="action.style || defaultAtcions[action.curdType].style"
+            (click)="onAction(action)" *ngFor="let action of euGridOptions.actions">
             <md-icon class="md-24" 
                 [mdTooltip]="action.name" 
                 mdTooltipPosition="above"
@@ -14,16 +12,22 @@
                     {{action.icon || defaultAtcions[action.curdType].icon}}
             </md-icon>
         </button>
-
     </div>
+    <md-expansion-panel [expanded]="queryExpanded">
+        <ef-md-form [fields]="queryfields"></ef-md-form>
+        <md-action-row>
+            <button md-button (click)="query($event)">查询</button>
+            <button md-button (click)="reset($event)">重置</button>
+        </md-action-row>
+    </md-expansion-panel>
     <!-- class="ag-blue"  -->
     <div class="eu-md-table-container">
-        <ag-grid-angular style="width: 100%;" 
-            class="ag-theme-material" 
-            [gridOptions]="aggridOptions" 
-            (gridReady)="gridReady($event)">
+        <ag-grid-angular style="width: 100%;" class="ag-theme-material"
+            [gridOptions]="aggridOptions" (gridReady)="gridReady($event)"
+            (sortChanged)="onSortChanged($event)">
         </ag-grid-angular>
     </div>
-    <md-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
+    <md-paginator #paginator [length]="length" [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
     </md-paginator>
 </div>

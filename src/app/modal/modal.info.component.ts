@@ -16,7 +16,7 @@ export class ModalInfoComponent implements OnModalAction {
 
     ege: EuGridEvent
     constructor( @Inject(MD_DIALOG_DATA) public data: any) {
-        debugger
+        // debugger
         this.ege = data.euGridEvent
     }
 
@@ -24,7 +24,7 @@ export class ModalInfoComponent implements OnModalAction {
         return new Observable(observer => {
             setTimeout(() => {
                 observer.next(42);
-            }, 1000);
+            }, 100);
         });
     }
 
@@ -32,7 +32,7 @@ export class ModalInfoComponent implements OnModalAction {
         return new Observable(observer => {
             setTimeout(() => {
                 observer.next(43);
-            }, 1000);
+            }, 100);
         });
     }
 }

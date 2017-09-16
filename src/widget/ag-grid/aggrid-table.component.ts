@@ -1,9 +1,7 @@
 import { Component, Input, ViewChild, OnInit, Type } from "@angular/core";
 import { PageEvent, MdPaginator, MdDialog, MdDialogRef, MdSnackBar, MD_DIALOG_DATA } from '@angular/material';
-
-import { GridOptions, IDatasource, IDateParams, IGetRowsParams, ColDef } from "ag-grid/main";
+import { GridOptions, IDatasource, IDateParams, IGetRowsParams, ColDef, ColGroupDef } from "ag-grid/main";
 // import { StyledComponent } from "./styled-render.component";
-
 import {
     EuPageService,
     EuGridOptions,
@@ -12,16 +10,25 @@ import {
     EuGridAction,
     EuGridEvent,
     EuModalService,
-    ModalConfig
+    ModalConfig,
+    Conditions,
+    Rule,
 } from '../../core/'
 
 import { localeText } from './aggrid-local'
+import {
+    FieldBase,
+    MdFormComponent,
+    QueryOperate
+} from 'ng2-easyform'
+
+import * as _ from "lodash"
 
 @Component({
     selector: 'eu-aggrid',
     templateUrl: './aggrid-table.component.html',
     styles: [
-`   
+        `   
 .eu-md-table-container {
     transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
     display: block;
@@ -40,7 +47,7 @@ export class AggridComponent implements GridApi, OnInit {
     @Input() euColModels: EuColModel[]
     @Input() euGridOptions: EuGridOptions
 
-    @Input() agGridColDefs: ColDef[]
+    @Input() agGridColDefs: (ColDef | ColGroupDef)[]
     @Input() rowModelType: string = 'inMemory' //{inMemory, infinite, viewport, enterprise}
 
     aggridOptions: GridOptions;
@@ -54,11 +61,22 @@ export class AggridComponent implements GridApi, OnInit {
     pageSizeOptions = [5, 10, 25, 100];
     pageIndex: number = 1
     cond: any
+    sidx: string
+    sord: string
+    queryExpanded: boolean = false
+    @Input() tableWidth: string = "1000px"
+    queryfields: FieldBase<any>[]
+
+    //表格的初始化参数
+    @Input() originParams: any = {}
+    //初始化的查询参数
+    originQueryParams: any = {}
 
     lastRow: number = 0
     cacheBlockSize: number = 10
 
-    @ViewChild(MdPaginator) paginator: MdPaginator;
+    @ViewChild(MdPaginator) paginator: MdPaginator
+    @ViewChild(MdFormComponent) queryForm: MdFormComponent
     pageEvent: PageEvent
 
     defaultAtcions = {
@@ -95,7 +113,7 @@ export class AggridComponent implements GridApi, OnInit {
         this.myDataSource = {
             // Callback the grid calls that you implement to fetch rows from the server. See below for params.
             getRows(params: IGetRowsParams) {
-                // debugger
+                
                 console.log('asking for ' + params.startRow + ' to ' + params.endRow);
                 // At this point in your code, you would call the server, using $http if in AngularJS 1.x.
                 // To make the demo look real, wait for 500ms before returning
@@ -114,6 +132,7 @@ export class AggridComponent implements GridApi, OnInit {
     }
 
     ngOnInit() {
+        this.queryfields = this.euGridOptions.queryfields
         this.aggridOptions = <GridOptions>{
 
             columnDefs: this.createColumnDefs(),
@@ -134,27 +153,69 @@ export class AggridComponent implements GridApi, OnInit {
             // debug: true,
             rowSelection: 'multiple',
             getRowNodeId: (data) => {
-                // debugger
+                
                 return data[this.euGridOptions.primaryKey]
-            }
+            },
+
         };
-        // debugger
+        
         this.url = this.euGridOptions.url
 
     }
 
     ngAfterViewInit() {
-        // debugger
+        
         this.paginator.page.subscribe(data => {
-            debugger
+            
             this.pageSize = this.paginator.pageSize
             this.pageIndex = this.paginator.pageIndex + 1
-            this.refreshData(this.url, this.pageSize, this.pageIndex, this.cond)
+            this.refreshData(this.url, this.pageSize, this.pageIndex, this.cond, this.sidx, this.sord)
+        })
+
+        this.queryForm.form.valueChanges.subscribe(value => {
+            
         })
     }
 
-    refreshData(url: string, pageSize: number, pageIndex: number, cond: any) {
-        return this.pageService.getPage(url, pageSize, pageIndex, cond).then(data => {
+    query($event) {
+        let postData = this.queryForm.form.value
+        let queryParams = {}
+        _.assign(queryParams, this.originParams, postData)
+        
+        this.doQueryParams(queryParams, this.queryfields)
+        this.refresh(queryParams)
+    }
+
+    reset($event) {
+        
+        this.queryForm.form.reset()
+        this.queryForm.form.patchValue(this.originQueryParams)
+        this.refresh(this.originParams)
+    }
+
+    private doQueryParams(queryParams: any, fields: FieldBase<any>[]) {
+        let rules: Rule[] = []
+        for (let p in queryParams) {
+            fields.forEach((v) => {
+                if (v.key == p && queryParams[p] && v.op) {
+                    let filtersbefore = queryParams.filters
+                    let rule = new Rule(v.key, v.op.name, queryParams[p])
+                    rules.push(rule)
+
+                    delete queryParams[p]
+                    // queryParams.
+                }
+                
+            })
+        }
+        if (rules.length > 0) {
+            let con = new Conditions("AND", rules, [])
+            queryParams.filters = con
+        }
+    }
+
+    refreshData(url: string, pageSize: number, pageIndex: number, cond: any, sidx: string, sord: string) {
+        return this.pageService.getPage(url, pageSize, pageIndex, cond, sidx, sord).then(data => {
             this.length = data.total
             this.rowData = data.contents
             this.aggridOptions.api.setRowData(this.rowData);
@@ -163,9 +224,9 @@ export class AggridComponent implements GridApi, OnInit {
     }
 
     gridReady($event) {
-        // debugger
+        
         this.aggridOptions.api.sizeColumnsToFit()
-        // debugger
+        
         if (this.rowModelType == 'inMemory') {
             this.pageService.getPage(this.url, this.pageSize, this.pageIndex, this.cond).then(data => {
                 this.length = data.total
@@ -176,6 +237,20 @@ export class AggridComponent implements GridApi, OnInit {
         }
     }
 
+    onSortChanged($event) {
+        let sortModel = this.aggridOptions.api.getSortModel()
+        let sortCol = sortModel[0]
+        if (sortCol) {
+            this.sidx = sortCol.colId
+            this.sord = sortCol.sort
+            setTimeout(() => {
+
+                this.refresh()
+            });
+        }
+        debugger
+    }
+
     private createColumnDefs() {
         if (this.euColModels) {
             let colDefs: ColDef[]
@@ -184,8 +259,23 @@ export class AggridComponent implements GridApi, OnInit {
             })
             return colDefs;
         } else {
+            this.attachComparatorToColDefs(this.agGridColDefs)
+            
             return this.agGridColDefs
         }
+    }
+
+    attachComparatorToColDefs(defs: any[]) {
+        defs.forEach((v) => {
+            if (v.children) {
+                this.attachComparatorToColDefs(v.children)
+            } else {
+                v.comparator = function (valueA, valueB, nodeA, nodeB, isInverted) {
+                    
+                    return 0
+                }
+            }
+        })
     }
 
     openDialog(component: Type<any>, data: any): void {
@@ -194,16 +284,16 @@ export class AggridComponent implements GridApi, OnInit {
             data: data
         }
         this.euModalService.open(modalConfig, (result) => {
-            // debugger
+            
             this.refresh()
         }, (result) => {
-            // debugger
+            
             this.refresh()
         })
     }
 
     onAction(action: EuGridAction) {
-        // debugger
+        
         let ids = this.getSelectedRowIds()
         let datas = this.getSelectedDatas()
         let ege: EuGridEvent = new EuGridEvent(
@@ -232,6 +322,7 @@ export class AggridComponent implements GridApi, OnInit {
                 }
                 break
             case EuGridAction.TYPE_QUERY:
+                this.queryExpanded = !this.queryExpanded
                 break
             case EuGridAction.TYPE_READ:
                 this.refresh()
@@ -242,8 +333,8 @@ export class AggridComponent implements GridApi, OnInit {
         }
     }
 
-    refresh() {
-        this.refreshData(this.url, this.pageSize, this.pageIndex, this.cond)
+    refresh(params?: any) {
+        this.refreshData(this.url, this.pageSize, this.pageIndex, params || this.cond, this.sidx, this.sord)
     }
 
     addParams: (params, fresh?: boolean) => void

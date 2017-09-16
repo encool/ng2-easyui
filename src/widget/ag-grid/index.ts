@@ -1,10 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MdButtonModule, MdIconModule, MdPaginatorModule, MdTooltipModule, MdSnackBarModule, MdCardModule } from '@angular/material';
+import {
+    MdButtonModule,
+    MdIconModule,
+    MdPaginatorModule,
+    MdTooltipModule,
+    MdSnackBarModule,
+    // MdCardModule,
+    MdInputModule,
+    MdExpansionModule,
+} from '@angular/material';
 import { AgGridModule } from 'ag-grid-angular/main';
-
 import { AggridComponent } from './aggrid-table.component'
+
+import { EasyFormMdModule } from 'ng2-easyform'
 
 @NgModule({
     imports: [
@@ -14,7 +24,10 @@ import { AggridComponent } from './aggrid-table.component'
         MdPaginatorModule,
         MdTooltipModule,
         MdSnackBarModule,
-        MdCardModule,
+        // MdCardModule,
+        MdInputModule,
+        MdExpansionModule,
+        EasyFormMdModule,
         AgGridModule.withComponents([]),
     ],
     exports: [
@@ -33,4 +46,4 @@ import { AggridComponent } from './aggrid-table.component'
 export class EasyUIagGridModule { }
 
 export * from './aggrid-table.component'
-export { ColDef } from 'ag-grid/main'
+export { ColDef, ColGroupDef } from 'ag-grid/main'
