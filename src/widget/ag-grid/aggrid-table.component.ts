@@ -1,7 +1,8 @@
 import { Component, Input, ViewChild, OnInit, Type } from "@angular/core";
 import { PageEvent, MdPaginator, MdDialog, MdDialogRef, MdSnackBar, MD_DIALOG_DATA } from '@angular/material';
 import { GridOptions, IDatasource, IDateParams, IGetRowsParams, ColDef, ColGroupDef } from "ag-grid/main";
-// import { StyledComponent } from "./styled-render.component";
+import { debounce } from 'rxjs/operator/debounce'
+import { Observable } from 'rxjs'
 import {
     EuPageService,
     EuGridOptions,
@@ -113,7 +114,7 @@ export class AggridComponent implements GridApi, OnInit {
         this.myDataSource = {
             // Callback the grid calls that you implement to fetch rows from the server. See below for params.
             getRows(params: IGetRowsParams) {
-                
+
                 console.log('asking for ' + params.startRow + ' to ' + params.endRow);
                 // At this point in your code, you would call the server, using $http if in AngularJS 1.x.
                 // To make the demo look real, wait for 500ms before returning
@@ -153,41 +154,41 @@ export class AggridComponent implements GridApi, OnInit {
             // debug: true,
             rowSelection: 'multiple',
             getRowNodeId: (data) => {
-                
+
                 return data[this.euGridOptions.primaryKey]
             },
 
         };
-        
+
         this.url = this.euGridOptions.url
 
     }
 
     ngAfterViewInit() {
-        
+
         this.paginator.page.subscribe(data => {
-            
+
             this.pageSize = this.paginator.pageSize
             this.pageIndex = this.paginator.pageIndex + 1
             this.refreshData(this.url, this.pageSize, this.pageIndex, this.cond, this.sidx, this.sord)
         })
 
-        this.queryForm.form.valueChanges.subscribe(value => {
-            
+        this.queryForm.form.valueChanges.debounce(() => Observable.interval(800)).subscribe(value => {
+            this.query()
         })
     }
 
-    query($event) {
+    query($event?) {
         let postData = this.queryForm.form.value
         let queryParams = {}
         _.assign(queryParams, this.originParams, postData)
-        
+
         this.doQueryParams(queryParams, this.queryfields)
         this.refresh(queryParams)
     }
 
-    reset($event) {
-        
+    reset($event?) {
+
         this.queryForm.form.reset()
         this.queryForm.form.patchValue(this.originQueryParams)
         this.refresh(this.originParams)
@@ -205,7 +206,7 @@ export class AggridComponent implements GridApi, OnInit {
                     delete queryParams[p]
                     // queryParams.
                 }
-                
+
             })
         }
         if (rules.length > 0) {
@@ -224,9 +225,9 @@ export class AggridComponent implements GridApi, OnInit {
     }
 
     gridReady($event) {
-        
+
         this.aggridOptions.api.sizeColumnsToFit()
-        
+
         if (this.rowModelType == 'inMemory') {
             this.pageService.getPage(this.url, this.pageSize, this.pageIndex, this.cond).then(data => {
                 this.length = data.total
@@ -260,7 +261,7 @@ export class AggridComponent implements GridApi, OnInit {
             return colDefs;
         } else {
             this.attachComparatorToColDefs(this.agGridColDefs)
-            
+
             return this.agGridColDefs
         }
     }
@@ -271,7 +272,7 @@ export class AggridComponent implements GridApi, OnInit {
                 this.attachComparatorToColDefs(v.children)
             } else {
                 v.comparator = function (valueA, valueB, nodeA, nodeB, isInverted) {
-                    
+
                     return 0
                 }
             }
@@ -284,16 +285,16 @@ export class AggridComponent implements GridApi, OnInit {
             data: data
         }
         this.euModalService.open(modalConfig, (result) => {
-            
+
             this.refresh()
         }, (result) => {
-            
+
             this.refresh()
         })
     }
 
     onAction(action: EuGridAction) {
-        
+
         let ids = this.getSelectedRowIds()
         let datas = this.getSelectedDatas()
         let ege: EuGridEvent = new EuGridEvent(
