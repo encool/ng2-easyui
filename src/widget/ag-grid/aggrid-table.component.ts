@@ -181,6 +181,11 @@ export class AggridComponent implements GridApi, OnInit {
     query($event?) {
         // debugger
         let postData = this.queryForm.form.value
+        for (let key in postData) {
+            if (postData[key] == undefined || postData[key] == "") {
+                delete postData[key]
+            }
+        }
         let queryParams = {}
         _.assign(queryParams, this.originParams, postData)
 

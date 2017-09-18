@@ -61,6 +61,8 @@ export class PageService extends EuPageService {
                             return true
                         }
                     }
+                    //没有条件不过滤
+                    return true
                 })
                 let contents = data.splice(offset, offset + rows)
                 resolve(
