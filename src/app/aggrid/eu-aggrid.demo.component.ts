@@ -11,7 +11,8 @@ import {
     MdDatepickerField,
     MdSelectField,
     MdFormComponent,
-    MdCheckboxField
+    MdCheckboxField,
+    QueryOperate
 } from 'ng2-easyform'
 
 @Component({
@@ -44,12 +45,12 @@ export class EuAggridDemoComponent implements OnInit {
             //     ],
             // },
             {
-                headerName: "categoryNo",
+                headerName: "编号",
                 field: "categoryNo",
                 checkboxSelection: true,
                 headerCheckboxSelection: true,
             },
-            { headerName: "categoryName", field: "categoryName" },
+            { headerName: "名称", field: "categoryName" },
             {
                 headerName: "URL",
                 field: "url",
@@ -71,20 +72,17 @@ export class EuAggridDemoComponent implements OnInit {
             rowNum: 10,
             queryfields: [
                 new MdTextinputField({
-                    key: "userName",
-                    label: "用户名",
+                    key: "categoryNo",
+                    label: "编号",
                     // required: true,
                     span: 4,
-                    valueChange: (value) => {
-                        this
-                        // debugger
-                    }
                 }),
                 new MdDatepickerField({
-                    key: "bornTime",
-                    label: "出生日期",
+                    key: "categoryName",
+                    label: "名称",
                     // required: true,
                     span: 4,
+                    op:QueryOperate.cn                     
                 }),
                 new MdDatepickerField({
                     key: "inTime",

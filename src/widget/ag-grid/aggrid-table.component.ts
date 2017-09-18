@@ -173,12 +173,13 @@ export class AggridComponent implements GridApi, OnInit {
             this.refreshData(this.url, this.pageSize, this.pageIndex, this.cond, this.sidx, this.sord)
         })
 
-        this.queryForm.form.valueChanges.debounce(() => Observable.interval(800)).subscribe(value => {
+        this.queryForm.form.valueChanges.debounce(() => Observable.interval(400)).subscribe(value => {
             this.query()
         })
     }
 
     query($event?) {
+        // debugger
         let postData = this.queryForm.form.value
         let queryParams = {}
         _.assign(queryParams, this.originParams, postData)
@@ -199,11 +200,12 @@ export class AggridComponent implements GridApi, OnInit {
         for (let p in queryParams) {
             fields.forEach((v) => {
                 if (v.key == p && queryParams[p] && v.op) {
-                    let filtersbefore = queryParams.filters
-                    let rule = new Rule(v.key, v.op.name, queryParams[p])
-                    rules.push(rule)
-
-                    delete queryParams[p]
+                    if (v.op != QueryOperate.nomal) {
+                        let filtersbefore = queryParams.filters
+                        let rule = new Rule(v.key, v.op.name, queryParams[p])
+                        rules.push(rule)
+                        delete queryParams[p]
+                    }
                     // queryParams.
                 }
 
