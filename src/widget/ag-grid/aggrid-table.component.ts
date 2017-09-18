@@ -200,7 +200,7 @@ export class AggridComponent implements GridApi, OnInit {
         for (let p in queryParams) {
             fields.forEach((v) => {
                 if (v.key == p && queryParams[p] && v.op) {
-                    if (v.op != QueryOperate.nomal) {
+                    if (v.op.advanced) {
                         let filtersbefore = queryParams.filters
                         let rule = new Rule(v.key, v.op.name, queryParams[p])
                         rules.push(rule)
