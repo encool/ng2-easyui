@@ -6,7 +6,8 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+      "outDir": "D:/hntc3/hntc0629/c2-jp-console/src/main/webapp/demozl",
+      "deployUrl": "test/demozl",
       "assets": [
         "assets",
         "favicon.ico"

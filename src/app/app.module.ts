@@ -42,11 +42,14 @@ import { ModalInfoComponent } from './modal/modal.info.component'
 import { EuAggridDemoComponent } from './aggrid/eu-aggrid.demo.component'
 
 import { AppComponent, DialogDataExampleDialog } from './app.component';
-import { EasyUIMdModalModule, EasyUIagGridModule, EuPageService} from '../../'
+import { EasyUIMdModalModule, EasyUIagGridModule, EuPageService } from '../../'
 
 // import { AgGridModule } from 'ag-grid-angular/main';
 
-import { PageService } from './page.service'
+import { PageService } from './page.service';
+
+import { EasyUIRichSwipeModule } from '../../'
+import { RichSwipeDemoComponent } from './rich-swipe-demo/rich-swipe-demo.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,7 @@ import { PageService } from './page.service'
     DialogDataExampleDialog,
     ModalInfoComponent,
     EuAggridDemoComponent,
+    RichSwipeDemoComponent,
   ],
   imports: [
     BrowserModule,
@@ -96,6 +100,7 @@ import { PageService } from './page.service'
 
     EasyUIMdModalModule,
     EasyUIagGridModule,
+    EasyUIRichSwipeModule,
   ],
   providers: [
     { provide: EuPageService, useClass: PageService, },
