@@ -1,4 +1,4 @@
-import { Component, OnInit, QueryList, AfterViewInit, ViewChildren, ContentChildren } from '@angular/core';
+import { Component, OnInit, QueryList, AfterViewInit, ViewChildren, ContentChildren, Output, EventEmitter } from '@angular/core';
 import {
     trigger,
     state,
@@ -31,7 +31,8 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     (init)="onSwipeInit($event)"
     (swiperTransitionEnd)="swiperTransitionEnd($event)"
     (swiperTransitionStart)="swiperTransitionStart($event)"
-    (slideChangeStart)="slideChangeStart($event)">
+    (slideChangeStart)="slideChangeStart($event)"
+    (slideChangeEnd)="slideChangeEnd($event)">
         <ng-content></ng-content>    
   </swiper>
   `,
@@ -72,8 +73,11 @@ export class RichSwipeComponent implements OnInit, AfterViewInit {
         // debugger
     }
 
+    @Output() indexChange = new EventEmitter<number>();
     onIndexChange($event) {
-        // debugger
+        let index = $event
+        // let SwipeSlideComponent = this.getSlideByIndex(index)
+        this.indexChange.emit(index)
     }
 
     onSwipeInit($event) {
@@ -117,6 +121,9 @@ export class RichSwipeComponent implements OnInit, AfterViewInit {
             this.inOutStatus = 'in'
             this.log("swiperTransitionEnd---end")
         }, 800);
+    }
+    slideChangeEnd($event){
+        // debugger
     }
     //动画开始
     swiperTransitionStart($event) {

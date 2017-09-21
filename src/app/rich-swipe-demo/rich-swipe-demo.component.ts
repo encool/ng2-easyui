@@ -10,6 +10,11 @@ export class RichSwipeDemoComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+  }
+
+  onIndexChange($event) {
+    // debugger
   }
 
 }
