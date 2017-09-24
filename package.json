@@ -34,11 +34,11 @@
     "@types/node": "^8.0.28",
     "ag-grid": "^13.1.2",
     "ag-grid-angular": "^13.1.1",
-    "mockjs": "^1.0.1-beta3",
-    "ng2-easyform": "0.0.8-beta.3",
+    "ng2-easyform": "0.0.8-beta.7",
     "ngx-swiper-wrapper": "^4.6.2"
   },
   "dependencies": {
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "ngx-swiper-wrapper": "^4.6.2"
   }
 }
