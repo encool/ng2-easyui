@@ -1,40 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { RouterModule } from '@angular/router'
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http'
 
 import {
-  MdAutocompleteModule,
   MdButtonModule,
-  MdButtonToggleModule,
-  MdCardModule,
-  MdCheckboxModule,
-  MdChipsModule,
-  MdDatepickerModule,
-  MdDialogModule,
-  MdExpansionModule,
-  MdGridListModule,
-  MdIconModule,
-  MdInputModule,
-  MdListModule,
-  MdMenuModule,
-  MdNativeDateModule,
-  MdPaginatorModule,
-  MdProgressBarModule,
-  MdProgressSpinnerModule,
-  MdRadioModule,
-  MdRippleModule,
-  MdSelectModule,
-  MdSidenavModule,
-  MdSliderModule,
-  MdSlideToggleModule,
-  MdSnackBarModule,
-  MdSortModule,
-  MdTableModule,
-  MdTabsModule,
-  MdToolbarModule,
-  MdTooltipModule,
 } from '@angular/material';
 
 import { ModalInfoComponent } from './modal/modal.info.component'
@@ -49,6 +20,7 @@ import { PageService } from './page.service';
 
 import { EasyUIRichSwipeModule } from '../../'
 import { RichSwipeDemoComponent } from './rich-swipe-demo/rich-swipe-demo.component';
+import { IndexComponent } from './index.component'
 
 @NgModule({
   declarations: [
@@ -57,44 +29,20 @@ import { RichSwipeDemoComponent } from './rich-swipe-demo/rich-swipe-demo.compon
     ModalInfoComponent,
     EuAggridDemoComponent,
     RichSwipeDemoComponent,
+    IndexComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
-
+    RouterModule.forRoot([
+      { path: 'EuAggridDemoComponent', component: EuAggridDemoComponent },
+      { path: 'RichSwipeDemoComponent', component: RichSwipeDemoComponent },
+      { path: '**', component: IndexComponent },
+    ]),
     // AgGridModule,
 
-    MdAutocompleteModule,
     MdButtonModule,
-    MdButtonToggleModule,
-    MdCardModule,
-    MdCheckboxModule,
-    MdChipsModule,
-    MdDatepickerModule,
-    MdDialogModule,
-    MdExpansionModule,
-    MdGridListModule,
-    MdIconModule,
-    MdInputModule,
-    MdListModule,
-    MdMenuModule,
-    MdNativeDateModule,
-    MdPaginatorModule,
-    MdProgressBarModule,
-    MdProgressSpinnerModule,
-    MdRadioModule,
-    MdRippleModule,
-    MdSelectModule,
-    MdSidenavModule,
-    MdSliderModule,
-    MdSlideToggleModule,
-    MdSnackBarModule,
-    MdSortModule,
-    MdTableModule,
-    MdTabsModule,
-    MdToolbarModule,
-    MdTooltipModule,
 
     EasyUIMdModalModule,
     EasyUIagGridModule,
