@@ -13,8 +13,9 @@ import { Component } from '@angular/core';
         display: flex;
         flex-direction: row;
         justify-content: center;">
-            <button md-raised-button routerLink="/EuAggridDemoComponent">aggrid</button>
+            <button md-raised-button routerLink="/demo/EuAggridDemoComponent">aggrid</button>
             <button md-raised-button routerLink="/RichSwipeDemoComponent">swipe</button>
+            <button md-raised-button routerLink="/Bpmn2DemoComponent">bpmn2</button>
         </div>
     </div>
 `,

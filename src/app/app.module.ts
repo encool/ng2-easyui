@@ -8,11 +8,10 @@ import {
   MdButtonModule,
 } from '@angular/material';
 
-import { ModalInfoComponent } from './modal/modal.info.component'
-import { EuAggridDemoComponent } from './aggrid/eu-aggrid.demo.component'
+import { Bpmn2DemoComponent } from './bpmn2/bpmn2.demo.component'
 
 import { AppComponent, DialogDataExampleDialog } from './app.component';
-import { EasyUIMdModalModule, EasyUIagGridModule, EuPageService } from '../../'
+import { EasyUIMdModalModule, EasyUIagGridModule, EuPageService, EasyUIBpmnModule } from '../../'
 
 // import { AgGridModule } from 'ag-grid-angular/main';
 
@@ -26,8 +25,7 @@ import { IndexComponent } from './index.component'
   declarations: [
     AppComponent,
     DialogDataExampleDialog,
-    ModalInfoComponent,
-    EuAggridDemoComponent,
+    Bpmn2DemoComponent,
     RichSwipeDemoComponent,
     IndexComponent,
   ],
@@ -36,8 +34,9 @@ import { IndexComponent } from './index.component'
     BrowserAnimationsModule,
     HttpModule,
     RouterModule.forRoot([
-      { path: 'EuAggridDemoComponent', component: EuAggridDemoComponent },
+      { path: 'demo', loadChildren: './aggrid/aggrid.module#AggridModule' },
       { path: 'RichSwipeDemoComponent', component: RichSwipeDemoComponent },
+      { path: 'Bpmn2DemoComponent', component: Bpmn2DemoComponent },
       { path: '**', component: IndexComponent },
     ]),
     // AgGridModule,
@@ -45,13 +44,14 @@ import { IndexComponent } from './index.component'
     MdButtonModule,
 
     EasyUIMdModalModule,
-    EasyUIagGridModule,
+    // EasyUIagGridModule,
     EasyUIRichSwipeModule,
+    EasyUIBpmnModule,
   ],
   providers: [
     { provide: EuPageService, useClass: PageService, },
   ],
-  entryComponents: [DialogDataExampleDialog, ModalInfoComponent],
+  entryComponents: [DialogDataExampleDialog],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
