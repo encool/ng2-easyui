@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router'
 
 import { EasyUIagGridModule, EuPageService } from '../../../'
 import { EuAggridDemoComponent } from './eu-aggrid.demo.component';
-import { ModalInfoComponent } from '../modal/modal.info.component'
+// import { ModalInfoComponent } from '../modal/modal.info.component'
 
 @NgModule({
     imports: [
@@ -15,11 +15,13 @@ import { ModalInfoComponent } from '../modal/modal.info.component'
     ],
     declarations: [
         EuAggridDemoComponent,
-        ModalInfoComponent
+        // ModalInfoComponent
     ],
     exports: [
         RouterModule
     ],
-    entryComponents: [ModalInfoComponent]
+    entryComponents: [
+        // ModalInfoComponent
+    ]
 })
 export class AggridModule { }
