@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router'
 
-import { EasyUIagGridModule, EuPageService } from '../../../'
+import { EasyUIagGridModule, EasyUIMdModalModule, EuPageService } from '../../../'
 import { EuAggridDemoComponent } from './eu-aggrid.demo.component';
-// import { ModalInfoComponent } from '../modal/modal.info.component'
+import { ModalInfoComponent } from './modal.info.component'
+import { EasyFormCoreModule,EasyFormMdModule, MdTextinputField } from 'ng2-easyform'
 
 @NgModule({
     imports: [
@@ -11,11 +12,14 @@ import { EuAggridDemoComponent } from './eu-aggrid.demo.component';
         RouterModule.forChild([{
             path: "EuAggridDemoComponent",
             component: EuAggridDemoComponent
-        }])
+        }]),
+        EasyUIMdModalModule.withComponents([ModalInfoComponent]),
+        EasyFormCoreModule,
+        EasyFormMdModule
     ],
     declarations: [
         EuAggridDemoComponent,
-        // ModalInfoComponent
+        ModalInfoComponent
     ],
     exports: [
         RouterModule

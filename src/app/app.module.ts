@@ -12,7 +12,7 @@ import { Bpmn2DemoComponent } from './bpmn2/bpmn2.demo.component'
 
 import { AppComponent, DialogDataExampleDialog } from './app.component';
 import { EasyUIMdModalModule, EasyUIagGridModule, EuPageService, EasyUIBpmnModule } from '../../'
-import { ModalInfoComponent } from './modal/modal.info.component'
+// import { ModalInfoComponent } from './modal/modal.info.component'
 // import { AgGridModule } from 'ag-grid-angular/main';
 
 import { PageService } from './page.service';
@@ -28,7 +28,7 @@ import { IndexComponent } from './index.component'
     Bpmn2DemoComponent,
     RichSwipeDemoComponent,
     IndexComponent,
-    ModalInfoComponent,
+    // ModalInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +54,7 @@ import { IndexComponent } from './index.component'
   ],
   entryComponents: [
     DialogDataExampleDialog,
-    ModalInfoComponent
+    // ModalInfoComponent
   ],
   bootstrap: [AppComponent]
 })

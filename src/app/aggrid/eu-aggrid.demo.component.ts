@@ -2,7 +2,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 
 import { EuGridOptions, EuColModel, EuGridEvent, AggridComponent, ColDef, ColGroupDef } from '../../../'
 
-import { ModalInfoComponent } from '../modal/modal.info.component'
+import { ModalInfoComponent } from './modal.info.component'
 
 import {
     FieldBase,

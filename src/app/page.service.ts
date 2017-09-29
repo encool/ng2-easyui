@@ -14,17 +14,6 @@ export class PageService extends EuPageService {
         super(http)
     }
 
-    /**
-     * 
-     * @param url 
-     * @param rows 
-     * @param page 
-     * @param cond 
-     * @param sidx sort index
-     * @param sord sord col
-     * @param _search 
-     */
-
     datas = [{ "categoryName": "考勤异常申诉", "categoryNo": "KQYCSS", "id": "kDlV3reHScenVuKlo4vBbw", "url": "f/abnormalappeal" },
     { "categoryName": "员工辞职申请", "categoryNo": "YGCZSQ", "id": "M3uMWZe7QG6Q22OtST7oUA", "url": "f/EmployeeLeave" },
     { "categoryName": "IVT终端下发", "categoryNo": "IVT_HAIR", "id": "Bqi444PKReOhDEAw6SvELg", "url": "f/terminalIVTHair" },
@@ -35,7 +24,18 @@ export class PageService extends EuPageService {
     { "categoryName": "人力资源面谈人", "categoryNo": "rlzymtr", "id": "UoaMniArQ-OyPM_kQZsxmw", "url": "f/humanresourceconversationform" },
     { "categoryName": "员工辞职原因", "categoryNo": "ygczyy", "id": "qJv2TN42R2yp4S-wnC6OWw", "url": "f/employeeleavereason" },
     { "categoryName": "科室(分中心)面谈记录", "categoryNo": "departnotes", "id": "NNEqYE6rRj6BXKvWyK-Spw", "url": "f/employeeinterviewnotes" }]
+    /**
+     * 
+     * @param url 
+     * @param rows 
+     * @param page 
+     * @param cond 
+     * @param sidx sort index
+     * @param sord sord col
+     * @param _search 
+     */
     getPage(url: string, rows: number, page: number,
+
         cond?: Object, sidx?: string, sord?: string, _search?: boolean): Promise<any> {
         let urlSearchParams = new URLSearchParams();
         urlSearchParams.set("rows", rows.toString());
@@ -112,6 +112,23 @@ export class PageService extends EuPageService {
                 // debugger
                 return data.json()
             })
+    }
+
+    getById(id: string) {
+        let value = this.datas.find((value) => {
+            return value.id == id
+        })
+        return new Observable(observer => {
+            setTimeout(() => {
+                observer.next(value);
+            }, 100);
+        });
+    }
+
+    updateById(id: string) {
+        return this.datas.find((value) => {
+            return value.id == id
+        })
     }
 
 }

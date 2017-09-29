@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders, ANALYZE_FOR_ENTRY_COMPONENTS } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MdDialogModule, MdButtonModule } from '@angular/material';
@@ -26,7 +26,16 @@ import { EuModalService } from '../../core/'
         ModalContainerComponent
     ]
 })
-export class EasyUIMdModalModule { }
+export class EasyUIMdModalModule {
+    static withComponents(components: any): ModuleWithProviders {
+        return {
+            ngModule: EasyUIMdModalModule,
+            providers: [
+                { provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: components, multi: true }
+            ],
+        };
+    }
+}
 
 export * from './modal.container.component'
 export * from './md-modal.service'
