@@ -13,6 +13,7 @@ import { MD_DIALOG_DATA, MdDialog } from "@angular/material"
     <ef-md-form [fields]="fields"></ef-md-form>
   `,
 })
+// 信息编辑弹出框
 export class ModalInfoComponent implements OnModalAction {
 
     ege: EuGridEvent
@@ -20,12 +21,12 @@ export class ModalInfoComponent implements OnModalAction {
     fields: FieldBase<any>[]
     @ViewChild(MdFormComponent) infoForm: MdFormComponent
     constructor( @Inject(MD_DIALOG_DATA) public data: any, private euPageService: EuPageService) {
-        debugger
         this.ege = data.euGridEvent
         this.action = this.ege.action
+        //编辑获取数据
         if (this.action == EuGridAction.UPDATE) {
             (this.euPageService as any).getById(this.ege.rowId).subscribe(value => {
-                debugger
+                // debugger
                 this.infoForm.form.patchValue(value)
             })
         }
@@ -48,12 +49,21 @@ export class ModalInfoComponent implements OnModalAction {
         ]
     }
 
+    //确定
     onModalClose() {
-        return new Observable(observer => {
-            setTimeout(() => {
-                observer.next(42);
-            }, 100);
-        });
+        if (this.action == EuGridAction.UPDATE) {
+            return new Observable(observer => {
+                (this.euPageService as any).updateById(this.ege.rowId, this.infoForm.form.value).subscribe((value) => {
+                    observer.next(value);
+                })
+            });
+        } else if (this.action == EuGridAction.CREATE) {
+            return new Observable(observer => {
+                (this.euPageService as any).addData(this.infoForm.form.value).subscribe((value) => {
+                    observer.next(value);
+                })
+            });
+        }
     }
 
     onModalDismiss() {

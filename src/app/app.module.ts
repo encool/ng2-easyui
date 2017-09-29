@@ -11,7 +11,7 @@ import {
 import { Bpmn2DemoComponent } from './bpmn2/bpmn2.demo.component'
 
 import { AppComponent, DialogDataExampleDialog } from './app.component';
-import {  EuPageService, EasyUIBpmnModule } from '../../'
+import { EuPageService, EasyUIBpmnModule, EasyUIMdModalModule } from '../../'
 // import { ModalInfoComponent } from './modal/modal.info.component'
 // import { AgGridModule } from 'ag-grid-angular/main';
 
@@ -44,7 +44,7 @@ import { IndexComponent } from './index.component'
 
     MdButtonModule,
 
-    // EasyUIMdModalModule,
+    EasyUIMdModalModule,
     // EasyUIagGridModule,
     EasyUIRichSwipeModule,
     EasyUIBpmnModule,

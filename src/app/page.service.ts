@@ -125,10 +125,27 @@ export class PageService extends EuPageService {
         });
     }
 
-    updateById(id: string) {
-        return this.datas.find((value) => {
+    updateById(id: string, value: any) {
+        let index = this.datas.findIndex((value) => {
             return value.id == id
         })
+        value.id = id
+        this.datas[index] = value
+        return new Observable(observer => {
+            setTimeout(() => {
+                observer.next(value);
+            });
+        });
     }
 
+    id: number = 0
+    addData(value) {
+        value.id = this.id++
+        this.datas.push(value)
+        return new Observable(observer => {
+            setTimeout(() => {
+                observer.next(value);
+            });
+        });
+    }
 }

@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router'
 import { EasyUIagGridModule, EasyUIMdModalModule, EuPageService } from '../../../'
 import { EuAggridDemoComponent } from './eu-aggrid.demo.component';
 import { ModalInfoComponent } from './modal.info.component'
-import { EasyFormCoreModule,EasyFormMdModule, MdTextinputField } from 'ng2-easyform'
+import { EasyFormCoreModule, EasyFormMdModule, MdTextinputField } from 'ng2-easyform'
 
 @NgModule({
     imports: [
