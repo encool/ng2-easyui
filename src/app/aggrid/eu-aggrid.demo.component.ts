@@ -1,6 +1,6 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 
-import { EuGridOptions, EuColModel, EuGridEvent, AggridComponent, ColDef, ColGroupDef } from '../../../'
+import { EuGridOptions, EuColModel, EuGridEvent, AggridComponent, ColDef, ColGroupDef, ModalConfig } from '../../../'
 
 import { ModalInfoComponent } from './modal.info.component'
 
@@ -65,7 +65,9 @@ export class EuAggridDemoComponent implements OnInit {
             primaryKey: "id",
             gridId: "aggriddemo",
             title: "表格示例",
-            defaultActionComponent: ModalInfoComponent,
+            defaultActionModalConfig: {
+                component: ModalInfoComponent
+            },
             // url: 'list/e/webdisplaycategory',
             url: "ls/list/form/webdiscategorymanage",
             defaultaction: true,
@@ -82,7 +84,7 @@ export class EuAggridDemoComponent implements OnInit {
                     label: "名称",
                     // required: true,
                     span: 4,
-                    op:QueryOperate.cn                     
+                    op: QueryOperate.cn
                 }),
                 new MdDatepickerField({
                     key: "inTime",

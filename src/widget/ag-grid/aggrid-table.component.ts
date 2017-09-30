@@ -287,11 +287,11 @@ export class AggridComponent implements GridApi, OnInit {
         })
     }
 
-    openDialog(component: Type<any>, data: any): void {
-        let modalConfig: ModalConfig = {
-            component: component,
-            data: data
+    openDialog(modalConfig: ModalConfig, data: any): void {
+        if (!modalConfig.data) {
+            modalConfig.data = {}
         }
+        Object.assign(modalConfig.data, data)
         this.euModalService.open(modalConfig, (result) => {
 
             this.refresh()
@@ -315,15 +315,15 @@ export class AggridComponent implements GridApi, OnInit {
         )
         switch (action.curdType) {
             case EuGridAction.TYPE_CREATE:
-                let component = action.component || this.euGridOptions.defaultActionComponent
-                this.openDialog(component, {
+                let modalConfig = action.modalConfig || this.euGridOptions.defaultActionModalConfig
+                this.openDialog(modalConfig, {
                     euGridEvent: ege
                 })
                 break
             case EuGridAction.TYPE_UPDATE:
                 if (ids.length == 1) {
-                    let component1 = action.component || this.euGridOptions.defaultActionComponent
-                    this.openDialog(component1, { euGridEvent: ege })
+                    let modalConfig1 = action.modalConfig || this.euGridOptions.defaultActionModalConfig
+                    this.openDialog(modalConfig1, { euGridEvent: ege })
                 } else {
                     this.snackBar.open('请选择一条记录！', '关闭', {
                         duration: 800

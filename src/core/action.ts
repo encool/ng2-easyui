@@ -1,4 +1,6 @@
 import { Type } from "@angular/core"
+import { ModalConfig } from './modal/modal-config'
+
 export abstract class BaseAction {
     key: string
     name: string
@@ -6,7 +8,7 @@ export abstract class BaseAction {
     icon?: string
     iconType?: string
     style?: string
-    component?: Type<any>
+    modalConfig?: ModalConfig
     constructor(options:
         {
             key: string,
@@ -14,13 +16,13 @@ export abstract class BaseAction {
             icon?: string
             order?: number
             style?: string
-            component?: Type<any>
+            modalConfig?: ModalConfig
         }) {
         this.key = options.key;
         this.name = options.name;
         this.icon = options.icon
         this.order = options.order === undefined ? 999 : options.order
         this.style = options.style
-        this.component = options.component
+        this.modalConfig = options.modalConfig
     }
 }

@@ -1,11 +1,12 @@
 import { Type } from "@angular/core"
 import { EuGridAction } from './grid.action'
 import { FieldBase } from 'ng2-easyform';
+import { ModalConfig } from '../modal/modal-config'
 
 export class EuGridOptions {
     primaryKey: string
     actions: EuGridAction[]
-    defaultActionComponent: Type<any>
+    defaultActionModalConfig: ModalConfig
     queryfields: FieldBase<any>[]
     title: string
     gridId: string
@@ -108,7 +109,7 @@ export class EuGridOptions {
         primaryKey: string
         title: string
         queryfields?: FieldBase<any>[]
-        defaultActionComponent?: Type<any>
+        defaultActionModalConfig?: ModalConfig,
         actions?: Array<EuGridAction>
         defaultaction?: boolean
         multiselect?: boolean
@@ -123,7 +124,7 @@ export class EuGridOptions {
         this.title = options.title
         this.queryfields = options.queryfields || []
         this.mtype = options.mtype == undefined ? "get" : options.mtype
-        this.defaultActionComponent = options.defaultActionComponent
+        this.defaultActionModalConfig = options.defaultActionModalConfig
         this.actions = options.defaultaction == true ? [
             EuGridAction.CREATE,
             EuGridAction.UPDATE,
