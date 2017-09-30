@@ -33,17 +33,9 @@ export class BpmnEditorComponent implements OnInit {
     _curElement: any    //config 当前选中的节点
     _overlays: any
 
-    _modalContext: {
-        vcRef: ViewContainerRef,
-        componentFactoryResolver: ComponentFactoryResolver
-    }
-
     constructor(private http: Http, private vcRef: ViewContainerRef, private componentFactoryResolver: ComponentFactoryResolver,
     ) {
-        this._modalContext = {
-            vcRef: vcRef,
-            componentFactoryResolver: componentFactoryResolver
-        }
+
     }
 
     ngOnInit() {
