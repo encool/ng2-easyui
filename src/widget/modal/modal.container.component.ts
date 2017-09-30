@@ -1,4 +1,4 @@
-import { Component, ComponentFactory, OnInit, Inject, ViewContainerRef, ViewChild, ComponentFactoryResolver, ComponentRef } from '@angular/core';
+import { Component, ComponentFactory, ViewEncapsulation, OnInit, Inject, ViewContainerRef, ViewChild, ComponentFactoryResolver, ComponentRef } from '@angular/core';
 import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material'
 
 import { Observable } from 'rxjs/Observable'
@@ -7,7 +7,10 @@ import { OnModalAction, ModalAction } from '../../core'
 
 @Component({
     selector: 'modal-container',
-    templateUrl: 'modal.container.component.html'
+    templateUrl: 'modal.container.component.html',
+    styleUrls: ["modal.css"],
+    encapsulation: ViewEncapsulation.None
+
 })
 
 export class ModalContainerComponent implements OnInit {
@@ -58,7 +61,7 @@ export class ModalContainerComponent implements OnInit {
             let result = this.cmpRef.instance.onModalDismiss()
             if (result instanceof Observable) {
                 result.subscribe(data => {
-                    this.dialogRef.close()                    
+                    this.dialogRef.close()
                     if (this.euMdParams.dismiss) {
                         this.euMdParams.dismiss(data, action)
                     }
@@ -74,13 +77,13 @@ export class ModalContainerComponent implements OnInit {
                 let result = this.cmpRef.instance.onModalAction(action)
                 if (result instanceof Observable) {
                     result.subscribe(data => {
-                        this.dialogRef.close()                      
+                        this.dialogRef.close()
                         if (this.euMdParams.success) {
                             this.euMdParams.success(data, action)
                         }
                     })
                 } else {
-                    this.dialogRef.close()                    
+                    this.dialogRef.close()
                     if (this.euMdParams.success) {
                         this.euMdParams.success(result, action)
                     }
