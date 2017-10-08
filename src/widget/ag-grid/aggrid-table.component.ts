@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild, OnInit, Type } from "@angular/core";
-import { PageEvent, MdPaginator, MdDialog, MdDialogRef, MdSnackBar, MD_DIALOG_DATA } from '@angular/material';
+import { PageEvent, MatPaginator, MatDialog, MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { GridOptions, IDatasource, IDateParams, IGetRowsParams, ColDef, ColGroupDef } from "ag-grid/main";
 import { debounce } from 'rxjs/operator/debounce'
 import { Observable } from 'rxjs'
@@ -76,7 +76,7 @@ export class AggridComponent implements GridApi, OnInit {
     lastRow: number = 0
     cacheBlockSize: number = 10
 
-    @ViewChild(MdPaginator) paginator: MdPaginator
+    @ViewChild(MatPaginator) paginator: MatPaginator
     @ViewChild(MdFormComponent) queryForm: MdFormComponent
     pageEvent: PageEvent
 
@@ -107,8 +107,8 @@ export class AggridComponent implements GridApi, OnInit {
     constructor(
         private euModalService: EuModalService,
         private pageService: EuPageService,
-        public dialog: MdDialog,
-        public snackBar: MdSnackBar) {
+        public dialog: MatDialog,
+        public snackBar: MatSnackBar) {
         let cacheBlockSize = this.cacheBlockSize
         //infinite 模式使用
         this.myDataSource = {

@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
-    MdButtonModule,
-    MdIconModule,
-    MdPaginatorModule,
-    MdTooltipModule,
-    MdSnackBarModule,
-    // MdCardModule,
-    MdInputModule,
-    MdExpansionModule,
+    MatButtonModule,
+    MatIconModule,
+    MatPaginatorModule,
+    MatTooltipModule,
+    MatSnackBarModule,
+    // MatCardModule,
+    MatInputModule,
+    MatExpansionModule,
 } from '@angular/material';
 import { AgGridModule } from 'ag-grid-angular/main';
 import { AggridComponent } from './aggrid-table.component'
@@ -19,14 +19,14 @@ import { EasyFormMdModule } from 'ng2-easyform'
 @NgModule({
     imports: [
         CommonModule,
-        MdButtonModule,
-        MdIconModule,
-        MdPaginatorModule,
-        MdTooltipModule,
-        MdSnackBarModule,
-        // MdCardModule,
-        MdInputModule,
-        MdExpansionModule,
+        MatButtonModule,
+        MatIconModule,
+        MatPaginatorModule,
+        MatTooltipModule,
+        MatSnackBarModule,
+        // MatCardModule,
+        MatInputModule,
+        MatExpansionModule,
         EasyFormMdModule,
         AgGridModule.withComponents([]),
     ],

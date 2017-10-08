@@ -5,7 +5,7 @@ import { OnModalAction, EuGridEvent, EuGridAction, EuPageService } from '../../.
 // import { EasyUIMdModalModule, MdModalService, ModalConfig } from '../../../'
 
 import { MdTextinputField, FieldBase, MdFormComponent } from 'ng2-easyform'
-import { MD_DIALOG_DATA, MdDialog } from "@angular/material"
+import { MAT_DIALOG_DATA, MatDialog } from "@angular/material"
 
 @Component({
     selector: 'dialog-data-example-dialog',
@@ -20,7 +20,7 @@ export class ModalInfoComponent implements OnModalAction {
     action: EuGridAction
     fields: FieldBase<any>[]
     @ViewChild(MdFormComponent) infoForm: MdFormComponent
-    constructor( @Inject(MD_DIALOG_DATA) public data: any, private euPageService: EuPageService) {
+    constructor( @Inject(MAT_DIALOG_DATA) public data: any, private euPageService: EuPageService) {
         this.ege = data.euGridEvent
         this.action = this.ege.action
         //编辑获取数据

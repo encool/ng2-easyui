@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http'
 
 import {
-  MdButtonModule,
+  MatButtonModule,
 } from '@angular/material';
 
 import { Bpmn2DemoComponent } from './bpmn2/bpmn2.demo.component'
@@ -42,7 +42,7 @@ import { IndexComponent } from './index.component'
     ]),
     // AgGridModule,
 
-    MdButtonModule,
+    MatButtonModule,
 
     EasyUIMdModalModule,
     // EasyUIagGridModule,

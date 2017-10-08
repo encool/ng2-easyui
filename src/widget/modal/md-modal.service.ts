@@ -1,6 +1,6 @@
 import { Injectable, ViewContainerRef, Compiler, ComponentRef, Type, ComponentFactoryResolver } from '@angular/core';
 // import { Injectable } from '@angular/platform-browser-dynamic'
-import { MdDialog, MdDialogRef, MdDialogConfig } from '@angular/material'
+import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material'
 
 import 'rxjs/add/operator/toPromise';
 
@@ -28,12 +28,12 @@ export class MdModalService extends EuModalService {
     ]
     _smodalstack = []
     // _ref:ComponentRef<SimpleModalComponent>
-    constructor(public dialog: MdDialog) {
+    constructor(public dialog: MatDialog) {
         super()
     }
 
-    openMdDialog<T extends Type<any>>(component: T, mdDialogConfig: MdDialogConfig, success?: Function, dismiss?: Function): void {
-        let dialogRef: MdDialogRef<T> = this.dialog.open<T>(component, mdDialogConfig);
+    openMdDialog<T extends Type<any>>(component: T, mdDialogConfig: MatDialogConfig, success?: Function, dismiss?: Function): void {
+        let dialogRef: MatDialogRef<T> = this.dialog.open<T>(component, mdDialogConfig);
 
         // dialogRef.afterClosed().subscribe(result => {
         //     if (success) {
@@ -85,7 +85,7 @@ export class MdModalService extends EuModalService {
         euMdParams.dismiss = dismiss
         data.euMdParams = euMdParams
         // debugger
-        let mdDialogConfig: MdDialogConfig = {
+        let mdDialogConfig: MatDialogConfig = {
             data: data,
             height: modalOptions.height,
             position: {

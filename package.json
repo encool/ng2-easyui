@@ -34,7 +34,7 @@
     "@types/node": "^8.0.28",
     "ag-grid": "^13.1.2",
     "ag-grid-angular": "^13.1.1",
-    "ng2-easyform": "0.0.8-beta.8",
+    "ng2-easyform": "0.0.8-beta.11",
     "ngx-swiper-wrapper": "^4.6.2",
     "bpmn-js": "0.20.6",
     "bpmn-js-properties-panel": "0.14.0",

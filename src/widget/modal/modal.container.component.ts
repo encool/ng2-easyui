@@ -1,5 +1,5 @@
 import { Component, ComponentFactory, ViewEncapsulation, OnInit, Inject, ViewContainerRef, ViewChild, ComponentFactoryResolver, ComponentRef } from '@angular/core';
-import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material'
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
 
 import { Observable } from 'rxjs/Observable'
 
@@ -31,8 +31,8 @@ export class ModalContainerComponent implements OnInit {
     constructor(
         private vcRef: ViewContainerRef,
         private componentFactoryResolver: ComponentFactoryResolver,
-        public dialogRef: MdDialogRef<any>,
-        @Inject(MD_DIALOG_DATA) public data: any) {
+        public dialogRef: MatDialogRef<any>,
+        @Inject(MAT_DIALOG_DATA) public data: any) {
         // debugger
         this.euMdParams = data.euMdParams
         this.title = this.euMdParams.title || "弹出表单"
