@@ -22,3 +22,6 @@ import { BpmnViewerComponent } from './bpmn-viewer.component'
     ]
 })
 export class EasyUIBpmnModule { }
+
+export { BpmnEditorComponent } from './bpmn-editor.component'
+export { ModelInput } from './model.input'

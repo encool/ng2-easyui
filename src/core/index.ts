@@ -12,3 +12,6 @@ export * from './modal/modal-config'
 export * from './modal/modal.action'
 export * from './modal/modal-hooks'
 export * from './modal/eu-modal.service'
+
+export * from './bpmn/bpmn.service'
+export * from './bpmn/model'

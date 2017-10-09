@@ -7,6 +7,8 @@ import { Headers, Http, URLSearchParams, RequestOptions } from '@angular/http';
 // import { ModalAction } from '../../shared/object/modal-action'
 // import { ModalService } from '../../service/modal.service'
 
+import { EuBpmnService, Model } from '../../core'
+
 @Component({
     selector: 'bpmn-editor',
     templateUrl: './bpmn-editor.component.html',
@@ -24,7 +26,7 @@ export class BpmnEditorComponent implements OnInit {
             processDefId?: string
             moduleId?: string
         }
-        bpmnModel?: any
+        bpmnModel?: Model
     } = {
         params: {}
     }
@@ -33,13 +35,12 @@ export class BpmnEditorComponent implements OnInit {
     _curElement: any    //config 当前选中的节点
     _overlays: any
 
-    constructor(private http: Http, private vcRef: ViewContainerRef, private componentFactoryResolver: ComponentFactoryResolver,
-    ) {
+    constructor(private http: Http, private euBpmnService: EuBpmnService) {
 
     }
 
     ngOnInit() {
-        this.model.params.type = 'add'
+        // this.model.params.type = 'add'
         if (this.model.params.processDefId != undefined
             || this.model.params.type == "add") {
             (require as any).ensure([], require => {
@@ -192,17 +193,17 @@ export class BpmnEditorComponent implements OnInit {
                 </bpmndi:BPMNDiagram>
                 </definitions>
             `
-            setTimeout(() => {
-                this._bpmnModeler.importXML(initXml, (err) => {
-                    if (err) {
-                        return console.error('could not import BPMN 2.0 diagram', err);
-                    }
-                    var canvas = this._bpmnModeler.get('canvas');
+            // setTimeout(() => {
+            this._bpmnModeler.importXML(initXml, (err) => {
+                if (err) {
+                    return console.error('could not import BPMN 2.0 diagram', err);
+                }
+                var canvas = this._bpmnModeler.get('canvas');
 
-                    // zoom to fit full viewport
-                    canvas.zoom('fit-viewport');
-                })
-            }, 2000)
+                // zoom to fit full viewport
+                canvas.zoom('fit-viewport');
+            })
+            // }, 2000)
         } else if (this.model.params.type == "edit") {
             // debugger
             if (this._bpmnModeler == undefined) {
@@ -224,24 +225,39 @@ export class BpmnEditorComponent implements OnInit {
                 });
             }
 
-            this.http.get("workflow/model/editProcessByConvert/" + this.model.params.processDefId).toPromise().then(rep => {
-                let rjson = rep.json();
-                this.model.bpmnModel = rjson.model;
-                let xml = this.activitiToCamundaAdapt(rjson.bpmn2xml)
-                console.info('diagram geted');
-                console.info(xml);
-                setTimeout(() => {
-                    this._bpmnModeler.importXML(xml, (err) => {
-                        if (err) {
-                            return console.error('could not import BPMN 2.0 diagram', err);
-                        }
-                        var canvas = this._bpmnModeler.get('canvas');
-                        // zoom to fit full viewport
-                        canvas.zoom('fit-viewport');
-                    });
-                }, 1500)
-
+            this.euBpmnService.getModelInfo(this.model.params.processDefId).then(data => {
+                this.model.bpmnModel = data.model
+                let xml = this.euBpmnService.activitiToCamundaAdapt(data.bpmn2xml)
+                // setTimeout(() => {
+                this._bpmnModeler.importXML(xml, (err) => {
+                    if (err) {
+                        return console.error('could not import BPMN 2.0 diagram', err);
+                    }
+                    var canvas = this._bpmnModeler.get('canvas');
+                    // zoom to fit full viewport
+                    canvas.zoom('fit-viewport');
+                });
+                // }, 1500)                
             })
+
+            // this.http.get("workflow/model/editProcessByConvert/" + this.model.params.processDefId).toPromise().then(rep => {
+            //     let rjson = rep.json();
+            //     this.model.bpmnModel = rjson.model;
+            //     let xml = this.activitiToCamundaAdapt(rjson.bpmn2xml)
+            //     console.info('diagram geted');
+            //     console.info(xml);
+            //     setTimeout(() => {
+            //         this._bpmnModeler.importXML(xml, (err) => {
+            //             if (err) {
+            //                 return console.error('could not import BPMN 2.0 diagram', err);
+            //             }
+            //             var canvas = this._bpmnModeler.get('canvas');
+            //             // zoom to fit full viewport
+            //             canvas.zoom('fit-viewport');
+            //         });
+            //     }, 1500)
+
+            // })
         } else if (this.model.params.type == "config") {
             if (this._bpmnModeler == undefined) {
                 // create modeler
@@ -250,7 +266,7 @@ export class BpmnEditorComponent implements OnInit {
                 });
             }
 
-            this.getProcessDefDiagram(this.model.params.processDefId).then(
+            this.euBpmnService.getProcessDefDiagramXml(this.model.params.processDefId).then(
                 data => {
                     setTimeout(() => {
                         this._bpmnModeler.importXML(data, (err) => {
@@ -264,6 +280,21 @@ export class BpmnEditorComponent implements OnInit {
                     }, 800)
                 }
             )
+
+            // this.getProcessDefDiagram(this.model.params.processDefId).then(
+            //     data => {
+            //         setTimeout(() => {
+            //             this._bpmnModeler.importXML(data, (err) => {
+            //                 if (err) {
+            //                     return console.error('could not import BPMN 2.0 diagram', err);
+            //                 }
+            //                 var canvas = this._bpmnModeler.get('canvas');
+            //                 // zoom to fit full viewport
+            //                 canvas.zoom('fit-viewport');
+            //             });
+            //         }, 800)
+            //     }
+            // )
             this.initConfigListener()
         }
 
@@ -300,20 +331,23 @@ export class BpmnEditorComponent implements OnInit {
                     reject(err)
                 } else {
                     this._bpmnModeler.saveSVG({ format: true }, (err, svg) => {
-                        xml = this.camundaToActivitiAdapt(xml);
+                        xml = this.euBpmnService.camundaToActivitiAdapt(xml);
                         console.info('diagram saved');
                         console.info(xml);
-                        let body =
-                            "xml=" + xml + "&" +
-                            "svg=" + svg
-                        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded;charset=ISO-8859-1' });
-                        let options = new RequestOptions({ headers: headers });
-                        this.http.put("workflow/service/model/" + this.model.bpmnModel.id + "/save", body, options)
-                            .toPromise()
-                            .then(function (response) {
-                                console.log("response", response.json());
-                                resolve(response.json())
-                            })
+
+                        this.euBpmnService.saveModel(this.model.bpmnModel.id, xml, svg)
+
+                        // let body =
+                        //     "xml=" + xml + "&" +
+                        //     "svg=" + svg
+                        // let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded;charset=ISO-8859-1' });
+                        // let options = new RequestOptions({ headers: headers });
+                        // this.http.put("workflow/service/model/" + this.model.bpmnModel.id + "/save", body, options)
+                        //     .toPromise()
+                        //     .then(function (response) {
+                        //         console.log("response", response.json());
+                        //         resolve(response.json())
+                        //     })
                     });
 
                 }
@@ -334,25 +368,25 @@ export class BpmnEditorComponent implements OnInit {
         }
     }
 
-    CamundaArray = {
-        activiti: ["activiti:collection", "activiti:candidateUsers", "activiti:elementVariable"],
-        camunda: ["camunda:collection", "camunda:candidateUsers", "camunda:elementVariable"]
-    }
+    // CamundaArray = {
+    //     activiti: ["activiti:collection", "activiti:candidateUsers", "activiti:elementVariable"],
+    //     camunda: ["camunda:collection", "camunda:candidateUsers", "camunda:elementVariable"]
+    // }
 
 
-    activitiToCamundaAdapt(activitiXml: string): string {
-        this.CamundaArray.activiti.forEach((str, index) => {
-            var reg = "/" + str + "/ig";
-            activitiXml = activitiXml.replace(eval(reg), this.CamundaArray.camunda[index]);
-        })
-        return activitiXml
-    }
+    // activitiToCamundaAdapt(activitiXml: string): string {
+    //     this.CamundaArray.activiti.forEach((str, index) => {
+    //         var reg = "/" + str + "/ig";
+    //         activitiXml = activitiXml.replace(eval(reg), this.CamundaArray.camunda[index]);
+    //     })
+    //     return activitiXml
+    // }
 
-    camundaToActivitiAdapt(camundaXml: string): string {
-        this.CamundaArray.camunda.forEach((str, index) => {
-            var reg = "/" + str + "/ig";
-            camundaXml = camundaXml.replace(eval(reg), this.CamundaArray.activiti[index]);
-        })
-        return camundaXml
-    }
+    // camundaToActivitiAdapt(camundaXml: string): string {
+    //     this.CamundaArray.camunda.forEach((str, index) => {
+    //         var reg = "/" + str + "/ig";
+    //         camundaXml = camundaXml.replace(eval(reg), this.CamundaArray.activiti[index]);
+    //     })
+    //     return camundaXml
+    // }
 }

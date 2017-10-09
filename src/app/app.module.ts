@@ -11,13 +11,19 @@ import {
 import { Bpmn2DemoComponent } from './bpmn2/bpmn2.demo.component'
 
 import { AppComponent, DialogDataExampleDialog } from './app.component';
-import { EuPageService, EasyUIBpmnModule, EasyUIMdModalModule } from '../../'
+import {
+  EuPageService,
+  EasyUIBpmnModule,
+  EasyUIMdModalModule,
+  EasyUIRichSwipeModule,
+  EuBpmnService
+} from '../../'
 // import { ModalInfoComponent } from './modal/modal.info.component'
 // import { AgGridModule } from 'ag-grid-angular/main';
 
 import { PageService } from './page.service';
+import { BpmnService } from './bpmn.service';
 
-import { EasyUIRichSwipeModule } from '../../'
 import { RichSwipeDemoComponent } from './rich-swipe-demo/rich-swipe-demo.component';
 import { IndexComponent } from './index.component'
 
@@ -51,6 +57,7 @@ import { IndexComponent } from './index.component'
   ],
   providers: [
     { provide: EuPageService, useClass: PageService, },
+    { provide: EuBpmnService, useClass: BpmnService, },
   ],
   entryComponents: [
     DialogDataExampleDialog,

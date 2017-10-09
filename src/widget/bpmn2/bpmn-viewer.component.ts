@@ -351,25 +351,25 @@ export class BpmnViewerComponent implements OnInit {
         }
     }
 
-    CamundaArray = {
-        activiti: ["activiti:collection", "activiti:candidateUsers", "activiti:elementVariable"],
-        camunda: ["camunda:collection", "camunda:candidateUsers", "camunda:elementVariable"]
-    }
+    // CamundaArray = {
+    //     activiti: ["activiti:collection", "activiti:candidateUsers", "activiti:elementVariable"],
+    //     camunda: ["camunda:collection", "camunda:candidateUsers", "camunda:elementVariable"]
+    // }
 
 
-    activitiToCamundaAdapt(activitiXml: string): string {
-        this.CamundaArray.activiti.forEach((str, index) => {
-            var reg = "/" + str + "/ig";
-            activitiXml = activitiXml.replace(eval(reg), this.CamundaArray.camunda[index]);
-        })
-        return activitiXml
-    }
+    // activitiToCamundaAdapt(activitiXml: string): string {
+    //     this.CamundaArray.activiti.forEach((str, index) => {
+    //         var reg = "/" + str + "/ig";
+    //         activitiXml = activitiXml.replace(eval(reg), this.CamundaArray.camunda[index]);
+    //     })
+    //     return activitiXml
+    // }
 
-    camundaToActivitiAdapt(camundaXml: string): string {
-        this.CamundaArray.camunda.forEach((str, index) => {
-            var reg = "/" + str + "/ig";
-            camundaXml = camundaXml.replace(eval(reg), this.CamundaArray.activiti[index]);
-        })
-        return camundaXml
-    }
+    // camundaToActivitiAdapt(camundaXml: string): string {
+    //     this.CamundaArray.camunda.forEach((str, index) => {
+    //         var reg = "/" + str + "/ig";
+    //         camundaXml = camundaXml.replace(eval(reg), this.CamundaArray.activiti[index]);
+    //     })
+    //     return camundaXml
+    // }
 }
