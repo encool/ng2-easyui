@@ -2,3 +2,6 @@
     position: relative;
     max-height: 75vh
 }
+.mat-dialog-container{
+    max-width: 99vw;
+}
