@@ -1,3 +1,4 @@
 .mat-dialog-content{
     position: relative;
+    max-height: 75vh
 }
