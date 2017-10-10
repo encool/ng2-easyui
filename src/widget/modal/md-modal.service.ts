@@ -72,9 +72,8 @@ export class MdModalService extends EuModalService {
         // _ref.instance._actions = modalOptions.actions == undefined ? this._confirm_actions : modalOptions.actions
     }
 
-    open(
-        modalOptions: ModalConfig,
-        success?: Function, dismiss?: Function) {
+    open(modalOptions: ModalConfig, success?: Function, dismiss?: Function) {
+
         let data: any = modalOptions.data || {}
         let euMdParams: any = {}
         euMdParams.component = modalOptions.component
@@ -88,9 +87,10 @@ export class MdModalService extends EuModalService {
         let mdDialogConfig: MatDialogConfig = {
             data: data,
             height: modalOptions.height,
-            position: {
-                top: "120px"
-            },
+            // position: {
+            //     top: "120px"
+            // },
+            position: modalOptions.position,
             width: modalOptions.width,
             viewContainerRef: modalOptions.viewContainerRef
         }

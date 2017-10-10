@@ -30,7 +30,12 @@ export declare class ModalConfig {
     title?: string;
     message?: string;
     /** Position overrides. */
-    // position?: DialogPosition;
+    position?: {
+        top?: string;
+        bottom?: string;
+        left?: string;
+        right?: string;
+    };
     /** Data being injected into the child component. */
     data?: any;
     /** Layout direction for the dialog's content. */

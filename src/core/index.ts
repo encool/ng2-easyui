@@ -15,3 +15,5 @@ export * from './modal/eu-modal.service'
 
 export * from './bpmn/bpmn.service'
 export * from './bpmn/model'
+
+export * from './dict/eu-dict.service'
