@@ -4,3 +4,28 @@
     <div id="js-properties-panel"></div>
     <!--<button id="save-button" (click)="saveModel()">保存</button>-->
 </div>
+<div class="io-zoom-controls">
+    <ul class="io-zoom-reset io-control io-control-list">
+        <li>
+            <button title="reset zoom" (click)="resetZoom()">
+                <span class="icon-size-reset"></span>
+            </button>
+        </li>
+    </ul>
+
+    <ul class="io-zoom io-control io-control-list">
+        <li>
+            <button title="zoom in" (click)="zoomUp()">
+                <span class="icon-plus"></span>
+            </button>
+        </li>
+        <li>
+            <hr>
+        </li>
+        <li>
+            <button href="" title="zoom out" (click)="zoomDown()">
+                <span class="icon-minus"></span>
+            </button>
+        </li>
+    </ul>
+</div>

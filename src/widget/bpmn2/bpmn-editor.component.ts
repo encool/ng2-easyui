@@ -32,6 +32,7 @@ export class BpmnEditorComponent implements OnInit {
     }
 
     _bpmnModeler: any
+    _canvas: any
     _curElement: any    //config 当前选中的节点
     _overlays: any
 
@@ -198,10 +199,10 @@ export class BpmnEditorComponent implements OnInit {
                 if (err) {
                     return console.error('could not import BPMN 2.0 diagram', err);
                 }
-                var canvas = this._bpmnModeler.get('canvas');
+                this._canvas = this._bpmnModeler.get('canvas');
 
                 // zoom to fit full viewport
-                canvas.zoom('fit-viewport');
+                this._canvas.zoom('fit-viewport');
             })
             // }, 2000)
         } else if (this.model.params.type == "edit") {
@@ -233,9 +234,9 @@ export class BpmnEditorComponent implements OnInit {
                     if (err) {
                         return console.error('could not import BPMN 2.0 diagram', err);
                     }
-                    var canvas = this._bpmnModeler.get('canvas');
+                    this._canvas = this._bpmnModeler.get('canvas');
                     // zoom to fit full viewport
-                    canvas.zoom('fit-viewport');
+                    this._canvas.zoom('fit-viewport');
                 });
                 // }, 1500)                
             })
@@ -273,9 +274,9 @@ export class BpmnEditorComponent implements OnInit {
                             if (err) {
                                 return console.error('could not import BPMN 2.0 diagram', err);
                             }
-                            var canvas = this._bpmnModeler.get('canvas');
+                            this._canvas = this._bpmnModeler.get('canvas');
                             // zoom to fit full viewport
-                            canvas.zoom('fit-viewport');
+                            this._canvas.zoom('fit-viewport');
                         });
                     }, 800)
                 }
@@ -366,6 +367,19 @@ export class BpmnEditorComponent implements OnInit {
         } else if (action.key == "dismiss") {
 
         }
+    }
+
+    resetZoom() {
+        this._canvas.zoom('fit-viewport');
+        // this._bpmnModeler.get("zoomScroll").reset()
+    }
+
+    zoomUp() {
+        this._bpmnModeler.get("zoomScroll").stepZoom(1)
+    }
+
+    zoomDown() {
+        this._bpmnModeler.get("zoomScroll").stepZoom(-1)
     }
 
     // CamundaArray = {
