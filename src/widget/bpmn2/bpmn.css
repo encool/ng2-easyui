@@ -9,7 +9,7 @@
 
 .io-zoom-controls {
     width: auto;
-    position: fixed;
+    position: absolute;
     right: 270px;
     bottom: 60px
 }

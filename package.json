@@ -1,6 +1,6 @@
 {
   "name": "ng2-easyui",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -32,14 +32,14 @@
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
     "@types/node": "^8.0.28",
-    "ag-grid": "^13.1.2",
-    "ag-grid-angular": "^13.1.1",
     "ng2-easyform": "^0.0.8-beta.11"
   },
   "dependencies": {
+    "ag-grid": "^13.1.2",
+    "ag-grid-angular": "^13.1.1",
     "bpmn-js": "0.22.1",
     "bpmn-js-properties-panel": "0.16.1",
-    "camunda-bpmn-moddle": "0.13.0",  
+    "camunda-bpmn-moddle": "0.13.0",
     "lodash": "^4.17.4",
     "ngx-swiper-wrapper": "^4.6.2"
   }
