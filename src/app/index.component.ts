@@ -16,6 +16,7 @@ import { Component } from '@angular/core';
             <button mat-raised-button routerLink="/demo/EuAggridDemoComponent">aggrid</button>
             <button mat-raised-button routerLink="/RichSwipeDemoComponent">swipe</button>
             <button mat-raised-button routerLink="/Bpmn2DemoComponent">bpmn2</button>
+            <button mat-raised-button routerLink="/AngTreeDemoComponent">ang-tree</button>
         </div>
     </div>
 `,

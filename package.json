@@ -37,6 +37,7 @@
   "dependencies": {
     "ag-grid": "^13.1.2",
     "ag-grid-angular": "^13.1.1",
+    "angular-tree-component": "^5.0.0",
     "bpmn-js": "0.22.1",
     "bpmn-js-properties-panel": "0.16.1",
     "camunda-bpmn-moddle": "0.13.0",
