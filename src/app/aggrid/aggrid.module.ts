@@ -11,7 +11,8 @@ import { EasyFormCoreModule, EasyFormMdModule, MdTextinputField } from 'ng2-easy
         EasyUIagGridModule,
         RouterModule.forChild([{
             path: "EuAggridDemoComponent",
-            component: EuAggridDemoComponent
+            component: EuAggridDemoComponent,
+            data: { title: "aggrid" }
         }]),
         EasyUIMdModalModule.withComponents([ModalInfoComponent]),
         EasyFormCoreModule,

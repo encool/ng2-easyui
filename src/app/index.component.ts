@@ -1,28 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { MatContainerComponent, EuMatTab } from '../../'
 
 
 @Component({
-    selector: 'index-app',
+    selector: 'demo-index',
     template: `
-    <div style="
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;">
-        <div style="
-        display: flex;
-        flex-direction: row;
-        justify-content: center;">
-            <button mat-raised-button routerLink="/demo/EuAggridDemoComponent">aggrid</button>
-            <button mat-raised-button routerLink="/RichSwipeDemoComponent">swipe</button>
-            <button mat-raised-button routerLink="/Bpmn2DemoComponent">bpmn2</button>
-            <button mat-raised-button routerLink="/AngTreeDemoComponent">ang-tree</button>
-        </div>
-    </div>
-`,
+    <mat-toolbar color="primary">My Application</mat-toolbar>
+    <eu-mat-container [indexTab]="indexTab"></eu-mat-container>
+    `
 })
-export class IndexComponent {
-    constructor() {
+export class IndexComponent implements OnInit {
 
+    indexTab: EuMatTab = {
+        path: ["/EntryComponent"],
+        label: "首页"
+    }
+
+    @ViewChild(MatContainerComponent) container: MatContainerComponent
+
+    constructor() { }
+
+    ngOnInit() {
+
+    }
+
+    tabadd() {
+        debugger
     }
 }

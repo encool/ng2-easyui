@@ -18,4 +18,4 @@ import { AngularTreeComponent } from './angular-tree.component'
 export class EuAngularTreeModule { }
 
 export { AngularTreeComponent } from './angular-tree.component'
-export { ITreeOptions, TREE_ACTIONS } from 'angular-tree-component'
+export { ITreeOptions, TREE_ACTIONS } from "angular-tree-component";

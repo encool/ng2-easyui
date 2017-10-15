@@ -1,0 +1,12 @@
+.eu_mat_tab_close{
+    background-image: url("./assets/ic_clear_black_24dp_1x.png");
+    height: 24px;
+    width: 24px;
+    position: absolute;
+    right: 2px;
+    top: 12px;
+    display: none
+}
+.mat-tab-link:hover .eu_mat_tab_close{
+    display: block
+}
