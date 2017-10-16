@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router } from "@angular/router";
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from "@angular/router";
 
 import { EuTabService } from "./eu-tab.service";
 
@@ -13,8 +13,12 @@ export class MatContainerComponent implements OnInit {
 
     @Input() indexTab: EuMatTab = {
         path: ["/"],
-        label: "首页"
+        fullPath: "/",
+        label: "首页",
     }
+
+    @ViewChild(RouterLink) routerLink: RouterLink
+    @ViewChild(RouterLinkActive) routerLinkActive: RouterLinkActive
 
     constructor(private router: Router, private euTabService: EuTabService) {
 
@@ -23,6 +27,9 @@ export class MatContainerComponent implements OnInit {
     ngOnInit() {
         // debugger
         this.euTabService.init(this.indexTab)
+        this.routerLink
+        this.routerLinkActive
+        this.router
     }
 
     tabClose(tab: EuMatTab) {
@@ -35,5 +42,8 @@ export interface EuMatTab {
     isIndex?: boolean
     hash?: string
     path: any[]
+    fullPath: string
+    params?: any
+    queryParams?: any
     label: string
 }

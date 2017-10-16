@@ -26,10 +26,13 @@ export class TitleGuard implements CanActivate, CanActivateChild {
 
             let data = route.data
             let params = route.params
+            let queryParams = route.queryParams
             if (data && data.title) {
                 let tab: EuMatTab = {
+                    fullPath: url,
                     label: data.title,
-                    path: [urls[0],params]
+                    path: [urls[0], params],
+                    queryParams: queryParams
                 }
                 this.euTabService.addEuMatTab(tab)
             }

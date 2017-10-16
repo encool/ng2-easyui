@@ -1,4 +1,5 @@
 import { Component, OnInit, NgZone } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
 
 import { EuGridOptions, EuColModel, EuGridEvent, AggridComponent, ColDef, ColGroupDef, ModalConfig } from '../../../'
 
@@ -28,7 +29,7 @@ export class EuAggridDemoComponent implements OnInit {
     euGridOptions: EuGridOptions
     agGridColDefs: (ColDef | ColGroupDef)[]
 
-    constructor(private _ngZone: NgZone) {
+    constructor(private activatedRoute: ActivatedRoute) {
 
         this.agGridColDefs = [
             // {
@@ -97,5 +98,9 @@ export class EuAggridDemoComponent implements OnInit {
         })
     }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.activatedRoute.params.subscribe(params => {
+            // debugger
+        });
+    }
 }

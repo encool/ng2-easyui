@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
 
 import { EuMatTab, EuTabService } from '../../'
 
@@ -49,10 +50,28 @@ export class EntryComponent {
             path: "/AngTreeDemoComponent",
             label: "ang-tree"
         },
+        {
+            path: ["/EntryComponent",{p:1}],
+            label: "entry1"
+        },
+        {
+            path: ["/EntryComponent",{p:2}],
+            label: "entry2"
+        },
+        {
+            path: ["/EntryComponent",{p:2}],
+            label: "entry2"
+        },
     ]
 
-    constructor(private euTabService: EuTabService) {
+    constructor(private euTabService: EuTabService,private activatedRoute:ActivatedRoute) {
 
+    }
+
+    ngOnInit() {
+        this.activatedRoute.params.subscribe(params => {
+            debugger
+        });
     }
 
 }

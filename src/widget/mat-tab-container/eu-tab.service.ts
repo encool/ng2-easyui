@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 import { Location } from '@angular/common';
 
-var hash = require('object-hash');
+// var hash = require('object-hash');
 
 import { EuMatTab } from "./mat-container.component";
 
@@ -22,7 +22,7 @@ export class EuTabService {
     }
 
     addEuMatTab(EuMatTab: EuMatTab) {
-        EuMatTab.hash = this._calculateHash(EuMatTab)
+        // EuMatTab.hash = this._calculateHash(EuMatTab)
         if (this.existTab(EuMatTab) == -1) {
             this.navLinks.push(EuMatTab)
         }
@@ -31,7 +31,7 @@ export class EuTabService {
     existTab(EuMatTab: EuMatTab): number {
         let result = -1
         this.navLinks.forEach((value, index) => {
-            if (value.hash == EuMatTab.hash) {
+            if (value.fullPath == EuMatTab.fullPath) {
                 result = index
             }
         })
@@ -45,7 +45,7 @@ export class EuTabService {
         }
         // this.location.back()
         let tab: EuMatTab = this._findNextTab()
-        this.router.navigate([tab.path])
+        this.router.navigateByUrl(tab.fullPath)
     }
 
     _findNextTab() {
@@ -53,9 +53,9 @@ export class EuTabService {
         return this.navLinks[length - 1]
     }
 
-    _calculateHash(tab: EuMatTab) {
-        return hash(tab)
-    }
+    // _calculateHash(tab: EuMatTab) {
+    //     return hash(tab)
+    // }
 
     // addEuMatTabAndNavigate(EuMatTab: EuMatTab) {
     //     // debugger

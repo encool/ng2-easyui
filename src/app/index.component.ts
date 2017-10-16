@@ -14,6 +14,7 @@ export class IndexComponent implements OnInit {
 
     indexTab: EuMatTab = {
         path: ["/EntryComponent"],
+        fullPath: "/EntryComponent",
         label: "首页"
     }
 
