@@ -31,11 +31,11 @@ export class EntryComponent {
             label: "aggrid"
         },
         {
-            path: ["/demo/EuAggridDemoComponent",{p:1}],
+            path: ["/demo/EuAggridDemoComponent", { id1: "1" }],
             label: "aggrid1"
         },
         {
-            path: ["/demo/EuAggridDemoComponent",{p:2}],
+            path: ["/demo/EuAggridDemoComponent", { id1: "2" }],
             label: "aggrid2"
         },
         {
@@ -51,26 +51,26 @@ export class EntryComponent {
             label: "ang-tree"
         },
         {
-            path: ["/EntryComponent",{p:1}],
+            path: ["/EntryComponent", { p: 1 }],
             label: "entry1"
         },
         {
-            path: ["/EntryComponent",{p:2}],
+            path: ["/EntryComponent", { p: 2 }],
             label: "entry2"
         },
         {
-            path: ["/EntryComponent",{p:2}],
+            path: ["/EntryComponent", { p: 2 }],
             label: "entry2"
         },
     ]
 
-    constructor(private euTabService: EuTabService,private activatedRoute:ActivatedRoute) {
+    constructor(private euTabService: EuTabService, private activatedRoute: ActivatedRoute) {
 
     }
 
     ngOnInit() {
         this.activatedRoute.params.subscribe(params => {
-            debugger
+            // debugger
         });
     }
 

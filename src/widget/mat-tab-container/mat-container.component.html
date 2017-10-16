@@ -2,8 +2,7 @@
     <nav mat-tab-nav-bar>
         <div style="display: inline-block;" *ngFor="let link of euTabService.navLinks">
             <div mat-tab-link [routerLink]="link.path" [queryParams]="link.queryParams" routerLinkActive #rla="routerLinkActive"
-                [active]="rla.isActive" [routerLinkActiveOptions]="{exact: true}">
-                {{rla.isActive}}
+                [active]="isActive(link)" [routerLinkActiveOptions]="{exact: true}">
                 {{link.label}}
                 <div *ngIf="!link.isIndex" class="eu_mat_tab_close" (click)="tabClose(link)"></div>
             </div>

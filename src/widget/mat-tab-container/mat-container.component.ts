@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from "@angular/router";
+import { Router, RouterLink, RouterLinkActive, UrlTree, UrlSegmentGroup } from "@angular/router";
 
 import { EuTabService } from "./eu-tab.service";
+
+import { containsTree } from "./angular/url_tree";
 
 @Component({
     selector: 'eu-mat-container',
@@ -20,7 +22,7 @@ export class MatContainerComponent implements OnInit {
     @ViewChild(RouterLink) routerLink: RouterLink
     @ViewChild(RouterLinkActive) routerLinkActive: RouterLinkActive
 
-    constructor(private router: Router, private euTabService: EuTabService) {
+    constructor(private router: Router, public euTabService: EuTabService) {
 
     }
 
@@ -36,6 +38,12 @@ export class MatContainerComponent implements OnInit {
         this.euTabService.removeTab(tab)
     }
 
+    isActive(tab: EuMatTab) {
+        // debugger
+        let urlTree: UrlTree = this.router.parseUrl(tab.fullPath)
+        return containsTree((this.router as any).currentUrlTree, urlTree as any, true)
+        // return this.router.isActive(tab.fullPath, true);
+    }
 }
 
 export interface EuMatTab {

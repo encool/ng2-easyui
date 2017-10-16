@@ -23,7 +23,7 @@ export class TitleGuard implements CanActivate, CanActivateChild {
         if (route.component) {
             let url: string = state.url;
             let urls = url.split(";")
-
+            // let needParams: boolean = urls.length == 1 ? false : true
             let data = route.data
             let params = route.params
             let queryParams = route.queryParams
