@@ -8,7 +8,7 @@ import {
 @Component({
     selector: 'eu-angular-tree',
     template: `
-    <tree-root [nodes]="nodes" [focused]="true" [options]="options"></tree-root>    
+    <tree-root class="euangulartree" [nodes]="nodes" [focused]="true" [options]="options"></tree-root>    
     `,
     styleUrls: ['angular-tree.component.css'],
     encapsulation: ViewEncapsulation.None
