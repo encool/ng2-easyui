@@ -6,7 +6,10 @@ import { HttpModule } from '@angular/http'
 
 import {
   MatButtonModule,
+  MatMenuModule,
   MatToolbarModule,
+  MatSidenavModule,
+  MatIconModule,
 } from '@angular/material';
 
 import { AppComponent, DialogDataExampleDialog } from './app.component';
@@ -15,10 +18,12 @@ import {
   EasyUIBpmnModule,
   EasyUIMdModalModule,
   EasyUIRichSwipeModule,
+  EasyUIAngularTreeModule,
+  EasyUIMatContainerModule,
+  EasyUIMatMenuSideBarModule,
+
   EuBpmnService,
-  EuAngularTreeModule,
-  EasyMatContainerModule,
-  TitleGuard
+  TitleGuard,
 } from '../../'
 // import { ModalInfoComponent } from './modal/modal.info.component'
 // import { AgGridModule } from 'ag-grid-angular/main';
@@ -65,13 +70,18 @@ import { EntryComponent } from "./entry.component";
 
     MatButtonModule,
     MatToolbarModule,
-
+    MatMenuModule,
+    MatSidenavModule,
+    MatIconModule,
+    
     EasyUIMdModalModule,
     // EasyUIagGridModule,
     EasyUIRichSwipeModule,
     EasyUIBpmnModule,
-    EuAngularTreeModule,
-    EasyMatContainerModule.forRoot(),
+    EasyUIAngularTreeModule,
+    EasyUIMatContainerModule,
+    EasyUIMatMenuSideBarModule.forRoot(),
+    EasyUIMatContainerModule.forRoot(),
   ],
   providers: [
     { provide: EuPageService, useClass: PageService, },

@@ -20,10 +20,10 @@ import { MatContainerComponent, EuMatTab } from "./mat-container.component";
         MatContainerComponent
     ]
 })
-export class EasyMatContainerModule {
+export class EasyUIMatContainerModule {
     static forRoot(): ModuleWithProviders {
         return {
-            ngModule: EasyMatContainerModule,
+            ngModule: EasyUIMatContainerModule,
             providers: [
                 EuTabService, TitleGuard
             ]

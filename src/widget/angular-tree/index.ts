@@ -15,7 +15,7 @@ import { AngularTreeComponent } from './angular-tree.component'
         AngularTreeComponent,
     ]
 })
-export class EuAngularTreeModule { }
+export class EasyUIAngularTreeModule { }
 
 export { AngularTreeComponent } from './angular-tree.component'
 export { ITreeOptions, TREE_ACTIONS } from "angular-tree-component";

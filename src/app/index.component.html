@@ -1,0 +1,40 @@
+<mat-toolbar color="primary">
+    <button class="hamburger" [class.starting]="isStarting" mat-button
+        (click)="sidenav.toggle()" title="Docs menu">
+        <mat-icon>menu</mat-icon>
+    </button>
+    My Application
+    <span style="flex: 1 1 auto"></span>
+    <button mat-button [disableRipple]=false [matMenuTriggerFor]="menu">
+        <span>{{userDTO.userRealname}}</span>
+        <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" [overlapTrigger]="false">
+        <button mat-menu-item>
+            <mat-icon>dialpad</mat-icon>
+            <span>Redial</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>voicemail</mat-icon>
+            <span>Check voicemail</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>notifications_off</mat-icon>
+            <span>Disable alerts</span>
+        </button>
+    </mat-menu>
+
+
+
+</mat-toolbar>
+<mat-sidenav-container style="width:100%;height:100%" role="main">
+    <mat-sidenav #sidenav class="sidenav" [mode]="mode">
+        <mat-nav-list>
+            <eu-menu-list></eu-menu-list>
+        </mat-nav-list>
+    </mat-sidenav>
+    <div cdk-scrollable>
+        <eu-mat-container [indexTab]="indexTab"></eu-mat-container>
+    </div>
+
+</mat-sidenav-container>
