@@ -2,9 +2,10 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 
-import { MatMenuModule, MatButtonModule, MatExpansionModule,MatIconModule } from "@angular/material";
+import { MatMenuModule, MatButtonModule, MatExpansionModule, MatIconModule } from "@angular/material";
 
 import { MenuListComponent } from "./menu-list.component";
+// import { EuMatMenuTrigger } from "./eu-menu.trigger";
 
 @NgModule({
     imports: [
@@ -13,13 +14,15 @@ import { MenuListComponent } from "./menu-list.component";
         MatExpansionModule,
         MatIconModule,
         CommonModule,
-        RouterModule
+        RouterModule,
     ],
     declarations: [
-        MenuListComponent
+        // EuMatMenuTrigger,
+        MenuListComponent,
     ],
     exports: [
-        MenuListComponent
+        MenuListComponent,
+        // EuMatMenuTrigger
     ]
 })
 export class EasyUIMatMenuSideBarModule {

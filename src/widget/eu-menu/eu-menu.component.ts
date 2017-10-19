@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 import { Menu } from "./menu";
@@ -7,7 +7,7 @@ import { Menu } from "./menu";
     selector: 'eu-menu',
     templateUrl: 'eu-menu.component.html',
     host: {
-        '[class.collapse in]': 'expanded',
+        '[class.collapse_in]': 'expanded',
         '[class.collapse]': '!expanded',
     },
     animations: [
@@ -17,6 +17,8 @@ import { Menu } from "./menu";
             transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4,0.0,0.2,1)')),
         ]),
     ],
+    styleUrls: ['./eu-menu.component.css'],
+    encapsulation: ViewEncapsulation.None
 })
 export class EuMenuComponent {
 

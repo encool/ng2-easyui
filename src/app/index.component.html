@@ -29,9 +29,9 @@
 </mat-toolbar>
 <mat-sidenav-container style="width:100%;height:100%" role="main">
     <mat-sidenav #sidenav class="sidenav" [mode]="mode">
-        <mat-nav-list>
-            <eu-menu-list></eu-menu-list>
-        </mat-nav-list>
+        <!-- <mat-nav-list>
+        </mat-nav-list> -->
+        <eu-menu-list [menus]="menus"></eu-menu-list>
     </mat-sidenav>
     <div cdk-scrollable>
         <eu-mat-container [indexTab]="indexTab"></eu-mat-container>

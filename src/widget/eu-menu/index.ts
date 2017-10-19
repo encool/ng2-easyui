@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EuMenuComponent } from './eu-menu.component';
 
+import { EuMenuComponent } from './eu-menu.component';
+import { EuMenuListComponent } from "./eu-menu-list.component";
 
 @NgModule({
     imports: [CommonModule],
-    declarations: [EuMenuComponent],
-    exports: [EuMenuComponent],
+    declarations: [EuMenuComponent, EuMenuListComponent],
+    exports: [EuMenuComponent, EuMenuListComponent],
 })
-export class EuMenuModule {
+export class EasyUIMenuModule {
 
 }
+
+export * from './menu'
