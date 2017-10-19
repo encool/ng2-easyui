@@ -5,5 +5,6 @@ export * from './rich-swipe'
 export * from './angular-tree'
 export * from './mat-tab-container'
 export * from './mat-menu-bar'
+export * from './eu-menu'
 
 export { ITreeOptions } from 'angular-tree-component'
