@@ -2,26 +2,35 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 
-import { MatMenuModule, MatButtonModule, MatExpansionModule, MatIconModule } from "@angular/material";
+import {
+    MatMenuModule,
+    MatButtonModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatListModule,
+} from "@angular/material";
 
 import { MenuListComponent } from "./menu-list.component";
+import { MatNavMenuComponent } from "./mat-nav-menu.component";
 // import { EuMatMenuTrigger } from "./eu-menu.trigger";
 
 @NgModule({
     imports: [
-        MatMenuModule,
-        MatButtonModule,
-        MatExpansionModule,
-        MatIconModule,
         CommonModule,
-        RouterModule,
+        // MatMenuModule,
+        MatButtonModule,
+        // MatExpansionModule,
+        MatIconModule,
+        MatListModule,
     ],
     declarations: [
         // EuMatMenuTrigger,
         MenuListComponent,
+        MatNavMenuComponent,
     ],
     exports: [
         MenuListComponent,
+        MatNavMenuComponent,
         // EuMatMenuTrigger
     ]
 })

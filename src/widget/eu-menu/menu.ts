@@ -3,20 +3,20 @@ export interface Menu {
     /**
      * icon
      */
-    i: string
+    icon: string
     /**
      * title
      */
-    t: string
+    title: string
     /**
      * link
      */
-    l: string
+    link: string
     active?: boolean
     /**
      * children
      */
-    c?: Array<Menu>,
-    o?: string
-    e?: string
+    children?: Array<Menu>,
+
+    parent?: string
 }

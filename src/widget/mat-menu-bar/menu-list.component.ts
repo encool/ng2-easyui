@@ -4,7 +4,7 @@ import { MatAccordionDisplayMode } from "@angular/material";
 import { Menu } from "./menu";
 
 @Component({
-    selector: 'eu-menu-list',
+    selector: 'eu-mat-menu-list',
     templateUrl: 'menu-list.component.html',
     styles: [".easyui-mat-menu .mat-expansion-panel-body{margin-bottom:0px}"],
     encapsulation: ViewEncapsulation.None

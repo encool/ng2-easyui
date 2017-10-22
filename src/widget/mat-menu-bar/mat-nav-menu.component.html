@@ -1,0 +1,9 @@
+<mat-nav-list style="width:230px">
+    <h3 mat-subheader style="cursor:pointer" (click)="menuClick(menu)">{{menu.t}}</h3>
+    <ng-container *ngIf="menu.c">
+        <eu-mat-nav-menu *ngFor="let menuc of menu.c" [menu]="menuc">
+            <!-- <mat-icon mat-list-icon>folder</mat-icon>
+            <a matLine>{{ menuc.t }}</a> -->
+        </eu-mat-nav-menu>
+    </ng-container>
+</mat-nav-list>

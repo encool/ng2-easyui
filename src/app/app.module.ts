@@ -20,7 +20,7 @@ import {
   EasyUIRichSwipeModule,
   EasyUIAngularTreeModule,
   EasyUIMatContainerModule,
-  // EasyUIMatMenuSideBarModule,
+  EasyUIMatMenuSideBarModule,
   EasyUIMenuModule,
 
   EuBpmnService,
@@ -82,7 +82,7 @@ import { EntryComponent } from "./entry.component";
     EasyUIAngularTreeModule,
     EasyUIMatContainerModule,
     EasyUIMenuModule,
-    // EasyUIMatMenuSideBarModule.forRoot(),
+    EasyUIMatMenuSideBarModule.forRoot(),
     EasyUIMatContainerModule.forRoot(),
   ],
   providers: [

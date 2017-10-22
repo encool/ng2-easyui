@@ -13,35 +13,49 @@ export class EuMenuDemoComponent implements OnInit {
     menus: Menu[] = [
         {
             id: "1",
-            t: "menu1",
-            l: "ddd",
-            i: "",
-            c: [
+            title: "系统设置",
+            link: "ddd",
+            icon: "",
+            children: [
                 {
                     id: "1",
-                    t: "menu1",
-                    l: "ddd",
-                    i: ""
+                    title: "系统设置",
+                    link: "ddd",
+                    icon: "",
+                    children: [
+                        {
+                            id: "1",
+                            title: "系统设置",
+                            link: "ddd",
+                            icon: "",
+                        },
+                        {
+                            id: "1",
+                            title: "系统设置",
+                            link: "ddd",
+                            icon: "",
+                        },
+                    ]
                 },
                 {
                     id: "1",
-                    t: "menu1",
-                    l: "ddd",
-                    i: ""
+                    title: "系统设置",
+                    link: "ddd",
+                    icon: "",
                 },
             ]
         },
         {
             id: "1",
-            t: "menu1",
-            l: "ddd",
-            i: ""
+            title: "系统设置",
+            link: "ddd",
+            icon: "",
         },
         {
             id: "1",
-            t: "menu1",
-            l: "ddd",
-            i: ""
+            title: "系统设置",
+            link: "ddd",
+            icon: "",
         },
     ]
     constructor() { }
