@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from "@angular/material";
 
 import { MatContainerComponent, EuMatTab, Menu } from '../../'
 
@@ -11,20 +12,18 @@ export class IndexComponent implements OnInit {
     menus: Menu[] = [
         {
             id: "1",
-            title: "系统设置",
-            link: "ddd",
+            title: "feature",
             icon: "",
             children: [
                 {
                     id: "1",
-                    title: "系统设置",
-                    link: "ddd",
+                    title: "demo",
                     icon: "",
                     children: [
                         {
                             id: "1",
-                            title: "系统设置",
-                            link: "ddd",
+                            title: "aggrid",
+                            link: "/demo/EuAggridDemoComponent",
                             icon: "",
                         },
                         {
@@ -96,6 +95,7 @@ export class IndexComponent implements OnInit {
     }
 
     @ViewChild(MatContainerComponent) container: MatContainerComponent
+    @ViewChild(MatSidenav) sideNav: MatSidenav
 
     constructor() { }
 
@@ -103,7 +103,8 @@ export class IndexComponent implements OnInit {
 
     }
 
-    tabadd() {
-        debugger
+    onHideMenu() {
+        this.sideNav.close()
     }
+
 }

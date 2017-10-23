@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Menu } from "./menu";
 
@@ -7,7 +7,7 @@ import { Menu } from "./menu";
     template: `
     <div class="menu_section" style="width:230px;">
         <ul cdk-accordion class="nav side-menu">
-            <eu-menu *ngFor="let menu of menus" [menu]="menu"></eu-menu>
+            <eu-menu *ngFor="let menu of menus" [menu]="menu" (hideMenu)="onHideMenu()"></eu-menu>
         </ul>
     </div>
     `
@@ -15,10 +15,15 @@ import { Menu } from "./menu";
 export class EuMenuListComponent implements OnInit {
 
     @Input() menus: Menu[]
+    @Output() hideMenu = new EventEmitter<void>();
+
     constructor() { }
 
     ngOnInit() {
 
     }
 
+    onHideMenu() {
+        this.hideMenu.emit()
+    }
 }

@@ -31,7 +31,7 @@
     <mat-sidenav #sidenav class="sidenav" [mode]="mode">
         <!-- <mat-nav-list>
         </mat-nav-list> -->
-        <eu-menu-list [menus]="menus"></eu-menu-list>
+        <eu-menu-list [menus]="menus" (hideMenu)="onHideMenu()"></eu-menu-list>
         <!-- <eu-mat-nav-menu [menu]="emenu"></eu-mat-nav-menu> -->
     </mat-sidenav>
     <div cdk-scrollable>

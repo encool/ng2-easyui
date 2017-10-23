@@ -11,7 +11,7 @@ export interface Menu {
     /**
      * link
      */
-    link: string
+    link?: string
     active?: boolean
     /**
      * children
