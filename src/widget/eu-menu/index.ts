@@ -4,8 +4,7 @@ import { CommonModule } from '@angular/common';
 import {
     MatIconModule,
     MatListModule,
-    CdkAccordion,
-    AccordionItem,
+    MatExpansionModule
 } from "@angular/material";
 import { UNIQUE_SELECTION_DISPATCHER_PROVIDER } from "@angular/cdk/collections";
 
@@ -17,15 +16,14 @@ import { EuMenuListComponent } from "./eu-menu-list.component";
         CommonModule,
         MatIconModule,
         MatListModule,
+        MatExpansionModule,
         // CdkAccordion,
         // AccordionItem,
     ],
     providers: [
-        AccordionItem,
         UNIQUE_SELECTION_DISPATCHER_PROVIDER
     ],
     declarations: [
-        CdkAccordion,
         EuMenuComponent,
         EuMenuListComponent,
     ],
