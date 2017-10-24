@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
@@ -30,7 +30,14 @@ import { EuMenuListComponent } from "./eu-menu-list.component";
     exports: [EuMenuComponent, EuMenuListComponent],
 })
 export class EasyUIMenuModule {
-
+    static forRoot(): ModuleWithProviders {
+        return {
+            ngModule: EasyUIMenuModule,
+            providers: [
+                EuMenuListComponent
+            ]
+        };
+    }
 }
 
 export * from './menu'

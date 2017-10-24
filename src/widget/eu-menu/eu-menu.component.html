@@ -1,5 +1,5 @@
 <li class="eu-menu">
-    <a class="eu-menu-a" (click)="menuClick($event)">
+    <a class="eu-menu-a" (click)="menuClick()">
         <mat-icon mat-list-icon>folder</mat-icon>
         <span class="eu-menu-text">{{menu.title}}</span>
         <mat-icon mat-list-icon *ngIf="menu.children">{{_getExpandedIcon()}}</mat-icon>

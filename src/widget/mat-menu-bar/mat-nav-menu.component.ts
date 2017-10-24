@@ -16,7 +16,7 @@ export class MatNavMenuComponent implements OnInit {
         debugger
     }
 
-    menuClick() {
+    menuClick(menu) {
 
     }
 

@@ -103,6 +103,11 @@ export class IndexComponent implements OnInit {
 
     }
 
+    isSideBySide = true
+    get mode() {
+        return this.isSideBySide ? 'side' : 'over';
+    }
+
     onHideMenu() {
         this.sideNav.close()
     }

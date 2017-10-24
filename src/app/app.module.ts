@@ -74,14 +74,14 @@ import { EntryComponent } from "./entry.component";
     MatMenuModule,
     MatSidenavModule,
     MatIconModule,
-    
+
     EasyUIMdModalModule,
     // EasyUIagGridModule,
     EasyUIRichSwipeModule,
     EasyUIBpmnModule,
     EasyUIAngularTreeModule,
     EasyUIMatContainerModule,
-    EasyUIMenuModule,
+    EasyUIMenuModule.forRoot(),
     EasyUIMatMenuSideBarModule.forRoot(),
     EasyUIMatContainerModule.forRoot(),
   ],

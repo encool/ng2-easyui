@@ -1,4 +1,9 @@
-import { Component, Input, ViewEncapsulation, Optional, ChangeDetectorRef, Host, Output, EventEmitter } from '@angular/core';
+import {
+    Component, Input, ViewEncapsulation,
+    Optional, ChangeDetectorRef, Host, Output,
+    EventEmitter, OnDestroy, ViewChildren,
+    QueryList
+} from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Router } from "@angular/router";
 
@@ -33,6 +38,8 @@ export class EuMenuComponent extends AccordionItem {
     @Output() hideMenu = new EventEmitter<void>();
     @Output() childActive = new EventEmitter<void>();
 
+    @ViewChildren(EuMenuComponent) childrenMenus: QueryList<EuMenuComponent>;
+
     readonly id = `eu-menu-${nextId++}`;
     active: boolean
     childActived: boolean = false
@@ -51,6 +58,7 @@ export class EuMenuComponent extends AccordionItem {
             _uniqueSelectionDispatcher.listen((id: string, type: string) => {
                 if (type === "menu_active_dispatcher" && this.id != id) {
                     this.active = false;
+                    //reset childActived, because followed up childActive EventEmitter will set the correct value
                     this.childActived = false
                     this.menu.active = false
                 }
@@ -59,12 +67,7 @@ export class EuMenuComponent extends AccordionItem {
 
     menuClick() {
         if (this.menu.link) {
-            this.menu.active = true
-            this.active = true
-            this._expansionDispatcher.notify(this.id, "menu_active_dispatcher");
-            setTimeout(() => {
-                this.childActive.emit()
-            });
+            // this._activateLink()
             this.router.navigateByUrl(this.menu.link)
 
             if (!this.menu.children) {
@@ -72,6 +75,15 @@ export class EuMenuComponent extends AccordionItem {
             }
         }
         this.expanded = !this.expanded
+    }
+
+    private _activateLink() {
+        this.menu.active = true
+        this.active = true
+        this._expansionDispatcher.notify(this.id, "menu_active_dispatcher");
+        setTimeout(() => {
+            this.childActive.emit()
+        });
     }
 
     onChildActive() {
@@ -83,12 +95,34 @@ export class EuMenuComponent extends AccordionItem {
         this.hideMenu.emit()
     }
 
+    activateLink(link: string) {
+        if (this.menu.link == link) {
+            this._activateLink()
+            return;
+        }
+        if (this.childrenMenus && this.childrenMenus.length > 0) {
+            this.childrenMenus.forEach(value => {
+                value.activateLink(link)
+            })
+        }
+    }
+
+    clearActive() {
+        this.active = false;
+        this.childActived = false
+        this.menu.active = false
+        if (this.childrenMenus && this.childrenMenus.length > 0) {
+            this.childrenMenus.forEach(value => {
+                value.clearActive()
+            })
+        }
+    }
+
     _getExpandedState() {
         return this.expanded ? 'expanded' : 'collapsed';
     }
 
     _getExpandedIcon() {
         return this.expanded ? 'expand_less' : 'expand_more';
-
     }
 }

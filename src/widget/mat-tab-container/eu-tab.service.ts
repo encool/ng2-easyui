@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 // var hash = require('object-hash');
 
 import { EuMatTab } from "./mat-container.component";
+import { EuMenuListComponent } from "../eu-menu/eu-menu-list.component";
 
 @Injectable()
 export class EuTabService {

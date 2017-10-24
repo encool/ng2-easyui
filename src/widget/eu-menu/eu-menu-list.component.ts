@@ -1,5 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+    Component, OnInit, Input, Output, EventEmitter,
+    ViewChildren, QueryList
+} from '@angular/core';
+import { Router, NavigationEnd } from "@angular/router";
 
+import { EuMenuComponent } from "./eu-menu.component";
 import { Menu } from "./menu";
 
 @Component({
@@ -17,10 +22,31 @@ export class EuMenuListComponent implements OnInit {
     @Input() menus: Menu[]
     @Output() hideMenu = new EventEmitter<void>();
 
-    constructor() { }
+    @ViewChildren(EuMenuComponent) childrenMenus: QueryList<EuMenuComponent>;
+
+    constructor(private router: Router) {
+        this.router.events.subscribe(event => {
+            if (event instanceof NavigationEnd) {
+                this.clearActive()
+                this.activateLink(event.url)
+            }
+        })
+    }
 
     ngOnInit() {
 
+    }
+
+    activateLink(link: string) {
+        this.childrenMenus.forEach(menu => {
+            menu.activateLink(link)
+        })
+    }
+
+    clearActive() {
+        this.childrenMenus.forEach(menu => {
+            menu.clearActive()
+        })
     }
 
     onHideMenu() {
