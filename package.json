@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "ng build  --no-extract-license --prod --build-optimizer"
   },
   "keywords": [
     "angular2",
@@ -31,11 +32,10 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
-    "@types/node": "^8.0.28",
-    "ng2-easyform": "^0.0.8-beta.11"
+    "@types/node": "^8.0.28"
   },
   "dependencies": {
-    "ng2-easyform":"^0.0.8-beta.11",
+    "ng2-easyform": "^0.0.9",
     "ag-grid": "^13.1.2",
     "ag-grid-angular": "^13.1.1",
     "angular-tree-component": "^5.0.0",
