@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild, OnInit, Type } from "@angular/core";
 import { PageEvent, MatPaginator, MatDialog, MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { GridOptions, IDatasource, IDateParams, IGetRowsParams, ColDef, ColGroupDef } from "ag-grid/main";
-import { debounce } from 'rxjs/operator/debounce'
+import { debounce } from 'rxjs/operators'
 import { Observable } from 'rxjs'
 import {
     EuPageService,
@@ -174,7 +174,12 @@ export class AggridComponent implements GridApi, OnInit {
             this.refreshData(this.url, this.pageSize, this.pageIndex, this.cond, this.sidx, this.sord)
         })
 
-        this.queryForm.form.valueChanges.debounce(() => Observable.interval(400)).subscribe(value => {
+        // this.queryForm.form.valueChanges.debounce(() => Observable.interval(400)).subscribe(value => {
+        //     this.query()
+        // })
+        this.queryForm.form.valueChanges.pipe(
+            debounce(() => Observable.interval(400))
+        ).subscribe(value => {
             this.query()
         })
     }
