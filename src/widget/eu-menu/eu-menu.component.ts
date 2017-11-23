@@ -7,7 +7,7 @@ import {
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Router } from "@angular/router";
 
-import { AccordionItem, CdkAccordion, } from "@angular/material";
+import { CdkAccordionItem, CdkAccordion, } from "@angular/cdk/accordion";
 import { UniqueSelectionDispatcher } from "@angular/cdk/collections";
 import { Menu } from "./menu";
 
@@ -32,7 +32,7 @@ let nextId = 0
     styleUrls: ['./eu-menu.component.css'],
     encapsulation: ViewEncapsulation.None
 })
-export class EuMenuComponent extends AccordionItem {
+export class EuMenuComponent extends CdkAccordionItem {
 
     @Input() menu: Menu
     @Output() hideMenu = new EventEmitter<void>();
