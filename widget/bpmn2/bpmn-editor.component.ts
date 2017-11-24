@@ -7,7 +7,7 @@ import { Headers, Http, URLSearchParams, RequestOptions } from '@angular/http';
 // import { ModalAction } from '../../shared/object/modal-action'
 // import { ModalService } from '../../service/modal.service'
 
-import { EuBpmnService, Model } from '../../core'
+import { EuBpmnService, Model } from '../core'
 
 @Component({
     selector: 'bpmn-editor',

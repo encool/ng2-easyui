@@ -1,7 +1,11 @@
 import { Component, Inject, ViewContainerRef, ViewChild } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable'
-import { OnModalAction, EuGridEvent, EuGridAction, EuPageService } from '../../../'
+import {
+    OnModalAction, EuGridEvent, EuGridAction, EuPageService
+    // } from 'ng2-easyui'
+} from '../../../widget'
+
 // import { EasyUIMdModalModule, MdModalService, ModalConfig } from '../../../'
 
 import { MdTextinputField, FieldBase, MdFormComponent } from 'ng2-easyform'

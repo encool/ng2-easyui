@@ -4,17 +4,17 @@ import { GridOptions, IDatasource, IDateParams, IGetRowsParams, ColDef, ColGroup
 import { debounce } from 'rxjs/operators'
 import { Observable } from 'rxjs'
 import {
-    EuPageService,
     EuGridOptions,
     EuColModel,
     GridApi,
     EuGridAction,
     EuGridEvent,
-    EuModalService,
     ModalConfig,
     Conditions,
     Rule,
-} from '../../core/'
+} from '../core/'
+import { EuModalService } from "../core/modal/eu-modal.service";
+import { EuPageService } from "../core/grid/eu-page.service";
 
 import { localeText } from './aggrid-local'
 import {

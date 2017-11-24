@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 
-import { ModelInput } from '../../../'
+import {
+    ModelInput
+    // } from 'ng2-easyui'
+} from '../../../widget'
+
 
 @Component({
     selector: 'bpmn2-demo',

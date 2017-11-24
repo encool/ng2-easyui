@@ -25,7 +25,9 @@ import {
 
   EuBpmnService,
   TitleGuard,
-} from '../../'
+  // } from 'ng2-easyui'
+} from '../../widget'
+
 // import { ModalInfoComponent } from './modal/modal.info.component'
 // import { AgGridModule } from 'ag-grid-angular/main';
 

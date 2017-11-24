@@ -7,4 +7,6 @@ export * from './mat-tab-container'
 export * from './mat-menu-bar'
 export * from './eu-menu'
 
+export * from './core'
+
 export { ITreeOptions } from 'angular-tree-component'

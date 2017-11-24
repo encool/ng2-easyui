@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from "@angular/material";
 
-import { MatContainerComponent, EuMatTab, Menu } from '../../'
+import {
+    MatContainerComponent, EuMatTab, Menu
+} from '../../widget'
+// } from 'ng2-easyui'
 
 @Component({
     selector: 'demo-index',

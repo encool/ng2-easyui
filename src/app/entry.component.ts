@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 
-import { EuMatTab, EuTabService } from '../../'
+import {
+    EuMatTab, EuTabService
+} from '../../widget'
+// } from 'ng2-easyui'
 
 @Component({
     selector: 'index-app',

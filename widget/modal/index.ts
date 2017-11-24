@@ -5,7 +5,7 @@ import { MatDialogModule, MatButtonModule } from '@angular/material';
 
 import { ModalContainerComponent } from './modal.container.component'
 import { MdModalService } from './md-modal.service'
-import { EuModalService } from '../../core/'
+import { EuModalService } from '../core/modal/eu-modal.service'
 
 @NgModule({
     imports: [

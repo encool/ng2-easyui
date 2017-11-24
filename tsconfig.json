@@ -18,5 +18,11 @@
       "es2016",
       "dom"
     ]
+    // "paths": {
+    //   "ng2-easyui": [
+    //     "../widget"
+    //     // "./widget"
+    //   ] // This mapping is relative to "baseUrl"
+    // }    
   }
 }

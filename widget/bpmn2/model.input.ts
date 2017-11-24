@@ -1,4 +1,4 @@
-import { Model } from '../../core'
+import { Model } from '../core'
 
 export class ModelInput {
     params?: {
