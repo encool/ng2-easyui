@@ -2,10 +2,24 @@
   "name": "ng2-easyui",
   "version": "0.0.11",
   "description": "",
-  "main": "index.js",
+  "main": "./bundles/ng2-easyui.js",
+  "module": "./ng2-easyui.es5.js",
+  "es2015": "./ng2-easyui.js",
+  "typings": "./ng2-easyui.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "ng build  --no-extract-license --prod --build-optimizer"
+    "build:example": "ng build --app example --prod --no-extract-license --build-optimizer",
+    "clean:lib": "rimraf dist/grid",
+    "build:app": "ng build --app app --no-extract-license --prod --build-optimizer",
+    "buildpkg": "ng-packagr -p ng-package.json",
+    "clean": "rimraf out-tsc dist/*",
+    "prebuild": "npm run clean",
+    "build": "node build.js",
+    "ng": "ng",
+    "start": "ng serve",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "publish:lib": "cnpm run clean && cnpm run build"
   },
   "keywords": [
     "angular2",
@@ -33,8 +47,15 @@
     "@angular/router": "^5.0.2",
     "@types/node": "^8.0.28",
     "classlist.js": "^1.1.20150312",
-    "web-animations-js": "^2.3.1",
-    "typescript": "~2.4.0"
+    "rimraf": "^2.6.2",
+    "rollup": "^0.42.0",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-sourcemaps": "^0.4.1",
+    "rollup-plugin-uglify": "^2.0.1",
+    "rxjs": "^5.5.2",
+    "typescript": "~2.4.0",
+    "web-animations-js": "^2.3.1"
   },
   "dependencies": {
     "ng2-easyform": "^0.1.2",
@@ -45,7 +66,6 @@
     "bpmn-js-properties-panel": "0.16.1",
     "camunda-bpmn-moddle": "0.13.0",
     "lodash": "^4.17.4",
-    "ngx-swiper-wrapper": "^4.6.2",
-    "object-hash": "^1.2.0"
+    "ngx-swiper-wrapper": "^4.6.2"
   }
 }

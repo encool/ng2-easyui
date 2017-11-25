@@ -1,6 +1,6 @@
 import { Type, ViewContainerRef } from '@angular/core'
 import { ModalAction } from './modal.action'
-export declare class ModalConfig {
+export class ModalConfig {
     /**
      * Where the attached component should live in Angular's *logical* component tree.
      * This affects what is available for injection and the change detection order for the

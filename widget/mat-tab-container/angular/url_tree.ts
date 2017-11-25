@@ -113,7 +113,7 @@ function containsSegmentGroupHelper(
  * @howToUse
  *
  * ```
- * @Component({templateUrl:'template.html'})
+ *
  * class MyComponent {
  *   constructor(router: Router) {
  *     const tree: UrlTree =
@@ -200,7 +200,7 @@ export class UrlSegmentGroup {
  * @howToUse
  *
  * ```
- * @Component({templateUrl:'template.html'})
+ * 
  * class MyComponent {
  *   constructor(router: Router) {
  *     const tree: UrlTree = router.parseUrl('/team;id=33');

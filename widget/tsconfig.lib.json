@@ -1,0 +1,26 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../out-tsc/lib-es2015/",
+    "target": "es2015",
+    "rootDir": "./",
+    "baseUrl": "",
+    "declaration": true,
+    "types": [
+      // add node as an option
+      "node"
+    ]
+  },
+  "files": [
+    "./index.ts",
+    "./typings.d.ts"
+  ],
+  "angularCompilerOptions": {
+    "annotateForClosureCompiler": true,
+    "strictMetadataEmit": true,
+    "skipTemplateCodegen": true,
+    "flatModuleOutFile": "ng2-easyui.js",
+    "flatModuleId": "ng2-easyui",
+    "genDir": "../../out-tsc/lib-gen-dir/"
+  }
+}

@@ -15,12 +15,19 @@ import * as _ from "lodash"
 
 // var domQuery = require('min-dom/lib/query');
 
-import * as svgAppend from 'tiny-svg/lib/append'
-import * as svgAttr from 'tiny-svg/lib/attr'
-import * as svgCreate from 'tiny-svg/lib/create'
-import * as svgClasses from 'tiny-svg/lib/classes'
+// import * as svgAppend from 'tiny-svg/lib/append'
+// import * as svgAttr from 'tiny-svg/lib/attr'
+// import * as svgCreate from 'tiny-svg/lib/create'
+// import * as svgClasses from 'tiny-svg/lib/classes'
 
-import * as domQuery from 'min-dom/lib/query'
+// import * as domQuery from 'min-dom/lib/query'
+
+import svgAppend from 'tiny-svg/lib/append'
+import svgAttr from 'tiny-svg/lib/attr'
+import svgCreate from 'tiny-svg/lib/create'
+import svgClasses from 'tiny-svg/lib/classes'
+
+import domQuery from 'min-dom/lib/query'
 
 // import { FormConfigComponent } from '../config/form-config.component'
 // import { ActivityConfigComponent } from '../config/activity-config.component'
@@ -171,7 +178,7 @@ export class BpmnViewerComponent implements OnInit {
                             let flows: string[] = highlights.flows;
                             // let r = $("g.djs-connection").each(function (e) {
                             // let r = document.querySelectorAll("g.djs-connection").each(function (e) {
-                                
+
                             //     var g = $(this)
                             //     var path = g.find('path')
                             //     var style = path.attr('style')

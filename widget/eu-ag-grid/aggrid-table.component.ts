@@ -1,8 +1,10 @@
 import { Component, Input, ViewChild, OnInit, Type } from "@angular/core";
 import { PageEvent, MatPaginator, MatDialog, MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
-import { GridOptions, IDatasource, IDateParams, IGetRowsParams, ColDef, ColGroupDef } from "ag-grid/main";
+import { GridOptions, IDatasource, IDateParams, IGetRowsParams, ColDef, ColGroupDef, RowNode } from "ag-grid/main";
 import { debounce } from 'rxjs/operators'
-import { Observable } from 'rxjs'
+import { Observable, } from 'rxjs/Observable'
+import 'rxjs/add/observable/interval'
+
 import {
     EuGridOptions,
     EuColModel,
