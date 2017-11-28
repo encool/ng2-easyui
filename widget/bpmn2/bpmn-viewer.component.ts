@@ -35,6 +35,8 @@ import domQuery from 'min-dom/lib/query'
 // import { ModalAction } from '../../shared/object/modal-action'
 // import { ModalService } from '../../service/modal.service'
 
+import { CamundaModdleDescriptor } from "./camunda"
+
 @Component({
     selector: 'bpmn-viewer',
     styles: ['.highlight:not(.djs-connection) .djs-visual > :nth-child(1) {fill: green !important; /* color elements as green */}'],
@@ -107,7 +109,7 @@ export class BpmnViewerComponent implements OnInit {
         // var windowl: any = window
         // var propertiesPanelModule = windowl.PropertiesPanelModule;
         // var propertiesProviderModule = windowl.PropertiesProviderModule;
-        var camundaModdleDescriptor = require("./camunda")
+        // var camundaModdleDescriptor = require("./camunda")
         // var BpmnModeler = windowl.BpmnJS;
         // var BpmnViewer = windowl.BpmnViewer;
         // var canvas = $('#js-canvas-view');

@@ -3,7 +3,7 @@ import { MatSidenav } from "@angular/material";
 
 import {
     MatContainerComponent, EuMatTab, Menu
-// } from '../../widget'
+    // } from '../../widget'
 } from 'ng2-easyui'
 
 @Component({
@@ -31,28 +31,28 @@ export class IndexComponent implements OnInit {
                         },
                         {
                             id: "1",
-                            title: "系统设置",
-                            link: "ddd",
+                            title: "Bpmn2",
+                            link: "/Bpmn2DemoComponent",
                             icon: "",
                         },
                     ]
                 },
                 {
                     id: "1",
-                    title: "系统设置",
+                    title: "demo",
                     link: "ddd",
                     icon: "",
                     children: [
                         {
                             id: "1",
-                            title: "系统设置",
-                            link: "ddd",
+                            title: "matpanel",
+                            link: "/MatPanelDemoComponent",
                             icon: "",
                         },
                         {
                             id: "1",
-                            title: "系统设置",
-                            link: "ddd",
+                            title: "ng2Tree",
+                            link: "/Ng2TreeDemoComponent",
                             icon: "",
                         },
                     ]
@@ -61,19 +61,19 @@ export class IndexComponent implements OnInit {
         },
         {
             id: "1",
-            title: "系统设置",
+            title: "level1",
             link: "ddd",
             icon: "",
             children: [
                 {
                     id: "1",
-                    title: "系统设置",
+                    title: "level2",
                     link: "ddd",
                     icon: "",
                 },
                 {
                     id: "1",
-                    title: "系统设置",
+                    title: "demo",
                     link: "ddd",
                     icon: "",
                 },

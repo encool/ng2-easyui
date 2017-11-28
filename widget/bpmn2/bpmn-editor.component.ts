@@ -9,6 +9,8 @@ import { Headers, Http, URLSearchParams, RequestOptions } from '@angular/http';
 
 import { EuBpmnService, Model } from '../core'
 
+import { CamundaModdleDescriptor } from "./camunda"
+
 @Component({
     selector: 'bpmn-editor',
     templateUrl: './bpmn-editor.component.html',
@@ -160,7 +162,8 @@ export class BpmnEditorComponent implements OnInit {
         // var windowl: any = window
         // var propertiesPanelModule = windowl.PropertiesPanelModule;
         // var propertiesProviderModule = windowl.PropertiesProviderModule;
-        var camundaModdleDescriptor = require("./camunda")
+        // var camundaModdleDescriptor = require("./camunda")
+
         // var BpmnModeler = windowl.BpmnJS;
         // var BpmnViewer = windowl.BpmnViewer;
         // var canvas = $('#js-canvas');
@@ -181,7 +184,8 @@ export class BpmnEditorComponent implements OnInit {
                     ],
 
                     moddleExtensions: {
-                        camunda: camundaModdleDescriptor.CamundaModdleDescriptor
+                        // camunda: camundaModdleDescriptor.CamundaModdleDescriptor
+                        camunda: CamundaModdleDescriptor
                     }
                 });
             }
@@ -221,7 +225,8 @@ export class BpmnEditorComponent implements OnInit {
                     ],
 
                     moddleExtensions: {
-                        camunda: camundaModdleDescriptor.CamundaModdleDescriptor
+                        // camunda: camundaModdleDescriptor.CamundaModdleDescriptor
+                        camunda: CamundaModdleDescriptor
                     }
                 });
             }

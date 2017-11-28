@@ -6,6 +6,8 @@ export * from './angular-tree'
 export * from './mat-tab-container'
 export * from './mat-menu-bar'
 export * from './eu-menu'
+export * from './mat-panel'
+// export * from './ng2-tree'
 
 export * from './core'
 

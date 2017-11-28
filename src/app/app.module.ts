@@ -12,6 +12,8 @@ import {
   MatIconModule,
 } from '@angular/material';
 
+// import { TreeModule } from "ng2-tree";
+
 import { AppComponent, DialogDataExampleDialog } from './app.component';
 import {
   EuPageService,
@@ -22,14 +24,15 @@ import {
   EasyUIMatContainerModule,
   EasyUIMatMenuSideBarModule,
   EasyUIMenuModule,
+  EasyUIMatPanelModule,
+  // EasyUINg2TreeModule,
 
   EuBpmnService,
   TitleGuard,
   // } from 'ng2-easyui'
 } from '../../widget'
 
-// import { ModalInfoComponent } from './modal/modal.info.component'
-// import { AgGridModule } from 'ag-grid-angular/main';
+import { Bootstrap3GridModule } from "ng2-bootstrap3-grid";
 
 import { PageService } from './page.service';
 import { BpmnService } from './bpmn.service';
@@ -37,6 +40,8 @@ import { BpmnService } from './bpmn.service';
 import { RichSwipeDemoComponent } from './rich-swipe-demo/rich-swipe-demo.component';
 import { Bpmn2DemoComponent } from './bpmn2/bpmn2.demo.component'
 import { AngTreeDemoComponent } from './angular-tree/angular-tree.demo.component'
+import { MatPanelDemoComponent } from './mat-panel/mat-panel.demo.component'
+// import { Ng2TreeDemoComponent } from "./ng2-tree/ng2-tree.demo.component";
 import { IndexComponent } from './index.component'
 import { EntryComponent } from "./entry.component";
 
@@ -45,6 +50,9 @@ import { EntryComponent } from "./entry.component";
     AppComponent,
     DialogDataExampleDialog,
     Bpmn2DemoComponent,
+    MatPanelDemoComponent,
+    // Ng2TreeDemoComponent,
+
     RichSwipeDemoComponent,
     AngTreeDemoComponent,
     IndexComponent,
@@ -64,18 +72,22 @@ import { EntryComponent } from "./entry.component";
         { path: 'demo', loadChildren: './aggrid/aggrid.module#AggridModule' },
         { path: 'RichSwipeDemoComponent', component: RichSwipeDemoComponent, data: { title: "翻页效果" } },
         { path: 'Bpmn2DemoComponent', component: Bpmn2DemoComponent, data: { title: "bpmn2" } },
+        { path: 'MatPanelDemoComponent', component: MatPanelDemoComponent, data: { title: "MatPanel" } },
+        // { path: 'Ng2TreeDemoComponent', component: Ng2TreeDemoComponent, data: { title: "Ng2Tree" } },
         { path: 'AngTreeDemoComponent', component: AngTreeDemoComponent, data: { title: "angular-tree" } },
         { path: 'EntryComponent', component: EntryComponent, data: { title: "entry" } },
         { path: '**', redirectTo: "EntryComponent" },
       ]
     }]),
-    // AgGridModule,
+    Bootstrap3GridModule,
 
     MatButtonModule,
     MatToolbarModule,
     MatMenuModule,
     MatSidenavModule,
     MatIconModule,
+
+    // TreeModule,
 
     EasyUIMdModalModule,
     // EasyUIagGridModule,
@@ -86,6 +98,9 @@ import { EntryComponent } from "./entry.component";
     EasyUIMenuModule.forRoot(),
     EasyUIMatMenuSideBarModule.forRoot(),
     EasyUIMatContainerModule.forRoot(),
+    EasyUIMatPanelModule,
+    // EasyUINg2TreeModule,
+
   ],
   providers: [
     { provide: EuPageService, useClass: PageService, },

@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, OnInit, Type } from "@angular/core";
+import { Component, Input, ViewChild, OnInit, Type, ViewEncapsulation } from "@angular/core";
 import { PageEvent, MatPaginator, MatDialog, MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { GridOptions, IDatasource, IDateParams, IGetRowsParams, ColDef, ColGroupDef, RowNode } from "ag-grid/main";
 import { debounce } from 'rxjs/operators'
@@ -30,21 +30,22 @@ import * as _ from "lodash"
 @Component({
     selector: 'eu-aggrid',
     templateUrl: './aggrid-table.component.html',
-    styles: [
-        `   
-.eu-md-table-container {
-    transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
-    display: block;
-    position: relative;
-    /* padding: 24px; */
-    border-radius: 2px;
-    background: #fff;
-    color: rgba(0,0,0,.87);
-    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);    
-}
-`
-
-    ]
+//     styles: [
+//         `   
+// .eu-md-table-container {
+//     transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
+//     display: block;
+//     position: relative;
+//     /* padding: 24px; */
+//     border-radius: 2px;
+//     background: #fff;
+//     color: rgba(0,0,0,.87);
+//     box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);    
+// }
+// `,
+//     ],
+    styleUrls: ["./aggrid-table.component.css"],
+    encapsulation: ViewEncapsulation.None
 })
 export class AggridComponent implements GridApi, OnInit {
     @Input() euColModels: EuColModel[]

@@ -8,7 +8,17 @@ import {
 
 @Component({
     selector: 'ang-tree-demo',
-    template: '<eu-angular-tree [nodes]="nodes" [options]="options"></eu-angular-tree>'
+    template: `
+    <div class="container">
+        <div bsRow>
+            <eu-mat-panel bsCol.sm="4">
+                <eu-angular-tree  [nodes]="nodes" [options]="options"></eu-angular-tree>
+            </eu-mat-panel>         
+        </div>
+    </div>
+    
+    
+    `
 })
 export class AngTreeDemoComponent implements OnInit {
 

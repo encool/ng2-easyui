@@ -1,0 +1,14 @@
+@import "~ag-grid/dist/styles/ag-grid.css";
+/* @import "../node_modules/ag-grid/dist/styles/theme-blue.css"; */
+@import "~ag-grid/dist/styles/ag-theme-material.css";
+
+.eu-md-table-container {
+    transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
+    display: block;
+    position: relative;
+    /* padding: 24px; */
+    border-radius: 2px;
+    background: #fff;
+    color: rgba(0,0,0,.87);
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);    
+}

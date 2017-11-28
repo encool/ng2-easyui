@@ -319,7 +319,7 @@ const ROLLUP_GLOBALS = {
     'tiny-svg/lib/create': null,
     'tiny-svg/lib/classes': null,  
     'min-dom/lib/query': null,
-    
+    'ng2-tree': null,
     // '@angular/animations': 'ng.animations',
     // '@angular/core': 'ng.core',
     // '@angular/common': 'ng.common',

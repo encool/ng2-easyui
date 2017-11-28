@@ -31,7 +31,7 @@
     },
     {
       "name": "example",
-      "root": "src",
+      "root": "examples",
       "outDir": "out/example",
       "assets": [
         "assets",
