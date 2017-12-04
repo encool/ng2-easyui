@@ -2,8 +2,8 @@ import { Component, Inject, ViewContainerRef } from '@angular/core';
 
 import {
   EasyUIMdModalModule, MdModalService, ModalConfig, EuModalService
-  // } from 'ng2-easyui'
-} from '../../widget'
+} from 'ng2-easyui'
+// } from '../../widget'
 
 
 import { MAT_DIALOG_DATA, MatDialog } from "@angular/material"

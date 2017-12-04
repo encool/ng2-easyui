@@ -12,6 +12,10 @@
 @import "../node_modules/ng2-bootstrap3-grid/css/bootstrap.min.css";
 
 /* @import "../node_modules/ng2-tree/styles.css"; */
+
+@import "~ng2-easyui/assets/eu-bpmn2.css";
+@import "~ng2-easyui/assets/eu-aggrid.css";
+
 /* You can add global styles to this file, and also import other style files */
 html, body {
     position: relative;

@@ -36,6 +36,10 @@ import domQuery from 'min-dom/lib/query'
 // import { ModalService } from '../../service/modal.service'
 
 import { CamundaModdleDescriptor } from "./camunda"
+import BpmnModeler from 'bpmn-js/lib/Modeler'
+import BpmnViewer from 'bpmn-js/lib/Viewer'
+import propertiesPanelModule from 'bpmn-js-properties-panel'
+import propertiesProviderModule from 'bpmn-js-properties-panel/lib/provider/camunda'
 
 @Component({
     selector: 'bpmn-viewer',
@@ -90,14 +94,14 @@ export class BpmnViewerComponent implements OnInit {
         if (this.$model.params.processDefId != undefined
             && this.$model.params.processInsId != undefined) {
             this._dataUrl = "/workflow/monitor/wfmonitor?processInstanceId=" + this.$model.params.processInsId;
-            (require as any).ensure([], require => {
-                let BpmnModeler = require('bpmn-js/lib/Modeler')
-                let BpmnViewer = require('bpmn-js/lib/Viewer')
-                let propertiesPanelModule = require('bpmn-js-properties-panel')
-                let propertiesProviderModule = require('bpmn-js-properties-panel/lib/provider/camunda')
-                this.initBpmn(BpmnModeler, BpmnViewer, propertiesPanelModule, propertiesProviderModule)
-            });
-            // this.initBpmn()
+            // (require as any).ensure([], require => {
+            //     let BpmnModeler = require('bpmn-js/lib/Modeler')
+            //     let BpmnViewer = require('bpmn-js/lib/Viewer')
+            //     let propertiesPanelModule = require('bpmn-js-properties-panel')
+            //     let propertiesProviderModule = require('bpmn-js-properties-panel/lib/provider/camunda')
+            //     this.initBpmn(BpmnModeler, BpmnViewer, propertiesPanelModule, propertiesProviderModule)
+            // });
+            this.initBpmn(BpmnModeler, BpmnViewer, propertiesPanelModule, propertiesProviderModule)
         }
     }
 

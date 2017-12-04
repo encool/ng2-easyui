@@ -7,9 +7,14 @@ import { Headers, Http, URLSearchParams, RequestOptions } from '@angular/http';
 // import { ModalAction } from '../../shared/object/modal-action'
 // import { ModalService } from '../../service/modal.service'
 
-import { EuBpmnService, Model } from '../core'
+import { EuBpmnService } from '../core/bpmn/bpmn.service'
+import { Model } from "../core/bpmn/model";
 
 import { CamundaModdleDescriptor } from "./camunda"
+import BpmnModeler from 'bpmn-js/lib/Modeler'
+import BpmnViewer from 'bpmn-js/lib/Viewer'
+import propertiesPanelModule from 'bpmn-js-properties-panel'
+import propertiesProviderModule from 'bpmn-js-properties-panel/lib/provider/camunda'
 
 @Component({
     selector: 'bpmn-editor',
@@ -46,15 +51,15 @@ export class BpmnEditorComponent implements OnInit {
         // this.model.params.type = 'add'
         if (this.model.params.processDefId != undefined
             || this.model.params.type == "add") {
-            (require as any).ensure([], require => {
-                // debugger
-                let BpmnModeler = require('bpmn-js/lib/Modeler')
-                let BpmnViewer = require('bpmn-js/lib/Viewer')
-                let propertiesPanelModule = require('bpmn-js-properties-panel')
-                let propertiesProviderModule = require('bpmn-js-properties-panel/lib/provider/camunda')
-                this.initBpmn(BpmnModeler, BpmnViewer, propertiesPanelModule, propertiesProviderModule)
-            });
-            // this.initBpmn()
+            // (require as any).ensure([], require => {
+            //     // debugger
+            //     let BpmnModeler = require('bpmn-js/lib/Modeler')
+            //     let BpmnViewer = require('bpmn-js/lib/Viewer')
+            //     let propertiesPanelModule = require('bpmn-js-properties-panel')
+            //     let propertiesProviderModule = require('bpmn-js-properties-panel/lib/provider/camunda')
+            //     this.initBpmn(BpmnModeler, BpmnViewer, propertiesPanelModule, propertiesProviderModule)
+            // });
+            this.initBpmn(BpmnModeler, BpmnViewer, propertiesPanelModule, propertiesProviderModule)
         }
     }
 

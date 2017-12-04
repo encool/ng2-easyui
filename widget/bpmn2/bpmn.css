@@ -1,7 +1,7 @@
-@import "./assets/diagram-js.css";
+/* @import "./assets/diagram-js.css";
 @import "./assets/bpmn-app.css";
 @import "./assets/diagram-js.css";
-@import "./assets/bpmn-font/css/bpmn-embedded.css";
+@import "./assets/bpmn-font/css/bpmn-embedded.css"; */
 
 [class^="bpmn-icon-"]:before, [class*=" bpmn-icon-"]:before {
     margin-left: 0;
@@ -71,13 +71,13 @@
 .icon-minus:before {
     content: '\f419';
 }
-@font-face {
+/* @font-face {
     font-family: 'app';
-    /* src: url('./assets/app-font/app.eot?42391129'); */
+//    src: url('./assets/app-font/app.eot?42391129');
     src: url('./assets/app-font/app.woff?42391129') format('woff');
     font-weight: normal;
     font-style: normal
-}
+} */
 
 .io-zoom-reset {
     margin-bottom: 10px;

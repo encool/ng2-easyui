@@ -5,11 +5,7 @@
     "target": "es2015",
     "rootDir": "./",
     "baseUrl": "",
-    "declaration": true,
-    "types": [
-      // add node as an option
-      "node"
-    ]
+    "declaration": true
   },
   "files": [
     "./index.ts",

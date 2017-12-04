@@ -304,13 +304,21 @@ const ROLLUP_GLOBALS = {
     "ng2-bootstrap3-grid": null,
     "ng-zorro-antd": null,
     "ng2-easyform": null,
+
     "ag-grid": null,
     "ag-grid-angular": null,
     "ag-grid-angular/main": null,
+
     "angular-tree-component": null,
+
     "bpmn-js": null,
     "bpmn-js-properties-panel": null,
     "camunda-bpmn-moddle": null,
+    "bpmn-js/lib/Modeler": null,
+    'bpmn-js/lib/Viewer': null,
+    'bpmn-js-properties-panel': null,
+    'bpmn-js-properties-panel/lib/provider/camunda': null,
+
     "lodash": "_",
     "ngx-swiper-wrapper": null,
 
@@ -319,6 +327,7 @@ const ROLLUP_GLOBALS = {
     'tiny-svg/lib/create': null,
     'tiny-svg/lib/classes': null,  
     'min-dom/lib/query': null,
+
     'ng2-tree': null,
     // '@angular/animations': 'ng.animations',
     // '@angular/core': 'ng.core',
