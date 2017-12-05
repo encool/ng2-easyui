@@ -48,7 +48,8 @@
     border: none;
 }
 .icon-size-reset:before {
-    content: '\f41f';
+    /*inline-resouce的时候 \f需要转义 下同*/        
+    content: '\\f41f';
 }
 [class^="icon-"]:before, [class*=" icon-"]:before {
     font-family: "app";
@@ -65,11 +66,11 @@
     text-transform: none;
     line-height: 1em;
 }
-.icon-plus:before {
-    content: '\f417';
+.icon-plus:before {   
+    content: '\\f417';
 }
 .icon-minus:before {
-    content: '\f419';
+    content: '\\f419';
 }
 /* @font-face {
     font-family: 'app';
