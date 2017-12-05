@@ -26,6 +26,7 @@ import {
   EasyUIMenuModule,
   EasyUIMatPanelModule,
   // EasyUINg2TreeModule,
+  EasyUIAntTreeModule,
 
   EuBpmnService,
   TitleGuard,
@@ -42,6 +43,8 @@ import { Bpmn2DemoComponent } from './bpmn2/bpmn2.demo.component'
 import { AngTreeDemoComponent } from './angular-tree/angular-tree.demo.component'
 import { MatPanelDemoComponent } from './mat-panel/mat-panel.demo.component'
 // import { Ng2TreeDemoComponent } from "./ng2-tree/ng2-tree.demo.component";
+import { AntdTreeDemoComponent } from "./antd-tree/antd-tree.demo.component";
+
 import { IndexComponent } from './index.component'
 import { EntryComponent } from "./entry.component";
 
@@ -52,6 +55,7 @@ import { EntryComponent } from "./entry.component";
     Bpmn2DemoComponent,
     MatPanelDemoComponent,
     // Ng2TreeDemoComponent,
+    AntdTreeDemoComponent,
 
     RichSwipeDemoComponent,
     AngTreeDemoComponent,
@@ -100,7 +104,7 @@ import { EntryComponent } from "./entry.component";
     EasyUIMatContainerModule.forRoot(),
     EasyUIMatPanelModule,
     // EasyUINg2TreeModule,
-
+    EasyUIAntTreeModule
   ],
   providers: [
     { provide: EuPageService, useClass: PageService, },

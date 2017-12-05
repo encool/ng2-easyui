@@ -8,6 +8,7 @@ export * from './mat-menu-bar/index'
 export * from './eu-menu/index'
 export * from './mat-panel/index'
 // export * from './ng2-tree/index'
+export * from './eu-tree-antd/index'
 
 export * from './core/index'
 
