@@ -55,6 +55,12 @@ export class IndexComponent implements OnInit {
                             link: "/Ng2TreeDemoComponent",
                             icon: "",
                         },
+                        {
+                            id: "1",
+                            title: "antdTree",
+                            link: "/AntdTreeDemoComponent",
+                            icon: "",
+                        },
                     ]
                 },
             ]

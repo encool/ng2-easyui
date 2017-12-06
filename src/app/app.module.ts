@@ -78,6 +78,7 @@ import { EntryComponent } from "./entry.component";
         { path: 'Bpmn2DemoComponent', component: Bpmn2DemoComponent, data: { title: "bpmn2" } },
         { path: 'MatPanelDemoComponent', component: MatPanelDemoComponent, data: { title: "MatPanel" } },
         // { path: 'Ng2TreeDemoComponent', component: Ng2TreeDemoComponent, data: { title: "Ng2Tree" } },
+        { path: 'AntdTreeDemoComponent', component: AntdTreeDemoComponent, data: { title: "AntdTree" } },
         { path: 'AngTreeDemoComponent', component: AngTreeDemoComponent, data: { title: "angular-tree" } },
         { path: 'EntryComponent', component: EntryComponent, data: { title: "entry" } },
         { path: '**', redirectTo: "EntryComponent" },
