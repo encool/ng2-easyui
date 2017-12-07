@@ -8,6 +8,7 @@ export * from './grid/query/conditions'
 export * from './grid/query/rule'
 
 export * from './action'
+export * from './curd.action'
 export * from './modal/modal-config'
 export * from './modal/modal.action'
 export * from './modal/modal-hooks'

@@ -5,7 +5,10 @@ import { MatPanelComponent } from "./mat-panel.component";
 
 import {
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
+    MatMenuModule,
 } from "@angular/material";
 
 
@@ -13,7 +16,10 @@ import {
     imports: [
         CommonModule,
         MatToolbarModule,
-        MatIconModule
+        MatIconModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatMenuModule,
     ],
     declarations: [
         MatPanelComponent

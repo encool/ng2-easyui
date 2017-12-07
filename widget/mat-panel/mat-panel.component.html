@@ -2,8 +2,24 @@
     <mat-toolbar color="primary">
         <span>title</span>
         <span class="spacer"></span>
-        <mat-icon>favorite</mat-icon>
-        <mat-icon>delete</mat-icon>
+        <button *ngIf="actions.length >= 1" mat-icon-button [color]="actions[0].style"
+            (click)="onAction(actions[0])">
+            <mat-icon class="mat-24" [matTooltip]="actions[0].name" matTooltipPosition="above"
+                [attr.aria-label]="actions[0].name" [attr.title]="actions[0].name">
+                {{actions[0].icon}}
+            </mat-icon>
+        </button>
+        <button *ngIf="actions.length > 1" mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon *ngIf="actions.length > 1">more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <ng-container *ngFor="let action of actions; let i=index;">
+                <button mat-menu-item>
+                    <mat-icon>dialpad</mat-icon>
+                    <span>Redial</span>
+                </button>
+            </ng-container>
+        </mat-menu>
     </mat-toolbar>
     <div class="eu_panel_content" [ngStyle]="_contentStyle">
         <ng-content></ng-content>

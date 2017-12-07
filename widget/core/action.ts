@@ -25,9 +25,9 @@ export abstract class BaseAction {
         this.order = options.order === undefined ? 999 : options.order
         this.style = options.style
         this.modalConfig = options.modalConfig
-    }
+    }  
 }
 
-export interface euOnAction {
-    onAction(action: BaseAction)
+export interface OnAction {
+    euOnAction(action: BaseAction)
 }

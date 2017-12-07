@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { BaseAction } from "../core";
+import { BaseAction, CURDAction } from "../core";
 
 @Component({
     selector: 'eu-mat-panel',
@@ -12,7 +12,7 @@ import { BaseAction } from "../core";
 })
 export class MatPanelComponent implements OnInit {
 
-    @Input() actions:BaseAction[]
+    @Input() actions: BaseAction[] = [CURDAction.CREATE, CURDAction.UPDATE]
     @Input() height: string
 
     _contentStyle: any
