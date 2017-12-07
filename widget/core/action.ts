@@ -8,6 +8,7 @@ export abstract class BaseAction {
     icon?: string
     iconType?: string
     style?: string
+    // if the action is pop a modal
     modalConfig?: ModalConfig
     constructor(options:
         {
@@ -25,4 +26,8 @@ export abstract class BaseAction {
         this.style = options.style
         this.modalConfig = options.modalConfig
     }
+}
+
+export interface euOnAction {
+    onAction(action: BaseAction)
 }

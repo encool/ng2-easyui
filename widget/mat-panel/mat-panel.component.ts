@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { BaseAction } from "../core";
 
 @Component({
     selector: 'eu-mat-panel',
     templateUrl: 'mat-panel.component.html',
-    styles: [`.spacer{flex: 1 1 auto;} .panelbar-icon{} .mat-toolbar-single-row{height:50px}
+    styles: [`.spacer{flex: 1 1 auto;} .panelbar-icon{padding: 0 14px;} .mat-toolbar-single-row{height:50px}
         .eu_panel_content{
             padding:15px;
         }
@@ -11,6 +12,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class MatPanelComponent implements OnInit {
 
+    @Input() actions:BaseAction[]
     @Input() height: string
 
     _contentStyle: any
