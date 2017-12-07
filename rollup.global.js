@@ -329,6 +329,7 @@ const ROLLUP_GLOBALS = {
     'min-dom/lib/query': null,
 
     'ng2-tree': null,
+    'ng-tree-antd': null,
     // '@angular/animations': 'ng.animations',
     // '@angular/core': 'ng.core',
     // '@angular/common': 'ng.common',
