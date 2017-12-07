@@ -26,8 +26,9 @@ import {
   EasyUIMenuModule,
   EasyUIMatPanelModule,
   // EasyUINg2TreeModule,
+  EasyUIAntTreeModule,
+  
   EuBpmnService,
-
   TitleGuard,
 } from 'ng2-easyui'
 // } from '../../widget'
@@ -42,6 +43,8 @@ import { Bpmn2DemoComponent } from './bpmn2/bpmn2.demo.component'
 import { AngTreeDemoComponent } from './angular-tree/angular-tree.demo.component'
 import { MatPanelDemoComponent } from './mat-panel/mat-panel.demo.component'
 // import { Ng2TreeDemoComponent } from "./ng2-tree/ng2-tree.demo.component";
+import { AntdTreeDemoComponent } from "./antd-tree/antd-tree.demo.component";
+
 import { IndexComponent } from './index.component'
 import { EntryComponent } from "./entry.component";
 
@@ -52,6 +55,7 @@ import { EntryComponent } from "./entry.component";
     Bpmn2DemoComponent,
     MatPanelDemoComponent,
     // Ng2TreeDemoComponent,
+    AntdTreeDemoComponent,
 
     RichSwipeDemoComponent,
     AngTreeDemoComponent,
@@ -74,6 +78,7 @@ import { EntryComponent } from "./entry.component";
         { path: 'Bpmn2DemoComponent', component: Bpmn2DemoComponent, data: { title: "bpmn2" } },
         { path: 'MatPanelDemoComponent', component: MatPanelDemoComponent, data: { title: "MatPanel" } },
         // { path: 'Ng2TreeDemoComponent', component: Ng2TreeDemoComponent, data: { title: "Ng2Tree" } },
+        { path: 'AntdTreeDemoComponent', component: AntdTreeDemoComponent, data: { title: "AntdTree" } },        
         { path: 'AngTreeDemoComponent', component: AngTreeDemoComponent, data: { title: "angular-tree" } },
         { path: 'EntryComponent', component: EntryComponent, data: { title: "entry" } },
         { path: '**', redirectTo: "EntryComponent" },
@@ -100,7 +105,7 @@ import { EntryComponent } from "./entry.component";
     EasyUIMatContainerModule.forRoot(),
     EasyUIMatPanelModule,
     // EasyUINg2TreeModule,
-
+    EasyUIAntTreeModule
   ],
   providers: [
     { provide: EuPageService, useClass: PageService, },

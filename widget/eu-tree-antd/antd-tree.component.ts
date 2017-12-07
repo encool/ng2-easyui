@@ -1,38 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
     selector: 'eu-antd-tree',
     template: `
-    <nz-tree [nzNodes]="nodes"
-    [nzOptions]="options"
-    (nzEvent)="onEvent($event)"></nz-tree>    
+    <nz-tree 
+        [nzNodes]="nzNodes"
+        [nzOptions]="nzOptions"
+        [nzCheckable]="nzCheckable"
+        (nzEvent)="onEvent($event)">
+    </nz-tree>
     `
 })
 export class AntdTreeComponent implements OnInit {
-    nodes = [
-        {
-            name: 'root1'
-        },
-        {
-            name: 'root2'
-        },
-        {
-            name: 'root3'
-        },
-        {
-            name: 'async root4',
-            hasChildren: true
-        }
-    ];
 
-    options = {
+    @Input() nzNodes: any[];
+    @Input() nzCheckable = false;
+    @Input() nzShowLine = false;
+    @Input() nzOptions: any = {
         allowDrag: true
-    };
+    }
+    @Input() nzShiftSelectedMulti = true;
 
     constructor() { }
 
     ngOnInit() {
-
+        this.nzNodes
+        this.nzOptions
     }
 
     onEvent(ev: any) {
