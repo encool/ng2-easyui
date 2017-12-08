@@ -9,14 +9,18 @@
                 {{actions[0].icon}}
             </mat-icon>
         </button>
-        <button *ngIf="actions.length > 1" mat-icon-button [matMenuTriggerFor]="menu">
+        <button *ngIf="actions.length > 1" mat-icon-button [matMenuTriggerFor]="menu" 
+            (mouseover)="onMouseenterMore($event)" 
+            
+            >
             <mat-icon *ngIf="actions.length > 1">more_vert</mat-icon>
         </button>
-        <mat-menu #menu="matMenu">
+        <mat-menu #menu="matMenu" yPosition="below" xPosition="before" 
+            overlapTrigger="false" classList="panelActionMenu">
             <ng-container *ngFor="let action of actions; let i=index;">
-                <button mat-menu-item>
-                    <mat-icon>dialpad</mat-icon>
-                    <span>Redial</span>
+                <button mat-menu-item *ngIf="i >= 1" >
+                    <mat-icon>{{action.icon}}</mat-icon>
+                    <span>{{action.name}}</span>
                 </button>
             </ng-container>
         </mat-menu>
