@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, ViewEncapsulation, ViewChild } from '@angular/core';
-import { BaseAction, CURDAction } from "../core";
+import { Component, OnInit, Input, ViewEncapsulation, ViewChild, ContentChild } from '@angular/core';
+import { BaseAction, CURDAction, OnAction } from "../core";
 
 import { MatMenuTrigger } from "@angular/material";
 
@@ -31,10 +31,12 @@ import { MatMenuTrigger } from "@angular/material";
 })
 export class MatPanelComponent implements OnInit {
 
-    @Input() actions: BaseAction[] = [CURDAction.CREATE, CURDAction.UPDATE]
+    @Input() actions: BaseAction[] = [CURDAction.CREATE, CURDAction.UPDATE, CURDAction.READ]
     @Input() height: string
 
     @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger
+    @ContentChild("panelcontent_ref") actionConponent: OnAction
+
     _contentStyle: any
     constructor() { }
 
@@ -43,6 +45,10 @@ export class MatPanelComponent implements OnInit {
             'min-height': '450px',
             'height': this.height
         }
+    }
+
+    onAction(action: BaseAction) {
+        this.actionConponent.euOnAction(action)
     }
 
     onMouseenterMore(event) {

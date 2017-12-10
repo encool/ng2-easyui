@@ -18,7 +18,7 @@
         <mat-menu #menu="matMenu" yPosition="below" xPosition="before" 
             overlapTrigger="false" classList="panelActionMenu">
             <ng-container *ngFor="let action of actions; let i=index;">
-                <button mat-menu-item *ngIf="i >= 1" >
+                <button mat-menu-item *ngIf="i >= 1" (click)="onAction(action)">
                     <mat-icon>{{action.icon}}</mat-icon>
                     <span>{{action.name}}</span>
                 </button>
