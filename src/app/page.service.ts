@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, URLSearchParams, RequestOptions, Response } from '@angular/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -13,7 +13,7 @@ import {
 @Injectable()
 export class PageService extends EuPageService {
 
-    constructor(public http: Http) {
+    constructor(public http: HttpClient) {
         super(http)
     }
 
@@ -38,17 +38,16 @@ export class PageService extends EuPageService {
      * @param _search 
      */
     getPage(url: string, rows: number, page: number,
-
         cond?: Object, sidx?: string, sord?: string, _search?: boolean): Promise<any> {
-        let urlSearchParams = new URLSearchParams();
-        urlSearchParams.set("rows", rows.toString());
-        urlSearchParams.set("page", page.toString());
-        urlSearchParams.set("sidx", sidx || "");
-        urlSearchParams.set("sord", sord || "asc");
-        urlSearchParams.set("_search", _search ? "true" : "false");
-        urlSearchParams.set("cond", JSON.stringify(cond));
-        let headers = new Headers({ 'Content-Type': 'application/json;charset=UTF-8' });
-        let options = new RequestOptions({ headers: headers, search: urlSearchParams });
+        // let urlSearchParams = new URLSearchParams();
+        // urlSearchParams.set("rows", rows.toString());
+        // urlSearchParams.set("page", page.toString());
+        // urlSearchParams.set("sidx", sidx || "");
+        // urlSearchParams.set("sord", sord || "asc");
+        // urlSearchParams.set("_search", _search ? "true" : "false");
+        // urlSearchParams.set("cond", JSON.stringify(cond));
+        // let headers = new Headers({ 'Content-Type': 'application/json;charset=UTF-8' });
+        // let options = new RequestOptions({ headers: headers, search: urlSearchParams });
         return new Promise(
             /* executor */
             (resolve, reject) => {
@@ -80,20 +79,22 @@ export class PageService extends EuPageService {
 
     getPageOb(url: string, rows: number, page: number,
         cond?: Object, sidx?: string, sord?: string, _search?: boolean): Observable<any> {
-        let urlSearchParams = new URLSearchParams();
+        let urlSearchParams = new HttpParams();
         urlSearchParams.set("rows", rows.toString());
         urlSearchParams.set("page", page.toString());
         urlSearchParams.set("sidx", sidx || "");
         urlSearchParams.set("sord", sord || "asc");
         urlSearchParams.set("_search", _search ? "true" : "false");
         urlSearchParams.set("cond", JSON.stringify(cond));
-        let headers = new Headers({ 'Content-Type': 'application/json;charset=UTF-8' });
-        let options = new RequestOptions({ headers: headers, search: urlSearchParams });
-        return this.http.get(url, options)
-            .map((data) => {
-                // debugger
-                return data.json()
-            })
+        let headers = new HttpHeaders({ 'Content-Type': 'application/json;charset=UTF-8' });
+        // let options = new RequestOptions({ headers: headers, search: urlSearchParams });
+        return this.http.get(url, {
+            headers: headers,
+            params: urlSearchParams
+        }).map((data) => {
+            // debugger
+            return data
+        })
     }
 
     getPageObByOffsetLimit(url: string, offset: number, limit: number,
@@ -101,20 +102,22 @@ export class PageService extends EuPageService {
         // debugger
         let rows = limit
         let page = offset / limit + 1
-        let urlSearchParams = new URLSearchParams();
+        let urlSearchParams = new HttpParams();
         urlSearchParams.set("rows", rows.toString());
         urlSearchParams.set("page", page.toString());
         urlSearchParams.set("sidx", sidx || "");
         urlSearchParams.set("sord", sord || "asc");
         urlSearchParams.set("_search", _search ? "true" : "false");
         urlSearchParams.set("cond", JSON.stringify(cond));
-        let headers = new Headers({ 'Content-Type': 'application/json;charset=UTF-8' });
-        let options = new RequestOptions({ headers: headers, search: urlSearchParams });
-        return this.http.get(url, options)
-            .map((data) => {
-                // debugger
-                return data.json()
-            })
+        let headers = new HttpHeaders({ 'Content-Type': 'application/json;charset=UTF-8' });
+        // let options = new HttpHeaders({ headers: headers, search: urlSearchParams });
+        return this.http.get(url, {
+            headers: headers,
+            params: urlSearchParams
+        }).map((data) => {
+            // debugger
+            return data
+        })
     }
 
     getById(id: string) {

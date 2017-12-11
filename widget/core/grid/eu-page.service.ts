@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, URLSearchParams, RequestOptions, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -7,7 +7,7 @@ import 'rxjs/add/operator/catch';
 
 export abstract class EuPageService {
 
-    constructor(public http: Http) { }
+    constructor(public http: HttpClient) { }
 
     abstract getPage(url: string, rows: number, page: number,
         cond?: Object, sidx?: string, sord?: string, _search?: boolean): Promise<any>

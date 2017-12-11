@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import {
-
-} from 'ng2-easyui'
-// } from '../../../widget'
+    TreeNodeDef, EuTreeOptions
+    // } from 'ng2-easyui'
+} from '../../../widget'
 
 
 @Component({
@@ -12,9 +12,10 @@ import {
     <div class="container">
         <div bsRow>
             <eu-mat-panel bsCol.sm="4">
-                <eu-antd-tree 
-                    [nzNodes]="nodes"
-                    [nzCheckable]="true">
+                <eu-antd-tree #panelcontent_ref
+                    (treeEvent)="onTreeEvent($event)"
+                    [euTreeOptions]="euTreeOptions"
+                    [euTreeNodes]="euTreeNodes">
                 </eu-antd-tree>
             </eu-mat-panel>         
         </div>
@@ -25,27 +26,34 @@ import {
 })
 export class AntdTreeDemoComponent implements OnInit {
 
-    nodes: any[]
+    euTreeNodes: TreeNodeDef[]
+    euTreeOptions: EuTreeOptions
     constructor() {
-        this.nodes = [
+        this.euTreeOptions = {
+            treeId: "demoTree",
+            rootNodeName: "root",
+            dataUrl: "./nodes.json"
+        }
+
+        this.euTreeNodes = [
             {
-                id: 1,
+                id: "12",
                 name: 'root1',
                 children: [
-                    { id: 2, name: 'child1' },
-                    { id: 3, name: 'child2' }
+                    { id: "2", name: 'child1' },
+                    { id: "3", name: 'child2' }
                 ]
             },
             {
-                id: 4,
+                id: "4",
                 name: 'root2',
                 children: [
-                    { id: 5, name: 'child2.1' },
+                    { id: "5", name: 'child2.1' },
                     {
-                        id: 6,
+                        id: "6",
                         name: 'child2.2',
                         children: [
-                            { id: 7, name: 'subsub' }
+                            { id: "7", name: 'subsub' }
                         ]
                     }
                 ]
@@ -53,8 +61,14 @@ export class AntdTreeDemoComponent implements OnInit {
         ];
     }
 
+
+
     ngOnInit() {
 
     }
 
+    onTreeEvent($event) {
+        this
+        debugger
+    }
 }

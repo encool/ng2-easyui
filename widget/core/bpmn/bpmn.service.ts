@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, URLSearchParams, RequestOptions, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Model } from './model'
 
@@ -27,7 +27,7 @@ export abstract class EuBpmnService {
         return camundaXml
     }
 
-    constructor(public http: Http) { }
+    constructor(public http: HttpClient) { }
 
     abstract getModelInfo(modelId: string): Promise<{ model: Model, bpmn2xml: string }>
 
