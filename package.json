@@ -33,7 +33,7 @@
   "license": "MIT",
   "devDependencies": {
     "@angular/animations": "^5.0.2",
-    "@angular/cdk": "^5.0.0-rc.1",
+    "@angular/cdk": "^5.0.0",
     "@angular/cli": "^1.5.1",
     "@angular/common": "^5.0.2",
     "@angular/compiler": "^5.0.2",
@@ -42,7 +42,7 @@
     "@angular/forms": "^5.0.2",
     "@angular/http": "^5.0.2",
     "@angular/language-service": "^5.0.2",
-    "@angular/material": "^5.0.0-rc.1",
+    "@angular/material": "^5.0.0",
     "@angular/platform-browser": "^5.0.2",
     "@angular/platform-browser-dynamic": "^5.0.2",
     "@angular/router": "^5.0.2",
