@@ -3,8 +3,8 @@ import { MatSidenav } from "@angular/material";
 
 import {
     MatContainerComponent, EuMatTab, Menu
-    // } from '../../widget'
-} from 'ng2-easyui'
+} from '../../widget'
+// } from 'ng2-easyui'
 
 @Component({
     selector: 'demo-index',
@@ -40,7 +40,6 @@ export class IndexComponent implements OnInit {
                 {
                     id: "1",
                     title: "demo",
-                    link: "ddd",
                     icon: "",
                     children: [
                         {
@@ -68,7 +67,6 @@ export class IndexComponent implements OnInit {
         {
             id: "1",
             title: "level1",
-            link: "ddd",
             icon: "",
             children: [
                 {

@@ -6,7 +6,7 @@
     </a>
 
     <ng-container *ngIf="menu.children">
-        <ul [@bodyExpansion]="_getExpandedState()" class="nav child_menu" cdk-accordion>
+        <ul [@bodyExpansion]="_getExpandedState()" class="nav child_menu" cdkAccordion>
             <eu-menu (childActive)="onChildActive()" (hideMenu)="onHideMenu()" *ngFor="let menuc of menu.children" [menu]="menuc"></eu-menu>
         </ul>
     </ng-container>

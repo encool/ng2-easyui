@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import {
     MatIconModule,
-    MatListModule
+    MatListModule,
 } from "@angular/material";
 import { UNIQUE_SELECTION_DISPATCHER_PROVIDER } from "@angular/cdk/collections";
 import { CdkAccordionModule } from "@angular/cdk/accordion";
@@ -21,7 +21,7 @@ import { EuMenuListComponent } from "./eu-menu-list.component";
         // AccordionItem,
     ],
     providers: [
-        UNIQUE_SELECTION_DISPATCHER_PROVIDER
+        
     ],
     declarations: [
         EuMenuComponent,
@@ -30,14 +30,14 @@ import { EuMenuListComponent } from "./eu-menu-list.component";
     exports: [EuMenuComponent, EuMenuListComponent],
 })
 export class EasyUIMenuModule {
-    static forRoot(): ModuleWithProviders {
-        return {
-            ngModule: EasyUIMenuModule,
-            providers: [
-                EuMenuListComponent
-            ]
-        };
-    }
+    // static forRoot(): ModuleWithProviders {
+    //     return {
+    //         ngModule: EasyUIMenuModule,
+    //         providers: [
+    //             EuMenuListComponent
+    //         ]
+    //     };
+    // }
 }
 
 export * from './menu'

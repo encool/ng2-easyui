@@ -11,7 +11,7 @@ import { Menu } from "./menu";
     selector: 'eu-menu-list',
     template: `
     <div class="menu_section" style="width:230px;">
-        <ul cdk-accordion class="nav side-menu">
+        <ul cdkAccordion class="nav side-menu">
             <eu-menu *ngFor="let menu of menus" [menu]="menu" (hideMenu)="onHideMenu()"></eu-menu>
         </ul>
     </div>

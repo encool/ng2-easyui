@@ -53,7 +53,6 @@ export class EuMenuComponent extends CdkAccordionItem {
         _uniqueSelectionDispatcher: UniqueSelectionDispatcher) {
         super(accordion, _changeDetectorRef, _uniqueSelectionDispatcher);
         this.accordion = accordion;
-
         this._removeActiveUniqueSelectionListener =
             _uniqueSelectionDispatcher.listen((id: string, type: string) => {
                 if (type === "menu_active_dispatcher" && this.id != id) {

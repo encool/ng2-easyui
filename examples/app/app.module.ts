@@ -100,7 +100,7 @@ import { EntryComponent } from "./entry.component";
     EasyUIBpmnModule,
     EasyUIAngularTreeModule,
     EasyUIMatContainerModule,
-    EasyUIMenuModule.forRoot(),
+    EasyUIMenuModule,
     EasyUIMatMenuSideBarModule.forRoot(),
     EasyUIMatContainerModule.forRoot(),
     EasyUIMatPanelModule,
