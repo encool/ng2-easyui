@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewContainerRef, ComponentFactoryResolver, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Headers, Http, URLSearchParams, RequestOptions } from '@angular/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 // import { FormConfigComponent } from '../config/form-config.component'
 // import { ActivityConfigComponent } from '../config/activity-config.component'
@@ -43,7 +43,7 @@ export class BpmnEditorComponent implements OnInit {
     _curElement: any    //config 当前选中的节点
     _overlays: any
 
-    constructor(private http: Http, private euBpmnService: EuBpmnService) {
+    constructor(private http: HttpClient, private euBpmnService: EuBpmnService) {
 
     }
 
@@ -313,19 +313,20 @@ export class BpmnEditorComponent implements OnInit {
     }
 
     private getProcessDefDiagram(processDefinitionId: string): Promise<any> {
-        let urlSearchParams = new URLSearchParams();
+        let urlSearchParams = new HttpParams();
         urlSearchParams.set('processDefinitionId', processDefinitionId);
 
-        let headers = new Headers({ 'Content-Type': 'application/json;charset=UTF-8' });
-        let options = new RequestOptions({
-            headers: headers,
-            search: urlSearchParams
-        });
+        let headers = new HttpHeaders({ 'Content-Type': 'application/json;charset=UTF-8' });
+
         // private _getprocessdefdiagramUrl = "/process-definition/{processDefinitionId}/diagram-layout"
-        return this.http.get('workflow/service/process-definition/' + processDefinitionId + '/diagram-layout', options)
+        return this.http.get('workflow/service/process-definition/' + processDefinitionId + '/diagram-layout',
+            {
+                params: urlSearchParams,
+                headers: headers
+            })
             .toPromise()
             .then((data) => {
-                return data.text()
+                return data
             })
     }
 
