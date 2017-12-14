@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewEncapsulation, ViewChild, ContentChild } from '@angular/core';
-import { BaseAction, CURDAction, OnAction } from "../core";
+import { BaseAction, CURDAction, OnAction } from "ng2-easyui.core";
 
 import { MatMenuTrigger } from "@angular/material";
 

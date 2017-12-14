@@ -4,7 +4,7 @@ import { ActivatedRoute } from "@angular/router";
 import {
     EuGridOptions, EuColModel, EuGridEvent, ModalConfig
     // } from 'ng2-easyui'
-} from '../../../widget'
+} from 'ng2-easyui.core'
 import {
     AggridComponent, ColDef, ColGroupDef,
     // } from 'ng2-easyui/eu-ag-grid'

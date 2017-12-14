@@ -1,0 +1,8 @@
+{
+  "version": "0.0.11",
+  "name": "ng2-easyui.core",
+  "typings": "./core.d.ts",
+  "main": "../bundles/core.umd.js",
+  "module": "./core.es5.js",
+  "es2015": "./core.js"
+}

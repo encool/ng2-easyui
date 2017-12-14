@@ -5,9 +5,9 @@ import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material'
 import 'rxjs/add/operator/toPromise';
 
 import { ModalContainerComponent } from './modal.container.component'
-import { ModalAction } from '../core/modal/modal.action'
-import { ModalConfig } from '../core/modal/modal-config'
-import { EuModalService } from '../core/modal/eu-modal.service'
+import { ModalAction } from 'ng2-easyui.core'
+import { ModalConfig } from 'ng2-easyui.core'
+import { EuModalService } from 'ng2-easyui.core'
 
 @Injectable()
 export class MdModalService extends EuModalService {

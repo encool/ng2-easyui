@@ -1,4 +1,4 @@
-import { Model } from '../core'
+import { Model } from 'ng2-easyui.core'
 
 export class ModelInput {
     params?: {

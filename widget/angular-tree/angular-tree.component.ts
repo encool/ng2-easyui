@@ -3,7 +3,7 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { ITreeOptions } from 'angular-tree-component'
 import {
     TreeNodeDef
-} from '../core/'
+} from 'ng2-easyui.core'
 
 @Component({
     selector: 'eu-angular-tree',

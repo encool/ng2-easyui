@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
 
 import { Observable } from 'rxjs/Observable'
 
-import { OnModalAction, ModalAction } from '../core'
+import { OnModalAction, ModalAction } from 'ng2-easyui.core'
 
 @Component({
     selector: 'modal-container',

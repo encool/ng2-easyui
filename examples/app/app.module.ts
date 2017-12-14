@@ -16,7 +16,7 @@ import {
 
 import { AppComponent, DialogDataExampleDialog } from './app.component';
 import {
-  EuPageService,
+  // EuPageService,
   EasyUIBpmnModule,
   EasyUIMdModalModule,
   EasyUIRichSwipeModule,
@@ -28,10 +28,14 @@ import {
   // EasyUINg2TreeModule,
   EasyUIAntTreeModule,
   
-  EuBpmnService,
+  // EuBpmnService,
   TitleGuard,
 } from 'ng2-easyui'
 // } from '../../widget'
+import {
+  EuPageService,
+  EuBpmnService,
+} from "ng2-easyui.core";
 
 import { Bootstrap3GridModule } from "ng2-bootstrap3-grid";
 

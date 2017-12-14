@@ -7,8 +7,8 @@ import 'rxjs/add/operator/catch';
 
 import {
     EuPageService
-// } from '../../widget'
-} from 'ng2-easyui'
+} from 'ng2-easyui.core'
+// } from 'ng2-easyui'
 
 @Injectable()
 export class PageService extends EuPageService {

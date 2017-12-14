@@ -7,8 +7,8 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 // import { ModalAction } from '../../shared/object/modal-action'
 // import { ModalService } from '../../service/modal.service'
 
-import { EuBpmnService } from '../core/bpmn/bpmn.service'
-import { Model } from "../core/bpmn/model";
+import { EuBpmnService } from 'ng2-easyui.core'
+import { Model } from "ng2-easyui.core";
 
 import { CamundaModdleDescriptor } from "./camunda"
 import BpmnModeler from 'bpmn-js/lib/Modeler'

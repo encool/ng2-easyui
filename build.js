@@ -34,6 +34,12 @@ function complile() {
       esEntryFolder: ""
     },
     {
+      libName: "core",
+      libFolder: path.join(tempLibFolder , "core"),
+      packageRootFolder: path.join(tempLibFolder , "core"),
+      esEntryFolder: "core"
+    },    
+    {
       libName: "eu-ag-grid",
       libFolder: tempLibFolder + "\\eu-ag-grid",
       packageRootFolder: tempLibFolder + "\\eu-ag-grid",

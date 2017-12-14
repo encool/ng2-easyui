@@ -1,10 +1,11 @@
 import { Component, Inject, ViewContainerRef } from '@angular/core';
 
 import {
-  EasyUIMdModalModule, MdModalService, ModalConfig, EuModalService
+  EasyUIMdModalModule, MdModalService
 } from 'ng2-easyui'
 // } from '../../widget'
-
+import { ModalConfig } from "ng2-easyui.core";
+import { EuModalService } from "ng2-easyui.core";
 
 import { MAT_DIALOG_DATA, MatDialog } from "@angular/material"
 
@@ -42,7 +43,7 @@ export class AppComponent {
 import {
   OnModalAction
 // } from '../../widget'
-} from 'ng2-easyui'
+} from 'ng2-easyui.core'
 
 @Component({
   selector: 'dialog-data-example-dialog',

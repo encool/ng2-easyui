@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable'
 import {
     OnModalAction, EuGridEvent, EuGridAction, EuPageService
     // } from 'ng2-easyui'
-} from '../../../widget'
+} from 'ng2-easyui.core'
 
 // import { EasyUIMdModalModule, MdModalService, ModalConfig } from '../../../'
 

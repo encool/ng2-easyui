@@ -3,7 +3,8 @@ import { Component, Inject, ViewContainerRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable'
 import {
     OnModalAction, EuGridEvent, EuGridAction, EuPageService
-} from 'ng2-easyui'
+    // } from 'ng2-easyui'
+} from 'ng2-easyui.core'
 // } from '../../../widget'
 
 // import { EasyUIMdModalModule, MdModalService, ModalConfig } from '../../../'

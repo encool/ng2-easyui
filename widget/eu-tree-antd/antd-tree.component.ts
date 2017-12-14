@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { OnAction, TreeAction, TreeEvent, TreeNodeDef, EuTreeOptions, CURDAction } from "../core";
+import { OnAction, TreeAction, TreeEvent, TreeNodeDef, EuTreeOptions, CURDAction } from "ng2-easyui.core";
 
 import { HttpClient } from "@angular/common/http";
 

@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {
     TreeNodeDef, EuTreeOptions
     // } from 'ng2-easyui'
-} from '../../../widget'
+} from 'ng2-easyui.core'
 
 
 @Component({
