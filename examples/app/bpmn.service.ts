@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http'
 
 import {
     EuBpmnService
-} from '../../widget'
-// } from 'ng2-easyui'
+    // } from '../../widget'
+} from 'ng2-easyui'
 
 @Injectable()
 export class BpmnService extends EuBpmnService {

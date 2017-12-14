@@ -41,7 +41,8 @@ export class AppComponent {
 
 import {
   OnModalAction
-} from '../../widget'
+// } from '../../widget'
+} from 'ng2-easyui'
 
 @Component({
   selector: 'dialog-data-example-dialog',

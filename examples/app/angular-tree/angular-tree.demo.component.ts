@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import {
     TreeNodeDef, ITreeOptions, TREE_ACTIONS
-    // } from 'ng2-easyui'
-} from '../../../widget'
+} from 'ng2-easyui'
+// } from '../../../widget'
 
 
 @Component({

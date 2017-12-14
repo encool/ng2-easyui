@@ -1,7 +1,7 @@
 {
-  "name": "ng2-easyui/eu-ag-grid",
+  "name": "eu-ag-grid",
   "typings": "./eu-ag-grid.d.ts",
-  "main": "../eu-ag-grid.umd.js",
-  "module": "../eu-ag-grid.es5.js",
-  "es2015": "../eu-ag-grid.js"
+  "main": "../bundles/eu-ag-grid.umd.js",
+  "module": "./eu-ag-grid.es5.js",
+  "es2015": "./eu-ag-grid.js"
 }

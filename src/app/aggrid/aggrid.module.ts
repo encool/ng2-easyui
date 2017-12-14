@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router'
 
 import {
-    EasyUIagGridModule, EasyUIMdModalModule
+    EasyUIMdModalModule
     // } from 'ng2-easyui'
 } from '../../../widget'
+
+import { EasyUIagGridModule } from "../../../widget/eu-ag-grid";
 
 import { EuAggridDemoComponent } from './eu-aggrid.demo.component';
 import { ModalInfoComponent } from './modal.info.component'

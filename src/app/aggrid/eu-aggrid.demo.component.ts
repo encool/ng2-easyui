@@ -2,9 +2,13 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 
 import {
-    EuGridOptions, EuColModel, EuGridEvent, AggridComponent, ColDef, ColGroupDef, ModalConfig
+    EuGridOptions, EuColModel, EuGridEvent, ModalConfig
     // } from 'ng2-easyui'
 } from '../../../widget'
+import {
+    AggridComponent, ColDef, ColGroupDef,
+    // } from 'ng2-easyui/eu-ag-grid'
+} from '../../../widget/eu-ag-grid'
 
 import { ModalInfoComponent } from './modal.info.component'
 
