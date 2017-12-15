@@ -26,6 +26,15 @@ const es2015OutputFolder = path.join(compilationFolder, 'lib-es2015');
 return complile()
 
 function complile() {
+  //coreLib compile first
+  let coreLib = [
+    {
+      libName: "core",
+      libFolder: path.join(tempLibFolder, "core"),
+      packageRootFolder: path.join(tempLibFolder, "core"),
+      esEntryFolder: "core"
+    },
+  ]
   let libs = [
     {
       libName: libName,
@@ -33,12 +42,6 @@ function complile() {
       packageRootFolder: rootFolder,
       esEntryFolder: ""
     },
-    {
-      libName: "core",
-      libFolder: path.join(tempLibFolder , "core"),
-      packageRootFolder: path.join(tempLibFolder , "core"),
-      esEntryFolder: "core"
-    },    
     {
       libName: "eu-ag-grid",
       libFolder: tempLibFolder + "\\eu-ag-grid",
@@ -51,8 +54,14 @@ function complile() {
     .then(() => _relativeCopy(`**/*`, srcFolder, tempLibFolder)
       .then(() => inlineResources(tempLibFolder))
       .then(() => console.log('Inlining succeeded.'))
-    ).then(
-    () => Promise.all(libs.map(value => complileLib(value.libFolder, value.libName, value.packageRootFolder, value.esEntryFolder)))
+    ).then(() =>
+      Promise.all(coreLib.map(
+        value => complileLib(value.libFolder, value.libName, value.packageRootFolder, value.esEntryFolder))
+      )
+    ).then(() =>
+      Promise.all(libs.map(
+        value => complileLib(value.libFolder, value.libName, value.packageRootFolder, value.esEntryFolder))
+      )
     )
   // let compile = complileLib(tempLibFolder, libName, rootFolder)
   // Promise.all([c])
@@ -122,14 +131,14 @@ function complileLib(libFolder, packageLibName, packageRootFolder, esEntryFolder
       // UMD bundle.
       const umdConfig = Object.assign({}, rollupBaseConfig, {
         entry: es5Entry,
-        dest: path.join(distFolder, `bundles`, `${packageLibName}.umd.js`),
+        dest: path.join(distFolder, esEntryFolder ? esEntryFolder : `bundles`, `${packageLibName}.umd.js`),
         format: 'umd',
       });
 
       // Minified UMD bundle.
       const minifiedUmdConfig = Object.assign({}, rollupBaseConfig, {
         entry: es5Entry,
-        dest: path.join(distFolder, `bundles`, `${packageLibName}.umd.min.js`),
+        dest: path.join(distFolder, esEntryFolder ? esEntryFolder : `bundles`, `${packageLibName}.umd.min.js`),
         format: 'umd',
         plugins: rollupBaseConfig.plugins.concat([uglify({})])
       });

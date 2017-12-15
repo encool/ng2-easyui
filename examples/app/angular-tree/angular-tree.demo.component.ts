@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 import {
-    TreeNodeDef, ITreeOptions, TREE_ACTIONS
+    ITreeOptions, TREE_ACTIONS
 } from 'ng2-easyui'
 // } from '../../../widget'
-
+import {
+    TreeNodeDef
+    // } from 'ng2-easyui'
+} from 'ng2-easyui.core'
 
 @Component({
     selector: 'ang-tree-demo',

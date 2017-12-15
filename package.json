@@ -22,7 +22,7 @@
     "copycss": "cpr assets/ dist/assets",
     "publish:lib": "cnpm run clean && cnpm run build && cnpm run copycss",
     "bundle-report:example": "webpack-bundle-analyzer out/example/stats.json",
-    "bundle-report:app": "webpack-bundle-analyzer out/app/stats.json"    
+    "bundle-report:app": "webpack-bundle-analyzer out/app/stats.json"
   },
   "keywords": [
     "angular2",
@@ -71,6 +71,7 @@
     "camunda-bpmn-moddle": "0.13.0",
     "lodash": "^4.17.4",
     "ng2-easyform": "^0.1.2",
+    "ng2-easyui.core": "0.0.11",
     "ng2-tree": "^2.0.0-rc.4",
     "ngx-swiper-wrapper": "^4.6.2"
   }
