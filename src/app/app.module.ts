@@ -16,7 +16,6 @@ import {
 
 import { AppComponent, DialogDataExampleDialog } from './app.component';
 import {
-  EasyUIBpmnModule,
   EasyUIMdModalModule,
   EasyUIRichSwipeModule,
   EasyUIAngularTreeModule,
@@ -41,7 +40,6 @@ import { PageService } from './page.service';
 import { BpmnService } from './bpmn.service';
 
 import { RichSwipeDemoComponent } from './rich-swipe-demo/rich-swipe-demo.component';
-import { Bpmn2DemoComponent } from './bpmn2/bpmn2.demo.component'
 import { AngTreeDemoComponent } from './angular-tree/angular-tree.demo.component'
 import { MatPanelDemoComponent } from './mat-panel/mat-panel.demo.component'
 // import { Ng2TreeDemoComponent } from "./ng2-tree/ng2-tree.demo.component";
@@ -54,7 +52,6 @@ import { EntryComponent } from "./entry.component";
   declarations: [
     AppComponent,
     DialogDataExampleDialog,
-    Bpmn2DemoComponent,
     MatPanelDemoComponent,
     // Ng2TreeDemoComponent,
     AntdTreeDemoComponent,
@@ -76,8 +73,8 @@ import { EntryComponent } from "./entry.component";
       canActivateChild: [TitleGuard],
       children: [
         { path: 'demo', loadChildren: './aggrid/aggrid.module#AggridModule' },
+        { path: 'Bpmn2Demo', loadChildren: './bpmn2/bpmn2.module#Bpmn2Module' },
         { path: 'RichSwipeDemoComponent', component: RichSwipeDemoComponent, data: { title: "翻页效果" } },
-        { path: 'Bpmn2DemoComponent', component: Bpmn2DemoComponent, data: { title: "bpmn2" } },
         { path: 'MatPanelDemoComponent', component: MatPanelDemoComponent, data: { title: "MatPanel" } },
         // { path: 'Ng2TreeDemoComponent', component: Ng2TreeDemoComponent, data: { title: "Ng2Tree" } },
         { path: 'AntdTreeDemoComponent', component: AntdTreeDemoComponent, data: { title: "AntdTree" } },
@@ -99,7 +96,6 @@ import { EntryComponent } from "./entry.component";
     EasyUIMdModalModule,
     // EasyUIagGridModule,
     EasyUIRichSwipeModule,
-    EasyUIBpmnModule,
     EasyUIAngularTreeModule,
     EasyUIMatContainerModule,
     EasyUIMenuModule,

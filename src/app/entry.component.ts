@@ -35,18 +35,18 @@ export class EntryComponent {
         },
         {
             path: ["/demo/EuAggridDemoComponent", { id1: "1" }],
-            label: "aggrid1"
+            label: "aggrid1 参数1"
         },
         {
             path: ["/demo/EuAggridDemoComponent", { id1: "2" }],
-            label: "aggrid2"
+            label: "aggrid2 参数2"
         },
         {
             path: "/RichSwipeDemoComponent",
             label: "swipe"
         },
         {
-            path: "/Bpmn2DemoComponent",
+            path: "Bpmn2Demo/Bpmn2DemoComponent",
             label: "bpmn2"
         },
         {
@@ -55,15 +55,15 @@ export class EntryComponent {
         },
         {
             path: ["/EntryComponent", { p: 1 }],
-            label: "entry1"
+            label: "entry1 参数1"
         },
         {
             path: ["/EntryComponent", { p: 2 }],
-            label: "entry2"
+            label: "entry2 参数2"
         },
         {
             path: ["/EntryComponent", { p: 2 }],
-            label: "entry2"
+            label: "entry2 参数2"
         },
     ]
 

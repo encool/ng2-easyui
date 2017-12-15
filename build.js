@@ -44,9 +44,15 @@ function complile() {
     },
     {
       libName: "eu-ag-grid",
-      libFolder: tempLibFolder + "\\eu-ag-grid",
-      packageRootFolder: tempLibFolder + "\\eu-ag-grid",
+      libFolder: path.join(tempLibFolder, "eu-ag-grid"),
+      packageRootFolder: path.join(tempLibFolder, "eu-ag-grid"),
       esEntryFolder: "eu-ag-grid"
+    },
+    {
+      libName: "bpmn2",
+      libFolder: path.join(tempLibFolder, "bpmn2"),
+      packageRootFolder: path.join(tempLibFolder, "bpmn2"),
+      esEntryFolder: "bpmn2"
     }
   ]
   return Promise.resolve()

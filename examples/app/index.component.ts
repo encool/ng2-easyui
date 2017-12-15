@@ -31,8 +31,8 @@ export class IndexComponent implements OnInit {
                         },
                         {
                             id: "1",
-                            title: "Bpmn2",
-                            link: "/Bpmn2DemoComponent",
+                            title: "Bpmn2Demo",
+                            link: "Bpmn2Demo/Bpmn2DemoComponent",
                             icon: "",
                         },
                     ]

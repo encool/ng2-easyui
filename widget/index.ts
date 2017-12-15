@@ -1,5 +1,5 @@
 // export * from './eu-ag-grid/index'
-export * from './bpmn2/index'
+// export * from './bpmn2/index'
 export * from './modal/index'
 export * from './rich-swipe/index'
 export * from './angular-tree/index'
