@@ -308,6 +308,7 @@ const ROLLUP_GLOBALS = {
     "ng2-easyui.core": null,
 
     "ag-grid": null,
+    "ag-grid/main": null,
     "ag-grid-angular": null,
     "ag-grid-angular/main": null,
 
