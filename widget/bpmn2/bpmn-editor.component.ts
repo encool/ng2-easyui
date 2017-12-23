@@ -11,10 +11,10 @@ import { EuBpmnService } from 'ng2-easyui.core'
 import { Model } from "ng2-easyui.core";
 
 import { CamundaModdleDescriptor } from "./camunda"
-import BpmnModeler from 'bpmn-js/lib/Modeler'
-import BpmnViewer from 'bpmn-js/lib/Viewer'
-import propertiesPanelModule from 'bpmn-js-properties-panel'
-import propertiesProviderModule from 'bpmn-js-properties-panel/lib/provider/camunda'
+import * as BpmnModeler from 'bpmn-js/lib/Modeler'
+import * as BpmnViewer from 'bpmn-js/lib/Viewer'
+import * as propertiesPanelModule from 'bpmn-js-properties-panel'
+import * as propertiesProviderModule from 'bpmn-js-properties-panel/lib/provider/camunda'
 
 @Component({
     selector: 'bpmn-editor',
