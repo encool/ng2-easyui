@@ -1,6 +1,5 @@
 node_modules/
 dist
 dist.zip
-out-tsc
 out
-
+out-tsc
