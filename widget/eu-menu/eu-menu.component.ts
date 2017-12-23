@@ -94,8 +94,12 @@ export class EuMenuComponent extends CdkAccordionItem {
         this.hideMenu.emit()
     }
 
+    /**
+     * 
+     * @param link 激活指定link
+     */
     activateLink(link: string) {
-        if (this.menu.link == link) {
+        if (this.menu.link == link || "/" + this.menu.link == link) {
             this._activateLink()
             return;
         }
