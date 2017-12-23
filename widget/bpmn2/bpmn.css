@@ -1,0 +1,85 @@
+/* @import "./assets/diagram-js.css";
+@import "./assets/bpmn-app.css";
+@import "./assets/diagram-js.css";
+@import "./assets/bpmn-font/css/bpmn-embedded.css"; */
+
+[class^="bpmn-icon-"]:before, [class*=" bpmn-icon-"]:before {
+    margin-left: 0;
+}
+
+.io-zoom-controls {
+    width: auto;
+    position: absolute;
+    right: 270px;
+    bottom: 60px
+}
+.io-zoom-reset {
+    margin-bottom: 10px;
+}
+.io-control-list {
+    list-style: none;
+    padding: 5px;
+    margin: 0;
+}
+.bjs-powered-by, .cjs-powered-by, .io-control {
+    background: #FFF;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    border-radius: 2px;
+    padding: 5px;
+}
+.io-control-list a, .io-control-list a:visited, .io-control-list button {
+    padding: 0;
+    outline: none;
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 26px;
+    color: #555555;
+    background: none;
+    border: none;
+}
+.io-control-list a, .io-control-list a:visited, .io-control-list button {
+    padding: 0;
+    outline: none;
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 26px;
+    color: #555555;
+    background: none;
+    border: none;
+}
+.icon-size-reset:before {
+    /*inline-resouce的时候 \f需要转义 下同*/        
+    content: '\\f41f';
+}
+[class^="icon-"]:before, [class*=" icon-"]:before {
+    font-family: "app";
+}
+[class^="icon-"]:before, [class*=" icon-"]:before, [class^="bpmn-icon-"]:before, [class*=" bpmn-icon-"]:before {
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+}
+.icon-plus:before {   
+    content: '\\f417';
+}
+.icon-minus:before {
+    content: '\\f419';
+}
+/* @font-face {
+    font-family: 'app';
+//    src: url('./assets/app-font/app.eot?42391129');
+    src: url('./assets/app-font/app.woff?42391129') format('woff');
+    font-weight: normal;
+    font-style: normal
+} */
+
+.io-zoom-reset {
+    margin-bottom: 10px;
+}

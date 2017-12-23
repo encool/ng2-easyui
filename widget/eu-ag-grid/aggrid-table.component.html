@@ -1,0 +1,33 @@
+<div [style.width]="tableWidth">
+    <h1>{{euGridOptions.title}}</h1>
+    <div style="display: flex;">
+        <span style="flex: 1 1 auto;"></span>
+        <button mat-icon-button [color]="action.style || defaultAtcions[action.curdType].style"
+            (click)="onAction(action)" *ngFor="let action of euGridOptions.actions">
+            <mat-icon class="mat-24" 
+                [matTooltip]="action.name" 
+                matTooltipPosition="above"
+                [attr.aria-label]="action.name"
+                [attr.title]="action.name">
+                    {{action.icon || defaultAtcions[action.curdType].icon}}
+            </mat-icon>
+        </button>
+    </div>
+    <mat-expansion-panel [expanded]="queryExpanded">
+        <ef-md-form [fields]="queryfields"></ef-md-form>
+        <mat-action-row>
+            <button mat-button (click)="query($event)">查询</button>
+            <button mat-button (click)="reset($event)">重置</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+    <!-- class="ag-blue"  -->
+    <div class="eu-md-table-container">
+        <ag-grid-angular style="width: 100%;" class="ag-theme-material"
+            [gridOptions]="aggridOptions" (gridReady)="gridReady($event)"
+            (sortChanged)="onSortChanged($event)">
+        </ag-grid-angular>
+    </div>
+    <mat-paginator #paginator [length]="length" [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
+    </mat-paginator>
+</div>

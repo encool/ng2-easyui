@@ -1,0 +1,7 @@
+{
+  "name": "eu-ag-grid",
+  "typings": "./eu-ag-grid.d.ts",
+  "main": "../eu-ag-grid.umd.js",
+  "module": "./eu-ag-grid.es5.js",
+  "es2015": "./eu-ag-grid.js"
+}

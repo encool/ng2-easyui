@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.lib.json",
+  "compilerOptions": {
+    "target": "es5",
+    "outDir": "../../../out-tsc/lib-es5/",
+    "baseUrl": ""
+
+  },
+  "files": [
+    "./index.ts"
+  ],
+  "angularCompilerOptions": {
+    "annotateForClosureCompiler": true,
+    "strictMetadataEmit": true,
+    "skipTemplateCodegen": true,
+    "flatModuleOutFile": "core.js",
+    "flatModuleId": "ng2-easyui.core",
+    "genDir": "../../out-tsc/lib-gen-dir/"
+  }
+}

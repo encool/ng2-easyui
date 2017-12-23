@@ -1,0 +1,63 @@
+import { Component, OnInit } from '@angular/core';
+
+import { TreeModel, RenamableNode } from "../../../widget";
+// import { TreeModel, RenamableNode } from "ng2-tree";
+// <tree [tree]="nodes"></tree>
+@Component({
+    selector: 'ng2-tree-demo',
+    template: `
+    <div class="container">
+    <div bsRow>
+        <eu-mat-panel bsCol.sm="4">           
+            <eu-ng2-tree [ng2TreeNodes]="nodes"></eu-ng2-tree>            
+        </eu-mat-panel>         
+    </div>
+</div>        
+    `
+})
+export class Ng2TreeDemoComponent implements OnInit {
+
+    nodes: TreeModel = {
+        value: 'Programming languages by programming paradigm',
+        children: [
+            {
+                value: 'Object-oriented programming',
+                children: [
+                    {
+                        // I am a RenamableNode. Yeah, that's me :)
+                        value: <RenamableNode>{
+                            name: 'Java',
+                            setName(name: string): void {
+                                this.name = name;
+                            },
+                            toString(): string {
+                                return this.name;
+                            }
+                        }
+                    },
+                    { value: 'C++' },
+                    { value: 'C#' }
+                ]
+            },
+            {
+                value: 'Prototype-based programming',
+                loadChildren: (callback) => {
+                    setTimeout(() => {
+                        callback([
+                            { value: 'JavaScript' },
+                            { value: 'CoffeeScript' },
+                            { value: 'TypeScript' }
+                        ]);
+                    }, 5000);
+                }
+            }
+        ]
+    };
+
+    constructor() { }
+
+    ngOnInit() {
+
+    }
+
+}

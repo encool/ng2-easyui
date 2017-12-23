@@ -1,8 +1,16 @@
 import { Component, OnInit, NgZone } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
 
-import { EuGridOptions, EuColModel, EuGridEvent, AggridComponent, ColDef, ColGroupDef } from '../../../'
+import {
+    EuGridOptions, EuColModel, EuGridEvent, ModalConfig
+    // } from 'ng2-easyui'
+} from 'ng2-easyui.core'
+import {
+    AggridComponent, ColDef, ColGroupDef,
+    // } from 'ng2-easyui/eu-ag-grid'
+} from '../../../widget/eu-ag-grid'
 
-import { ModalInfoComponent } from '../modal/modal.info.component'
+import { ModalInfoComponent } from './modal.info.component'
 
 import {
     FieldBase,
@@ -28,7 +36,7 @@ export class EuAggridDemoComponent implements OnInit {
     euGridOptions: EuGridOptions
     agGridColDefs: (ColDef | ColGroupDef)[]
 
-    constructor(private _ngZone: NgZone) {
+    constructor(private activatedRoute: ActivatedRoute) {
 
         this.agGridColDefs = [
             // {
@@ -65,7 +73,9 @@ export class EuAggridDemoComponent implements OnInit {
             primaryKey: "id",
             gridId: "aggriddemo",
             title: "表格示例",
-            defaultActionComponent: ModalInfoComponent,
+            defaultActionModalConfig: {
+                component: ModalInfoComponent
+            },
             // url: 'list/e/webdisplaycategory',
             url: "ls/list/form/webdiscategorymanage",
             defaultaction: true,
@@ -82,7 +92,7 @@ export class EuAggridDemoComponent implements OnInit {
                     label: "名称",
                     // required: true,
                     span: 4,
-                    op:QueryOperate.cn                     
+                    op: QueryOperate.cn
                 }),
                 new MdDatepickerField({
                     key: "inTime",
@@ -95,5 +105,9 @@ export class EuAggridDemoComponent implements OnInit {
         })
     }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.activatedRoute.params.subscribe(params => {
+            // debugger
+        });
+    }
 }

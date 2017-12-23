@@ -1,13 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-/* @import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
+/* @import '~@angular/material/prebuilt-themes/deeppurple-amber.css'; */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 /* @import "app/assets/project.css"; */
 @import "./assets/iconfont/material-icons.css";
 /* @import "../node_modules/devextreme/dist/css/dx.common.css"; */
 /* @import "../node_modules/devextreme/dist/css/dx.light.css"; */
-@import "../node_modules/ag-grid/dist/styles/ag-grid.css";
+/* @import "../node_modules/ag-grid/dist/styles/ag-grid.css"; */
 /* @import "../node_modules/ag-grid/dist/styles/theme-blue.css"; */
-@import "../node_modules/ag-grid/dist/styles/ag-theme-material.css";
+/* @import "../node_modules/ag-grid/dist/styles/ag-theme-material.css"; */
+
+@import "../node_modules/ng2-bootstrap3-grid/css/bootstrap.min.css";
+
+/* @import "../node_modules/ng2-tree/styles.css"; */
+
+@import "../assets/eu-bpmn2.css";
+@import "../assets/eu-aggrid.css";
+
 /* You can add global styles to this file, and also import other style files */
 html, body {
     position: relative;

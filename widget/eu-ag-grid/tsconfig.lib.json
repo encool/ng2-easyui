@@ -1,0 +1,21 @@
+{
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../../out-tsc/lib-es2015/",
+    "target": "es2015",
+    "rootDir": "../",
+    "baseUrl": "",
+    "declaration": true
+  },
+  "files": [
+    "./index.ts"
+  ],
+  "angularCompilerOptions": {
+    "annotateForClosureCompiler": true,
+    "strictMetadataEmit": true,
+    "skipTemplateCodegen": true,
+    "flatModuleOutFile": "eu-ag-grid.js",
+    "flatModuleId": "ng2-easyui/eu-ag-grid",
+    "genDir": "../../out-tsc/lib-gen-dir/"
+  }
+}

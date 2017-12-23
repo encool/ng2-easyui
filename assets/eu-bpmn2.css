@@ -1,0 +1,12 @@
+@import "./diagram-js.css";
+@import "./bpmn-app.css";
+@import "./diagram-js.css";
+@import "./bpmn-font/css/bpmn-embedded.css";
+
+@font-face {
+    font-family: 'app';
+    /* src: url('./assets/app-font/app.eot?42391129'); */
+    src: url('./app-font/app.woff?42391129') format('woff');
+    font-weight: normal;
+    font-style: normal
+}

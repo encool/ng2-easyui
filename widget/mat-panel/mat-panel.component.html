@@ -1,0 +1,31 @@
+<div style="box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);">
+    <mat-toolbar color="primary">
+        <span>title</span>
+        <span class="spacer"></span>
+        <button *ngIf="actions.length >= 1" mat-icon-button [color]="actions[0].style"
+            (click)="onAction(actions[0])">
+            <mat-icon class="mat-24" [matTooltip]="actions[0].name" matTooltipPosition="above"
+                [attr.aria-label]="actions[0].name" [attr.title]="actions[0].name">
+                {{actions[0].icon}}
+            </mat-icon>
+        </button>
+        <button *ngIf="actions.length > 1" mat-icon-button [matMenuTriggerFor]="menu" 
+            (mouseover)="onMouseenterMore($event)" 
+            
+            >
+            <mat-icon *ngIf="actions.length > 1">more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" yPosition="below" xPosition="before" 
+            overlapTrigger="false" classList="panelActionMenu">
+            <ng-container *ngFor="let action of actions; let i=index;">
+                <button mat-menu-item *ngIf="i >= 1" (click)="onAction(action)">
+                    <mat-icon>{{action.icon}}</mat-icon>
+                    <span>{{action.name}}</span>
+                </button>
+            </ng-container>
+        </mat-menu>
+    </mat-toolbar>
+    <div class="eu_panel_content" [ngStyle]="_contentStyle">
+        <ng-content></ng-content>
+    </div>
+</div>
