@@ -3,6 +3,10 @@ import { OnAction, TreeAction, TreeEvent, TreeNodeDef, EuTreeOptions, CURDAction
 
 import { HttpClient } from "@angular/common/http";
 
+import {
+    EuTreeService
+} from 'ng2-easyui.core'
+
 import { NzTreeComponent } from "ng-tree-antd";
 import { TreeNode } from "angular-tree-component";
 
@@ -37,7 +41,7 @@ export class AntdTreeComponent implements OnInit, OnAction {
     _nzOptions: any
     _nzNodes: any[]
 
-    constructor(private httpClient: HttpClient) {
+    constructor(private httpClient: HttpClient, private treeService: EuTreeService) {
 
     }
 
@@ -97,22 +101,7 @@ export class AntdTreeComponent implements OnInit, OnAction {
                 }
             })
         }
-        // return this.httpClient.post(this._dataUrl, {
-        //     params: params
-        // }).toPromise()
-
-        return new Promise<TreeNodeDef[]>(resolve => {
-            resolve([
-                { id: this.guid(), name: 'child2.1', hasChildren: true },
-                {
-                    id: this.guid(),
-                    name: 'child2.2',
-                    children: [
-                        { id: this.guid(), name: 'subsub' }
-                    ]
-                }
-            ])
-        })
+        return this.treeService.getTreeNodes(this._dataUrl, params)
     }
 
     private treeAsyncSuccess(ztree, openState, checkState, selectedState, openNodes, checkedNodes, selectedNodes) {
@@ -160,16 +149,6 @@ export class AntdTreeComponent implements OnInit, OnAction {
 
     refreshTree() {
 
-    }
-
-    private guid() {
-        function s4() {
-            return Math.floor((1 + Math.random()) * 0x10000)
-                .toString(16)
-                .substring(1);
-        }
-        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-            s4() + '-' + s4() + s4() + s4();
     }
 
 }

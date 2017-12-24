@@ -33,12 +33,13 @@ import {
 import {
   EuPageService,
   EuBpmnService,
+  EuTreeService
 } from "ng2-easyui.core";
-
 import { Bootstrap3GridModule } from "ng2-bootstrap3-grid";
 
 import { PageService } from './page.service';
 import { BpmnService } from './bpmn.service';
+import { TreeService } from "./tree.service";
 
 import { RichSwipeDemoComponent } from './rich-swipe-demo/rich-swipe-demo.component';
 import { AngTreeDemoComponent } from './angular-tree/angular-tree.demo.component'
@@ -109,6 +110,7 @@ import { EntryComponent } from "./entry.component";
   providers: [
     { provide: EuPageService, useClass: PageService, },
     { provide: EuBpmnService, useClass: BpmnService, },
+    { provide: EuTreeService, useClass: TreeService, },
   ],
   entryComponents: [
     DialogDataExampleDialog,

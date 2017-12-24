@@ -20,3 +20,4 @@ export * from './bpmn/model'
 export * from './dict/eu-dict.service'
 
 export * from './tree/tree.def'
+export * from './tree/eu-tree.service'
