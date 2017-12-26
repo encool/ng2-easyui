@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, OnInit, Type, ViewEncapsulation } from "@angular/core";
+import { Component, Input, ViewChild, OnInit, Type, ViewEncapsulation, Optional } from "@angular/core";
 import { PageEvent, MatPaginator, MatDialog, MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { GridOptions, IDatasource, IDateParams, IGetRowsParams, ColDef, ColGroupDef, RowNode } from "ag-grid/main";
 import { debounce } from 'rxjs/operators'
@@ -53,6 +53,8 @@ export class AggridComponent implements GridApi, OnInit {
 
     @Input() agGridColDefs: (ColDef | ColGroupDef)[]
     @Input() rowModelType: string = 'inMemory' //{inMemory, infinite, viewport, enterprise}
+
+    @Input() inputPageService: EuPageService
 
     aggridOptions: GridOptions;
 
@@ -109,7 +111,7 @@ export class AggridComponent implements GridApi, OnInit {
     // pageEvent: PageEvent;
     constructor(
         private euModalService: EuModalService,
-        private pageService: EuPageService,
+        @Optional() private pageService: EuPageService,
         public dialog: MatDialog,
         public snackBar: MatSnackBar) {
         let cacheBlockSize = this.cacheBlockSize
@@ -122,7 +124,7 @@ export class AggridComponent implements GridApi, OnInit {
                 // At this point in your code, you would call the server, using $http if in AngularJS 1.x.
                 // To make the demo look real, wait for 500ms before returning
                 // pageService.getPageObol("/ls/list/form/webdiscategorymanage", params.startRow, cacheBlockSize).toPromise().then(data => {
-                pageService.getPageObByOffsetLimit("list/e/webdisplaycategory", params.startRow, cacheBlockSize).toPromise().then(data => {
+                this.getPageService().getPageObByOffsetLimit("list/e/webdisplaycategory", params.startRow, cacheBlockSize).toPromise().then(data => {
                     var lastRow = -1;
                     if (data.total <= params.endRow) {
                         lastRow = data.total;
@@ -232,7 +234,7 @@ export class AggridComponent implements GridApi, OnInit {
     }
 
     refreshData(url: string, pageSize: number, pageIndex: number, cond: any, sidx: string, sord: string) {
-        return this.pageService.getPage(url, pageSize, pageIndex, cond, sidx, sord).then(data => {
+        return this.getPageService().getPage(url, pageSize, pageIndex, cond, sidx, sord).then(data => {
             this.length = data.total
             this.rowData = data.contents
             this.aggridOptions.api.setRowData(this.rowData);
@@ -245,7 +247,7 @@ export class AggridComponent implements GridApi, OnInit {
         this.aggridOptions.api.sizeColumnsToFit()
 
         if (this.rowModelType == 'inMemory') {
-            this.pageService.getPage(this.url, this.pageSize, this.pageIndex, this.cond).then(data => {
+            this.getPageService().getPage(this.url, this.pageSize, this.pageIndex, this.cond).then(data => {
                 this.length = data.total
                 this.rowData = data.contents
                 this.aggridOptions.api.setRowData(this.rowData);
@@ -288,7 +290,6 @@ export class AggridComponent implements GridApi, OnInit {
                 this.attachComparatorToColDefs(v.children)
             } else {
                 v.comparator = function (valueA, valueB, nodeA, nodeB, isInverted) {
-
                     return 0
                 }
             }
@@ -301,10 +302,8 @@ export class AggridComponent implements GridApi, OnInit {
         }
         Object.assign(modalConfig.data, data)
         this.euModalService.open(modalConfig, (result) => {
-
             this.refresh()
         }, (result) => {
-
             this.refresh()
         })
     }
@@ -418,6 +417,10 @@ export class AggridComponent implements GridApi, OnInit {
             // }
         }
         return colDef
+    }
+
+    private getPageService(): EuPageService {
+        return this.inputPageService || this.pageService
     }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, Optional } from '@angular/core';
 import { OnAction, TreeAction, TreeEvent, TreeNodeDef, EuTreeOptions, CURDAction } from "ng2-easyui.core";
 
 import { HttpClient } from "@angular/common/http";
@@ -33,6 +33,8 @@ export class AntdTreeComponent implements OnInit, OnAction {
 
     @ViewChild(NzTreeComponent) nzTree: NzTreeComponent
 
+    @Input() inputTreeService: EuTreeService
+
     params: any = {}
     autoParams: string[] = ['id']
     nzCheckable = false;
@@ -41,7 +43,7 @@ export class AntdTreeComponent implements OnInit, OnAction {
     _nzOptions: any
     _nzNodes: any[]
 
-    constructor(private httpClient: HttpClient, private treeService: EuTreeService) {
+    constructor(private httpClient: HttpClient, @Optional() private treeService: EuTreeService) {
 
     }
 
@@ -101,7 +103,7 @@ export class AntdTreeComponent implements OnInit, OnAction {
                 }
             })
         }
-        return this.treeService.getTreeNodes(this._dataUrl, params)
+        return this.getTreeService().getTreeNodes(this._dataUrl, node, params)
     }
 
     private treeAsyncSuccess(ztree, openState, checkState, selectedState, openNodes, checkedNodes, selectedNodes) {
@@ -149,6 +151,10 @@ export class AntdTreeComponent implements OnInit, OnAction {
 
     refreshTree() {
 
+    }
+
+    private getTreeService(): EuTreeService {
+        return this.inputTreeService || this.treeService
     }
 
 }

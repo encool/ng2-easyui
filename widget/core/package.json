@@ -1,5 +1,5 @@
 {
-  "version": "0.1.1",
+  "version": "0.1.2",
   "name": "ng2-easyui.core",
   "typings": "./core.d.ts",
   "main": "./core.umd.js",

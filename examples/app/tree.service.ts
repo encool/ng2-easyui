@@ -17,7 +17,7 @@ export class TreeService extends EuTreeService {
         super(http)
     }
 
-    getTreeNodes(url, params): Promise<TreeNodeDef[]> {
+    getTreeNodes(url, node, params): Promise<TreeNodeDef[]> {
         return new Promise<TreeNodeDef[]>(resolve => {
             resolve([
                 { id: this.guid(), name: 'child2.1', hasChildren: true },
@@ -32,7 +32,7 @@ export class TreeService extends EuTreeService {
         })
     }
 
-    getTreeNodesOb(url, params): Observable<TreeNodeDef[]> {
+    getTreeNodesOb(url, node, params): Observable<TreeNodeDef[]> {
         return null
 
     }

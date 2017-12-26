@@ -8,8 +8,8 @@ export abstract class EuTreeService {
 
     constructor(public http: HttpClient) { }
 
-    abstract getTreeNodes(url: string, cond?: Object): Promise<TreeNodeDef[]>
+    abstract getTreeNodes(url: string, node?: TreeNodeDef, cond?: Object): Promise<TreeNodeDef[]>
 
-    abstract getTreeNodesOb(url: string, cond?: Object): Observable<TreeNodeDef[]>
+    abstract getTreeNodesOb(url: string, node?: TreeNodeDef, cond?: Object): Observable<TreeNodeDef[]>
 
 }
