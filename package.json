@@ -1,6 +1,6 @@
 {
   "name": "ng2-easyui",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "",
   "main": "./bundles/ng2-easyui.js",
   "module": "./ng2-easyui.es5.js",
@@ -63,8 +63,8 @@
     "webpack-bundle-analyzer": "^2.9.1"
   },
   "dependencies": {
-    "ag-grid": "^13.1.2",
-    "ag-grid-angular": "^13.1.1",
+    "ag-grid": "^15.0.0",
+    "ag-grid-angular": "^15.0.0",
     "angular-tree-component": "^6.0.0",
     "bpmn-js": "0.22.1",
     "bpmn-js-properties-panel": "0.16.1",

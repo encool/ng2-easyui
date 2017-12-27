@@ -25,7 +25,7 @@ import {
     QueryOperate
 } from 'ng2-easyform'
 
-import * as _ from "lodash"
+// import * as _ from "lodash"
 
 @Component({
     selector: 'eu-aggrid',
@@ -66,7 +66,7 @@ export class AggridComponent implements GridApi, OnInit {
     pageSize = 10;
     pageSizeOptions = [5, 10, 25, 100];
     pageIndex: number = 1
-    cond: any
+    // cond: any
     sidx: string
     sord: string
     queryExpanded: boolean = false
@@ -76,7 +76,8 @@ export class AggridComponent implements GridApi, OnInit {
     //表格的初始化参数
     @Input() originParams: any = {}
     //初始化的查询参数
-    originQueryParams: any = {}
+    @Input() originQueryParams: any = {}
+    private _queryParams: any = {}
 
     lastRow: number = 0
     cacheBlockSize: number = 10
@@ -167,7 +168,9 @@ export class AggridComponent implements GridApi, OnInit {
         };
 
         this.url = this.euGridOptions.url
-
+        if (this.euGridOptions.width) {
+            this.tableWidth = this.euGridOptions.width + 'px'
+        }
     }
 
     ngAfterViewInit() {
@@ -187,28 +190,36 @@ export class AggridComponent implements GridApi, OnInit {
         ).subscribe(value => {
             this.query()
         })
+
+        //初始化的查询参数
+        this.queryForm.form.patchValue(this.originQueryParams)
+    }
+
+    private get cond() {
+        return Object.assign({}, this.originParams, this.originQueryParams, this._queryParams)
     }
 
     query($event?) {
         // debugger
-        let postData = this.queryForm.form.value
-        for (let key in postData) {
-            if (postData[key] == undefined || postData[key] == "") {
-                delete postData[key]
+        this._queryParams = this.queryForm.form.value
+        for (let key in this._queryParams) {
+            if (this._queryParams[key] == undefined || this._queryParams[key] == "") {
+                delete this._queryParams[key]
             }
         }
         let queryParams = {}
-        _.assign(queryParams, this.originParams, postData)
+        Object.assign(queryParams, this.originParams, this._queryParams, this.originQueryParams)
 
         this.doQueryParams(queryParams, this.queryfields)
         this.refresh(queryParams)
     }
 
     reset($event?) {
-
         this.queryForm.form.reset()
         this.queryForm.form.patchValue(this.originQueryParams)
-        this.refresh(this.originParams)
+        this._queryParams = this.queryForm.form.value
+
+        this.refresh(this.cond)
     }
 
     private doQueryParams(queryParams: any, fields: FieldBase<any>[]) {
@@ -263,11 +274,9 @@ export class AggridComponent implements GridApi, OnInit {
             this.sidx = sortCol.colId
             this.sord = sortCol.sort
             setTimeout(() => {
-
                 this.refresh()
             });
         }
-        debugger
     }
 
     private createColumnDefs() {
@@ -356,7 +365,12 @@ export class AggridComponent implements GridApi, OnInit {
     addParams: (params, fresh?: boolean) => void
     removeParam: (paramName, fresh?) => void
 
-    setParams: (params, fresh?) => void
+    setParams(params, fresh?) {
+        this.originParams = params
+        if (fresh) {
+            this.refresh()
+        }
+    }
 
     // getDataIDs = function () {
     //     return this.jqgridObject.jqGrid("getDataIDs");
