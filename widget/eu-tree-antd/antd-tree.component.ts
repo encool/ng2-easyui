@@ -1,11 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, Optional } from '@angular/core';
-import { OnAction, TreeAction, TreeEvent, TreeNodeDef, EuTreeOptions, CURDAction } from "ng2-easyui.core";
-
 import { HttpClient } from "@angular/common/http";
 
-import {
-    EuTreeService
-} from 'ng2-easyui.core'
+import { MatSnackBar } from "@angular/material";
+
+import { OnAction, TreeAction, TreeEvent, TreeNodeDef, EuTreeOptions, CURDAction, ModalConfig, EuModalService, EuTreeService } from "ng2-easyui.core";
 
 import { NzTreeComponent } from "ng-tree-antd";
 import { TreeNode } from "angular-tree-component";
@@ -43,7 +41,10 @@ export class AntdTreeComponent implements OnInit, OnAction {
     _nzOptions: any
     _nzNodes: any[]
 
-    constructor(private httpClient: HttpClient, @Optional() private treeService: EuTreeService) {
+    constructor(private httpClient: HttpClient,
+        @Optional() private treeService: EuTreeService,
+        private euModalService: EuModalService,
+        public snackBar: MatSnackBar) {
 
     }
 
@@ -69,6 +70,18 @@ export class AntdTreeComponent implements OnInit, OnAction {
         console.log('onEvent', ev);
     }
 
+    openDialog(modalConfig: ModalConfig, data: any, node: TreeNode): void {
+        if (!modalConfig.data) {
+            modalConfig.data = {}
+        }
+        Object.assign(modalConfig.data, data)
+        this.euModalService.open(modalConfig, (result) => {
+            this.refreshNode(node)
+        }, (result) => {
+            this.refreshNode(node)
+        })
+    }
+
     euOnAction(baseAction: TreeAction) {
 
         let defnodes = this.getActiveDefNodes()
@@ -78,11 +91,43 @@ export class AntdTreeComponent implements OnInit, OnAction {
             action: baseAction,
         }
         let nodes = this.getActiveNodes()
-        if (baseAction.curdType === CURDAction.READ.curdType) {
-            if (nodes.length == 1) {
-                this.refreshNode(nodes[0])
-            }
+        switch (baseAction.curdType) {
+            case CURDAction.TYPE_CREATE:
+                let modalConfig = baseAction.modalConfig || this.euTreeOptions.defaultActionModalConfig
+                if (modalConfig) {
+                    this.openDialog(modalConfig, {
+                        euTreeEvent: event
+                    }, nodes[0])
+                }
+                break
+            case CURDAction.TYPE_UPDATE:
+                if (defnodes.length == 1) {
+                    let modalConfig1 = baseAction.modalConfig || this.euTreeOptions.defaultActionModalConfig
+                    if (modalConfig1) {
+                        this.openDialog(modalConfig1, { euTreeEvent: event }, nodes[0])
+                    }
+                } else {
+                    this.snackBar.open('请选择一条记录！', '关闭', {
+                        duration: 800
+                    });
+                }
+                break
+            case CURDAction.TYPE_QUERY:
+                break
+            case CURDAction.TYPE_READ:
+                if (nodes.length == 1) {
+                    this.refreshNode(nodes[0])
+                }
+                break
+            case CURDAction.TYPE_DELETE:
+                break
+            default:
+                //有modal配置就是要打开modal咯
+                if (baseAction && baseAction.modalConfig) {
+                    this.openDialog(baseAction.modalConfig, { euGridEvent: event }, nodes[0])
+                }
         }
+
         this.treeEvent.emit(event)
     }
 

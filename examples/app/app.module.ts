@@ -36,6 +36,8 @@ import {
   EuTreeService
 } from "ng2-easyui.core";
 import { Bootstrap3GridModule } from "ng2-bootstrap3-grid";
+import { EasyFormCoreModule, EasyFormMdModule } from 'ng2-easyform'
+
 
 import { PageService } from './page.service';
 import { BpmnService } from './bpmn.service';
@@ -46,6 +48,8 @@ import { AngTreeDemoComponent } from './angular-tree/angular-tree.demo.component
 import { MatPanelDemoComponent } from './mat-panel/mat-panel.demo.component'
 // import { Ng2TreeDemoComponent } from "./ng2-tree/ng2-tree.demo.component";
 import { AntdTreeDemoComponent } from "./antd-tree/antd-tree.demo.component";
+
+import { TreeModalComponent } from "./antd-tree/tree-modal.component";
 
 import { IndexComponent } from './index.component'
 import { EntryComponent } from "./entry.component";
@@ -63,6 +67,7 @@ import { EntryComponent } from "./entry.component";
     IndexComponent,
     EntryComponent,
     // ModalInfoComponent,
+    TreeModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,6 +99,8 @@ import { EntryComponent } from "./entry.component";
     MatIconModule,
 
     // TreeModule,
+    EasyFormCoreModule,
+    EasyFormMdModule,
 
     EasyUIMdModalModule,
     // EasyUIagGridModule,
@@ -115,6 +122,7 @@ import { EntryComponent } from "./entry.component";
   entryComponents: [
     DialogDataExampleDialog,
     // ModalInfoComponent
+    TreeModalComponent,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,5 @@
 import { CURDAction } from '../curd.action'
+import { ModalConfig } from '../modal/modal-config'
 
 export interface TreeNodeDef {
     children?: TreeNodeDef[];
@@ -47,6 +48,7 @@ export class EuTreeOptions {
     rootNodeName: string
     dataUrl: string
     actions?: Array<TreeAction> = []
+    defaultActionModalConfig: ModalConfig
     //otherParam
     params?: any = {}
     //自动提交参数
@@ -78,6 +80,7 @@ export class EuTreeOptions {
             rootNodeName?: string
             dataUrl: string,
             actions?: Array<TreeAction>,
+            defaultActionModalConfig?: ModalConfig,
             nameIsHTML?: boolean,
             //otherParam
             params?: any

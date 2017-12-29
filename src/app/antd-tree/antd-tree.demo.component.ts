@@ -5,6 +5,7 @@ import {
     // } from 'ng2-easyui'
 } from 'ng2-easyui.core'
 
+import { TreeModalComponent } from "./tree-modal.component";
 
 @Component({
     selector: 'antd-tree-demo',
@@ -32,7 +33,10 @@ export class AntdTreeDemoComponent implements OnInit {
         this.euTreeOptions = {
             treeId: "demoTree",
             rootNodeName: "root",
-            dataUrl: "./nodes.json"
+            dataUrl: "./nodes.json",
+            defaultActionModalConfig: {
+                component: TreeModalComponent
+            }
         }
 
         this.euTreeNodes = [
@@ -69,6 +73,5 @@ export class AntdTreeDemoComponent implements OnInit {
 
     onTreeEvent($event) {
         this
-        debugger
     }
 }

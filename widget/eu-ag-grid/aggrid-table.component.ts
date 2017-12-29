@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, OnInit, Type, ViewEncapsulation, Optional } from "@angular/core";
+import { Component, Input, Output, EventEmitter, ViewChild, OnInit, Type, ViewEncapsulation, Optional } from "@angular/core";
 import { PageEvent, MatPaginator, MatDialog, MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { GridOptions, IDatasource, IDateParams, IGetRowsParams, ColDef, ColGroupDef, RowNode } from "ag-grid/main";
 import { debounce } from 'rxjs/operators'
@@ -85,6 +85,7 @@ export class AggridComponent implements GridApi, OnInit {
     @ViewChild(MatPaginator) paginator: MatPaginator
     @ViewChild(MdFormComponent) queryForm: MdFormComponent
     pageEvent: PageEvent
+    @Output() euGridEvent: EventEmitter<EuGridEvent> = new EventEmitter<EuGridEvent>()
 
     defaultAtcions = {
         [EuGridAction.TYPE_CREATE]: {
@@ -355,7 +356,12 @@ export class AggridComponent implements GridApi, OnInit {
             case EuGridAction.TYPE_DELETE:
                 break
             default:
+                //有modal配置就是要打开modal咯
+                if (action && action.modalConfig) {
+                    this.openDialog(action.modalConfig, { euGridEvent: ege })
+                }
         }
+        this.euGridEvent.emit(ege)
     }
 
     refresh(params?: any) {
