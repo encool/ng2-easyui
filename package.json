@@ -1,6 +1,6 @@
 {
   "name": "ng2-easyui",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "",
   "main": "./bundles/ng2-easyui.js",
   "module": "./ng2-easyui.es5.js",
@@ -74,7 +74,7 @@
     "lodash": "^4.17.4",
     "ng-tree-antd": "^2.0.4",
     "ng2-easyform": "^0.3.0",
-    "ng2-easyui.core": "^0.1.2",
+    "ng2-easyui.core": "^0.1.9",
     "ng2-tree": "^2.0.0-rc.4",
     "ngx-swiper-wrapper": "^4.6.2"
   }
