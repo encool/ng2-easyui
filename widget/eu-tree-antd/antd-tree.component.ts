@@ -76,9 +76,13 @@ export class AntdTreeComponent implements OnInit, OnAction {
         }
         Object.assign(modalConfig.data, data)
         this.euModalService.open(modalConfig, (result) => {
-            this.refreshNode(node)
+            if (node.parent) {
+                this.refreshNode(node)
+            }
         }, (result) => {
-            this.refreshNode(node)
+            if (node.parent) {
+                this.refreshNode(node)
+            }
         })
     }
 
