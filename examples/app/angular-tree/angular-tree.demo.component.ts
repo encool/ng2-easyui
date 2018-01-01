@@ -5,7 +5,7 @@ import {
 } from 'ng2-easyui'
 // } from '../../../widget'
 import {
-    TreeNodeDef
+    EuTreeNode
     // } from 'ng2-easyui'
 } from 'ng2-easyui.core'
 
@@ -25,7 +25,7 @@ import {
 })
 export class AngTreeDemoComponent implements OnInit {
 
-    nodes: TreeNodeDef[]
+    nodes: EuTreeNode[]
     options: ITreeOptions
 
     constructor() { }

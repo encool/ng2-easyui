@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import {
-    TreeNodeDef, EuTreeOptions
+    EuTreeNode, EuTreeOptions
     // } from 'ng2-easyui'
 } from 'ng2-easyui.core'
 
@@ -27,7 +27,7 @@ import { TreeModalComponent } from "./tree-modal.component";
 })
 export class AntdTreeDemoComponent implements OnInit {
 
-    euTreeNodes: TreeNodeDef[]
+    euTreeNodes: EuTreeNode[]
     euTreeOptions: EuTreeOptions
     constructor() {
         this.euTreeOptions = {

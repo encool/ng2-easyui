@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 
 import { MatSnackBar } from "@angular/material";
 
-import { OnAction, TreeAction, TreeEvent, TreeNodeDef, EuTreeOptions, CURDAction, ModalConfig, EuModalService, EuTreeService } from "ng2-easyui.core";
+import { OnAction, TreeAction, TreeEvent, EuTreeNode, EuTreeOptions, CURDAction, ModalConfig, EuModalService, EuTreeService } from "ng2-easyui.core";
 
 import { NzTreeComponent } from "ng-tree-antd";
 import { TreeNode } from "angular-tree-component";
@@ -22,7 +22,7 @@ import { TreeNode } from "angular-tree-component";
 })
 export class AntdTreeComponent implements OnInit, OnAction {
 
-    @Input() euTreeNodes: TreeNodeDef[] = []
+    @Input() euTreeNodes: EuTreeNode[] = []
     @Input() euTreeOptions: EuTreeOptions
 
     @Input() nzShiftSelectedMulti = true;
@@ -58,7 +58,7 @@ export class AntdTreeComponent implements OnInit, OnAction {
         this.params = this.euTreeOptions.params || {}
 
         this._nzOptions = Object.assign({
-            getChildren: (node: any) => {
+            getChildren: (node: TreeNode) => {
                 return this.getNodes(this.params, node)
             }
         }, this.euTreeOptions.otherOptions)
@@ -87,7 +87,7 @@ export class AntdTreeComponent implements OnInit, OnAction {
         let defnodes = this.getActiveDefNodes()
         let event: TreeEvent = {
             businessId: this.euTreeOptions.treeId,
-            activeNodes: defnodes,
+            activeEuNodes: defnodes,
             action: baseAction,
         }
         let nodes = this.getActiveNodes()
@@ -140,15 +140,17 @@ export class AntdTreeComponent implements OnInit, OnAction {
         })
     }
 
-    private getNodes(params, node?): Promise<any> {
+    private getNodes(params, node?: TreeNode): Promise<any> {
+        let eunode
         if (node) {
+            eunode = this.treeNodeToEuTreeNode(node)
             this.autoParams.forEach(value => {
-                if (node[value]) {
-                    params[value] = node[value]
+                if (eunode[value]) {
+                    params[value] = eunode[value]
                 }
             })
         }
-        return this.getTreeService().getTreeNodes(this._dataUrl, node, params)
+        return this.getTreeService().getTreeNodes(this._dataUrl, eunode, params)
     }
 
     private treeAsyncSuccess(ztree, openState, checkState, selectedState, openNodes, checkedNodes, selectedNodes) {
@@ -163,7 +165,7 @@ export class AntdTreeComponent implements OnInit, OnAction {
         node.loadNodeChildren()
     }
 
-    getActiveNode(): TreeNodeDef {
+    getActiveNode(): EuTreeNode {
         let nodes = this.getActiveNodes()
         if (nodes && nodes.length > 0) {
             return this.getActiveDefNodes()[0]
@@ -172,14 +174,11 @@ export class AntdTreeComponent implements OnInit, OnAction {
         }
     }
 
-    getActiveDefNodes(): Array<TreeNodeDef> {
+    getActiveDefNodes(): Array<EuTreeNode> {
         let nodes: TreeNode[] = this.getActiveNodes()
-        let rnodes = new Array<TreeNodeDef>()
+        let rnodes = new Array<EuTreeNode>()
         nodes.forEach(node => {
-            let enNodeDef: TreeNodeDef = Object.assign({
-                id: node.id,
-                name: node.data[node.displayField],
-            }, node.data)
+            let enNodeDef: EuTreeNode = this.treeNodeToEuTreeNode(node)
             rnodes.push(enNodeDef)
         })
         return rnodes
@@ -190,7 +189,7 @@ export class AntdTreeComponent implements OnInit, OnAction {
         return nodes
     }
 
-    getCheckedNodes(checked: boolean): Array<TreeNodeDef> {
+    getCheckedNodes(checked: boolean): Array<EuTreeNode> {
         return null
     }
 
@@ -200,6 +199,17 @@ export class AntdTreeComponent implements OnInit, OnAction {
 
     private getTreeService(): EuTreeService {
         return this.inputTreeService || this.treeService
+    }
+
+    private treeNodeToEuTreeNode(node: TreeNode): EuTreeNode {
+        let euNodeDef: EuTreeNode = Object.assign({
+            id: node.id,
+            name: node.data[node.displayField],
+        }, node.data)
+        if (node.parent) {
+            euNodeDef.parent = this.treeNodeToEuTreeNode(node.parent)
+        }
+        return euNodeDef
     }
 
 }

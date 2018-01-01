@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 
 import { ITreeOptions } from 'angular-tree-component'
 import {
-    TreeNodeDef
+    EuTreeNode
 } from 'ng2-easyui.core'
 
 @Component({
@@ -15,9 +15,9 @@ import {
 })
 export class AngularTreeComponent implements OnInit {
 
-    @Input() nodes: TreeNodeDef[]
+    @Input() nodes: EuTreeNode[]
     @Input() focused: boolean = false
-    @Input() options: ITreeOptions 
+    @Input() options: ITreeOptions
 
     constructor() { }
 

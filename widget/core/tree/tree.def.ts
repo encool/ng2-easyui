@@ -1,14 +1,14 @@
 import { CURDAction } from '../curd.action'
 import { ModalConfig } from '../modal/modal-config'
 
-export interface TreeNodeDef {
-    children?: TreeNodeDef[];
+export interface EuTreeNode {
+    children?: EuTreeNode[];
     id: string;
     sid?: number
     name: string;
     hasChildren?: boolean
     isExpanded?: boolean
-
+    parent?: EuTreeNode
     // data
     // displayField
     // elementRef
@@ -25,15 +25,22 @@ export interface TreeNodeDef {
 }
 
 export class TreeEvent {
-    constructor(options: { businessId: string, action: TreeAction, activeNodes?: Array<TreeNodeDef>, event?: any }) {
+    constructor(options: {
+        businessId: string, action: TreeAction, activeEuNodes?: Array<EuTreeNode>, event?: any,
+        selectedEuNodes?: Array<EuTreeNode>,
+        data?: any
+    }) {
         this.businessId = options.businessId;
         this.action = options.action;
-        this.activeNodes = options.activeNodes;
+        this.activeEuNodes = options.activeEuNodes;
+        this.selectedEuNodes = options.selectedEuNodes
+        this.data = options.data
     }
-    activeNodes: Array<TreeNodeDef>
-    selectedNodes?: Array<TreeNodeDef>
-    businessId: string;
+    activeEuNodes: Array<EuTreeNode>
+    selectedEuNodes?: Array<EuTreeNode>
+    businessId: string
     action: TreeAction
+    data?: any
 }
 
 export class TreeAction extends CURDAction {
