@@ -70,18 +70,24 @@ export class AntdTreeComponent implements OnInit, OnAction {
         console.log('onEvent', ev);
     }
 
+    /**
+     * 
+     * @param modalConfig 
+     * @param data 
+     * @param node node to refresh
+     */
     openDialog(modalConfig: ModalConfig, data: any, node: TreeNode): void {
         if (!modalConfig.data) {
             modalConfig.data = {}
         }
         Object.assign(modalConfig.data, data)
         this.euModalService.open(modalConfig, (result) => {
-            if (node.parent) {
-                this.refreshNode(node.parent)
+            if (node) {
+                this.refreshNode(node)
             }
         }, (result) => {
-            if (node.parent) {
-                this.refreshNode(node.parent)
+            if (node) {
+                this.refreshNode(node)
             }
         })
     }
@@ -97,21 +103,27 @@ export class AntdTreeComponent implements OnInit, OnAction {
         let nodes = this.getActiveNodes()
         switch (baseAction.curdType) {
             case CURDAction.TYPE_CREATE:
-                let modalConfig = baseAction.modalConfig || this.euTreeOptions.defaultActionModalConfig
-                if (modalConfig) {
-                    this.openDialog(modalConfig, {
-                        euTreeEvent: event
-                    }, nodes[0])
+                if (defnodes.length == 1) {
+                    let modalConfig = baseAction.modalConfig || this.euTreeOptions.defaultActionModalConfig
+                    if (modalConfig) {
+                        this.openDialog(modalConfig, {
+                            euTreeEvent: event
+                        }, nodes[0])
+                    }
+                } else {
+                    this.snackBar.open('请选择一个需要新增到的父节点！', '关闭', {
+                        duration: 800
+                    });
                 }
                 break
             case CURDAction.TYPE_UPDATE:
                 if (defnodes.length == 1) {
                     let modalConfig1 = baseAction.modalConfig || this.euTreeOptions.defaultActionModalConfig
                     if (modalConfig1) {
-                        this.openDialog(modalConfig1, { euTreeEvent: event }, nodes[0])
+                        this.openDialog(modalConfig1, { euTreeEvent: event }, nodes[0].parent)
                     }
                 } else {
-                    this.snackBar.open('请选择一条记录！', '关闭', {
+                    this.snackBar.open('请选择一个节点！', '关闭', {
                         duration: 800
                     });
                 }
