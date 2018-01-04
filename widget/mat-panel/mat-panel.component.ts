@@ -33,6 +33,7 @@ export class MatPanelComponent implements OnInit {
 
     @Input() actions: BaseAction[] = [CURDAction.CREATE, CURDAction.UPDATE, CURDAction.READ]
     @Input() height: string
+    @Input() title: string = 'panel'
 
     @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger
     @ContentChild("panelcontent_ref") actionConponent: OnAction
@@ -52,16 +53,16 @@ export class MatPanelComponent implements OnInit {
     }
 
     onMouseenterMore(event) {
-        console.log("over")
-        if (!this.trigger.menuOpen) {
-            this.trigger.openMenu()
-        }
+        // console.log("over")
+        // if (!this.trigger.menuOpen) {
+        //     this.trigger.openMenu()
+        // }
     }
 
     onMouseleaveMore(event) {
-        console.log("out")
-        if (this.trigger.menuOpen) {
-            this.trigger.closeMenu()
-        }
+        // console.log("out")
+        // if (this.trigger.menuOpen) {
+        //     this.trigger.closeMenu()
+        // }
     }
 }
