@@ -1,6 +1,6 @@
 {
   "name": "ng2-easyui",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "description": "",
   "main": "./bundles/ng2-easyui.js",
   "module": "./ng2-easyui.es5.js",
@@ -67,7 +67,7 @@
   "dependencies": {
     "ag-grid": "^15.0.0",
     "ag-grid-angular": "^15.0.0",
-    "angular-tree-component": "^6.0.0",
+    "angular-tree-component": "^7.0.1",
     "bpmn-js": "0.22.1",
     "bpmn-js-properties-panel": "0.16.1",
     "camunda-bpmn-moddle": "0.13.0",

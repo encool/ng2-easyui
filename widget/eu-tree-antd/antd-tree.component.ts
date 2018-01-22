@@ -201,7 +201,8 @@ export class AntdTreeComponent implements OnInit, OnAction {
     }
 
     getActiveNodes(): Array<TreeNode> {
-        let nodes: TreeNode[] = this.nzTree.treeModel.activeNodes;
+        // let nodes: TreeNode[] = Object.assign([], this.nzTree.treeModel.getActiveNode())
+        let nodes: TreeNode[] = this.nzTree.treeModel.getActiveNodes()
         return nodes
     }
 
