@@ -49,7 +49,7 @@ export class AntdTreeComponent implements OnInit, OnAction {
     }
 
     ngOnInit() {
-        // this._nzNodes = this.euTreeNodes
+        this._nzNodes = this.euTreeNodes
         this.nzCheckable = this.euTreeOptions.checkEnable
         if (this.euTreeOptions.otherOptions && this.euTreeOptions.otherOptions.nzShowLine != null) {
             this.nzShowLine = this.euTreeOptions.otherOptions.nzShowLine
@@ -59,6 +59,7 @@ export class AntdTreeComponent implements OnInit, OnAction {
 
         this._nzOptions = Object.assign({
             getChildren: (node: TreeNode) => {
+                debugger
                 return this.getNodes(this.params, node)
             }
         }, this.euTreeOptions.otherOptions)
