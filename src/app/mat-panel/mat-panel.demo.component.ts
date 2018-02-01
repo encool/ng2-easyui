@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
     selector: 'mat-penal-demo',
     template: `
         <div bsContainer>
-            <eu-mat-panel></eu-mat-panel>       
+            <eu-mat-panel color="primary"></eu-mat-panel>       
         </div>
     `
 })

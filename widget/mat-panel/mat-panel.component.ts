@@ -32,6 +32,10 @@ import { MatMenuTrigger } from "@angular/material";
 export class MatPanelComponent implements OnInit {
 
     @Input() actions: BaseAction[] = [CURDAction.CREATE, CURDAction.UPDATE, CURDAction.READ]
+    /**
+     * By default, toolbars use a neutral background color based on the current theme (light or dark). This can be changed to 'primary', 'accent', or 'warn'
+     */
+    @Input() color = "primary"
     @Input() height: string
     @Input() title: string = 'panel'
 
