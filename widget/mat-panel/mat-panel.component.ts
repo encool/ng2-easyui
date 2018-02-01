@@ -48,7 +48,8 @@ export class MatPanelComponent implements OnInit {
     ngOnInit() {
         this._contentStyle = {
             'min-height': '450px',
-            'height': this.height
+            'height': this.height,
+            "overflow": "overlay"
         }
     }
 
