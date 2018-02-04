@@ -54,7 +54,11 @@ export class MatPanelComponent implements OnInit {
     }
 
     onAction(action: BaseAction) {
-        this.actionConponent.euOnAction(action)
+        if (this.actionConponent) {
+            this.actionConponent.euOnAction(action)
+        } else {
+            console.log("actionConponent is null,add #panelcontent_ref on component to fix it")
+        }
     }
 
     onMouseenterMore(event) {

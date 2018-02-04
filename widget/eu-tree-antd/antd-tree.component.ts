@@ -105,7 +105,8 @@ export class AntdTreeComponent implements OnInit, OnAction {
             case CURDAction.TYPE_CREATE:
                 if (defnodes.length == 1) {
                     let modalConfig = baseAction.modalConfig || this.euTreeOptions.defaultActionModalConfig
-                    if (modalConfig) {
+                    //有component才打开component
+                    if (modalConfig.component) {
                         this.openDialog(modalConfig, {
                             euTreeEvent: event
                         }, nodes[0])
@@ -119,7 +120,8 @@ export class AntdTreeComponent implements OnInit, OnAction {
             case CURDAction.TYPE_UPDATE:
                 if (defnodes.length == 1) {
                     let modalConfig1 = baseAction.modalConfig || this.euTreeOptions.defaultActionModalConfig
-                    if (modalConfig1) {
+                    //有component才打开component
+                    if (modalConfig1.component) {
                         this.openDialog(modalConfig1, { euTreeEvent: event }, nodes[0].parent)
                     }
                 } else {
@@ -139,7 +141,7 @@ export class AntdTreeComponent implements OnInit, OnAction {
                 break
             default:
                 //有modal配置就是要打开modal咯
-                if (baseAction && baseAction.modalConfig) {
+                if (baseAction && baseAction.modalConfig && baseAction.modalConfig.component) {
                     this.openDialog(baseAction.modalConfig, { euGridEvent: event }, nodes[0])
                 }
         }

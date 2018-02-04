@@ -12,7 +12,7 @@ import { TreeModalComponent } from "./tree-modal.component";
     template: `
     <div class="container">
         <div bsRow>
-            <eu-mat-panel bsCol.sm="4">
+            <eu-mat-panel bsCol.sm="4" title="测试panel标题">
                 <eu-antd-tree #panelcontent_ref
                     (treeEvent)="onTreeEvent($event)"
                     [euTreeOptions]="euTreeOptions"
@@ -35,7 +35,8 @@ export class AntdTreeDemoComponent implements OnInit {
             rootNodeName: "root",
             dataUrl: "./nodes.json",
             defaultActionModalConfig: {
-                component: TreeModalComponent
+                // component: TreeModalComponent,
+                title: "测试标题"
             }
         }
 
@@ -73,5 +74,6 @@ export class AntdTreeDemoComponent implements OnInit {
 
     onTreeEvent($event) {
         this
+        debugger
     }
 }

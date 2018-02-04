@@ -22,6 +22,7 @@ export interface EuTreeNode {
     // parent
     // path
     // Methods    
+    [propName: string]: any
 }
 
 export class TreeEvent {
