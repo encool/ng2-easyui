@@ -149,13 +149,18 @@ export class AntdTreeComponent implements OnInit, OnAction {
         this.treeEvent.emit(event)
     }
 
-    refresh(params, node?, openState?, checkState?, selectedState?) {
-        this.getNodes(params, node).then(nodes => {
-            //认为是初始化加载
-            if (!node) {
-                this._nzNodes = nodes
-            }
-        })
+    refresh(params, node?: EuTreeNode, openState?, checkState?, selectedState?) {
+        if (node && node.originNode) {
+            (node.originNode as TreeNode).loadNodeChildren()
+        } else if (!node) {
+    
+            this.getNodes(params, null).then(nodes => {
+                //认为是初始化加载
+                if (!node) {
+                    this._nzNodes = nodes
+                }
+            })
+        }
     }
 
     private getNodes(params, node?: TreeNode): Promise<any> {
@@ -228,6 +233,7 @@ export class AntdTreeComponent implements OnInit, OnAction {
         if (node.parent) {
             euNodeDef.parent = this.treeNodeToEuTreeNode(node.parent)
         }
+        euNodeDef.originalNode = node
         return euNodeDef
     }
 
