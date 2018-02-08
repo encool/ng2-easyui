@@ -90,6 +90,7 @@ export class AntdTreeDemoComponent implements OnInit {
     }
 
     onCheckClick(e) {
+        let nodes = this.tree.checkedLeafNodes
         debugger
     }
 }

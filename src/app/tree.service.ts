@@ -18,7 +18,6 @@ export class TreeService extends EuTreeService {
     }
 
     getTreeNodes(url, node, params): Promise<EuTreeNode[]> {
-        debugger
         return new Promise<EuTreeNode[]>(resolve => {
             resolve([
                 { id: this.guid(), name: 'child2.1', hasChildren: true },

@@ -16,6 +16,7 @@ import { TreeNode } from "angular-tree-component";
         [nzOptions]="_nzOptions"
         [nzCheckable]="nzCheckable"
         [nzShowLine]="nzShowLine"
+        (nzCheck)="onCheck($event)"
         (nzEvent)="onEvent($event)">
     </nz-tree>
     `
@@ -152,7 +153,7 @@ export class AntdTreeComponent implements OnInit, OnAction {
     refresh(params, node?: EuTreeNode, openState?, checkState?, selectedState?) {
         if (node && node.originalNode) {
             (node.originalNode as TreeNode).loadNodeChildren()
-        } else if (!node) {   
+        } else if (!node) {
             this.getNodes(params, null).then(nodes => {
                 //认为是初始化加载
                 if (!node) {
@@ -209,14 +210,37 @@ export class AntdTreeComponent implements OnInit, OnAction {
         return rnodes
     }
 
-    getActiveNodes(): Array<TreeNode> {
+    private getActiveNodes(): Array<TreeNode> {
         // let nodes: TreeNode[] = Object.assign([], this.nzTree.treeModel.getActiveNode())
         let nodes: TreeNode[] = this.nzTree.treeModel.getActiveNodes()
         return nodes
     }
 
+    readonly checkedLeafNodes: EuTreeNode[] = []
+    readonly checkedParentNodes: EuTreeNode[] = []
+    onCheck(e) {
+        debugger
+        let node: TreeNode = e.node
+        let _this = this
+        function doNode(node: TreeNode) {
+            if (e.checked) {
+                if (node.isLeaf) {
+                    _this.checkedLeafNodes.push(_this.treeNodeToEuTreeNode(node))
+                } else {
+                    _this.checkedParentNodes.push(_this.treeNodeToEuTreeNode(node))
+                    if (node.children) {
+                        node.children.forEach(value => {
+                            doNode(value)
+                        })
+                    }
+                }
+            }
+        }
+        doNode(node)
+    }
+
     getCheckedNodes(checked: boolean): Array<EuTreeNode> {
-        return null
+        return this.checkedLeafNodes.concat(this.checkedParentNodes)
     }
 
     refreshTree() {
