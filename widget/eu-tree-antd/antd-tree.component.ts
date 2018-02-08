@@ -150,10 +150,9 @@ export class AntdTreeComponent implements OnInit, OnAction {
     }
 
     refresh(params, node?: EuTreeNode, openState?, checkState?, selectedState?) {
-        if (node && node.originNode) {
-            (node.originNode as TreeNode).loadNodeChildren()
-        } else if (!node) {
-    
+        if (node && node.originalNode) {
+            (node.originalNode as TreeNode).loadNodeChildren()
+        } else if (!node) {   
             this.getNodes(params, null).then(nodes => {
                 //认为是初始化加载
                 if (!node) {
@@ -184,11 +183,14 @@ export class AntdTreeComponent implements OnInit, OnAction {
 
     }
 
-    refreshNode(node: TreeNode, id?: string, pid?: string) {
+    private refreshNode(node: TreeNode, id?: string, pid?: string) {
         node.loadNodeChildren()
     }
 
-    getActiveNode(): EuTreeNode {
+    /**
+     * 获取一个选择的node
+     */
+    getActiveDefNode(): EuTreeNode {
         let nodes = this.getActiveNodes()
         if (nodes && nodes.length > 0) {
             return this.getActiveDefNodes()[0]

@@ -4,7 +4,7 @@ import {
     EuTreeNode, EuTreeOptions
     // } from 'ng2-easyui'
 } from 'ng2-easyui.core'
-
+import { AntdTreeComponent } from "../../../widget/";
 import { TreeModalComponent } from "./tree-modal.component";
 
 @Component({
@@ -18,7 +18,11 @@ import { TreeModalComponent } from "./tree-modal.component";
                     [euTreeOptions]="euTreeOptions"
                     [euTreeNodes]="euTreeNodes">
                 </eu-antd-tree>
-            </eu-mat-panel>         
+            </eu-mat-panel>  
+            <div bsCol.sm="8">
+                <button mat-button (click)="onClick($event)">点击</button>
+                <button mat-button (click)="onCheckClick($event)">点击</button>
+            </div>       
         </div>
     </div>
     
@@ -29,11 +33,14 @@ export class AntdTreeDemoComponent implements OnInit {
 
     euTreeNodes: EuTreeNode[]
     euTreeOptions: EuTreeOptions
+
+    @ViewChild(AntdTreeComponent) tree: AntdTreeComponent
     constructor() {
         this.euTreeOptions = {
             treeId: "demoTree",
             rootNodeName: "root",
             dataUrl: "./nodes.json",
+            checkEnable: true,
             defaultActionModalConfig: {
                 // component: TreeModalComponent,
                 title: "测试标题"
@@ -74,6 +81,15 @@ export class AntdTreeDemoComponent implements OnInit {
 
     onTreeEvent($event) {
         this
+        debugger
+    }
+
+    onClick(e) {
+        let node: EuTreeNode = this.tree.getActiveDefNode()
+        this.tree.refresh({}, node)
+    }
+
+    onCheckClick(e) {
         debugger
     }
 }

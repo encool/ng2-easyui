@@ -9,6 +9,7 @@ export interface EuTreeNode {
     hasChildren?: boolean
     isExpanded?: boolean
     parent?: EuTreeNode
+    originalNode?: any
     // data
     // displayField
     // elementRef
