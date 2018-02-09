@@ -17,7 +17,8 @@ import { TreeNode } from "angular-tree-component";
         [nzCheckable]="nzCheckable"
         [nzShowLine]="nzShowLine"
         (nzCheck)="onCheck($event)"
-        (nzEvent)="onEvent($event)">
+        (nzEvent)="onEvent($event)"
+        (nzLoadNodeChildren)="onNzLoadNodeChildren($event)">
     </nz-tree>
     `
 })
@@ -68,7 +69,14 @@ export class AntdTreeComponent implements OnInit, OnAction {
     }
 
     onEvent(ev: any) {
-        console.log('onEvent', ev);
+        // console.log('onEvent', ev);
+    }
+
+    onNzLoadNodeChildren($event){
+        let node:TreeNode = $event.node
+        if(node.data.checked){
+            (this.nzTree as any).updateCheckState(node,true)
+        }
     }
 
     /**
@@ -153,7 +161,10 @@ export class AntdTreeComponent implements OnInit, OnAction {
     refresh(params, node?: EuTreeNode, openState?, checkState?, selectedState?) {
         if (node && node.originalNode) {
             (node.originalNode as TreeNode).loadNodeChildren()
-        } else if (!node) {
+        } else if(node && !node.originalNode && node.id){
+            let treeNode:TreeNode = this.nzTree.treeModel.getNodeById(node.id)
+            treeNode.loadNodeChildren()
+        }else if (!node) {
             this.getNodes(params, null).then(nodes => {
                 //认为是初始化加载
                 if (!node) {
@@ -163,7 +174,7 @@ export class AntdTreeComponent implements OnInit, OnAction {
         }
     }
 
-    private getNodes(params, node?: TreeNode): Promise<any> {
+    private getNodes(params, node?: TreeNode): Promise<EuTreeNode[]> {
         let eunode
         if (node) {
             eunode = this.treeNodeToEuTreeNode(node)
@@ -216,31 +227,58 @@ export class AntdTreeComponent implements OnInit, OnAction {
         return nodes
     }
 
-    readonly checkedLeafNodes: EuTreeNode[] = []
-    readonly checkedParentNodes: EuTreeNode[] = []
+    private checkedLeafNodes: EuTreeNode[] = []
+    private checkedParentNodes: EuTreeNode[] = []
+    private checkedNodes: EuTreeNode[] = []
     onCheck(e) {
-        debugger
-        let node: TreeNode = e.node
-        let _this = this
-        function doNode(node: TreeNode) {
-            if (e.checked) {
-                if (node.isLeaf) {
-                    _this.checkedLeafNodes.push(_this.treeNodeToEuTreeNode(node))
-                } else {
-                    _this.checkedParentNodes.push(_this.treeNodeToEuTreeNode(node))
-                    if (node.children) {
-                        node.children.forEach(value => {
-                            doNode(value)
-                        })
-                    }
-                }
-            }
-        }
-        doNode(node)
+        // debugger
+        // let node: TreeNode = e.node
+        // let _this = this
+        // function doNode(node: TreeNode) {
+        //     if (e.checked) {
+        //         if (node.isLeaf) {
+        //             _this.checkedLeafNodes.push(_this.treeNodeToEuTreeNode(node))
+        //         } else {
+        //             _this.checkedParentNodes.push(_this.treeNodeToEuTreeNode(node))
+        //             if (node.children) {
+        //                 node.children.forEach(value => {
+        //                     doNode(value)
+        //                 })
+        //             }
+        //         }
+        //     }
+        // }
+        // doNode(node)
     }
 
-    getCheckedNodes(checked: boolean): Array<EuTreeNode> {
-        return this.checkedLeafNodes.concat(this.checkedParentNodes)
+    getCheckedNodes(checked?: boolean): Array<EuTreeNode> {
+        // return this.checkedLeafNodes.concat(this.checkedParentNodes)
+        this.checkedLeafNodes = []
+        this.checkedParentNodes = []
+        this.checkedNodes = []
+        let nodes: any[] = this.nzTree.treeModel.nodes
+        let _this = this
+        function doNodes(nodes: any[]) {
+            nodes.forEach(node => {
+                if (node.checked) {
+                    _this.checkedNodes.push(node)
+
+                    // if (node.isLeaf) {
+                    //     _this.checkedLeafNodes.push(eunode)
+                    // } else {
+                    //     _this.checkedParentNodes.push(eunode)
+                    //     if (node.children) {
+                    //         doNodes(node.children)
+                    //     }
+                    // }
+                }
+                if (node.children) {
+                    doNodes(node.children)
+                }
+            })
+        }
+        doNodes(nodes)
+        return this.checkedNodes
     }
 
     refreshTree() {
