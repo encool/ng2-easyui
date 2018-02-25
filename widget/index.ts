@@ -9,7 +9,7 @@ export * from './eu-menu/index'
 export * from './mat-panel/index'
 // export * from './ng2-tree/index'
 export * from './eu-tree-antd/index'
-
+export * from './select-tree/index'
 // export * from 'ng2-easyui.core'
 
 export { ITreeOptions } from 'angular-tree-component'

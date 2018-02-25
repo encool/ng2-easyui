@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, Optional } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, Optional, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 
 import { MatSnackBar } from "@angular/material";
@@ -20,7 +20,9 @@ import { TreeNode } from "angular-tree-component";
         (nzEvent)="onEvent($event)"
         (nzLoadNodeChildren)="onNzLoadNodeChildren($event)">
     </nz-tree>
-    `
+    `,
+    styles: [`.angular-tree-component{background: white;color: rgba(0, 0, 0, 0.87);}"`],
+    encapsulation: ViewEncapsulation.None
 })
 export class AntdTreeComponent implements OnInit, OnAction {
 
@@ -72,10 +74,10 @@ export class AntdTreeComponent implements OnInit, OnAction {
         // console.log('onEvent', ev);
     }
 
-    onNzLoadNodeChildren($event){
-        let node:TreeNode = $event.node
-        if(node.data.checked){
-            (this.nzTree as any).updateCheckState(node,true)
+    onNzLoadNodeChildren($event) {
+        let node: TreeNode = $event.node
+        if (node.data.checked) {
+            (this.nzTree as any).updateCheckState(node, true)
         }
     }
 
@@ -161,10 +163,10 @@ export class AntdTreeComponent implements OnInit, OnAction {
     refresh(params, node?: EuTreeNode, openState?, checkState?, selectedState?) {
         if (node && node.originalNode) {
             (node.originalNode as TreeNode).loadNodeChildren()
-        } else if(node && !node.originalNode && node.id){
-            let treeNode:TreeNode = this.nzTree.treeModel.getNodeById(node.id)
+        } else if (node && !node.originalNode && node.id) {
+            let treeNode: TreeNode = this.nzTree.treeModel.getNodeById(node.id)
             treeNode.loadNodeChildren()
-        }else if (!node) {
+        } else if (!node) {
             this.getNodes(params, null).then(nodes => {
                 //认为是初始化加载
                 if (!node) {

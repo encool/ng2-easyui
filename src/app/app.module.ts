@@ -10,6 +10,7 @@ import {
   MatToolbarModule,
   MatSidenavModule,
   MatIconModule,
+  MatInputModule,
 } from '@angular/material';
 
 // import { TreeModule } from "ng2-tree";
@@ -25,7 +26,7 @@ import {
   EasyUIMatPanelModule,
   // EasyUINg2TreeModule,
   EasyUIAntTreeModule,
-
+  EasyUISelectTreeModule,
   // EuBpmnService,
   TitleGuard,
   // } from 'ng2-easyui'
@@ -48,6 +49,7 @@ import { AngTreeDemoComponent } from './angular-tree/angular-tree.demo.component
 import { MatPanelDemoComponent } from './mat-panel/mat-panel.demo.component'
 // import { Ng2TreeDemoComponent } from "./ng2-tree/ng2-tree.demo.component";
 import { AntdTreeDemoComponent } from "./antd-tree/antd-tree.demo.component";
+import { SelectTreeDemoComponent } from "./select-tree/select-tree.demo.component";
 
 import { TreeModalComponent } from "./antd-tree/tree-modal.component";
 
@@ -68,6 +70,7 @@ import { EntryComponent } from "./entry.component";
     EntryComponent,
     // ModalInfoComponent,
     TreeModalComponent,
+    SelectTreeDemoComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,6 +89,7 @@ import { EntryComponent } from "./entry.component";
         // { path: 'Ng2TreeDemoComponent', component: Ng2TreeDemoComponent, data: { title: "Ng2Tree" } },
         { path: 'AntdTreeDemoComponent', component: AntdTreeDemoComponent, data: { title: "AntdTree" } },
         { path: 'AngTreeDemoComponent', component: AngTreeDemoComponent, data: { title: "angular-tree" } },
+        { path: 'SelectTreeDemoComponent', component: SelectTreeDemoComponent, data: { title: "select-tree" } },
         { path: 'EntryComponent', component: EntryComponent, data: { title: "entry" } },
         { path: '**', redirectTo: "EntryComponent" },
       ]
@@ -97,6 +101,7 @@ import { EntryComponent } from "./entry.component";
     MatMenuModule,
     MatSidenavModule,
     MatIconModule,
+    MatInputModule,
 
     // TreeModule,
     EasyFormCoreModule,
@@ -112,7 +117,8 @@ import { EntryComponent } from "./entry.component";
     EasyUIMatContainerModule.forRoot(),
     EasyUIMatPanelModule,
     // EasyUINg2TreeModule,
-    EasyUIAntTreeModule
+    EasyUIAntTreeModule,
+    EasyUISelectTreeModule.forRoot()
   ],
   providers: [
     { provide: EuPageService, useClass: PageService, },
