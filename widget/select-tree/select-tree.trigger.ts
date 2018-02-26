@@ -57,7 +57,7 @@ export const MAT_AUTOCOMPLETE_SCROLL_STRATEGY_PROVIDER = {
 };
 
 @Directive({
-    selector: `input[antTree], textarea[antTree]`,
+    selector: `input[treeTrigger], textarea[treeTrigger]`,
     host: {
         'role': 'combobox',
         'autocomplete': 'off',
@@ -72,7 +72,7 @@ export const MAT_AUTOCOMPLETE_SCROLL_STRATEGY_PROVIDER = {
         '(input)': '_handleInput($event)',
         // '(keydown)': '_handleKeydown($event)',
     },
-    exportAs: 'antTreeTrigger',
+    exportAs: 'treeTrigger',
     providers: []
 })
 export class SelectTreeTrigger {
@@ -92,7 +92,8 @@ export class SelectTreeTrigger {
 
     private _panelOpen: boolean = false;
     /** The tree panel to be attached to this trigger. */
-    @Input('antTree') treeTemplate: TemplateRef<any>;
+    @Input('treeTrigger') treeTemplate: TemplateRef<any>;
+    @Input('treeComponent') tree: AntdTreeComponent;
 
     /** Opens the autocomplete suggestion panel. */
     openPanel(): void {
@@ -109,7 +110,8 @@ export class SelectTreeTrigger {
     }
 
     ngOnInit() {
-        this.treeTemplate
+        debugger
+        this.tree
     }
 
     private _attachOverlay(): void {
@@ -237,6 +239,7 @@ export class SelectTreeTrigger {
 
     get panelClosingActions(): Observable<any> {
         return merge(
+            this.tree.nzTree.nzStateChange,
             // this.optionSelections,
             // this.autocomplete._keyManager.tabOut.pipe(filter(() => this._panelOpen)),
             // this._closeKeyEventStream,
@@ -256,6 +259,7 @@ export class SelectTreeTrigger {
  */
 
     private _setValueAndClose(event: any | null): void {
+        debugger
         this.closePanel();
     }
     /** Stream of clicks outside of the autocomplete panel. */

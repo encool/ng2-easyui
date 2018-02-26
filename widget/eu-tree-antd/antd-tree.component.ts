@@ -21,6 +21,7 @@ import { TreeNode } from "angular-tree-component";
         (nzLoadNodeChildren)="onNzLoadNodeChildren($event)">
     </nz-tree>
     `,
+    exportAs:"euAntdTree",
     styles: [`.angular-tree-component{background: white;color: rgba(0, 0, 0, 0.87);}"`],
     encapsulation: ViewEncapsulation.None
 })

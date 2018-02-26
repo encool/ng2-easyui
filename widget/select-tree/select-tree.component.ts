@@ -7,16 +7,17 @@ import {
     TreeEvent,
     EuTreeService
 } from "ng2-easyui.core";
+import { AntdTreeComponent } from "../eu-tree-antd/antd-tree.component";
 import { FieldBase } from "ng2-easyform";
 
 @Component({
     selector: 'eu-tree-select',
     template: `
     <mat-form-field bsCol.sm="12" class="example-full-width">
-        <input matInput placeholder="State" aria-label="State" [antTree]="template" [formControl]="formControl">
+        <input matInput placeholder="State" aria-label="State" [treeTrigger]="template" [treeComponent]="tree" [formControl]="formControl">
     </mat-form-field>    
     <ng-template>
-        <eu-antd-tree class="tree-select"
+        <eu-antd-tree class="tree-select" #tree="euAntdTree"
             (treeEvent)="onTreeEvent($event)"
             [euTreeOptions]="euTreeOptions"
             [euTreeNodes]="euTreeNodes">
@@ -40,6 +41,8 @@ export class SelectTreeComponent implements OnInit, AfterViewInit {
     @Input() inputTreeService: EuTreeService
 
     @ViewChild(TemplateRef) template: TemplateRef<any>;
+    // @ViewChild(AntdTreeComponent) tree: AntdTreeComponent;
+
     constructor() { }
 
     ngOnInit() {
