@@ -37,8 +37,9 @@ import { merge } from 'rxjs/observable/merge';
 import { of as observableOf } from 'rxjs/observable/of';
 import { Subscription } from 'rxjs/Subscription';
 
-import { AntdTreeComponent } from "../eu-tree-antd/antd-tree.component";
-
+// import { AntdTreeComponent } from "../eu-tree-antd/antd-tree.component";
+import { TreeWrapComponent } from "./tree-wrapper";
+import { debug } from 'util';
 /** Injection token that determines the scroll handling while the autocomplete panel is open. */
 export const MAT_AUTOCOMPLETE_SCROLL_STRATEGY =
     new InjectionToken<() => ScrollStrategy>('select-tree-scroll-strategy');
@@ -92,8 +93,8 @@ export class SelectTreeTrigger {
 
     private _panelOpen: boolean = false;
     /** The tree panel to be attached to this trigger. */
-    @Input('treeTrigger') treeTemplate: TemplateRef<any>;
-    @Input('treeComponent') tree: AntdTreeComponent;
+    // @Input('treeTrigger') treeTemplate: TemplateRef<any>;
+    @Input('treeTrigger') treeWrap: TreeWrapComponent;
 
     /** Opens the autocomplete suggestion panel. */
     openPanel(): void {
@@ -110,16 +111,17 @@ export class SelectTreeTrigger {
     }
 
     ngOnInit() {
-        debugger
-        this.tree
+        this.treeWrap
     }
 
     private _attachOverlay(): void {
         // if (!this.antTree) {
         // throw getMatAutocompleteMissingPanelError();
         // }
+        // debugger
         if (!this._overlayRef) {
-            this._portal = new TemplatePortal(this.treeTemplate, this._viewContainerRef);
+            // this._portal = new TemplatePortal(this.treeTemplate, this._viewContainerRef);
+            this._portal = new TemplatePortal(this.treeWrap.template, this._viewContainerRef);
             // this._portal = new ComponentPortal(AntdTreeComponent, this._viewContainerRef);
             this._overlayRef = this._overlay.create(this._getOverlayConfig());
             this._overlayRef.backdropClick().subscribe
@@ -155,7 +157,7 @@ export class SelectTreeTrigger {
             this._panelOpen = false;
             if (this._overlayRef && this._overlayRef.hasAttached()) {
                 this._overlayRef.detach();
-                // this._closingActionsSubscription.unsubscribe();
+                this._closingActionsSubscription.unsubscribe();
             }
 
             // Note that in some cases this can end up being called after the component is destroyed.
@@ -239,7 +241,7 @@ export class SelectTreeTrigger {
 
     get panelClosingActions(): Observable<any> {
         return merge(
-            this.tree.nzTree.nzStateChange,
+            this.treeCloseStatus,
             // this.optionSelections,
             // this.autocomplete._keyManager.tabOut.pipe(filter(() => this._panelOpen)),
             // this._closeKeyEventStream,
@@ -249,19 +251,32 @@ export class SelectTreeTrigger {
                 observableOf()
         );
     }
+
     private _subscribeToClosingActions(): Subscription {
-        return this.panelClosingActions.subscribe(event => this._setValueAndClose(event));
+        return this.panelClosingActions.subscribe(event => {
+            debugger
+            this._setValueAndClose(event)
+        });
     }
     /**
- * This method closes the panel, and if a value is specified, also sets the associated
- * control to that value. It will also mark the control as dirty if this interaction
- * stemmed from the user.
- */
-
+     * This method closes the panel, and if a value is specified, also sets the associated
+     * control to that value. It will also mark the control as dirty if this interaction
+     * stemmed from the user.
+     */
     private _setValueAndClose(event: any | null): void {
-        debugger
         this.closePanel();
     }
+
+    private get treeCloseStatus(): Observable<any> {
+        return merge(
+            this.treeWrap.tree.nzTree.nzActivate,
+            this.treeWrap.tree.nzTree.nzCheck
+        ).pipe(filter(event=>{
+            debugger
+            return true
+        }))
+    }
+
     /** Stream of clicks outside of the autocomplete panel. */
     private get _outsideClickStream(): Observable<any> {
         if (!this._document) {
