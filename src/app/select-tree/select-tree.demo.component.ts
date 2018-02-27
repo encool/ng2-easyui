@@ -4,7 +4,7 @@ import {
     EuTreeNode, EuTreeOptions
     // } from 'ng2-easyui'
 } from 'ng2-easyui.core'
-import { AntdTreeComponent } from "../../../widget/";
+import { AntdTreeComponent, SelectTreeField } from "../../../widget/";
 
 @Component({
     selector: 'antd-tree-demo',
@@ -13,8 +13,7 @@ import { AntdTreeComponent } from "../../../widget/";
         <div bsRow>
             <eu-tree-select bsCol.sm="4"
                 (treeEvent)="onTreeEvent($event)"
-                [euTreeOptions]="euTreeOptions"
-                [euTreeNodes]="euTreeNodes">
+                [field]="selectTreeField">
             </eu-tree-select> 
             <div bsCol.sm="12">
                 <button mat-button (click)="onClick($event)">点击</button>
@@ -27,8 +26,6 @@ import { AntdTreeComponent } from "../../../widget/";
 })
 export class SelectTreeDemoComponent implements OnInit {
 
-    myControl: FormControl = new FormControl();
-
     options = [
         'One',
         'Two',
@@ -37,6 +34,7 @@ export class SelectTreeDemoComponent implements OnInit {
 
     euTreeNodes: EuTreeNode[]
     euTreeOptions: EuTreeOptions
+    selectTreeField: SelectTreeField
 
     @ViewChild(AntdTreeComponent) tree: AntdTreeComponent
     constructor() {
@@ -44,37 +42,13 @@ export class SelectTreeDemoComponent implements OnInit {
             treeId: "demoTree",
             rootNodeName: "root",
             dataUrl: "./nodes.json",
-            checkEnable: true,
+            // checkEnable: true,
             defaultActionModalConfig: {
                 // component: TreeModalComponent,
                 title: "测试标题"
             }
         }
-
-        this.euTreeNodes = [
-            {
-                id: "12",
-                name: 'root1',
-                children: [
-                    { id: "2", name: 'child1' },
-                    { id: "3", name: 'child2' }
-                ]
-            },
-            {
-                id: "4",
-                name: 'root2',
-                children: [
-                    { id: "5", name: 'child2.1' },
-                    {
-                        id: "6",
-                        name: 'child2.2',
-                        children: [
-                            { id: "7", name: 'subsub' }
-                        ]
-                    }
-                ]
-            }
-        ];
+        this.selectTreeField = new SelectTreeField({ key: "test", label: "testname", euTreeOptions: this.euTreeOptions })
     }
 
 
@@ -85,7 +59,6 @@ export class SelectTreeDemoComponent implements OnInit {
 
     onTreeEvent($event) {
         this
-        debugger
     }
 
     onClick(e) {
@@ -94,7 +67,7 @@ export class SelectTreeDemoComponent implements OnInit {
     }
 
     onCheckClick(e) {
-        let nodes = this.tree.getCheckedNodes(true)
         debugger
+        let nodes = this.tree.getCheckedNodes(true)
     }
 }

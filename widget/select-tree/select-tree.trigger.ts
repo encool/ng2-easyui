@@ -7,6 +7,7 @@ import {
     ScrollStrategy,
 } from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
+import { AbstractControl } from "@angular/forms";
 import {
     TemplatePortal,
     CdkPortal
@@ -26,7 +27,8 @@ import {
     Optional,
     ViewContainerRef,
     Output,
-    TemplateRef
+    TemplateRef,
+    EventEmitter
 } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
@@ -37,9 +39,8 @@ import { merge } from 'rxjs/observable/merge';
 import { of as observableOf } from 'rxjs/observable/of';
 import { Subscription } from 'rxjs/Subscription';
 
-// import { AntdTreeComponent } from "../eu-tree-antd/antd-tree.component";
 import { TreeWrapComponent } from "./tree-wrapper";
-import { debug } from 'util';
+
 /** Injection token that determines the scroll handling while the autocomplete panel is open. */
 export const MAT_AUTOCOMPLETE_SCROLL_STRATEGY =
     new InjectionToken<() => ScrollStrategy>('select-tree-scroll-strategy');
@@ -56,6 +57,19 @@ export const MAT_AUTOCOMPLETE_SCROLL_STRATEGY_PROVIDER = {
     deps: [Overlay],
     useFactory: MAT_AUTOCOMPLETE_SCROLL_STRATEGY_PROVIDER_FACTORY,
 };
+
+/** Change event object that is emitted when the select value has changed. */
+export class TreeSelectChange {
+    constructor(
+        /** Reference to the select that emitted the change event. */
+        public source: any,
+        /** Current value of the select that emitted the event. */
+        public value: {
+            id,
+            name,
+            data?
+        }) { }
+}
 
 @Directive({
     selector: `input[treeTrigger], textarea[treeTrigger]`,
@@ -95,7 +109,10 @@ export class SelectTreeTrigger {
     /** The tree panel to be attached to this trigger. */
     // @Input('treeTrigger') treeTemplate: TemplateRef<any>;
     @Input('treeTrigger') treeWrap: TreeWrapComponent;
+    @Input('fieldControl') fieldControl: AbstractControl
+    @Input('displayValue') displayValue: any
 
+    @Output("treeSelectChange") treeSelectChange: EventEmitter<TreeSelectChange> = new EventEmitter()
     /** Opens the autocomplete suggestion panel. */
     openPanel(): void {
         this._attachOverlay();
@@ -254,7 +271,6 @@ export class SelectTreeTrigger {
 
     private _subscribeToClosingActions(): Subscription {
         return this.panelClosingActions.subscribe(event => {
-            debugger
             this._setValueAndClose(event)
         });
     }
@@ -264,6 +280,12 @@ export class SelectTreeTrigger {
      * stemmed from the user.
      */
     private _setValueAndClose(event: any | null): void {
+        if (event.eventName == "activate") {
+            let data = event.node.data
+            let treeSelectChange = new TreeSelectChange(event, { id: data.id, name: data.name, data: data })
+            this.treeSelectChange.emit(treeSelectChange)
+        } else {
+        }
         this.closePanel();
     }
 
@@ -271,9 +293,12 @@ export class SelectTreeTrigger {
         return merge(
             this.treeWrap.tree.nzTree.nzActivate,
             this.treeWrap.tree.nzTree.nzCheck
-        ).pipe(filter(event=>{
-            debugger
-            return true
+        ).pipe(filter((event: any) => {
+            if (event.eventName = "activate") {
+                return true
+            } else {
+                return false
+            }
         }))
     }
 

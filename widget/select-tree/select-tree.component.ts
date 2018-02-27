@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, TemplateRef, ViewChild, AfterViewInit, ViewEncapsulation, ElementRef } from '@angular/core';
-import { FormControl } from "@angular/forms";
+import { AbstractControl, FormControl, FormGroup } from "@angular/forms";
 import { CdkPortal } from "@angular/cdk/portal";
+import { Validators } from "@angular/forms";
 import {
     EuTreeNode,
     EuTreeOptions,
@@ -8,13 +9,25 @@ import {
     EuTreeService
 } from "ng2-easyui.core";
 import { TreeWrapComponent } from "./tree-wrapper";
-import { FieldBase } from "ng2-easyform";
-
+import { FieldBase, UIComponent } from "ng2-easyform";
+import { SelectTreeField } from "./select-tree.field";
+import { TreeSelectChange } from "./select-tree.trigger";
+@UIComponent({
+    selector: 'eu-tree-select',
+    component: SelectTreeComponent
+})
 @Component({
     selector: 'eu-tree-select',
     template: `
     <mat-form-field bsCol.sm="12" class="example-full-width">
-        <input matInput placeholder="State" aria-label="State" [treeTrigger]="tree" [formControl]="formControl">
+        <input matInput [placeholder]="this.label" [attr.aria-label]="this.label" 
+        [bsCol.sm]="span"
+        [bsCol.xs]="12"
+        [ngModel]="displayValue"
+        [treeTrigger]="tree" 
+        (treeSelectChange)="onTreeSelectChange($event)"
+        [fieldControl]="fieldControl"
+        [disableControl]="field.disabled">
     </mat-form-field>    
     <tree-wrap>
         <eu-antd-tree class="tree-select"
@@ -30,7 +43,14 @@ import { FieldBase } from "ng2-easyform";
 
 })
 export class SelectTreeComponent implements OnInit, AfterViewInit {
-    formControl: FormControl;
+    fieldControl: AbstractControl;
+    @Input() field: SelectTreeField
+    @Input() form: FormGroup;
+
+    label: string
+    span: number = 12
+    displayValue:any
+
     @Input() euTreeNodes: EuTreeNode[] = []
     @Input() euTreeOptions: EuTreeOptions
 
@@ -46,11 +66,44 @@ export class SelectTreeComponent implements OnInit, AfterViewInit {
     constructor() { }
 
     ngOnInit() {
-        this.formControl = new FormControl();
+        if(this.field){
+            if(!this.fieldControl && this.form){
+                this.fieldControl = this.form.get(this.field.key)
+            } else if(!this.fieldControl && !this.form){
+                this.fieldControl = this._getFormControl(this.field)
+            }
+            this.span = this.field.span == undefined ? 4 : this.field.span
+            this.label = this.field.label
+            if(!this.euTreeOptions){
+                this.euTreeOptions = this.field.euTreeOptions
+            }
+            if(!this.euTreeNodes){
+                this.euTreeNodes = this.field.euTreeNodes
+            }
+
+            this.fieldControl.statusChanges.subscribe(data => {
+                // this.errors = this.fieldControl.errors
+                // FormUtils.doFormFieldInputStatusChanges(this.field, data, this.errors, this.errorsKeys)
+            })
+            this.fieldControl.valueChanges.subscribe(data => {
+                if (this.field.valueChange instanceof Function) {
+                    this.field.valueChange(data)
+                }
+            })
+        }
+
+
+
     }
 
     ngAfterViewInit() {
         this.tree
+    }
+
+    onTreeSelectChange($event:TreeSelectChange){
+        let data = $event.value.data
+        this.fieldControl.patchValue(data.id)
+        this.displayValue = data.name
     }
 
     close() {
@@ -59,5 +112,28 @@ export class SelectTreeComponent implements OnInit, AfterViewInit {
 
     onTreeEvent($event) {
 
+    }
+
+    _getFormControl(field: FieldBase<any>): FormControl {
+        var validators = [];
+        var asyncValidators = [];
+        if (field.required) {
+            validators.push(Validators.required)
+        }
+        if (field.validator) {
+            validators.push(field.validator)
+        }
+        if (field.asyncValidator) {
+            asyncValidators.push(field.asyncValidator)
+        }
+        if (validators.length > 0 && asyncValidators.length > 0) {
+            return new FormControl({ value: field.value, disabled: field.disabled } || '', validators, asyncValidators)
+        } else if (validators.length > 0) {
+            return new FormControl({ value: field.value, disabled: field.disabled } || '', validators)
+        } else if (asyncValidators.length > 0) {
+            return new FormControl({ value: field.value, disabled: field.disabled } || '', null, asyncValidators)
+        } else {
+            return new FormControl({ value: field.value, disabled: field.disabled } || '')
+        }
     }
 }

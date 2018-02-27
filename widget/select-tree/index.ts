@@ -1,6 +1,9 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { ReactiveFormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule, MatInputModule } from "@angular/material";
+import { Bootstrap3GridModule } from "ng2-bootstrap3-grid";
+import { EasyFormCoreModule } from "ng2-easyform";
 
 import { EasyUIAntTreeModule } from "../eu-tree-antd/index";
 import { SelectTreeTrigger } from './select-tree.trigger';
@@ -11,10 +14,14 @@ import { TreeWrapComponent } from "./tree-wrapper";
 
 @NgModule({
     imports: [
+        CommonModule,
+        FormsModule,
         ReactiveFormsModule,
         MatFormFieldModule,
         MatInputModule,
-        EasyUIAntTreeModule
+        EasyUIAntTreeModule,
+        Bootstrap3GridModule,
+        EasyFormCoreModule
     ],
     declarations: [
         SelectTreeComponent,
@@ -37,3 +44,6 @@ export class EasyUISelectTreeModule {
         };
     }
 }
+
+export { SelectTreeField } from './select-tree.field'
+export { SelectTreeComponent } from './select-tree.component'
