@@ -11,7 +11,7 @@ import {
 import { TreeWrapComponent } from "./tree-wrapper";
 import { FieldBase, UIComponent } from "ng2-easyform";
 import { SelectTreeField } from "./select-tree.field";
-import { TreeSelectChange } from "./select-tree.trigger";
+import { TreeSelectChange } from "./select-tree.input";
 @UIComponent({
     selector: 'eu-tree-select',
     component: SelectTreeComponent
@@ -20,14 +20,14 @@ import { TreeSelectChange } from "./select-tree.trigger";
     selector: 'eu-tree-select',
     template: `
     <mat-form-field bsCol.sm="12" class="example-full-width">
-        <input matInput [placeholder]="this.label" [attr.aria-label]="this.label" 
-        [bsCol.sm]="span"
-        [bsCol.xs]="12"
-        [ngModel]="displayValue"
-        [treeTrigger]="tree" 
-        (treeSelectChange)="onTreeSelectChange($event)"
-        [fieldControl]="fieldControl"
-        [disableControl]="field.disabled">
+        <select-tree 
+            [formControl]="fieldControl" 
+            [placeholder]="label"
+            [treeTrigger]="tree">
+        </select-tree>
+        <mat-error *ngIf="fieldControl.hasError('required')">
+        <strong>必填项</strong>
+        </mat-error>          
     </mat-form-field>    
     <tree-wrap>
         <eu-antd-tree class="tree-select"
@@ -49,7 +49,7 @@ export class SelectTreeComponent implements OnInit, AfterViewInit {
 
     label: string
     span: number = 12
-    displayValue:any
+    displayValue: any
 
     @Input() euTreeNodes: EuTreeNode[] = []
     @Input() euTreeOptions: EuTreeOptions
@@ -66,18 +66,18 @@ export class SelectTreeComponent implements OnInit, AfterViewInit {
     constructor() { }
 
     ngOnInit() {
-        if(this.field){
-            if(!this.fieldControl && this.form){
+        if (this.field) {
+            if (!this.fieldControl && this.form) {
                 this.fieldControl = this.form.get(this.field.key)
-            } else if(!this.fieldControl && !this.form){
+            } else if (!this.fieldControl && !this.form) {
                 this.fieldControl = this._getFormControl(this.field)
             }
             this.span = this.field.span == undefined ? 4 : this.field.span
             this.label = this.field.label
-            if(!this.euTreeOptions){
+            if (!this.euTreeOptions) {
                 this.euTreeOptions = this.field.euTreeOptions
             }
-            if(!this.euTreeNodes){
+            if (!this.euTreeNodes) {
                 this.euTreeNodes = this.field.euTreeNodes
             }
 
@@ -95,12 +95,17 @@ export class SelectTreeComponent implements OnInit, AfterViewInit {
 
 
     }
+    // ngDoCheck() {
+    //     if (this.fieldControl) {
+    //         this.fieldControl.updateValueAndValidity()
+    //     }
+    // }
 
     ngAfterViewInit() {
         this.tree
     }
 
-    onTreeSelectChange($event:TreeSelectChange){
+    onTreeSelectChange($event: TreeSelectChange) {
         let data = $event.value.data
         this.fieldControl.patchValue(data.id)
         this.displayValue = data.name

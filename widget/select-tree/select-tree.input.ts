@@ -6,18 +6,25 @@ import {
     PositionStrategy,
     ScrollStrategy,
 } from '@angular/cdk/overlay';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+
 import { DOCUMENT } from '@angular/common';
-import { AbstractControl } from "@angular/forms";
+import { AbstractControl, NgForm, FormGroupDirective, NgControl, ControlValueAccessor } from "@angular/forms";
 import {
     TemplatePortal,
     CdkPortal
 } from '@angular/cdk/portal';
 import {
     MatFormField,
+    ErrorStateMatcher,
+    mixinErrorState,
+    mixinDisabled,
+    MatFormFieldControl,
+    mixinTabIndex
 } from "@angular/material";
 import {
     ChangeDetectorRef,
-    Directive,
+    Component,
     ElementRef,
     forwardRef,
     Host,
@@ -28,7 +35,10 @@ import {
     ViewContainerRef,
     Output,
     TemplateRef,
-    EventEmitter
+    EventEmitter,
+    Self,
+    HostBinding,
+    ViewEncapsulation
 } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
@@ -71,26 +81,59 @@ export class TreeSelectChange {
         }) { }
 }
 
-@Directive({
-    selector: `input[treeTrigger], textarea[treeTrigger]`,
+export class MatSelectBase {
+    constructor(public _elementRef: ElementRef,
+        public _defaultErrorStateMatcher: ErrorStateMatcher,
+        public _parentForm: NgForm,
+        public _parentFormGroup: FormGroupDirective,
+        public ngControl: NgControl) { }
+}
+export const _MatSelectMixinBase = mixinTabIndex(mixinDisabled(mixinErrorState(MatSelectBase)));
+
+@Component({
+    selector: `select-tree`,
     host: {
-        'role': 'combobox',
-        'autocomplete': 'off',
-        'aria-autocomplete': 'list',
-        // '[attr.aria-activedescendant]': 'activeOption?.id',
-        // '[attr.aria-expanded]': 'panelOpen.toString()',
-        // '[attr.aria-owns]': 'autocomplete?.id',
-        // Note: we use `focusin`, as opposed to `focus`, in order to open the panel
-        // a little earlier. This avoids issues where IE delays the focusing of the input.
-        '(focusin)': '_handleFocus()',
-        // '(blur)': '_onTouched()',
-        '(input)': '_handleInput($event)',
-        // '(keydown)': '_handleKeydown($event)',
+        'role': 'listbox',
+        '[attr.id]': 'id',
+        '[attr.tabindex]': 'tabIndex',
+        '[attr.aria-label]': '_ariaLabel',
+        '[attr.aria-labelledby]': 'ariaLabelledby',
+        '[attr.aria-required]': 'required.toString()',
+        '[attr.aria-disabled]': 'disabled.toString()',
+        '[attr.aria-invalid]': 'errorState',
+        '[attr.aria-owns]': 'panelOpen ? _optionIds : null',
+        '[attr.aria-multiselectable]': 'multiple',
+        '[attr.aria-describedby]': '_ariaDescribedby || null',
+        // '[attr.aria-activedescendant]': '_getAriaActiveDescendant()',
+        '[class.mat-select-disabled]': 'disabled',
+        '[class.mat-select-invalid]': 'errorState',
+        '[class.mat-select-required]': 'required',
+        'class': 'mat-select',
+        '(keydown)': '_handleKeydown($event)',
+        '(focus)': '_onFocus()',
+        '(blur)': '_onBlur()',
     },
-    exportAs: 'treeTrigger',
-    providers: []
+    template: `        
+    <div class="mat-select-trigger"
+        aria-hidden="true"
+        (click)="toggle()">
+        <div class="mat-select-value" [ngSwitch]="empty">
+            <span class="mat-select-placeholder" *ngSwitchCase="true">{{placeholder || '\u00A0'}}</span>
+            <span class="mat-select-value-text" *ngSwitchCase="false">
+                <span *ngSwitchDefault>{{triggerValue}}</span>
+            </span>
+        </div>
+        <div class="mat-select-arrow-wrapper"><div class="mat-select-arrow"></div></div>
+    </div>`,
+    styles: [`.mat-select{display:inline-block;width:100%;outline:0}.mat-select-trigger{display:inline-table;cursor:pointer;position:relative;box-sizing:border-box}.mat-select-disabled .mat-select-trigger{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}.mat-select-value{display:table-cell;max-width:0;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mat-select-value-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mat-select-arrow-wrapper{display:table-cell;vertical-align:middle}.mat-select-arrow{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:5px solid;margin:0 4px}.mat-select-panel{min-width:112px;max-width:280px;overflow:auto;-webkit-overflow-scrolling:touch;padding-top:0;padding-bottom:0;max-height:256px;min-width:100%}.mat-select-panel:not([class*=mat-elevation-z]){box-shadow:0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12)}@media screen and (-ms-high-contrast:active){.mat-select-panel{outline:solid 1px}}.mat-select-panel .mat-optgroup-label,.mat-select-panel .mat-option{font-size:inherit;line-height:3em;height:3em}.mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex{cursor:pointer}.mat-form-field-type-mat-select .mat-form-field-label{width:calc(100% - 18px)}.mat-select-placeholder{transition:color .4s .133s cubic-bezier(.25,.8,.25,1)}.mat-form-field-hide-placeholder .mat-select-placeholder{color:transparent;transition:none}`],
+    encapsulation: ViewEncapsulation.None,
+    providers: [{ provide: MatFormFieldControl, useExisting: SelectTreeInput }],
 })
-export class SelectTreeTrigger {
+export class SelectTreeInput extends _MatSelectMixinBase implements MatFormFieldControl<any>, ControlValueAccessor {
+
+    static nextId = 0;
+
+    @HostBinding() id = `tree-select-input-${SelectTreeInput.nextId++}`;
 
     private _overlayRef: OverlayRef | null;
     // private _portal: ComponentPortal<AntdTreeComponent>;
@@ -106,6 +149,10 @@ export class SelectTreeTrigger {
     private _closingActionsSubscription: Subscription;
 
     private _panelOpen: boolean = false;
+    /** Whether or not the overlay panel is open. */
+    get panelOpen(): boolean {
+        return this._panelOpen;
+    }
     /** The tree panel to be attached to this trigger. */
     // @Input('treeTrigger') treeTemplate: TemplateRef<any>;
     @Input('treeTrigger') treeWrap: TreeWrapComponent;
@@ -121,14 +168,87 @@ export class SelectTreeTrigger {
 
     constructor(private _element: ElementRef, private _overlay: Overlay,
         private _viewContainerRef: ViewContainerRef,
+        _defaultErrorStateMatcher: ErrorStateMatcher,
+        @Optional() _parentForm: NgForm,
+        @Optional() _parentFormGroup: FormGroupDirective,
+        @Self() @Optional() public ngControl: NgControl,
+        private _changeDetectorRef: ChangeDetectorRef,
+
         @Inject(MAT_AUTOCOMPLETE_SCROLL_STRATEGY) private _scrollStrategy,
         @Optional() @Host() private _formField: MatFormField,
         @Optional() @Inject(DOCUMENT) private _document: any) {
+        super(_element, _defaultErrorStateMatcher, _parentForm,
+            _parentFormGroup, ngControl);
+        if (this.ngControl) {
+            // Note: we provide the value accessor through here, instead of
+            // the `providers` to avoid running into a circular import.
+            this.ngControl.valueAccessor = this;
+        }
 
+        // Force setter to be called in case id was not specified.
+        this.id = this.id;
+    }
+
+    stateChanges = new Subject<void>();
+
+    set value(tel: any | null) {
+        this.stateChanges.next();
+    }
+    get empty() {
+        return !this.value
+    }
+    get shouldLabelFloat() {
+        return this.focused || !this.empty || this.panelOpen;
+    }
+    @Input()
+    get required() {
+        return this._required;
+    }
+    set required(req) {
+        this._required = coerceBooleanProperty(req);
+        this.stateChanges.next();
+    }
+    private _required = false;
+
+    /** Handles all keydown events on the select. */
+    _handleKeydown(event: KeyboardEvent): void {
+        if (!this.disabled) {
+            // this.panelOpen ? this._handleOpenKeydown(event) : this._handleClosedKeydown(event);
+        }
+    }
+
+    @HostBinding('attr.aria-describedby') describedBy = '';
+
+    setDescribedByIds(ids: string[]) {
+        this.describedBy = ids.join(' ');
+    }
+
+    onContainerClick(event: MouseEvent) {
+        // if ((event.target as Element).tagName.toLowerCase() != 'input') {
+        //   this.elRef.nativeElement.querySelector('input').focus();
+        // }
+    }
+
+    @Input()
+    get placeholder() {
+        return this._placeholder;
+    }
+    set placeholder(plh) {
+        this._placeholder = plh;
+        this.stateChanges.next();
+    }
+    private _placeholder: string;
+
+    ngOnDestroy() {
+        this.stateChanges.complete();
     }
 
     ngOnInit() {
         this.treeWrap
+    }
+
+    toggle() {
+        this.panelOpen ? this.closePanel() : this.openPanel();
     }
 
     private _attachOverlay(): void {
@@ -322,5 +442,79 @@ export class SelectTreeTrigger {
                     (!formField || !formField.contains(clickTarget)) &&
                     (!!this._overlayRef && !this._overlayRef.overlayElement.contains(clickTarget));
             }));
+    }
+
+
+    /** `View -> model callback called when value changes` */
+    _onChange: (value: any) => void = () => { };
+
+    /** `View -> model callback called when select has been touched` */
+    _onTouched = () => { };
+    /**
+       * Sets the select's value. Part of the ControlValueAccessor interface
+       * required to integrate with Angular's core forms API.
+       *
+       * @param value New value to be written to the model.
+       */
+    writeValue(value: any): void {
+        // if (this.options) {
+        //   this._setSelectionByValue(value);
+        // }
+    }
+
+    /**
+     * Saves a callback function to be invoked when the select's value
+     * changes from user input. Part of the ControlValueAccessor interface
+     * required to integrate with Angular's core forms API.
+     *
+     * @param fn Callback to be triggered when the value changes.
+     */
+    registerOnChange(fn: (value: any) => void): void {
+        this._onChange = fn;
+    }
+
+    /**
+     * Saves a callback function to be invoked when the select is blurred
+     * by the user. Part of the ControlValueAccessor interface required
+     * to integrate with Angular's core forms API.
+     *
+     * @param fn Callback to be triggered when the component has been touched.
+     */
+    registerOnTouched(fn: () => {}): void {
+        this._onTouched = fn;
+    }
+
+    /**
+     * Disables the select. Part of the ControlValueAccessor interface required
+     * to integrate with Angular's core forms API.
+     *
+     * @param isDisabled Sets whether the component is disabled.
+     */
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+        // this._changeDetectorRef.markForCheck();
+        this.stateChanges.next();
+    }
+
+    focused = false
+    _onFocus() {
+        if (!this.disabled) {
+            this.focused = true;
+            this.stateChanges.next();
+        }
+    }
+
+    /**
+     * Calls the touched callback only if the panel is closed. Otherwise, the trigger will
+     * "blur" to the panel when it opens, causing a false positive.
+     */
+    _onBlur() {
+        this.focused = false;
+
+        if (!this.disabled && !this.panelOpen) {
+            this._onTouched();
+            this._changeDetectorRef.markForCheck();
+            this.stateChanges.next();
+        }
     }
 }

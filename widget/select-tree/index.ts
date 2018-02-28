@@ -6,8 +6,7 @@ import { Bootstrap3GridModule } from "ng2-bootstrap3-grid";
 import { EasyFormCoreModule } from "ng2-easyform";
 
 import { EasyUIAntTreeModule } from "../eu-tree-antd/index";
-import { SelectTreeTrigger } from './select-tree.trigger';
-import { MAT_AUTOCOMPLETE_SCROLL_STRATEGY_PROVIDER } from "./select-tree.trigger";
+import { SelectTreeInput, MAT_AUTOCOMPLETE_SCROLL_STRATEGY_PROVIDER } from './select-tree.input';
 import { AntdTreeComponent } from "../eu-tree-antd/antd-tree.component";
 import { SelectTreeComponent } from "./select-tree.component";
 import { TreeWrapComponent } from "./tree-wrapper";
@@ -25,12 +24,12 @@ import { TreeWrapComponent } from "./tree-wrapper";
     ],
     declarations: [
         SelectTreeComponent,
-        SelectTreeTrigger,
+        SelectTreeInput,
         TreeWrapComponent
     ],
     exports: [
         SelectTreeComponent,
-        SelectTreeTrigger
+        SelectTreeInput
     ],
     entryComponents: [AntdTreeComponent]
 })

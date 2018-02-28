@@ -48,7 +48,10 @@ export class SelectTreeDemoComponent implements OnInit {
                 title: "测试标题"
             }
         }
-        this.selectTreeField = new SelectTreeField({ key: "test", label: "testname", euTreeOptions: this.euTreeOptions })
+        this.selectTreeField = new SelectTreeField({
+            key: "test", label: "testname", required: true,
+            euTreeOptions: this.euTreeOptions
+        })
     }
 
 
