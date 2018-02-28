@@ -135,6 +135,7 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
 
     @HostBinding() id = `tree-select-input-${SelectTreeInput.nextId++}`;
 
+    triggerValue: any
     private _overlayRef: OverlayRef | null;
     // private _portal: ComponentPortal<AntdTreeComponent>;
     private _portal: TemplatePortal;
@@ -191,13 +192,19 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
 
     stateChanges = new Subject<void>();
 
-    set value(tel: any | null) {
+    set value(value: any | null) {
+        debugger
         this.stateChanges.next();
     }
     get empty() {
+        console.log("get empty---value", this.value)
         return !this.value
     }
     get shouldLabelFloat() {
+        // console.log("shouldLabelFloat----", this.focused || !this.empty || this.panelOpen)
+        // console.log("focused----", this.focused)
+        // console.log("!empty----", !this.empty)
+        // console.log("panelOpen----", this.panelOpen)
         return this.focused || !this.empty || this.panelOpen;
     }
     @Input()
@@ -402,6 +409,8 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
     private _setValueAndClose(event: any | null): void {
         if (event.eventName == "activate") {
             let data = event.node.data
+            this.triggerValue = data.name
+            this.value = data.id
             let treeSelectChange = new TreeSelectChange(event, { id: data.id, name: data.name, data: data })
             this.treeSelectChange.emit(treeSelectChange)
         } else {
@@ -457,6 +466,8 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
        * @param value New value to be written to the model.
        */
     writeValue(value: any): void {
+        // debugger
+        // this.value = value
         // if (this.options) {
         //   this._setSelectionByValue(value);
         // }

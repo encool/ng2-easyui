@@ -23,7 +23,8 @@ import { TreeSelectChange } from "./select-tree.input";
         <select-tree 
             [formControl]="fieldControl" 
             [placeholder]="label"
-            [treeTrigger]="tree">
+            [treeTrigger]="tree"
+            (treeSelectChange)="onTreeSelectChange($event)">
         </select-tree>
         <mat-error *ngIf="fieldControl.hasError('required')">
         <strong>必填项</strong>
@@ -49,7 +50,6 @@ export class SelectTreeComponent implements OnInit, AfterViewInit {
 
     label: string
     span: number = 12
-    displayValue: any
 
     @Input() euTreeNodes: EuTreeNode[] = []
     @Input() euTreeOptions: EuTreeOptions
@@ -108,7 +108,6 @@ export class SelectTreeComponent implements OnInit, AfterViewInit {
     onTreeSelectChange($event: TreeSelectChange) {
         let data = $event.value.data
         this.fieldControl.patchValue(data.id)
-        this.displayValue = data.name
     }
 
     close() {
