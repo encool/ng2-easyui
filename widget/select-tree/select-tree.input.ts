@@ -20,7 +20,10 @@ import {
     mixinErrorState,
     mixinDisabled,
     MatFormFieldControl,
-    mixinTabIndex
+    mixinTabIndex,
+    CanDisable,
+    CanUpdateErrorState,
+    HasTabIndex,
 } from "@angular/material";
 import {
     ChangeDetectorRef,

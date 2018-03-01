@@ -428,7 +428,7 @@ const ROLLUP_GLOBALS = {
     // 'rxjs/operators/delay': 'Rx.Observable.prototype',
     // 'rxjs/operators/distinctUntilChanged': 'Rx.Observable.prototype',
     // 'rxjs/operators/do': 'Rx.Observable.prototype',
-    // 'rxjs/operators/filter': 'Rx.Observable.prototype',
+    'rxjs/operators/filter': 'Rx.Observable.prototype',
     // 'rxjs/operators/finally': 'Rx.Observable.prototype',
     // 'rxjs/operators/first': 'Rx.Observable.prototype',
     // 'rxjs/operators/map': 'Rx.Observable.prototype',
