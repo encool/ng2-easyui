@@ -95,11 +95,11 @@ export class SelectTreeComponent implements OnInit, AfterViewInit {
 
 
     }
-    // ngDoCheck() {
-    //     if (this.fieldControl) {
-    //         this.fieldControl.updateValueAndValidity()
-    //     }
-    // }
+    ngDoCheck() {
+        if (this.fieldControl) {
+            this.fieldControl.updateValueAndValidity()
+        }
+    }
 
     ngAfterViewInit() {
         this.tree

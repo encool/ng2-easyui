@@ -60,6 +60,12 @@ export class IndexComponent implements OnInit {
                             link: "/AntdTreeDemoComponent",
                             icon: "",
                         },
+                        {
+                            id: "1",
+                            title: "SelectTree",
+                            link: "/SelectTreeDemoComponent",
+                            icon: "",
+                        },                        
                     ]
                 },
             ]
