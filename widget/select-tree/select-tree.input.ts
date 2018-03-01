@@ -120,7 +120,7 @@ export const _MatSelectMixinBase = mixinTabIndex(mixinDisabled(mixinErrorState(M
         <div class="mat-select-value" [ngSwitch]="empty">
             <span class="mat-select-placeholder" *ngSwitchCase="true">{{placeholder || '\u00A0'}}</span>
             <span class="mat-select-value-text" *ngSwitchCase="false">
-                <span *ngSwitchDefault>{{triggerValue}}</span>
+                <span>{{triggerValue}}</span>
             </span>
         </div>
         <div class="mat-select-arrow-wrapper"><div class="mat-select-arrow"></div></div>
@@ -143,6 +143,7 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
     /** Strategy that is used to position the panel. */
     private _positionStrategy: ConnectedPositionStrategy;
 
+    private _value: string | number | null;
     /** Old value of the native input. Used to work around issues with the `input` event on IE. */
     private _previousValue: string | number | null;
 
@@ -193,13 +194,18 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
     stateChanges = new Subject<void>();
 
     set value(value: any | null) {
-        debugger
+        this._value = value
         this.stateChanges.next();
     }
+
+    get value() {
+        return this._value
+    }    
+
     get empty() {
-        console.log("get empty---value", this.value)
         return !this.value
     }
+
     get shouldLabelFloat() {
         // console.log("shouldLabelFloat----", this.focused || !this.empty || this.panelOpen)
         // console.log("focused----", this.focused)
@@ -207,6 +213,7 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
         // console.log("panelOpen----", this.panelOpen)
         return this.focused || !this.empty || this.panelOpen;
     }
+
     @Input()
     get required() {
         return this._required;
