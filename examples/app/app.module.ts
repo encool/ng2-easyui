@@ -37,12 +37,13 @@ import {
   EuTreeService
 } from "ng2-easyui.core";
 import { Bootstrap3GridModule } from "ng2-bootstrap3-grid";
-import { EasyFormCoreModule, EasyFormMdModule } from 'ng2-easyform'
+import { EasyFormCoreModule, EasyFormMdModule, EfDictdataService } from 'ng2-easyform'
 
 
 import { PageService } from './page.service';
 import { BpmnService } from './bpmn.service';
 import { TreeService } from "./tree.service";
+import { DictdataService } from "./dictdata.service";
 
 import { RichSwipeDemoComponent } from './rich-swipe-demo/rich-swipe-demo.component';
 import { AngTreeDemoComponent } from './angular-tree/angular-tree.demo.component'
@@ -50,7 +51,7 @@ import { MatPanelDemoComponent } from './mat-panel/mat-panel.demo.component'
 // import { Ng2TreeDemoComponent } from "./ng2-tree/ng2-tree.demo.component";
 import { AntdTreeDemoComponent } from "./antd-tree/antd-tree.demo.component";
 import { SelectTreeDemoComponent } from "./select-tree/select-tree.demo.component";
-
+import { SelectTreeFormComponent } from "./select-tree/select-tree-form.demo.component";
 import { TreeModalComponent } from "./antd-tree/tree-modal.component";
 
 import { IndexComponent } from './index.component'
@@ -71,6 +72,7 @@ import { EntryComponent } from "./entry.component";
     // ModalInfoComponent,
     TreeModalComponent,
     SelectTreeDemoComponent,
+    SelectTreeFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,6 +92,7 @@ import { EntryComponent } from "./entry.component";
         { path: 'AntdTreeDemoComponent', component: AntdTreeDemoComponent, data: { title: "AntdTree" } },        
         { path: 'AngTreeDemoComponent', component: AngTreeDemoComponent, data: { title: "angular-tree" } },
         { path: 'SelectTreeDemoComponent', component: SelectTreeDemoComponent, data: { title: "select-tree" } },
+        { path: 'SelectTreeFormComponent', component: SelectTreeFormComponent, data: { title: "select-tree-form" } },        
         { path: 'EntryComponent', component: EntryComponent, data: { title: "entry" } },
         { path: '**', redirectTo: "EntryComponent" },
       ]
@@ -124,6 +127,7 @@ import { EntryComponent } from "./entry.component";
     { provide: EuPageService, useClass: PageService, },
     { provide: EuBpmnService, useClass: BpmnService, },
     { provide: EuTreeService, useClass: TreeService, },
+    { provide: EfDictdataService, useClass: DictdataService, },    
   ],
   entryComponents: [
     DialogDataExampleDialog,

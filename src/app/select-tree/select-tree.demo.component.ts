@@ -32,7 +32,6 @@ export class SelectTreeDemoComponent implements OnInit {
         'Three'
     ];
 
-    euTreeNodes: EuTreeNode[]
     euTreeOptions: EuTreeOptions
     selectTreeField: SelectTreeField
 

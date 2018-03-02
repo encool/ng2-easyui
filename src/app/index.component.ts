@@ -66,6 +66,12 @@ export class IndexComponent implements OnInit {
                             link: "/SelectTreeDemoComponent",
                             icon: "",
                         },
+                        {
+                            id: "1",
+                            title: "SelectTreeForm",
+                            link: "/SelectTreeFormComponent",
+                            icon: "",
+                        },
                     ]
                 },
             ]

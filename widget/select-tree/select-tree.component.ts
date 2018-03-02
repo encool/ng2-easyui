@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, TemplateRef, ViewChild, AfterViewInit, ViewEncapsulation, ElementRef } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from "@angular/forms";
 import { CdkPortal } from "@angular/cdk/portal";
-import { Validators } from "@angular/forms";
+import { Validators, FormGroupDirective, NgForm } from "@angular/forms";
+import { ErrorStateMatcher } from "@angular/material";
 import {
     EuTreeNode,
     EuTreeOptions,
@@ -12,6 +13,15 @@ import { TreeWrapComponent } from "./tree-wrapper";
 import { FieldBase, UIComponent } from "ng2-easyform";
 import { SelectTreeField } from "./select-tree.field";
 import { TreeSelectChange } from "./select-tree.input";
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class DefaultErrorStateMatcher implements ErrorStateMatcher {
+    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+        const isSubmitted = form && form.submitted;
+        return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+    }
+}
+
 @UIComponent({
     selector: 'eu-tree-select',
     component: SelectTreeComponent
@@ -19,14 +29,14 @@ import { TreeSelectChange } from "./select-tree.input";
 @Component({
     selector: 'eu-tree-select',
     template: `
-    <mat-form-field bsCol.sm="12" class="example-full-width">
+    <mat-form-field bsCol.sm="span" class="example-full-width">
         <select-tree 
             [formControl]="fieldControl" 
             [placeholder]="label"
             [treeTrigger]="tree"
             (treeSelectChange)="onTreeSelectChange($event)">
         </select-tree>
-        <mat-error *ngIf="fieldControl.hasError('required')">
+        <mat-error>
         <strong>必填项</strong>
         </mat-error>          
     </mat-form-field>    
@@ -55,6 +65,9 @@ export class SelectTreeComponent implements OnInit, AfterViewInit {
     @Input() euTreeOptions: EuTreeOptions
 
     @Input() nzShiftSelectedMulti = true;
+
+    /** An object used to control when error messages are shown. */
+    @Input() errorStateMatcher: ErrorStateMatcher;
 
     @Output() treeEvent: EventEmitter<TreeEvent> = new EventEmitter<TreeEvent>()
 

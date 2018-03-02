@@ -31,7 +31,7 @@ import { TreeWrapComponent } from "./tree-wrapper";
         SelectTreeComponent,
         SelectTreeInput
     ],
-    entryComponents: [AntdTreeComponent]
+    entryComponents: [AntdTreeComponent, SelectTreeComponent]
 })
 export class EasyUISelectTreeModule {
     static forRoot(): ModuleWithProviders {

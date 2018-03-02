@@ -164,6 +164,9 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
     @Input('fieldControl') fieldControl: AbstractControl
     @Input('displayValue') displayValue: any
 
+    /** An object used to control when error messages are shown. */
+    @Input() errorStateMatcher: ErrorStateMatcher;
+
     @Output("treeSelectChange") treeSelectChange: EventEmitter<TreeSelectChange> = new EventEmitter()
     /** Opens the autocomplete suggestion panel. */
     openPanel(): void {
@@ -203,7 +206,7 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
 
     get value() {
         return this._value
-    }    
+    }
 
     get empty() {
         return !this.value
@@ -262,6 +265,12 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
 
     ngOnInit() {
         this.treeWrap
+    }
+
+    ngDoCheck() {
+        if (this.ngControl) {
+            this.updateErrorState();
+        }
     }
 
     toggle() {
