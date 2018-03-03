@@ -68,7 +68,7 @@ export class SelectTreeFormComponent {
                 }
             }),
             new SelectTreeField({
-                key: 'selectTree', label: '选择树',
+                key: 'selectTree', label: '选择树', required: true, span: 4,
                 euTreeOptions: {
                     treeId: "demoTree",
                     rootNodeName: "root",
@@ -209,7 +209,7 @@ export class SelectTreeFormComponent {
 
     ngAfterViewInit() {
         this.form.form.valueChanges.subscribe(value => {
-            setTimeout(() => {             
+            setTimeout(() => {
                 this.formvalue = JSON.stringify(value)
             });
         })

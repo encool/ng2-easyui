@@ -118,8 +118,7 @@ export const _MatSelectMixinBase = mixinTabIndex(mixinDisabled(mixinErrorState(M
     },
     template: `        
     <div class="mat-select-trigger"
-        aria-hidden="true"
-        (click)="toggle()">
+        aria-hidden="true">
         <div class="mat-select-value" [ngSwitch]="empty">
             <span class="mat-select-placeholder" *ngSwitchCase="true">{{placeholder || '\u00A0'}}</span>
             <span class="mat-select-value-text" *ngSwitchCase="false">
@@ -244,6 +243,7 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
     }
 
     onContainerClick(event: MouseEvent) {
+        this.toggle()
         // if ((event.target as Element).tagName.toLowerCase() != 'input') {
         //   this.elRef.nativeElement.querySelector('input').focus();
         // }
@@ -322,6 +322,7 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
                 this._overlayRef.detach();
                 this._closingActionsSubscription.unsubscribe();
             }
+            this._onTouched()
 
             // Note that in some cases this can end up being called after the component is destroyed.
             // Add a check to ensure that we don't try to run change detection on a destroyed view.
@@ -380,7 +381,7 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
             this._getConnectedElement(),
             { originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' })
             .withFallbackPosition(
-            { originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }
+                { originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }
             );
         return this._positionStrategy;
     }
@@ -477,7 +478,7 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
     _onChange: (value: any) => void = () => { };
 
     /** `View -> model callback called when select has been touched` */
-    _onTouched = () => { };
+    _onTouched: () => {};
     /**
        * Sets the select's value. Part of the ControlValueAccessor interface
        * required to integrate with Angular's core forms API.

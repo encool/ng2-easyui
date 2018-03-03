@@ -29,7 +29,7 @@ export class DefaultErrorStateMatcher implements ErrorStateMatcher {
 @Component({
     selector: 'eu-tree-select',
     template: `
-    <mat-form-field bsCol.sm="span" class="example-full-width">
+    <mat-form-field [bsCol.sm]="span">
         <select-tree 
             [formControl]="fieldControl" 
             [placeholder]="label"
@@ -109,9 +109,7 @@ export class SelectTreeComponent implements OnInit, AfterViewInit {
 
     }
     ngDoCheck() {
-        if (this.fieldControl) {
-            this.fieldControl.updateValueAndValidity()
-        }
+
     }
 
     ngAfterViewInit() {
