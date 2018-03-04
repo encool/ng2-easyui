@@ -1,7 +1,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatFormFieldModule, MatInputModule } from "@angular/material";
+import { MatFormFieldModule, MatInputModule, MatIconModule } from "@angular/material";
 import { Bootstrap3GridModule } from "ng2-bootstrap3-grid";
 import { EasyFormCoreModule } from "ng2-easyform";
 
@@ -18,6 +18,7 @@ import { TreeWrapComponent } from "./tree-wrapper";
         ReactiveFormsModule,
         MatFormFieldModule,
         MatInputModule,
+        MatIconModule,
         EasyUIAntTreeModule,
         Bootstrap3GridModule,
         EasyFormCoreModule

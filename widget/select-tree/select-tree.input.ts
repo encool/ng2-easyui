@@ -53,6 +53,7 @@ import { of as observableOf } from 'rxjs/observable/of';
 import { Subscription } from 'rxjs/Subscription';
 
 import { TreeWrapComponent } from "./tree-wrapper";
+import { AntdTreeComponent } from '../eu-tree-antd';
 
 /** Injection token that determines the scroll handling while the autocomplete panel is open. */
 export const MAT_AUTOCOMPLETE_SCROLL_STRATEGY =
@@ -125,6 +126,8 @@ export const _MatSelectMixinBase = mixinTabIndex(mixinDisabled(mixinErrorState(M
                 <span>{{triggerValue}}</span>
             </span>
         </div>
+        <mat-icon matSuffix (click)="clearValue($event)" 
+        style="font-size: 14px;height: 18px;width: 18px;display: table-cell;vertical-align: middle;">clear</mat-icon>
         <div class="mat-select-arrow-wrapper"><div class="mat-select-arrow"></div></div>
     </div>`,
     styles: [`.mat-select{display:inline-block;width:100%;outline:0}.mat-select-trigger{display:inline-table;cursor:pointer;position:relative;box-sizing:border-box}.mat-select-disabled .mat-select-trigger{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}.mat-select-value{display:table-cell;max-width:0;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mat-select-value-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mat-select-arrow-wrapper{display:table-cell;vertical-align:middle}.mat-select-arrow{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:5px solid;margin:0 4px}.mat-select-panel{min-width:112px;max-width:280px;overflow:auto;-webkit-overflow-scrolling:touch;padding-top:0;padding-bottom:0;max-height:256px;min-width:100%}.mat-select-panel:not([class*=mat-elevation-z]){box-shadow:0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12)}@media screen and (-ms-high-contrast:active){.mat-select-panel{outline:solid 1px}}.mat-select-panel .mat-optgroup-label,.mat-select-panel .mat-option{font-size:inherit;line-height:3em;height:3em}.mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex{cursor:pointer}.mat-form-field-type-mat-select .mat-form-field-label{width:calc(100% - 18px)}.mat-select-placeholder{transition:color .4s .133s cubic-bezier(.25,.8,.25,1)}.mat-form-field-hide-placeholder .mat-select-placeholder{color:transparent;transition:none}`],
@@ -160,7 +163,7 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
     /** The tree panel to be attached to this trigger. */
     // @Input('treeTrigger') treeTemplate: TemplateRef<any>;
     @Input('treeTrigger') treeWrap: TreeWrapComponent;
-    @Input('fieldControl') fieldControl: AbstractControl
+    // @Input('fieldControl') fieldControl: AbstractControl
     @Input('displayValue') displayValue: any
 
     /** An object used to control when error messages are shown. */
@@ -198,9 +201,11 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
 
     stateChanges = new Subject<void>();
 
-    set value(value: any | null) {
-        this._value = value
-        this.stateChanges.next();
+    set value(newValue: any | null) {debugger
+        if (newValue !== this._value) {
+            this._value = newValue;
+            this.writeValue(newValue);
+        }
     }
 
     get value() {
@@ -283,11 +288,7 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
         // }
         // debugger
         if (!this._overlayRef) {
-            // this._portal = new TemplatePortal(this.treeTemplate, this._viewContainerRef);
-            this._portal = new TemplatePortal(this.treeWrap.template, this._viewContainerRef);
-            // this._portal = new ComponentPortal(AntdTreeComponent, this._viewContainerRef);
-            this._overlayRef = this._overlay.create(this._getOverlayConfig());
-            this._overlayRef.backdropClick().subscribe
+            this.generateProtalAndOverlay()
         } else {
             /** Update the panel width, in case the host width has changed */
             this._overlayRef.updateSize({ width: this._getHostWidth() });
@@ -309,6 +310,11 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
         // if (this.panelOpen && wasOpen !== this.panelOpen) {
         //     this.autocomplete.opened.emit();
         // }
+    }
+
+    generateProtalAndOverlay() {
+        this._portal = new TemplatePortal(this.treeWrap.template, this._viewContainerRef);
+        this._overlayRef = this._overlay.create(this._getOverlayConfig());
     }
 
     /** Closes the autocomplete suggestion panel. */
@@ -421,6 +427,11 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
             this._setValueAndClose(event)
         });
     }
+
+    clearValue($event: MouseEvent) {
+        $event.stopPropagation()
+        this._setValueAndClose({ eventName: 'reset' })
+    }
     /**
      * This method closes the panel, and if a value is specified, also sets the associated
      * control to that value. It will also mark the control as dirty if this interaction
@@ -429,11 +440,22 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
     private _setValueAndClose(event: any | null): void {
         if (event.eventName == "activate") {
             let data = event.node.data
-            this.triggerValue = data.name
-            this.value = data.id
-            let treeSelectChange = new TreeSelectChange(event, { id: data.id, name: data.name, data: data })
-            this.treeSelectChange.emit(treeSelectChange)
-        } else {
+            if (this._previousValue !== data.id) {
+                this.triggerValue = data.name
+                this.value = data.id
+                this._onChange(data.id)
+                let treeSelectChange = new TreeSelectChange(event, { id: data.id, name: data.name, data: data })
+                this.treeSelectChange.emit(treeSelectChange)
+            }
+        } else if (event.eventName = "reset") {
+            let data: any = {}
+            if (this._previousValue !== data.id || this._previousValue == undefined) {
+                this.triggerValue = data.name
+                this.value = data.id
+                this._onChange(data.id)
+                let treeSelectChange = new TreeSelectChange(event, { id: data.id, name: data.name, data: data })
+                this.treeSelectChange.emit(treeSelectChange)
+            }
         }
         this.closePanel();
     }
@@ -486,8 +508,19 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
        * @param value New value to be written to the model.
        */
     writeValue(value: any): void {
-        // debugger
-        // this.value = value
+        if (this.treeWrap && value) {
+            if (!this._overlayRef) {
+                this.generateProtalAndOverlay()
+            }
+            let treeComponent: AntdTreeComponent = this.treeWrap.tree
+            let treeModal = this.treeWrap.tree.nzTree.treeModel
+            let node: any = treeModal.getNodeById(value)
+            if (node) {
+                this.triggerValue = node.data.name
+                treeModal.setActiveNode(node, value)
+                this.value = node.data.id
+            }
+        }
         // if (this.options) {
         //   this._setSelectionByValue(value);
         // }

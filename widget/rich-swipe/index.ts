@@ -13,14 +13,14 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     // effect: 'cube',
     // effect: 'fade',
     effect: 'flip',
-    keyboardControl: true,
-    nextButton: '.swiper-button-next',
+    // keyboardControl: true,
+    // nextButton: '.swiper-button-next',
 };
 
 @NgModule({
     imports: [
         CommonModule,
-        SwiperModule.forChild()
+        SwiperModule
     ],
     exports: [
         RichSwipeComponent,

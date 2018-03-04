@@ -29,8 +29,8 @@ export class DefaultErrorStateMatcher implements ErrorStateMatcher {
 @Component({
     selector: 'eu-tree-select',
     template: `
-    <mat-form-field [bsCol.sm]="span">
-        <select-tree 
+    <mat-form-field [bsCol.sm]="span" [bsCol.xs]="12" style="line-height:1">
+        <select-tree
             [formControl]="fieldControl" 
             [placeholder]="label"
             [treeTrigger]="tree"
@@ -90,7 +90,7 @@ export class SelectTreeComponent implements OnInit, AfterViewInit {
             if (!this.euTreeOptions) {
                 this.euTreeOptions = this.field.euTreeOptions
             }
-            if (!this.euTreeNodes) {
+            if (this.field.euTreeNodes && this.field.euTreeNodes.length > 0) {               
                 this.euTreeNodes = this.field.euTreeNodes
             }
 
@@ -118,7 +118,7 @@ export class SelectTreeComponent implements OnInit, AfterViewInit {
 
     onTreeSelectChange($event: TreeSelectChange) {
         let data = $event.value.data
-        this.fieldControl.patchValue(data.id)
+        // this.fieldControl.patchValue(data.id)
     }
 
     close() {
@@ -126,6 +126,10 @@ export class SelectTreeComponent implements OnInit, AfterViewInit {
     }
 
     onTreeEvent($event) {
+
+    }
+
+    _clear(e) {
 
     }
 

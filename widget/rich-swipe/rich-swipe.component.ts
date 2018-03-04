@@ -17,11 +17,11 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     // effect: 'cube',
     // effect: 'fade',
     effect: 'flip',
-    keyboardControl: true,
-    nextButton: '.swiper-button-next',
-    onSlideChangeStart: (value) => {
-        debugger
-    }
+    // keyboardControl: true,
+    // nextButton: '.swiper-button-next',
+    // onSlideChangeStart: (value) => {
+    //     debugger
+    // }
 };
 
 @Component({

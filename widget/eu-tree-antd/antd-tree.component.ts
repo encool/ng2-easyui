@@ -21,7 +21,7 @@ import { TreeNode } from "angular-tree-component";
         (nzLoadNodeChildren)="onNzLoadNodeChildren($event)">
     </nz-tree>
     `,
-    exportAs:"euAntdTree",
+    exportAs: "euAntdTree",
     styles: [`.angular-tree-component{background: white;color: rgba(0, 0, 0, 0.87);}"`],
     encapsulation: ViewEncapsulation.None
 })
@@ -67,8 +67,9 @@ export class AntdTreeComponent implements OnInit, OnAction {
                 return this.getNodes(this.params, node)
             }
         }, this.euTreeOptions.otherOptions)
-
-        this.refresh(this.params)
+        if (!this._nzNodes || this._nzNodes.length == 0) {
+            this.refresh(this.params)
+        }
     }
 
     onEvent(ev: any) {
