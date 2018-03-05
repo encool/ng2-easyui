@@ -1,6 +1,6 @@
 {
   "name": "ng2-easyui",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "description": "",
   "main": "./bundles/ng2-easyui.js",
   "module": "./ng2-easyui.es5.js",
