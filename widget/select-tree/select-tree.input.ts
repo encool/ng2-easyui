@@ -387,7 +387,7 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
             this._getConnectedElement(),
             { originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' })
             .withFallbackPosition(
-                { originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }
+            { originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }
             );
         return this._positionStrategy;
     }
@@ -512,14 +512,16 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
             if (!this._overlayRef) {
                 this.generateProtalAndOverlay()
             }
-            let treeComponent: AntdTreeComponent = this.treeWrap.tree
             let treeModal = this.treeWrap.tree.nzTree.treeModel
             let node: any = treeModal.getNodeById(value)
             if (node) {
                 this.triggerValue = node.data.name
-                treeModal.setActiveNode(node, value)
+                treeModal.setActiveNode(node, true)
                 this.value = node.data.id
             }
+        } else if (this.treeWrap && !value) {
+            let treeModal = this.treeWrap.tree.nzTree.treeModel
+            treeModal.setActiveNode({}, false)
         }
         // if (this.options) {
         //   this._setSelectionByValue(value);
