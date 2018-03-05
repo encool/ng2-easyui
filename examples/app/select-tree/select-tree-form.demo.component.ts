@@ -68,7 +68,7 @@ export class SelectTreeFormComponent {
                 }
             }),
             new SelectTreeField({
-                key: 'selectTree', name: '选择树',
+                key: 'selectTree', label: '选择树', required: true, span: 4,
                 euTreeOptions: {
                     treeId: "demoTree",
                     rootNodeName: "root",

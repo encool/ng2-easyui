@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 
-import { EfDictdataService } from '../../lib'
+import { EfDictdataService } from 'ng2-easyform'
 
 @Injectable()
 export class DictdataService extends EfDictdataService {
