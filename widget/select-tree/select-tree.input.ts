@@ -201,7 +201,7 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
 
     stateChanges = new Subject<void>();
 
-    set value(newValue: any | null) {debugger
+    set value(newValue: any | null) {
         if (newValue !== this._value) {
             this._value = newValue;
             this.writeValue(newValue);
@@ -447,7 +447,7 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
                 let treeSelectChange = new TreeSelectChange(event, { id: data.id, name: data.name, data: data })
                 this.treeSelectChange.emit(treeSelectChange)
             }
-        } else if (event.eventName = "reset") {
+        } else if (event.eventName == "reset") {
             let data: any = {}
             if (this._previousValue !== data.id || this._previousValue == undefined) {
                 this.triggerValue = data.name
