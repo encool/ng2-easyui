@@ -319,7 +319,6 @@ export class AggridComponent implements GridApi, OnInit {
     }
 
     onAction(action: EuGridAction) {
-
         let ids = this.getSelectedRowIds()
         let datas = this.getSelectedDatas()
         let ege: EuGridEvent = new EuGridEvent(
@@ -375,6 +374,21 @@ export class AggridComponent implements GridApi, OnInit {
         this.originParams = params
         if (fresh) {
             this.refresh()
+        }
+    }
+
+    private actionParams: any
+    /**
+     * 设置action的外部参数（非rowId这些）
+     * @param actionKey 
+     * @param param 
+     * @param all 是否所有action生效
+     */
+    setActionParams(actionKey: string, param: any, all?: boolean) {
+        if (all) {
+            this.actionParams.all = param
+        } else {
+            this.actionParams[actionKey] = param
         }
     }
 
