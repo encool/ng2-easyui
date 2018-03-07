@@ -1,6 +1,6 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-
+import { MatSidenavContainer } from "@angular/material";
 import {
     EuGridOptions, EuColModel, EuGridEvent, ModalConfig
     // } from 'ng2-easyui'
@@ -36,8 +36,8 @@ export class EuAggridDemoComponent implements OnInit {
     euGridOptions: EuGridOptions
     agGridColDefs: (ColDef | ColGroupDef)[]
 
-    constructor(private activatedRoute: ActivatedRoute) {
-
+    constructor(private activatedRoute: ActivatedRoute, private container: MatSidenavContainer) {
+        debugger
         this.agGridColDefs = [
             // {
             //     headerName: "编号",

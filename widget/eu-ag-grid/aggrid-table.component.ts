@@ -70,7 +70,7 @@ export class AggridComponent implements GridApi, OnInit {
     sidx: string
     sord: string
     queryExpanded: boolean = false
-    @Input() tableWidth: string = "1000px"
+    @Input() tableWidth: string = "100%"
     queryfields: FieldBase<any>[]
 
     //表格的初始化参数
