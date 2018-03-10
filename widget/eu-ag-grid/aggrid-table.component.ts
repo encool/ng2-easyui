@@ -328,6 +328,7 @@ export class AggridComponent implements GridApi, OnInit {
             ids,
             datas.length > 0 ? datas[0] : undefined,
             datas,
+            this.getActionParams(action.key)
         )
         switch (action.curdType) {
             case EuGridAction.TYPE_CREATE:
@@ -377,7 +378,7 @@ export class AggridComponent implements GridApi, OnInit {
         }
     }
 
-    private actionParams: any
+    private actionParams: any = {}
     /**
      * 设置action的外部参数（非rowId这些）
      * @param actionKey 
@@ -390,6 +391,10 @@ export class AggridComponent implements GridApi, OnInit {
         } else {
             this.actionParams[actionKey] = param
         }
+    }
+
+    getActionParams(key: string): any {
+        return Object.assign({}, this.actionParams[key], this.actionParams.all)
     }
 
     // getDataIDs = function () {
