@@ -87,10 +87,11 @@ export class AntdTreeDemoComponent implements OnInit {
     onClick(e) {
         let node: EuTreeNode = this.tree.getActiveDefNode()
         this.tree.refresh({}, node)
+        this.tree.refreshActiveNode()
     }
 
     onCheckClick(e) {
         let nodes = this.tree.getCheckedNodes(true)
-        debugger        
+        this.tree.refreshActiveNodeParent()
     }
 }

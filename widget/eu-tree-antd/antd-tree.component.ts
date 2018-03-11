@@ -195,10 +195,34 @@ export class AntdTreeComponent implements OnInit, OnAction {
 
     }
 
-    refreshSelectedNode() {
-
+    refreshActiveNode() {
+        var params = this.params
+        if (!params) {
+            params = {};
+        }
+        var activeNode = this.getActiveDefNode()
+        if (activeNode) {
+            this.refresh(params, activeNode, false, false, false);
+        } else {
+            console.warn("refreshActiveNode while no active node")
+            this.refresh(params);
+        }
     }
 
+    refreshActiveNodeParent() {
+        var params = this.params
+        if (!params) {
+            params = {};
+        }
+        var activeNode = this.getActiveDefNode()
+        if (activeNode && activeNode.parent) {
+            this.refresh(params, activeNode.parent, false, false, false);
+        } else {
+            console.warn("refreshActiveNodeParent while no active node or parent node")
+            this.refresh(params);
+        }
+    }
+    
     private refreshNode(node: TreeNode, id?: string, pid?: string) {
         node.loadNodeChildren()
     }
@@ -207,9 +231,9 @@ export class AntdTreeComponent implements OnInit, OnAction {
      * 获取一个选择的node
      */
     getActiveDefNode(): EuTreeNode {
-        let nodes = this.getActiveNodes()
+        let nodes = this.getActiveDefNodes()
         if (nodes && nodes.length > 0) {
-            return this.getActiveDefNodes()[0]
+            return nodes[0]
         } else {
             return null
         }
