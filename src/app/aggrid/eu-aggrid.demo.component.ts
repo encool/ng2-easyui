@@ -1,6 +1,5 @@
 import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-import { MatSidenavContainer } from "@angular/material";
 import {
     EuGridOptions, EuColModel, EuGridEvent, ModalConfig
     // } from 'ng2-easyui'
@@ -9,6 +8,8 @@ import {
     AggridComponent, ColDef, ColGroupDef,
     // } from 'ng2-easyui/eu-ag-grid'
 } from '../../../widget/eu-ag-grid'
+
+import { IndexComponent } from "../index.component";
 import { ModalInfoComponent } from './modal.info.component'
 
 import {
@@ -39,7 +40,7 @@ export class EuAggridDemoComponent implements OnInit {
     agGridColDefs: (ColDef | ColGroupDef)[]
     @ViewChild(AggridComponent) gridComponent: AggridComponent
 
-    constructor(private activatedRoute: ActivatedRoute, private container: MatSidenavContainer) {
+    constructor(private activatedRoute: ActivatedRoute, private indexComponent: IndexComponent) {
         this.agGridColDefs = [
             // {
             //     headerName: "编号",
@@ -104,6 +105,9 @@ export class EuAggridDemoComponent implements OnInit {
                     span: 4,
                 }),
             ]
+        })
+        this.indexComponent.openedChange.subscribe((data)=>{
+            this.gridComponent.reComputeSize()
         })
     }
 

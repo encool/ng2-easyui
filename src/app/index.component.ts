@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter } from '@angular/core';
 import { MatSidenav } from "@angular/material";
 
 import {
@@ -131,4 +131,8 @@ export class IndexComponent implements OnInit {
         this.sideNav.close()
     }
 
+    openedChange: EventEmitter<any> = new EventEmitter<any>(); 
+    onSideChanged(e) {
+        this.openedChange.emit()
+    }
 }

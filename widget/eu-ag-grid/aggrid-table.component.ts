@@ -255,9 +255,7 @@ export class AggridComponent implements GridApi, OnInit {
     }
 
     gridReady($event) {
-
-        this.aggridOptions.api.sizeColumnsToFit()
-
+        this.reComputeSize()
         if (this.rowModelType == 'inMemory') {
             this.getPageService().getPage(this.url, this.pageSize, this.pageIndex, this.cond).then(data => {
                 this.length = data.total
@@ -266,6 +264,10 @@ export class AggridComponent implements GridApi, OnInit {
                 // this.rowData = data
             })
         }
+    }
+
+    reComputeSize(){
+        this.aggridOptions.api.sizeColumnsToFit()
     }
 
     onSortChanged($event) {
