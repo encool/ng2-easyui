@@ -1,11 +1,12 @@
 import { Type } from "@angular/core"
-import { EuGridAction } from './grid.action'
+import { BaseAction } from '../action'
+import { CURDAction } from "../curd.action";
 import { FieldBase } from 'ng2-easyform';
 import { ModalConfig } from '../modal/modal-config'
 
 export class EuGridOptions {
     primaryKey: string
-    actions: EuGridAction[]
+    actions: BaseAction[]
     defaultActionModalConfig: ModalConfig
     queryfields: FieldBase<any>[]
     title: string
@@ -110,7 +111,7 @@ export class EuGridOptions {
         title: string
         queryfields?: FieldBase<any>[]
         defaultActionModalConfig?: ModalConfig,
-        actions?: Array<EuGridAction>
+        actions?: Array<BaseAction>
         defaultaction?: boolean
         multiselect?: boolean
         mtype?: string
@@ -126,11 +127,11 @@ export class EuGridOptions {
         this.mtype = options.mtype == undefined ? "get" : options.mtype
         this.defaultActionModalConfig = options.defaultActionModalConfig
         this.actions = options.defaultaction == true ? [
-            EuGridAction.CREATE,
-            EuGridAction.UPDATE,
-            EuGridAction.QUERY,
-            EuGridAction.READ,
-            EuGridAction.DELETE,
+            CURDAction.CREATE,
+            CURDAction.UPDATE,
+            CURDAction.QUERY,
+            CURDAction.READ,
+            CURDAction.DELETE,
         ] : options.actions
         this.rowNum = options.rowNum == undefined ? 10 : options.rowNum
         this.postData = options.postData == undefined ? {} : options.postData
