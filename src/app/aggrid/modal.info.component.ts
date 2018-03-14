@@ -10,6 +10,7 @@ import {
 
 import { MdTextinputField, FieldBase, MdFormComponent } from 'ng2-easyform'
 import { MAT_DIALOG_DATA, MatDialog } from "@angular/material"
+import { BaseAction } from '../../../widget/core';
 
 @Component({
     selector: 'dialog-data-example-dialog',
@@ -21,7 +22,7 @@ import { MAT_DIALOG_DATA, MatDialog } from "@angular/material"
 export class ModalInfoComponent implements OnModalAction {
 
     ege: EuGridEvent
-    action: EuGridAction
+    action: BaseAction
     fields: FieldBase<any>[]
     @ViewChild(MdFormComponent) infoForm: MdFormComponent
     constructor( @Inject(MAT_DIALOG_DATA) public data: any, private euPageService: EuPageService) {
