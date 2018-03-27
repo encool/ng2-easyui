@@ -15,6 +15,7 @@ import { TreeModalComponent } from "./tree-modal.component";
             <eu-mat-panel bsCol.sm="4" title="测试panel标题">
                 <eu-antd-tree #panelcontent_ref
                     (treeEvent)="onTreeEvent($event)"
+                    (euTreeCheck)="onEuTreeCheck($event)"
                     [euTreeOptions]="euTreeOptions"
                     [euTreeNodes]="euTreeNodes">
                 </eu-antd-tree>
@@ -93,5 +94,9 @@ export class AntdTreeDemoComponent implements OnInit {
     onCheckClick(e) {
         let nodes = this.tree.getCheckedNodes(true)
         this.tree.refreshActiveNodeParent()
+    }
+
+    onEuTreeCheck(e) {
+        
     }
 }

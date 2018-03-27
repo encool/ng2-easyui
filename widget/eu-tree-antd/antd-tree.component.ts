@@ -33,6 +33,12 @@ export class AntdTreeComponent implements OnInit, OnAction {
     @Input() nzShiftSelectedMulti = true;
 
     @Output() treeEvent: EventEmitter<TreeEvent> = new EventEmitter<TreeEvent>()
+    @Output() euTreeCheck: EventEmitter<{
+        checked: boolean,
+        eventName: string,
+        euTreeNode: EuTreeNode,
+        node: any
+    }> = new EventEmitter<any>()
 
     @ViewChild(NzTreeComponent) nzTree: NzTreeComponent
 
@@ -222,7 +228,7 @@ export class AntdTreeComponent implements OnInit, OnAction {
             this.refresh(params);
         }
     }
-    
+
     private refreshNode(node: TreeNode, id?: string, pid?: string) {
         node.loadNodeChildren()
     }
@@ -258,25 +264,15 @@ export class AntdTreeComponent implements OnInit, OnAction {
     private checkedLeafNodes: EuTreeNode[] = []
     private checkedParentNodes: EuTreeNode[] = []
     private checkedNodes: EuTreeNode[] = []
+
     onCheck(e) {
-        // debugger
-        // let node: TreeNode = e.node
-        // let _this = this
-        // function doNode(node: TreeNode) {
-        //     if (e.checked) {
-        //         if (node.isLeaf) {
-        //             _this.checkedLeafNodes.push(_this.treeNodeToEuTreeNode(node))
-        //         } else {
-        //             _this.checkedParentNodes.push(_this.treeNodeToEuTreeNode(node))
-        //             if (node.children) {
-        //                 node.children.forEach(value => {
-        //                     doNode(value)
-        //                 })
-        //             }
-        //         }
-        //     }
-        // }
-        // doNode(node)
+        let euTreeNode = this.treeNodeToEuTreeNode(e.node)
+        this.euTreeCheck.emit({
+            checked: e.checked,
+            eventName: e.eventName,
+            euTreeNode: euTreeNode,
+            node: e.node
+        })
     }
 
     getCheckedNodes(checked?: boolean): Array<EuTreeNode> {
@@ -290,15 +286,6 @@ export class AntdTreeComponent implements OnInit, OnAction {
             nodes.forEach(node => {
                 if (node.checked) {
                     _this.checkedNodes.push(node)
-
-                    // if (node.isLeaf) {
-                    //     _this.checkedLeafNodes.push(eunode)
-                    // } else {
-                    //     _this.checkedParentNodes.push(eunode)
-                    //     if (node.children) {
-                    //         doNodes(node.children)
-                    //     }
-                    // }
                 }
                 if (node.children) {
                     doNodes(node.children)
