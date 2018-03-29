@@ -18,17 +18,22 @@ export class TreeService extends EuTreeService {
     }
 
     getTreeNodes(url, node, params): Promise<EuTreeNode[]> {
+        let nodes = this.genareteNodes(10);
         return new Promise<EuTreeNode[]>(resolve => {
-            resolve([
-                { id: this.guid(), name: 'child2.1', hasChildren: true },
-                {
-                    id: this.guid(),
-                    name: 'child2.2',
-                    children: [
-                        { id: this.guid(), name: 'subsub' }
-                    ]
-                }
-            ])
+            resolve(
+                [
+                    { id: this.guid(), name: 'child2.1', hasChildren: true },
+                    {
+                        id: this.guid(),
+                        name: 'child2.2',
+                        checked: true,
+                        children: [
+                            { id: this.guid(), name: 'subsub' }
+                        ]
+                    }
+                ]
+                // nodes
+            )
         })
     }
 
@@ -47,4 +52,12 @@ export class TreeService extends EuTreeService {
             s4() + '-' + s4() + s4() + s4();
     }
 
+    private genareteNodes(num: number) {
+        let nodes = new Array();
+        for (var i = 0; i < num; i++) {
+            let node = { id: this.guid(), name: 'child' + num, hasChildren: true }
+            nodes.push(node)
+        }
+        return nodes;
+    }
 }

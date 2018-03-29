@@ -26,6 +26,7 @@ import { TreeNode } from "angular-tree-component";
     encapsulation: ViewEncapsulation.None
 })
 export class AntdTreeComponent implements OnInit, OnAction {
+    // [nzAutoExpandParent]="2"
 
     @Input() euTreeNodes: EuTreeNode[] = []
     @Input() euTreeOptions: EuTreeOptions
@@ -78,15 +79,19 @@ export class AntdTreeComponent implements OnInit, OnAction {
         }
     }
 
-    onEvent(ev: any) {
-        // console.log('onEvent', ev);
+    onEvent(event: any) {
+        if (event.eventName == "initialized") {
+            let node: TreeNode = this.nzTree.treeModel.getFirstRoot();
+            node.expand()
+        }
     }
 
     onNzLoadNodeChildren($event) {
-        let node: TreeNode = $event.node
-        if (node.data.checked) {
-            (this.nzTree as any).updateCheckState(node, true)
-        }
+        let node: TreeNode = $event.node;
+        (this.nzTree as any).traverseNode();
+        // if (node.data.checked) {
+        //     (this.nzTree as any).updateCheckState(node, true)
+        // }
     }
 
     /**
