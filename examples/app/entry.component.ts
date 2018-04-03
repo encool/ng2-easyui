@@ -5,7 +5,7 @@ import {
     EuMatTab, EuTabService
 // } from '../../widget'
 } from 'ng2-easyui'
-
+import { EuModalService } from "ng2-easyui.core";
 @Component({
     selector: 'index-app',
     template: `
@@ -19,6 +19,8 @@ import {
         flex-direction: row;
         justify-content: center;">
             <button mat-raised-button *ngFor="let link of links" [routerLink]="link.path">{{link.label}}</button>
+            <button mat-raised-button (click)="modalClick($event)">modal</button>
+            
         </div>
     </div>
 `,
@@ -67,7 +69,8 @@ export class EntryComponent {
         },
     ]
 
-    constructor(private euTabService: EuTabService, private activatedRoute: ActivatedRoute) {
+    constructor(private euTabService: EuTabService, private activatedRoute: ActivatedRoute,
+        private euModalService: EuModalService) {
 
     }
 
@@ -76,5 +79,10 @@ export class EntryComponent {
             // debugger
         });
     }
+    
+    modalClick(e) {
+        this.euModalService.openConfirm({ message: "是<br>否" }, () => {
 
+        })
+    }
 }

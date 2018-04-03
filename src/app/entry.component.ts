@@ -5,7 +5,7 @@ import {
     EuMatTab, EuTabService
 } from '../../widget'
 // } from 'ng2-easyui'
-
+import { EuModalService } from "ng2-easyui.core";
 @Component({
     selector: 'index-app',
     template: `
@@ -19,6 +19,8 @@ import {
         flex-direction: row;
         justify-content: center;">
             <button mat-raised-button *ngFor="let link of links" [routerLink]="link.path">{{link.label}}</button>
+            <button mat-raised-button (click)="modalClick($event)">modal</button>
+            
         </div>
     </div>
 `,
@@ -29,45 +31,46 @@ export class EntryComponent {
         path,
         label
     }[] = [
-        {
-            path: "/demo/EuAggridDemoComponent",
-            label: "aggrid"
-        },
-        {
-            path: ["/demo/EuAggridDemoComponent", { id1: "1" }],
-            label: "aggrid1 参数1"
-        },
-        {
-            path: ["/demo/EuAggridDemoComponent", { id1: "2" }],
-            label: "aggrid2 参数2"
-        },
-        {
-            path: "/RichSwipeDemoComponent",
-            label: "swipe"
-        },
-        {
-            path: "Bpmn2Demo/Bpmn2DemoComponent",
-            label: "bpmn2"
-        },
-        {
-            path: "/AngTreeDemoComponent",
-            label: "ang-tree"
-        },
-        {
-            path: ["/EntryComponent", { p: 1 }],
-            label: "entry1 参数1"
-        },
-        {
-            path: ["/EntryComponent", { p: 2 }],
-            label: "entry2 参数2"
-        },
-        {
-            path: ["/EntryComponent", { p: 2 }],
-            label: "entry2 参数2"
-        },
-    ]
+            {
+                path: "/demo/EuAggridDemoComponent",
+                label: "aggrid"
+            },
+            {
+                path: ["/demo/EuAggridDemoComponent", { id1: "1" }],
+                label: "aggrid1 参数1"
+            },
+            {
+                path: ["/demo/EuAggridDemoComponent", { id1: "2" }],
+                label: "aggrid2 参数2"
+            },
+            {
+                path: "/RichSwipeDemoComponent",
+                label: "swipe"
+            },
+            {
+                path: "Bpmn2Demo/Bpmn2DemoComponent",
+                label: "bpmn2"
+            },
+            {
+                path: "/AngTreeDemoComponent",
+                label: "ang-tree"
+            },
+            {
+                path: ["/EntryComponent", { p: 1 }],
+                label: "entry1 参数1"
+            },
+            {
+                path: ["/EntryComponent", { p: 2 }],
+                label: "entry2 参数2"
+            },
+            {
+                path: ["/EntryComponent", { p: 2 }],
+                label: "entry2 参数2"
+            },
+        ]
 
-    constructor(private euTabService: EuTabService, private activatedRoute: ActivatedRoute) {
+    constructor(private euTabService: EuTabService, private activatedRoute: ActivatedRoute,
+        private euModalService: EuModalService) {
 
     }
 
@@ -77,4 +80,9 @@ export class EntryComponent {
         });
     }
 
+    modalClick(e) {
+        this.euModalService.openConfirm({ message: "是<br>否" }, () => {
+
+        })
+    }
 }

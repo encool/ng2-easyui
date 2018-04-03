@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MatDialogModule, MatButtonModule } from '@angular/material';
 
 import { ModalContainerComponent } from './modal.container.component'
+import { MessageComponent } from "./message.componet";
 import { MdModalService } from './md-modal.service'
 import { EuModalService } from 'ng2-easyui.core'
 
@@ -17,13 +18,12 @@ import { EuModalService } from 'ng2-easyui.core'
         ModalContainerComponent
     ],
     declarations: [
-        ModalContainerComponent
-    ],
-    providers: [
-        { provide: EuModalService, useClass: MdModalService, },
+        ModalContainerComponent,
+        MessageComponent
     ],
     entryComponents: [
-        ModalContainerComponent
+        ModalContainerComponent,
+        MessageComponent
     ]
 })
 export class EasyUIMdModalModule {
@@ -31,7 +31,8 @@ export class EasyUIMdModalModule {
         return {
             ngModule: EasyUIMdModalModule,
             providers: [
-                { provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: components, multi: true }
+                { provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: components, multi: true },
+                { provide: EuModalService, useClass: MdModalService },
             ],
         };
     }

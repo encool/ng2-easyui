@@ -1,9 +1,13 @@
-import { Component, ComponentFactory, ViewEncapsulation, OnInit, Inject, ViewContainerRef, ViewChild, ComponentFactoryResolver, ComponentRef } from '@angular/core';
+import {
+    Component, ComponentFactory, ViewEncapsulation, OnInit, Inject,
+    ViewContainerRef, ViewChild, ComponentFactoryResolver, ComponentRef
+} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
 
 import { Observable } from 'rxjs/Observable'
 
 import { OnModalAction, ModalAction } from 'ng2-easyui.core'
+import { MessageComponent } from "./message.componet";
 
 @Component({
     selector: 'modal-container',
@@ -94,7 +98,14 @@ export class ModalContainerComponent implements OnInit {
 
     ngOnInit() {
         let component = this.data.euMdParams.component
-        let myComponentFactory: ComponentFactory<OnModalAction> = this.componentFactoryResolver.resolveComponentFactory(component)
-        this.cmpRef = this.wrapperRef.createComponent(myComponentFactory)
+        if (component) {
+            let myComponentFactory: ComponentFactory<OnModalAction> = this.componentFactoryResolver.resolveComponentFactory(component)
+            this.cmpRef = this.wrapperRef.createComponent(myComponentFactory)
+        } else if (this.data.euMdParams.message) {
+            let myComponentFactory: ComponentFactory<OnModalAction> = this.componentFactoryResolver.resolveComponentFactory(MessageComponent)
+            this.cmpRef = this.wrapperRef.createComponent(myComponentFactory)
+            let ref = this.cmpRef as any
+            ref.instance.message = this.data.euMdParams.message
+        }
     }
 }

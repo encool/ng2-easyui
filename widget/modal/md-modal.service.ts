@@ -35,45 +35,35 @@ export class MdModalService extends EuModalService {
     openMdDialog<T extends Type<any>>(component: T, mdDialogConfig: MatDialogConfig, success?: Function, dismiss?: Function): void {
         let dialogRef: MatDialogRef<T> = this.dialog.open<T>(component, mdDialogConfig);
 
-        // dialogRef.afterClosed().subscribe(result => {
-        //     if (success) {
-        //         success(result)
-        //     }
-        // });
     }
 
     openConfirm<T>(
         modalOptions: ModalConfig,
         success?: Function, dismiss?: Function) {
-        // let myComponentFactory = modalContext.componentFactoryResolver.resolveComponentFactory(ModalContainerComponent);
-        // let _ref: ComponentRef<ModalContainerComponent<T>> = modalContext.vcRef.createComponent(myComponentFactory);
-
-        // let successwrapper = (data) => {
-        //     if (success) {
-        //         success(data)
-        //     }
-        //     this.destroy();
-        // }
-
-
-        // let dismisswrapper = (data) => {
-        //     if (dismiss) {
-        //         dismiss(data)
-        //     }
-        //     this.destroy();
-        // }
-
-        // this._smodalstack.push(_ref)
-
-        // _ref.instance.openConfirm(modalOptions.message, successwrapper, dismisswrapper)
-        // _ref.instance._width = modalOptions.width
-        // _ref.instance._height = modalOptions.height
-        // _ref.instance._title = modalOptions.title
-        // _ref.instance._actions = modalOptions.actions == undefined ? this._confirm_actions : modalOptions.actions
+        let data: any = modalOptions.data || {}
+        let euMdParams: any = {}
+        euMdParams.component = modalOptions.component
+        euMdParams.modalActions = modalOptions.modalActions == undefined ? this._confirm_actions : modalOptions.modalActions
+        euMdParams.title = modalOptions.title || '确认'
+        euMdParams.message = modalOptions.message
+        euMdParams.success = success
+        euMdParams.dismiss = dismiss
+        data.euMdParams = euMdParams
+        // debugger
+        let mdDialogConfig: MatDialogConfig = {
+            data: data,
+            height: modalOptions.height,
+            // position: {
+            //     top: "120px"
+            // },
+            position: modalOptions.position,
+            width: modalOptions.width,
+            viewContainerRef: modalOptions.viewContainerRef
+        }
+        this.openMdDialog(ModalContainerComponent, mdDialogConfig, success, dismiss)
     }
 
     open(modalOptions: ModalConfig, success?: Function, dismiss?: Function) {
-
         let data: any = modalOptions.data || {}
         let euMdParams: any = {}
         euMdParams.component = modalOptions.component
@@ -95,72 +85,6 @@ export class MdModalService extends EuModalService {
             viewContainerRef: modalOptions.viewContainerRef
         }
         this.openMdDialog(ModalContainerComponent, mdDialogConfig, success, dismiss)
-        // let myComponentFactory = modalContext.componentFactoryResolver.resolveComponentFactory(SimpleModalComponent);
-        // let _ref: ComponentRef<SimpleModalComponent> = modalContext.vcRef.createComponent(myComponentFactory);
-        // // let _ref: ComponentRef<SimpleModalComponent> = this._modal_context.vcRef.createComponent(myComponentFactory);
-        // let myContentComponentFactory = modalContext.componentFactoryResolver.resolveComponentFactory(modalOptions.comp);
-
-        // let successwrapper = (data) => {
-        //     if (success) {
-        //         success(data)
-        //     }
-        //     this.destroy();
-        // }
-
-
-        // let dismisswrapper = (data) => {
-        //     if (dismiss) {
-        //         dismiss(data)
-        //     }
-        //     this.destroy();
-        // }
-
-        // this._smodalstack.push(_ref)
-
-        // _ref.instance.open(myContentComponentFactory, params, successwrapper, dismisswrapper)
-        // _ref.instance._width = modalOptions.width
-        // _ref.instance._height = modalOptions.height
-        // _ref.instance._title = modalOptions.title
-        // _ref.instance._actions = modalOptions.actions == undefined ? this._default_actions : modalOptions.actions
-    }
-
-    open2(
-        modalOptions: {
-            comp: Type<any>
-            actions?: ModalAction[]
-            width?: string
-            title?: string
-            height?: string | number
-        },
-        params: any,
-        success?: Function, dismiss?: Function) {
-        // debugger
-        // let myComponentFactory = this._modal_context.componentFactoryResolver.resolveComponentFactory(SimpleModalComponent);
-        // let _ref: ComponentRef<SimpleModalComponent> = this._modal_context.vcRef.createComponent(myComponentFactory);
-        // let myContentComponentFactory = this._modal_context.componentFactoryResolver.resolveComponentFactory(modalOptions.comp);
-
-        // let successwrapper = (data) => {
-        //     if (success) {
-        //         success(data)
-        //     }
-        //     this.destroy();
-        // }
-
-
-        // let dismisswrapper = (data) => {
-        //     if (dismiss) {
-        //         dismiss(data)
-        //     }
-        //     this.destroy();
-        // }
-
-        // this._smodalstack.push(_ref)
-
-        // _ref.instance.open(myContentComponentFactory, params, successwrapper, dismisswrapper)
-        // _ref.instance._width = modalOptions.width
-        // _ref.instance._height = modalOptions.height
-        // _ref.instance._title = modalOptions.title
-        // _ref.instance._actions = modalOptions.actions == undefined ? this._default_actions : modalOptions.actions
     }
 
     destroy() {

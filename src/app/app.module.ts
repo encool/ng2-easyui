@@ -110,7 +110,7 @@ import { EntryComponent } from "./entry.component";
     EasyFormCoreModule,
     EasyFormMdModule,
 
-    EasyUIMdModalModule,
+    EasyUIMdModalModule.withComponents([]),
     // EasyUIagGridModule,
     EasyUIRichSwipeModule,
     EasyUIAngularTreeModule,
