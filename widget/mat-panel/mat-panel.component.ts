@@ -37,6 +37,7 @@ export class MatPanelComponent implements OnInit {
      */
     @Input() color = "primary"
     @Input() height: string
+    @Input() minHeight: string
     @Input() title: string = 'panel'
 
     @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger
@@ -47,7 +48,7 @@ export class MatPanelComponent implements OnInit {
 
     ngOnInit() {
         this._contentStyle = {
-            'min-height': '450px',
+            'min-height': this.minHeight || '450px',
             'height': this.height,
             "overflow": "overlay"
         }
