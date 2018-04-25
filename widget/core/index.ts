@@ -21,3 +21,5 @@ export { EuDictService } from './dict/eu-dict.service'
 
 export { EuTreeNode, EuTreeOptions, TreeAction, TreeEvent } from './tree/tree.def'
 export { EuTreeService } from './tree/eu-tree.service'
+
+export { Menu } from './menu/menu'

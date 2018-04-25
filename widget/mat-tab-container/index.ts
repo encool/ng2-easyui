@@ -3,15 +3,17 @@ import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 
 import { MatTabsModule } from "@angular/material";
+import { NzBreadCrumbModule } from "ng-zorro-antd";
 import { EuTabService } from "./eu-tab.service";
 import { TitleGuard } from './title.gard'
 
 import { MatContainerComponent, EuMatTab } from "./mat-container.component";
 @NgModule({
     imports: [
-        MatTabsModule,
         CommonModule,
-        RouterModule
+        RouterModule,
+        MatTabsModule,
+        NzBreadCrumbModule,
     ],
     declarations: [
         MatContainerComponent

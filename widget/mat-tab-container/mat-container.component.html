@@ -1,12 +1,38 @@
-<div style="position: relative;">
+<div style="position: relative;" *ngIf="model == 'tab'">
     <nav mat-tab-nav-bar>
         <div style="display: inline-block;" *ngFor="let link of euTabService.navLinks">
-            <div mat-tab-link [routerLink]="link.path" [queryParams]="link.queryParams" routerLinkActive #rla="routerLinkActive"
-                [active]="isActive(link)" [routerLinkActiveOptions]="{exact: true}">
+            <div mat-tab-link [routerLink]="link.path" [queryParams]="link.queryParams"
+                routerLinkActive #rla="routerLinkActive" [active]="isActive(link)"
+                [routerLinkActiveOptions]="{exact: true}">
                 {{link.label}}
                 <div *ngIf="!link.isIndex" class="eu_mat_tab_close" (click)="tabClose(link)"></div>
             </div>
         </div>
     </nav>
+    <router-outlet></router-outlet>
+</div>
+<div *ngIf="model == 'breadcrumb'">
+    <nav *ngIf="breadcrumbMenus.length > 0">
+        <div class="nav-wrapper">
+            <div style="margin-left:1px;padding-left:10px;    font-family: 'Roboto', sans-serif !important;
+            font-weight: normal;">
+                <a [routerLink]="menu.l" *ngFor="let menu of breadcrumbMenus" class="breadcrumb">{{menu.t}}</a>
+            </div>
+        </div>
+    </nav>
+    <!-- <nz-breadcrumb>
+        <nz-breadcrumb-item>
+            Home
+        </nz-breadcrumb-item>
+        <nz-breadcrumb-item>
+            <a href="">Application Center</a>
+        </nz-breadcrumb-item>
+        <nz-breadcrumb-item>
+            <a href="">Application List</a>
+        </nz-breadcrumb-item>
+        <nz-breadcrumb-item>
+            An Application
+        </nz-breadcrumb-item>
+    </nz-breadcrumb> -->
     <router-outlet></router-outlet>
 </div>
