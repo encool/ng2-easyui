@@ -40,11 +40,6 @@ nav .nav-wrapper {
     color: black;
 }
 
-.breadcrumb:before {
-    content: "\e7c3";
-    font-family: "Material-Design-Icons";
-}
-
 .breadcrumb:first-child:before {
     display: none;
 }

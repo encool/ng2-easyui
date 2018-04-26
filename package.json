@@ -1,6 +1,6 @@
 {
   "name": "ng2-easyui",
-  "version": "0.1.29",
+  "version": "0.1.32",
   "description": "",
   "main": "./bundles/ng2-easyui.js",
   "module": "./ng2-easyui.es5.js",
@@ -11,7 +11,7 @@
     "clean:lib": "rimraf dist/grid",
     "build:app": "ng build --app app --no-extract-license --prod --build-optimizer",
     "buildpkg": "ng-packagr -p ng-package.json",
-    "clean": "rimraf out-tsc dist/*",
+    "clean": "rimraf out-tsc && rimraf dist",
     "prebuild": "npm run clean",
     "build": "node build.js",
     "ng": "ng",
@@ -53,6 +53,7 @@
     "@types/node": "^8.10.8",
     "classlist.js": "^1.1.20150312",
     "cpr": "^3.0.1",
+    "del-cli": "^1.1.0",
     "rimraf": "^2.6.2",
     "rollup": "^0.42.0",
     "rollup-plugin-commonjs": "^8.4.1",
@@ -60,7 +61,7 @@
     "rollup-plugin-sourcemaps": "^0.4.1",
     "rollup-plugin-uglify": "^2.0.1",
     "rxjs": "^5.5.10",
-    "typescript": "~2.4.0",
+    "typescript": "^2.6.2",
     "web-animations-js": "^2.3.1",
     "webpack-bundle-analyzer": "^2.9.1"
   },
@@ -74,6 +75,7 @@
     "lodash": "^4.17.4",
     "ng-tree-antd": "^2.2.3",
     "ng2-easyform": "^0.3.14",
+    "ng2-easyui.core": "^0.1.23",
     "ng2-tree": "^2.0.0-rc.11",
     "ngx-swiper-wrapper": "^5.3.8",
     "tiny-svg": "~0.1.3"
