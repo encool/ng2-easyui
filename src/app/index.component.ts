@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild, EventEmitter } from '@angular/core';
 import { MatSidenav } from "@angular/material";
 
 import {
-    MatContainerComponent, EuMatTab, Menu
+    MatContainerComponent, EuMatTab
 } from '../../widget'
 // } from 'ng2-easyui'
+import { Menu } from "ng2-easyui.core";
 
 @Component({
     selector: 'demo-index',
@@ -15,62 +16,62 @@ export class IndexComponent implements OnInit {
     menus: Menu[] = [
         {
             id: "1",
-            title: "feature",
-            icon: "",
-            children: [
+            t: "feature",
+            i: "",
+            c: [
                 {
                     id: "1",
-                    title: "demo",
-                    icon: "",
-                    children: [
+                    t: "demo",
+                    i: "",
+                    c: [
                         {
                             id: "1",
-                            title: "aggrid",
-                            link: "/demo/EuAggridDemoComponent",
-                            icon: "",
+                            t: "aggrid",
+                            l: "/demo/EuAggridDemoComponent",
+                            i: "",
                         },
                         {
                             id: "1",
-                            title: "Bpmn2Demo",
-                            link: "Bpmn2Demo/Bpmn2DemoComponent",
-                            icon: "",
+                            t: "Bpmn2Demo",
+                            l: "Bpmn2Demo/Bpmn2DemoComponent",
+                            i: "",
                         },
                     ]
                 },
                 {
                     id: "1",
-                    title: "demo",
-                    icon: "",
-                    children: [
+                    t: "demo",
+                    i: "",
+                    c: [
                         {
                             id: "1",
-                            title: "matpanel",
-                            link: "/MatPanelDemoComponent",
-                            icon: "",
+                            t: "matpanel",
+                            l: "/MatPanelDemoComponent",
+                            i: "",
                         },
                         {
                             id: "1",
-                            title: "ng2Tree",
-                            link: "/Ng2TreeDemoComponent",
-                            icon: "",
+                            t: "ng2Tree",
+                            l: "/Ng2TreeDemoComponent",
+                            i: "",
                         },
                         {
                             id: "1",
-                            title: "antdTree",
-                            link: "/AntdTreeDemoComponent",
-                            icon: "",
+                            t: "antdTree",
+                            l: "/AntdTreeDemoComponent",
+                            i: "",
                         },
                         {
                             id: "1",
-                            title: "SelectTree",
-                            link: "/SelectTreeDemoComponent",
-                            icon: "",
+                            t: "SelectTree",
+                            l: "/SelectTreeDemoComponent",
+                            i: "",
                         },
                         {
                             id: "1",
-                            title: "SelectTreeForm",
-                            link: "/SelectTreeFormComponent",
-                            icon: "",
+                            t: "SelectTreeForm",
+                            l: "/SelectTreeFormComponent",
+                            i: "",
                         },
                     ]
                 },
@@ -78,28 +79,28 @@ export class IndexComponent implements OnInit {
         },
         {
             id: "1",
-            title: "level1",
-            icon: "",
-            children: [
+            t: "level1",
+            i: "",
+            c: [
                 {
                     id: "1",
-                    title: "level2",
-                    link: "ddd",
-                    icon: "",
+                    t: "level2",
+                    l: "ddd",
+                    i: "",
                 },
                 {
                     id: "1",
-                    title: "demo",
-                    link: "ddd",
-                    icon: "",
+                    t: "demo",
+                    l: "ddd",
+                    i: "",
                 },
             ]
         },
         {
             id: "1",
-            title: "系统设置",
-            link: "ddd",
-            icon: "",
+            t: "系统设置",
+            l: "ddd",
+            i: "",
         },
     ]
 
@@ -118,8 +119,9 @@ export class IndexComponent implements OnInit {
 
     constructor() { }
 
+    srcMenus = [{ id: "1", t: "11", l: "", i: "" }]
     ngOnInit() {
-
+        this.container.breadcrumbMenus = this.srcMenus
     }
 
     isSideBySide = true
@@ -128,10 +130,13 @@ export class IndexComponent implements OnInit {
     }
 
     onHideMenu() {
+        debugger
+        this.srcMenus = []
+        // this.container.breadcrumbMenus = []
         this.sideNav.close()
     }
 
-    openedChange: EventEmitter<any> = new EventEmitter<any>(); 
+    openedChange: EventEmitter<any> = new EventEmitter<any>();
     onSideChanged(e) {
         this.openedChange.emit()
     }

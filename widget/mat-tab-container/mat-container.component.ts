@@ -25,7 +25,7 @@ export class MatContainerComponent implements OnInit {
     @ViewChild(RouterLink) routerLink: RouterLink
     @ViewChild(RouterLinkActive) routerLinkActive: RouterLinkActive
 
-    breadcrumbMenus: Menu[] = [new Menu("$dkiesdf", "1", "首页", "index"),new Menu("$dkiesdf", "1", "系统", "index")]
+    @Input() breadcrumbMenus: Menu[] = [new Menu("$dkiesdf", "1", "首页", "index")]
 
     constructor(private router: Router, public euTabService: EuTabService) {
 
@@ -38,6 +38,8 @@ export class MatContainerComponent implements OnInit {
         this.routerLinkActive
         this.router
     }
+
+    
 
     tabClose(tab: EuMatTab) {
         this.euTabService.removeTab(tab)

@@ -61,13 +61,13 @@
     "rollup-plugin-sourcemaps": "^0.4.1",
     "rollup-plugin-uglify": "^2.0.1",
     "rxjs": "^5.5.10",
-    "typescript": "^2.6.2",
+    "typescript": "~2.6.2",
     "web-animations-js": "^2.3.1",
     "webpack-bundle-analyzer": "^2.9.1"
   },
   "dependencies": {
-    "ag-grid": "^15.0.0",
-    "ag-grid-angular": "^15.0.0",
+    "ag-grid": "^17.1.1",
+    "ag-grid-angular": "^17.1.0",
     "angular-tree-component": "^7.1.0",
     "bpmn-js": "0.22.1",
     "bpmn-js-properties-panel": "0.16.1",
@@ -75,7 +75,7 @@
     "lodash": "^4.17.4",
     "ng-tree-antd": "^2.2.3",
     "ng2-easyform": "^0.3.14",
-    "ng2-easyui.core": "^0.1.23",
+    "ng2-easyui.core": "^0.1.26",
     "ng2-tree": "^2.0.0-rc.11",
     "ngx-swiper-wrapper": "^5.3.8",
     "tiny-svg": "~0.1.3"

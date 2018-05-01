@@ -9,7 +9,7 @@ import { Router } from "@angular/router";
 
 import { CdkAccordionItem, CdkAccordion, } from "@angular/cdk/accordion";
 import { UniqueSelectionDispatcher } from "@angular/cdk/collections";
-import { Menu } from "./menu";
+import { Menu } from "ng2-easyui.core";
 
 let nextId = 0
 
@@ -65,11 +65,11 @@ export class EuMenuComponent extends CdkAccordionItem {
     }
 
     menuClick() {
-        if (this.menu.link) {
+        if (this.menu.l) {
             // this._activateLink()
-            this.router.navigateByUrl(this.menu.link)
+            this.router.navigateByUrl(this.menu.l)
 
-            if (!this.menu.children) {
+            if (!this.menu.c) {
                 this.hideMenu.emit()
             }
         }
@@ -99,7 +99,7 @@ export class EuMenuComponent extends CdkAccordionItem {
      * @param link 激活指定link
      */
     activateLink(link: string) {
-        if (this.menu.link == link || "/" + this.menu.link == link) {
+        if (this.menu.l == link || "/" + this.menu.l == link) {
             this._activateLink()
             return;
         }

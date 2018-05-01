@@ -1,13 +1,13 @@
 <li class="eu-menu">
     <a class="eu-menu-a" (click)="menuClick()">
         <mat-icon mat-list-icon>folder</mat-icon>
-        <span class="eu-menu-text">{{menu.title}}</span>
-        <mat-icon mat-list-icon *ngIf="menu.children">{{_getExpandedIcon()}}</mat-icon>
+        <span class="eu-menu-text">{{menu.t}}</span>
+        <mat-icon mat-list-icon *ngIf="menu.c">{{_getExpandedIcon()}}</mat-icon>
     </a>
 
-    <ng-container *ngIf="menu.children">
+    <ng-container *ngIf="menu.c">
         <ul [@bodyExpansion]="_getExpandedState()" class="nav child_menu" cdkAccordion>
-            <eu-menu (childActive)="onChildActive()" (hideMenu)="onHideMenu()" *ngFor="let menuc of menu.children" [menu]="menuc"></eu-menu>
+            <eu-menu (childActive)="onChildActive()" (hideMenu)="onHideMenu()" *ngFor="let menuc of menu.c" [menu]="menuc"></eu-menu>
         </ul>
     </ng-container>
 
