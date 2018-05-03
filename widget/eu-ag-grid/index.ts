@@ -46,4 +46,4 @@ import { EasyFormMdModule } from 'ng2-easyform'
 export class EasyUIagGridModule { }
 
 export * from './aggrid-table.component'
-export { ColDef, ColGroupDef } from 'ag-grid/main'
+export { ColDef, ColGroupDef, DraggingEvent } from 'ag-grid/main'

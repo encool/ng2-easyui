@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 
 import {
@@ -10,6 +10,7 @@ import {
 } from 'ng2-easyui/eu-ag-grid'
 // } from '../../../widget'
 
+import { IndexComponent } from "../index.component";
 import { ModalInfoComponent } from './modal.info.component'
 
 import {
@@ -26,7 +27,11 @@ import {
 @Component({
     selector: 'eu-aggrid-demo',
     template: `
-    <eu-aggrid [agGridColDefs]="agGridColDefs" [euGridOptions]="euGridOptions"></eu-aggrid>
+    <eu-aggrid [agGridColDefs]="agGridColDefs" [euGridOptions]="euGridOptions"
+        (rowDragEnd)="OnRowDragEnd($event)"></eu-aggrid>
+    <div bsCol.sm="8">
+    <button mat-button (click)="onClick($event)">点击</button>
+    </div>       
     `
 })
 
@@ -35,9 +40,9 @@ export class EuAggridDemoComponent implements OnInit {
     // EuColModels: EuColModel[]
     euGridOptions: EuGridOptions
     agGridColDefs: (ColDef | ColGroupDef)[]
+    @ViewChild(AggridComponent) gridComponent: AggridComponent
 
-    constructor(private activatedRoute: ActivatedRoute) {
-
+    constructor(private activatedRoute: ActivatedRoute, private indexComponent: IndexComponent) {
         this.agGridColDefs = [
             // {
             //     headerName: "编号",
@@ -57,6 +62,7 @@ export class EuAggridDemoComponent implements OnInit {
                 field: "categoryNo",
                 checkboxSelection: true,
                 headerCheckboxSelection: true,
+                rowDrag: true,                
             },
             { headerName: "名称", field: "categoryName" },
             {
@@ -80,6 +86,7 @@ export class EuAggridDemoComponent implements OnInit {
             url: "ls/list/form/webdiscategorymanage",
             defaultaction: true,
             rowNum: 10,
+            rowDragManaged: true,
             queryfields: [
                 new MdTextinputField({
                     key: "categoryNo",
@@ -103,6 +110,9 @@ export class EuAggridDemoComponent implements OnInit {
                 }),
             ]
         })
+        this.indexComponent.openedChange.subscribe((data) => {
+            this.gridComponent.reComputeSize()
+        })        
     }
 
     ngOnInit() {
@@ -110,4 +120,13 @@ export class EuAggridDemoComponent implements OnInit {
             // debugger
         });
     }
+
+    onClick(e) {
+        // this.gridComponent.setActionParams("all", { orgId: "11" })
+        this.gridComponent.toggleSuppressRowDrag()
+    }
+
+    OnRowDragEnd(event) {
+        let datas = this.gridComponent.getRowDatas()
+    }    
 }

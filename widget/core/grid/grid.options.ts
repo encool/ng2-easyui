@@ -104,6 +104,8 @@ export class EuGridOptions {
 
     ajaxGridOptions: any	//This option allows to set global ajax settings for the grid when requesting data. Note that with this option it is possible to overwrite all current ajax settings in the grid including the error, complete and beforeSend events.	empty object	Yes
     ajaxSelectOptions: any	//This option allows to set global ajax settings for the select element when the select is obtained via dataUrl option in editoptions or searchoptions objects	empty object	Yes
+
+    rowDragManaged: boolean = true
     constructor(options: {
         gridId: string
         url: string
@@ -117,6 +119,8 @@ export class EuGridOptions {
         mtype?: string
         rowNum?: number
         postData?: any
+        rowDragManaged?: boolean
+        sortable?: boolean
     }) {
         this.gridId = options.gridId
         this.url = options.url
@@ -135,5 +139,7 @@ export class EuGridOptions {
         ] : options.actions
         this.rowNum = options.rowNum == undefined ? 10 : options.rowNum
         this.postData = options.postData == undefined ? {} : options.postData
+        this.rowDragManaged = options.rowDragManaged == undefined ? false : options.rowDragManaged
+        this.sortable = options.sortable || false
     }
 }

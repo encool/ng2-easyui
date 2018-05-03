@@ -2,14 +2,14 @@
     <h1>{{euGridOptions.title}}</h1>
     <div style="display: flex;">
         <span style="flex: 1 1 auto;"></span>
-        <button mat-icon-button [color]="action.style || defaultAtcions[action.curdType].style"
+        <button mat-icon-button [color]="action.style"
             (click)="onAction(action)" *ngFor="let action of euGridOptions.actions">
             <mat-icon class="mat-24" 
                 [matTooltip]="action.name" 
                 matTooltipPosition="above"
                 [attr.aria-label]="action.name"
                 [attr.title]="action.name">
-                    {{action.icon || defaultAtcions[action.curdType].icon}}
+                    {{action.icon}}
             </mat-icon>
         </button>
     </div>

@@ -16,7 +16,8 @@ export class EuColModel {
     index: string//点击表头排序时，会将这个值传到后台，从而标识是以该列排序。
     key: boolean//如果返回的数据中没有 id 值，那么可以设置这个做为每行的 id 。行 id 的生成当然会计数从而不重复。 只能有一列可设置该值
     resizable: boolean//该类是否可以拖动边界改变宽度。
-    sortable: boolean//该列是否可以排序。    
+    sortable: boolean//该列是否可以排序。   
+    dragable: boolean//拖动 
 
     formatter: (value, option, rowObject) => {} | string
     constructor(options: {
@@ -32,6 +33,7 @@ export class EuColModel {
         resizable?: boolean
         frozen?: boolean
         index?: string
+        dragable?: boolean
     } = {}
     ) {
         this.headerName = options.headerName
@@ -46,5 +48,6 @@ export class EuColModel {
         this.resizable = options.resizable
         this.fixed = options.frozen
         this.index = options.index
+        this.dragable = options.dragable
     }
 }

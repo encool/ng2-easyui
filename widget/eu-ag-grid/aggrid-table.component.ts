@@ -1,6 +1,16 @@
 import { Component, Input, Output, EventEmitter, ViewChild, OnInit, Type, ViewEncapsulation, Optional } from "@angular/core";
 import { PageEvent, MatPaginator, MatDialog, MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
-import { GridOptions, IDatasource, IDateParams, IGetRowsParams, ColDef, ColGroupDef, RowNode } from "ag-grid/main";
+
+import {
+    GridOptions,
+    IDatasource,
+    IDateParams,
+    IGetRowsParams,
+    ColDef,
+    ColGroupDef,
+    RowNode,
+    DraggingEvent,
+} from "ag-grid/main";
 import { debounce } from 'rxjs/operators'
 import { Observable, } from 'rxjs/Observable'
 import 'rxjs/add/observable/interval'
@@ -86,6 +96,11 @@ export class AggridComponent implements GridApi, OnInit {
     @ViewChild(MdFormComponent) queryForm: MdFormComponent
     pageEvent: PageEvent
     @Output() euGridEvent: EventEmitter<EuGridEvent> = new EventEmitter<EuGridEvent>()
+    @Output() dragEvent: EventEmitter<DraggingEvent> = new EventEmitter<DraggingEvent>()
+    @Output() rowDragEnter: EventEmitter<DraggingEvent> = new EventEmitter<DraggingEvent>()
+    @Output() rowDragEnd: EventEmitter<DraggingEvent> = new EventEmitter<DraggingEvent>()
+    @Output() rowDragMove: EventEmitter<DraggingEvent> = new EventEmitter<DraggingEvent>()
+    @Output() rowDragLeave: EventEmitter<DraggingEvent> = new EventEmitter<DraggingEvent>()
 
     defaultAtcions = {
         [EuGridAction.TYPE_CREATE]: {
@@ -154,18 +169,33 @@ export class AggridComponent implements GridApi, OnInit {
             enableColResize: true,
             // pagination: true,
             localeText: localeText,
-            enableSorting: true,
-            enableFilter: true,
+            enableSorting: this.euGridOptions.sortable,
+            enableFilter: false,
             suppressRowClickSelection: false,
             suppressCellSelection: true,
             groupSelectsChildren: true,
             // debug: true,
             rowSelection: 'multiple',
+            rowDragManaged: this.euGridOptions.rowDragManaged,
             getRowNodeId: (data) => {
-
                 return data[this.euGridOptions.primaryKey]
             },
-
+            onRowDragEnter: (event: DraggingEvent) => {
+                this.dragEvent.emit(event)
+                this.rowDragEnter.emit(event)
+            },
+            onRowDragEnd: (event: DraggingEvent) => {
+                this.dragEvent.emit(event)
+                this.rowDragEnd.emit(event)
+            },
+            onRowDragMove: (event: DraggingEvent) => {
+                this.dragEvent.emit(event)
+                this.rowDragMove.emit(event)
+            },
+            onRowDragLeave: (event: DraggingEvent) => {
+                this.dragEvent.emit(event)
+                this.rowDragLeave.emit(event)
+            },
         };
 
         this.url = this.euGridOptions.url
@@ -175,9 +205,7 @@ export class AggridComponent implements GridApi, OnInit {
     }
 
     ngAfterViewInit() {
-
         this.paginator.page.subscribe(data => {
-
             this.pageSize = this.paginator.pageSize
             this.pageIndex = this.paginator.pageIndex + 1
             this.refreshData(this.url, this.pageSize, this.pageIndex, this.cond, this.sidx, this.sord)
@@ -266,7 +294,7 @@ export class AggridComponent implements GridApi, OnInit {
         }
     }
 
-    reComputeSize(){
+    reComputeSize() {
         this.aggridOptions.api.sizeColumnsToFit()
     }
 
@@ -370,6 +398,14 @@ export class AggridComponent implements GridApi, OnInit {
         this.refreshData(this.url, this.pageSize, this.pageIndex, params || this.cond, this.sidx, this.sord)
     }
 
+    toggleSuppressRowDrag(suppress?: boolean) {
+        if (suppress == undefined) {
+            this.aggridOptions.api.setSuppressRowDrag(!this.aggridOptions.suppressRowDrag)
+        } else {
+            this.aggridOptions.api.setSuppressRowDrag(suppress)
+        }
+    }
+
     addParams: (params, fresh?: boolean) => void
     removeParam: (paramName, fresh?) => void
 
@@ -405,6 +441,10 @@ export class AggridComponent implements GridApi, OnInit {
     //获取指定列的数据 rowId:主列的值;如果rowId为空，则返回表格全部数据。
     getRowData = (rowId) => {
         return this.aggridOptions.api.getRowNode(rowId)
+    }
+    //获取所有数据 in memory
+    getRowDatas = () => {
+        return this.aggridOptions.api.getRenderedNodes()
     }
     //获取表格信息。param:"rowNum"-每页记录条数 "page"-当前第几页 “records”-总共有多少条
     // getGridParam = function (param) {
