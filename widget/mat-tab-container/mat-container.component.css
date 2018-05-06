@@ -45,7 +45,7 @@ nav .nav-wrapper {
 }
 
 .breadcrumb:before {
-    content: '\E5CC';
+    content: '\\E5CC';
     color: rgba(255,255,255,0.7);
     vertical-align: top;
     display: inline-block;

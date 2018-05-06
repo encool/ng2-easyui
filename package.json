@@ -1,6 +1,6 @@
 {
   "name": "ng2-easyui",
-  "version": "0.1.33",
+  "version": "0.1.34",
   "description": "",
   "main": "./bundles/ng2-easyui.js",
   "module": "./ng2-easyui.es5.js",
@@ -50,7 +50,7 @@
     "@angular/platform-browser": "^5.2.10",
     "@angular/platform-browser-dynamic": "^5.2.10",
     "@angular/router": "^5.2.10",
-    "@types/node": "^8.10.8",
+    "@types/node": "^8.10.12",
     "classlist.js": "^1.1.20150312",
     "cpr": "^3.0.1",
     "del-cli": "^1.1.0",
@@ -75,7 +75,7 @@
     "lodash": "^4.17.4",
     "ng-tree-antd": "^2.2.3",
     "ng2-easyform": "^0.3.14",
-    "ng2-easyui.core": "^0.1.26",
+    "ng2-easyui.core": "^0.1.28",
     "ng2-tree": "^2.0.0-rc.11",
     "ngx-swiper-wrapper": "^5.3.8",
     "tiny-svg": "~0.1.3"
