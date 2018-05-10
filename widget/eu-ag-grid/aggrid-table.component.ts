@@ -163,13 +163,13 @@ export class AggridComponent implements GridApi, OnInit {
             datasource: this.myDataSource,
             rowData: this.rowData,
             domLayout: 'autoHeight', //不出现上下滚动条
-
             cacheBlockSize: this.cacheBlockSize,
             enableServerSideFilter: true,
             enableColResize: true,
             // pagination: true,
             localeText: localeText,
-            enableSorting: this.euGridOptions.sortable,
+            enableSorting: this.euGridOptions.suppressRowDrag,
+            suppressRowDrag: true,
             enableFilter: false,
             suppressRowClickSelection: false,
             suppressCellSelection: true,

@@ -9,8 +9,19 @@ export class Menu {
     public parent?: string
     public o?: string
     public e?: string
-    constructor(id: string, i: string, t: string, l?: string, isSelected?: boolean, c?: Array<Menu>,
-        active?: boolean, parent?: string, o?: string, e?: string) {
-
+    constructor(options: {
+        id: string, i: string, t: string, l?: string, isSelected?: boolean, c?: Array<Menu>,
+        active?: boolean, parent?: string, o?: string, e?: string
+    }) {
+        this.id = options.id
+        this.i = options.i
+        this.t = options.t
+        this.l = options.l
+        this.isSelected = options.isSelected
+        this.c = options.c
+        this.active = options.active
+        this.parent = options.parent
+        this.o = options.o
+        this.e = options.e
     }
 }

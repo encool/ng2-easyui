@@ -23,6 +23,7 @@ export class EuGridOptions {
     multiboxonly: boolean = true//需要点击checkbox才能多选
     datatype: "json"
     sortable: boolean = false//When set to true, this option allows reordering columns by dragging and dropping them with the mouse. Since this option uses the jQuery UI sortable widget, be sure to load this widget and its related files in the HTML head tag of the page. Also, be sure to select the jQuery UI Addons option under the jQuery UI Addon Methods section while downloading jqGrid if you want to use this facility.???没效果
+    suppressRowDrag: boolean
     sortname: string
     sortorder: string
     multiSort: boolean//多列排序
@@ -121,6 +122,7 @@ export class EuGridOptions {
         postData?: any
         rowDragManaged?: boolean
         sortable?: boolean
+        suppressRowDrag?: boolean
     }) {
         this.gridId = options.gridId
         this.url = options.url
@@ -141,5 +143,6 @@ export class EuGridOptions {
         this.postData = options.postData == undefined ? {} : options.postData
         this.rowDragManaged = options.rowDragManaged == undefined ? false : options.rowDragManaged
         this.sortable = options.sortable || false
+        this.suppressRowDrag = options.suppressRowDrag == undefined ? false : options.suppressRowDrag
     }
 }
