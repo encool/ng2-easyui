@@ -3,6 +3,6 @@ import { Observable } from 'rxjs/Observable';
 
 export interface OnModalAction {
     onModalAction?(modalAction: ModalAction): any | Observable<any>;
-    onModalClose(): any | Observable<any>;
-    onModalDismiss(): any | Observable<any>;
+    onModalClose(modalAction: ModalAction): any | Observable<any>;
+    onModalDismiss(modalAction: ModalAction): any | Observable<any>;
 }

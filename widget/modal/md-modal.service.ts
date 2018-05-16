@@ -18,13 +18,17 @@ export class MdModalService extends EuModalService {
     }
 
     _default_actions: Array<ModalAction> = [
-        new ModalAction({ key: "cancel", name: "取消", order: 1, isCancel: true, style: "default" }),
-        new ModalAction({ key: "close", name: "保存", order: 2, isClose: true, style: "primary" })
+        ModalAction.CANCEL,
+        ModalAction.SAVE
+        // new ModalAction({ key: "cancel", name: "取消", order: 1, isCancel: true, style: "default" }),
+        // new ModalAction({ key: "close", name: "保存", order: 2, isClose: true, style: "primary" })
     ]
 
     _confirm_actions: Array<ModalAction> = [
-        new ModalAction({ key: "cancel", name: "取消", order: 1, isCancel: true, style: "default" }),
-        new ModalAction({ key: "close", name: "确定", order: 2, isClose: true, style: "primary" })
+        ModalAction.CANCEL,
+        ModalAction.CONFIRM
+        // new ModalAction({ key: "cancel", name: "取消", order: 1, isCancel: true, style: "default" }),
+        // new ModalAction({ key: "close", name: "确定", order: 2, isClose: true, style: "primary" })
     ]
     _smodalstack = []
     // _ref:ComponentRef<SimpleModalComponent>
