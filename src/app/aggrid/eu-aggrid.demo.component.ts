@@ -1,7 +1,13 @@
 import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import {
-    EuGridOptions, EuColModel, EuGridEvent, ModalConfig
+    EuGridOptions,
+     EuColModel, 
+     EuGridEvent, 
+     ModalConfig, 
+     EuGridAction,
+     TreeAction,
+     EuTreeNode
     // } from 'ng2-easyui'
 } from 'ng2-easyui.core'
 import {
@@ -81,6 +87,14 @@ export class EuAggridDemoComponent implements OnInit {
             defaultActionModalConfig: {
                 component: ModalInfoComponent
             },
+            actions: [
+                EuGridAction.CREATE,
+                EuGridAction.UPDATE,
+                EuGridAction.DELETE,
+                EuGridAction.READ,
+                { key: "sortuser", name: "排序", icon: "reorder", style: "basic" },
+                { key: "setrole", name: "设置角色", icon: "assignment_ind", style: "primary" }
+            ],
             // url: 'list/e/webdisplaycategory',
             url: "ls/list/form/webdiscategorymanage",
             defaultaction: true,
@@ -119,10 +133,28 @@ export class EuAggridDemoComponent implements OnInit {
             // debugger
         });
     }
-
+    onTreeEvent(e) {
+        let action: TreeAction = e.action
+        let nodes: EuTreeNode[] = e.activeEuNodes
+        let ids = []
+        nodes.forEach(node => {
+            ids.push(node.id)
+        })
+        if (nodes.length > 0) {
+            switch (action) {
+                case TreeAction.CREATE:
+                    // this.addRes()
+                    break;
+                case TreeAction.DELETE:
+                    break;
+                default:
+            }
+        }
+    }
     onClick(e) {
         // this.gridComponent.setActionParams("all", { orgId: "11" })
-        this.gridComponent.toggleSuppressRowDrag()
+        // this.gridComponent.toggleSuppressRowDrag()
+        let ids = this.gridComponent.getRowDataIds();
     }
 
     OnRowDragEnd(event) {

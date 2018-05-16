@@ -435,9 +435,11 @@ export class AggridComponent implements GridApi, OnInit {
         return Object.assign({}, this.actionParams[key], this.actionParams.all)
     }
 
-    // getDataIDs = function () {
-    //     return this.jqgridObject.jqGrid("getDataIDs");
-    // }
+    getRowDataIds = () => {
+        return this.getRowDatas().map(node => {
+            return node.data[this.euGridOptions.primaryKey]
+        })
+    }
     //获取指定列的数据 rowId:主列的值;如果rowId为空，则返回表格全部数据。
     getRowData = (rowId) => {
         return this.aggridOptions.api.getRowNode(rowId)
@@ -452,7 +454,7 @@ export class AggridComponent implements GridApi, OnInit {
     // }
     //获取单个选中的行的主列值，如果选中多个这返回最后选中的值
     getSingleSelectedRowId = () => {
-        return this.getSingleSelectedData[this.euGridOptions.primaryKey]
+        return this.getSingleSelectedData()[this.euGridOptions.primaryKey]
     }
     //获取所有选中的行的主列值，返回数组
     getSelectedRowIds = () => {
