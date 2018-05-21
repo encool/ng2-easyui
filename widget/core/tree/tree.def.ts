@@ -1,5 +1,15 @@
 import { CURDAction } from '../curd.action'
 import { ModalConfig } from '../modal/modal-config'
+import { BaseAction } from '../../../dist/core';
+
+export interface EuTree {
+    refresh(params, node?: EuTreeNode, openState?, checkState?, selectedState?)
+    refreshActiveNode()
+    refreshActiveNodeParent()
+    getActiveDefNode(): EuTreeNode
+    getActiveDefNodes(): Array<EuTreeNode>
+    getCheckedNodes(checked?: boolean): Array<EuTreeNode>
+}
 
 export interface EuTreeNode {
     children?: EuTreeNode[];
@@ -45,9 +55,9 @@ export class TreeEvent {
     data?: any
 }
 
-export class TreeAction extends CURDAction {
+export class TreeAction extends BaseAction {
 
-    constructor(options: CURDAction) {
+    constructor(options: BaseAction) {
         super(options)
     }
 }
@@ -82,6 +92,9 @@ export class EuTreeOptions {
     // 设置自动关联勾选时是否触发 beforeCheck / onCheck 事件回调函数。
     autoCheckTrigger?: boolean = false;
 
+    nodeCheck?: (tree: EuTree, node: EuTreeNode, $event) => void
+    nodeClick?: (tree: EuTree, node: EuTreeNode, $event) => void
+
     otherOptions?: any
     constructor(options:
         {
@@ -112,6 +125,8 @@ export class EuTreeOptions {
             chkboxType?: any
             // 设置自动关联勾选时是否触发 beforeCheck / onCheck 事件回调函数。
             autoCheckTrigger?: boolean
+            nodeCheck?: (tree: EuTree, node: EuTreeNode, $event) => void
+            nodeClick?: (tree: EuTree, node: EuTreeNode, $event) => void
         } = {
             treeId: "defaultZtreeId",
             dataUrl: "dataUrl"
@@ -129,5 +144,7 @@ export class EuTreeOptions {
         this.checkStyle = options.checkStyle == undefined ? "checkbox" : options.checkStyle
         this.chkboxType = options.chkboxType == undefined ? { "Y": "p", "N": "s" } : options.chkboxType
         this.autoCheckTrigger = options.autoCheckTrigger == undefined ? false : options.autoCheckTrigger
+        this.nodeCheck = options.nodeCheck
+        this.nodeClick = options.nodeClick
     }
 }
