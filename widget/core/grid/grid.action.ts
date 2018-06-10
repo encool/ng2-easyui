@@ -1,7 +1,7 @@
-import { CURDAction } from '../curd.action'
-export class EuGridAction extends CURDAction {
+import { BaseAction } from '../action'
+export class EuGridAction extends BaseAction {
 
-    constructor(options: CURDAction) {
+    constructor(options: BaseAction) {
         super(options)
     }
 }

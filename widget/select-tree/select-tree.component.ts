@@ -29,7 +29,7 @@ export class DefaultErrorStateMatcher implements ErrorStateMatcher {
 @Component({
     selector: 'eu-tree-select',
     template: `
-    <mat-form-field [bsCol.sm]="span" [bsCol.xs]="12" style="line-height:1">
+    <mat-form-field [bsCol.sm]="span" [bsCol.xs]="12" style="line-height:1" [hidden]="this.field.hidden">
         <select-tree
             [formControl]="fieldControl" 
             [placeholder]="label"
