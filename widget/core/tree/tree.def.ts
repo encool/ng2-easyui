@@ -1,17 +1,22 @@
-import { CURDAction } from '../curd.action'
+import { EventEmitter } from "@angular/core";
 import { ModalConfig } from '../modal/modal-config'
-import { BaseAction } from '../../../dist/core';
+import { BaseAction } from '../action';
 
-export interface EuTree {
-    refresh(params, node?: EuTreeNode, openState?, checkState?, selectedState?)
-    refreshActiveNode()
-    refreshActiveNodeParent()
-    getActiveDefNode(): EuTreeNode
-    getActiveDefNodes(): Array<EuTreeNode>
-    getCheckedNodes(checked?: boolean): Array<EuTreeNode>
+export abstract class EuTree {
+    activate: EventEmitter<{}>;
+    check: EventEmitter<{}>;
+
+    abstract refresh(params, node?: EuTreeNode, openState?, checkState?, selectedState?)
+    abstract refreshActiveNode()
+    abstract refreshActiveNodeParent()
+    abstract getNodeById(id: string): EuTreeNode
+    abstract getActiveDefNode(): EuTreeNode
+    abstract getActiveDefNodes(): Array<EuTreeNode>
+    abstract getCheckedNodes(checked?: boolean): Array<EuTreeNode>
+    abstract setActiveNode(idOrNode: string | EuTreeNode)
 }
 
-export interface EuTreeNode {
+export abstract class EuTreeNode {
     children?: EuTreeNode[];
     id: string;
     sid?: number

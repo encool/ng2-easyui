@@ -19,6 +19,8 @@ import {
     EuGridOptions,
     EuColModel,
     GridApi,
+    BaseAction,
+    CURDAction,
     EuGridAction,
     EuGridEvent,
     ModalConfig,
@@ -103,23 +105,23 @@ export class AggridComponent implements GridApi, OnInit {
     @Output() rowDragLeave: EventEmitter<DraggingEvent> = new EventEmitter<DraggingEvent>()
 
     defaultAtcions = {
-        [EuGridAction.TYPE_CREATE]: {
+        [CURDAction.TYPE_CREATE]: {
             icon: 'add',
             "style": "basic"
         },
-        [EuGridAction.TYPE_UPDATE]: {
+        [CURDAction.TYPE_UPDATE]: {
             icon: 'mode_edit',
             "style": "primary"
         },
-        [EuGridAction.TYPE_QUERY]: {
+        [CURDAction.TYPE_QUERY]: {
             icon: 'search',
             "style": "accent"
         },
-        [EuGridAction.TYPE_READ]: {
+        [CURDAction.TYPE_READ]: {
             icon: 'sync',
             "style": "accent"
         },
-        [EuGridAction.TYPE_DELETE]: {
+        [CURDAction.TYPE_DELETE]: {
             icon: 'delete_forever',
             "style": "warn"
         },
@@ -360,36 +362,40 @@ export class AggridComponent implements GridApi, OnInit {
             datas,
             this.getActionParams(action.key)
         )
-        switch (action.curdType) {
-            case EuGridAction.TYPE_CREATE:
-                let modalConfig = action.modalConfig || this.euGridOptions.defaultActionModalConfig
-                this.openDialog(modalConfig, {
-                    euGridEvent: ege
-                })
-                break
-            case EuGridAction.TYPE_UPDATE:
-                if (ids.length == 1) {
-                    let modalConfig1 = action.modalConfig || this.euGridOptions.defaultActionModalConfig
-                    this.openDialog(modalConfig1, { euGridEvent: ege })
-                } else {
-                    this.snackBar.open('请选择一条记录！', '关闭', {
-                        duration: 800
-                    });
-                }
-                break
-            case EuGridAction.TYPE_QUERY:
-                this.queryExpanded = !this.queryExpanded
-                break
-            case EuGridAction.TYPE_READ:
-                this.refresh()
-                break
-            case EuGridAction.TYPE_DELETE:
-                break
-            default:
-                //有modal配置就是要打开modal咯
-                if (action && action.modalConfig) {
-                    this.openDialog(action.modalConfig, { euGridEvent: ege })
-                }
+        if (action instanceof CURDAction) {
+            switch (action.curdType) {
+                case CURDAction.TYPE_CREATE:
+                    let modalConfig = action.modalConfig || this.euGridOptions.defaultActionModalConfig
+                    this.openDialog(modalConfig, {
+                        euGridEvent: ege
+                    })
+                    break
+                case CURDAction.TYPE_UPDATE:
+                    if (ids.length == 1) {
+                        let modalConfig1 = action.modalConfig || this.euGridOptions.defaultActionModalConfig
+                        this.openDialog(modalConfig1, { euGridEvent: ege })
+                    } else {
+                        this.snackBar.open('请选择一条记录！', '关闭', {
+                            duration: 800
+                        });
+                    }
+                    break
+                case CURDAction.TYPE_QUERY:
+                    this.queryExpanded = !this.queryExpanded
+                    break
+                case CURDAction.TYPE_READ:
+                    this.refresh()
+                    break
+                case CURDAction.TYPE_DELETE:
+                    break
+                default:
+
+            }
+        } else {
+            //有modal配置就是要打开modal咯
+            if (action && action.modalConfig) {
+                this.openDialog(action.modalConfig, { euGridEvent: ege })
+            }
         }
         this.euGridEvent.emit(ege)
     }

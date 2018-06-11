@@ -62,7 +62,7 @@
     "rollup-plugin-sourcemaps": "^0.4.1",
     "rollup-plugin-uglify": "^2.0.1",
     "rxjs": "^5.5.11",
-    "typescript": "~2.6.2",
+    "typescript": "~2.4.0",
     "web-animations-js": "^2.3.1",
     "webpack-bundle-analyzer": "^2.13.1"
   },
@@ -76,7 +76,7 @@
     "lodash": "^4.17.4",
     "ng-tree-antd": "^2.2.3",
     "ng2-easyform": "~0.3.14",
-    "ng2-easyui.core": "^0.1.33",
+    "ng2-easyui.core": "^0.1.36",
     "ng2-tree": "^2.0.0-rc.11",
     "ngx-swiper-wrapper": "^5.3.8",
     "tiny-svg": "~0.1.3"

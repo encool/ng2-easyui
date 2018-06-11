@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 
 import { MatSnackBar } from "@angular/material";
 
-import { OnAction, TreeAction, TreeEvent, EuTreeNode, EuTreeOptions, CURDAction, ModalConfig, EuModalService, EuTreeService } from "ng2-easyui.core";
+import { OnAction, TreeAction, TreeEvent, EuTreeNode, EuTreeOptions, CURDAction, ModalConfig, EuModalService, EuTreeService, EuTree } from "ng2-easyui.core";
 
 import { NzTreeComponent } from "ng-tree-antd";
 import { TreeNode } from "angular-tree-component";
@@ -25,7 +25,7 @@ import { TreeNode } from "angular-tree-component";
     styles: [`.angular-tree-component{background: white;color: rgba(0, 0, 0, 0.87);}"`],
     encapsulation: ViewEncapsulation.None
 })
-export class AntdTreeComponent implements OnInit, OnAction {
+export class AntdTreeComponent implements OnInit, OnAction, EuTree {
     // [nzAutoExpandParent]="2"
 
     @Input() euTreeNodes: EuTreeNode[] = []
@@ -35,6 +35,19 @@ export class AntdTreeComponent implements OnInit, OnAction {
 
     @Output() treeEvent: EventEmitter<TreeEvent> = new EventEmitter<TreeEvent>()
     @Output() euTreeCheck: EventEmitter<{
+        checked: boolean,
+        eventName: string,
+        euTreeNode: EuTreeNode,
+        node: any
+    }> = new EventEmitter<any>()
+
+    activate: EventEmitter<{
+        checked: boolean,
+        eventName: string,
+        euTreeNode: EuTreeNode,
+        node: any
+    }> = new EventEmitter<any>()
+    check: EventEmitter<{
         checked: boolean,
         eventName: string,
         euTreeNode: EuTreeNode,
@@ -125,49 +138,53 @@ export class AntdTreeComponent implements OnInit, OnAction {
             action: baseAction,
         }
         let nodes = this.getActiveNodes()
-        switch (baseAction.curdType) {
-            case CURDAction.TYPE_CREATE:
-                if (defnodes.length == 1) {
-                    let modalConfig = baseAction.modalConfig || this.euTreeOptions.defaultActionModalConfig
-                    //有component才打开component
-                    if (modalConfig.component) {
-                        this.openDialog(modalConfig, {
-                            euTreeEvent: event
-                        }, nodes[0])
+        if (baseAction instanceof CURDAction) {
+            switch (baseAction.curdType) {
+                case CURDAction.TYPE_CREATE:
+                    if (defnodes.length == 1) {
+                        let modalConfig = baseAction.modalConfig || this.euTreeOptions.defaultActionModalConfig
+                        //有component才打开component
+                        if (modalConfig.component) {
+                            this.openDialog(modalConfig, {
+                                euTreeEvent: event
+                            }, nodes[0])
+                        }
+                    } else {
+                        this.snackBar.open('请选择一个需要新增到的父节点！', '关闭', {
+                            duration: 800
+                        });
                     }
-                } else {
-                    this.snackBar.open('请选择一个需要新增到的父节点！', '关闭', {
-                        duration: 800
-                    });
-                }
-                break
-            case CURDAction.TYPE_UPDATE:
-                if (defnodes.length == 1) {
-                    let modalConfig1 = baseAction.modalConfig || this.euTreeOptions.defaultActionModalConfig
-                    //有component才打开component
-                    if (modalConfig1.component) {
-                        this.openDialog(modalConfig1, { euTreeEvent: event }, nodes[0].parent)
+                    break
+                case CURDAction.TYPE_UPDATE:
+                    if (defnodes.length == 1) {
+                        let modalConfig1 = baseAction.modalConfig || this.euTreeOptions.defaultActionModalConfig
+                        //有component才打开component
+                        if (modalConfig1.component) {
+                            this.openDialog(modalConfig1, { euTreeEvent: event }, nodes[0].parent)
+                        }
+                    } else {
+                        this.snackBar.open('请选择一个节点！', '关闭', {
+                            duration: 800
+                        });
                     }
-                } else {
-                    this.snackBar.open('请选择一个节点！', '关闭', {
-                        duration: 800
-                    });
-                }
-                break
-            case CURDAction.TYPE_QUERY:
-                break
-            case CURDAction.TYPE_READ:
-                if (nodes.length == 1) {
-                    this.refreshNode(nodes[0])
-                }
-                break
-            case CURDAction.TYPE_DELETE:
-                break
-            default:
-                //有modal配置就是要打开modal咯
-                if (baseAction && baseAction.modalConfig && baseAction.modalConfig.component) {
-                    this.openDialog(baseAction.modalConfig, { euGridEvent: event }, nodes[0])
-                }
+                    break
+                case CURDAction.TYPE_QUERY:
+                    break
+                case CURDAction.TYPE_READ:
+                    if (nodes.length == 1) {
+                        this.refreshNode(nodes[0])
+                    }
+                    break
+                case CURDAction.TYPE_DELETE:
+                    break
+                default:
+
+            }
+        } else {
+            //有modal配置就是要打开modal咯
+            if (baseAction && baseAction.modalConfig && baseAction.modalConfig.component) {
+                this.openDialog(baseAction.modalConfig, { euGridEvent: event }, nodes[0])
+            }
         }
 
         this.treeEvent.emit(event)
@@ -186,6 +203,27 @@ export class AntdTreeComponent implements OnInit, OnAction {
                     this._nzNodes = nodes
                 }
             })
+        }
+    }
+
+    public getNodeById(id: string): EuTreeNode {
+        let node: any = this.nzTree.treeModel.getNodeById(id)
+        if (node) {
+            return this.treeNodeToEuTreeNode(node)
+        } else {
+            return null
+        }
+    }
+
+    setActiveNode(idOrNode: string | EuTreeNode): any {
+        if (idOrNode instanceof String) {
+            this.setActiveNode
+            let node: any = this.nzTree.treeModel.getNodeById(idOrNode)
+            if (node) {
+                this.nzTree.treeModel.setActiveNode(node, true)
+            }
+        } else if (idOrNode instanceof EuTreeNode) {
+            this.setActiveNode(idOrNode.id)
         }
     }
 

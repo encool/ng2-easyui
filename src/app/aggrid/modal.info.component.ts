@@ -2,7 +2,7 @@ import { Component, Inject, ViewContainerRef, ViewChild } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable'
 import {
-    OnModalAction, EuGridEvent, EuGridAction, EuPageService
+    OnModalAction, EuGridEvent, CURDAction, EuGridAction, EuPageService
     // } from 'ng2-easyui'
 } from 'ng2-easyui.core'
 
@@ -25,11 +25,11 @@ export class ModalInfoComponent implements OnModalAction {
     action: BaseAction
     fields: FieldBase<any>[]
     @ViewChild(MdFormComponent) infoForm: MdFormComponent
-    constructor( @Inject(MAT_DIALOG_DATA) public data: any, private euPageService: EuPageService) {
+    constructor(@Inject(MAT_DIALOG_DATA) public data: any, private euPageService: EuPageService) {
         this.ege = data.euGridEvent
         this.action = this.ege.action
         //编辑获取数据
-        if (this.action == EuGridAction.UPDATE) {
+        if (this.action == CURDAction.UPDATE) {
             (this.euPageService as any).getById(this.ege.rowId).subscribe(value => {
                 // debugger
                 this.infoForm.form.patchValue(value)
@@ -56,13 +56,13 @@ export class ModalInfoComponent implements OnModalAction {
 
     //确定
     onModalClose() {
-        if (this.action == EuGridAction.UPDATE) {
+        if (this.action == CURDAction.UPDATE) {
             return new Observable(observer => {
                 (this.euPageService as any).updateById(this.ege.rowId, this.infoForm.form.value).subscribe((value) => {
                     observer.next(value);
                 })
             });
-        } else if (this.action == EuGridAction.CREATE) {
+        } else if (this.action == CURDAction.CREATE) {
             return new Observable(observer => {
                 (this.euPageService as any).addData(this.infoForm.form.value).subscribe((value) => {
                     observer.next(value);
