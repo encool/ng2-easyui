@@ -11,8 +11,11 @@ import {
   MatSidenavModule,
   MatIconModule,
   MatInputModule,
+  MatNativeDateModule
 } from '@angular/material';
-
+// import {
+//   MatMomentDateModule,
+// } from "@angular/material-moment-adapter";
 // import { TreeModule } from "ng2-tree";
 
 import { AppComponent, DialogDataExampleDialog } from './app.component';
@@ -105,7 +108,8 @@ import { EntryComponent } from "./entry.component";
     MatSidenavModule,
     MatIconModule,
     MatInputModule,
-
+    MatNativeDateModule,
+    
     // TreeModule,
     EasyFormCoreModule,
     EasyFormMdModule,

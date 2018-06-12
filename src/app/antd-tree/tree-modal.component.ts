@@ -2,7 +2,7 @@ import { Component, Inject, ViewContainerRef, ViewChild } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable'
 import {
-    OnModalAction, TreeEvent, CURDAction
+    OnModalAction, TreeEvent, CURDAction, BaseAction
     // } from 'ng2-easyui'
 } from 'ng2-easyui.core'
 
@@ -21,10 +21,10 @@ import { MAT_DIALOG_DATA, MatDialog } from "@angular/material"
 export class TreeModalComponent implements OnModalAction {
 
     ege: TreeEvent
-    action: CURDAction
+    action: BaseAction
     fields: FieldBase<any>[]
     @ViewChild(MdFormComponent) infoForm: MdFormComponent
-    constructor( @Inject(MAT_DIALOG_DATA) public data: any) {
+    constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
         this.ege = data.euTreeEvent
         this.action = this.ege.action
         //编辑获取数据

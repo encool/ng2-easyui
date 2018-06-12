@@ -5,6 +5,7 @@ import {
      EuColModel, 
      EuGridEvent, 
      ModalConfig, 
+     CURDAction,
      EuGridAction,
      TreeAction,
      EuTreeNode
@@ -88,10 +89,10 @@ export class EuAggridDemoComponent implements OnInit {
                 component: ModalInfoComponent
             },
             actions: [
-                EuGridAction.CREATE,
-                EuGridAction.UPDATE,
-                EuGridAction.DELETE,
-                EuGridAction.READ,
+                CURDAction.CREATE,
+                CURDAction.UPDATE,
+                CURDAction.DELETE,
+                CURDAction.READ,
                 { key: "sortuser", name: "排序", icon: "reorder", style: "basic" },
                 { key: "setrole", name: "设置角色", icon: "assignment_ind", style: "primary" }
             ],
@@ -142,10 +143,10 @@ export class EuAggridDemoComponent implements OnInit {
         })
         if (nodes.length > 0) {
             switch (action) {
-                case TreeAction.CREATE:
+                case CURDAction.CREATE:
                     // this.addRes()
                     break;
-                case TreeAction.DELETE:
+                case CURDAction.DELETE:
                     break;
                 default:
             }
