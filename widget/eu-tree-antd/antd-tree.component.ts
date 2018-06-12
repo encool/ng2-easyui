@@ -2,8 +2,18 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, Optional, Vi
 import { HttpClient } from "@angular/common/http";
 
 import { MatSnackBar } from "@angular/material";
-
-import { OnAction, TreeAction, TreeEvent, EuTreeNode, EuTreeOptions, CURDAction, ModalConfig, EuModalService, EuTreeService } from "ng2-easyui.core";
+import { TREE_ACTIONS } from "angular-tree-component";
+import {
+    OnAction,
+    TreeAction,
+    TreeEvent,
+    EuTreeNode,
+    EuTreeOptions,
+    CURDAction,
+    ModalConfig,
+    EuModalService,
+    EuTreeService,
+} from "ng2-easyui.core";
 
 import { NzTreeComponent } from "ng-tree-antd";
 import { TreeNode } from "angular-tree-component";
@@ -69,11 +79,27 @@ export class AntdTreeComponent implements OnInit, OnAction {
         this._dataUrl = this.euTreeOptions.dataUrl
         this.params = this.euTreeOptions.params || {}
 
-        this._nzOptions = Object.assign({
-            getChildren: (node: TreeNode) => {
-                return this.getNodes(this.params, node)
+        this._nzOptions = Object.assign(
+            {
+                getChildren: (node: TreeNode) => {
+                    return this.getNodes(this.params, node)
+                }
+            },
+            this.euTreeOptions.otherOptions,
+            {
+                actionMapping: {
+                    mouse: {
+                        click: (tree, node, $event) => {
+                            let euNode = this.treeNodeToEuTreeNode(node)
+                            if (this.euTreeOptions.nodeClick) {
+                                this.euTreeOptions.nodeClick(this, euNode, $event)
+                            }
+                            TREE_ACTIONS.TOGGLE_ACTIVE(tree, node, $event);
+                        }
+                    },
+                }
             }
-        }, this.euTreeOptions.otherOptions)
+        )
         if (!this._nzNodes || this._nzNodes.length == 0) {
             this.refresh(this.params)
         }
@@ -213,7 +239,7 @@ export class AntdTreeComponent implements OnInit, OnAction {
         }
         var activeNode = this.getActiveDefNode()
         if (activeNode) {
-            this.refresh(params, activeNode, false, false, false);
+            this.refresh(params, activeNode.parent, false, false, false);
         } else {
             console.warn("refreshActiveNode while no active node")
             this.refresh(params);
@@ -278,6 +304,9 @@ export class AntdTreeComponent implements OnInit, OnAction {
             euTreeNode: euTreeNode,
             node: e.node
         })
+        if (this.euTreeOptions.nodeCheck) {
+            this.euTreeOptions.nodeCheck(this, euTreeNode, e)
+        }
     }
 
     getCheckedNodes(checked?: boolean): Array<EuTreeNode> {
