@@ -3,8 +3,25 @@ import { ModalConfig } from '../modal/modal-config'
 import { BaseAction } from '../action';
 
 export abstract class EuTree {
-    activate: EventEmitter<{}>;
-    check: EventEmitter<{}>;
+    check: EventEmitter<Event>;
+    decheck: EventEmitter<Event>;
+    toggleExpanded?: EventEmitter<Event>;
+    activate?: EventEmitter<Event>;
+    deactivate?: EventEmitter<Event>;
+    nodeActivate?: EventEmitter<Event>;
+    nodeDeactivate?: EventEmitter<Event>;
+    select: EventEmitter<Event>
+    deselect: EventEmitter<Event>;
+    focus?: EventEmitter<Event>;
+    blur?: EventEmitter<Event>;
+    updateData?: EventEmitter<Event>;
+    initialized: EventEmitter<Event>;
+    moveNode?: EventEmitter<Event>;
+    copyNode?: EventEmitter<Event>;
+    loadNodeChildren?: EventEmitter<Event>;
+    changeFilter?: EventEmitter<Event>;
+    event?: EventEmitter<Event>;
+    stateChange?: EventEmitter<Event>;
 
     abstract refresh(params, node?: EuTreeNode, openState?, checkState?, selectedState?)
     abstract refreshActiveNode()
@@ -14,6 +31,12 @@ export abstract class EuTree {
     abstract getActiveDefNodes(): Array<EuTreeNode>
     abstract getCheckedNodes(checked?: boolean): Array<EuTreeNode>
     abstract setActiveNode(idOrNode: string | EuTreeNode)
+}
+
+export interface Event {
+    name: string
+    tree?: EuTree
+    node?: EuTreeNode
 }
 
 export abstract class EuTreeNode {

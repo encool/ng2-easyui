@@ -54,6 +54,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { TreeWrapComponent } from "./tree-wrapper";
 import { AntdTreeComponent } from '../eu-tree-antd';
+import { EuTreeNode } from "ng2-easyui.core";
 
 /** Injection token that determines the scroll handling while the autocomplete panel is open. */
 export const MAT_AUTOCOMPLETE_SCROLL_STRATEGY =
@@ -438,8 +439,8 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
      * stemmed from the user.
      */
     private _setValueAndClose(event: any | null): void {
-        if (event.eventName == "activate") {
-            let data = event.node.data
+        if (event.node) {
+            let data = event.node
             if (this._previousValue !== data.id) {
                 this.triggerValue = data.name
                 this.value = data.id
@@ -462,10 +463,15 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
 
     private get treeCloseStatus(): Observable<any> {
         return merge(
-            this.treeWrap.tree.nzTree.nzActivate,
-            this.treeWrap.tree.nzTree.nzCheck
+            this.treeWrap.tree.select,
+            this.treeWrap.tree.check
         ).pipe(filter((event: any) => {
-            if (event.eventName = "activate") {
+            // if (event.eventName = "activate") {
+            //     return true
+            // } else {
+            //     return false
+            // }
+            if (event.node) {
                 return true
             } else {
                 return false
@@ -512,16 +518,19 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
             if (!this._overlayRef) {
                 this.generateProtalAndOverlay()
             }
-            let treeModal = this.treeWrap.tree.nzTree.treeModel
-            let node: any = treeModal.getNodeById(value)
+            // let treeModal = this.treeWrap.tree.nzTree.treeModel
+            // let node: any = treeModal.getNodeById(value)
+            let node: EuTreeNode = this.treeWrap.tree.getNodeById(value)
+
             if (node) {
-                this.triggerValue = node.data.name
-                treeModal.setActiveNode(node, true)
-                this.value = node.data.id
+                this.triggerValue = node.name
+                this.treeWrap.tree.setActiveNode(node)
+                this.value = node.id
             }
         } else if (this.treeWrap && !value) {
-            let treeModal = this.treeWrap.tree.nzTree.treeModel
-            treeModal.setActiveNode({}, false)
+            // let treeModal = this.treeWrap.tree.nzTree.treeModel
+            // treeModal.setActiveNode({}, false)
+            this.treeWrap.tree.setActiveNode(undefined)
         }
         // if (this.options) {
         //   this._setSelectionByValue(value);

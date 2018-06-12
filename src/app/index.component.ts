@@ -130,7 +130,6 @@ export class IndexComponent implements OnInit {
     }
 
     onHideMenu() {
-        debugger
         this.srcMenus = []
         // this.container.breadcrumbMenus = []
         this.sideNav.close()

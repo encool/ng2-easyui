@@ -28,6 +28,9 @@ import { TreeNode } from "angular-tree-component";
         [nzCheckable]="nzCheckable"
         [nzShowLine]="nzShowLine"
         (nzCheck)="onCheck($event)"
+        (nzDecheck)="onDeCheck($event)"
+        (nzActivate)="onActivate($event)"
+        (nzDeactivate)="onDeActivate($event)"
         (nzEvent)="onEvent($event)"
         (nzLoadNodeChildren)="onNzLoadNodeChildren($event)">
     </nz-tree>
@@ -52,18 +55,13 @@ export class AntdTreeComponent implements OnInit, OnAction, EuTree {
         node: any
     }> = new EventEmitter<any>()
 
-    activate: EventEmitter<{
-        checked: boolean,
-        eventName: string,
-        euTreeNode: EuTreeNode,
-        node: any
-    }> = new EventEmitter<any>()
-    check: EventEmitter<{
-        checked: boolean,
-        eventName: string,
-        euTreeNode: EuTreeNode,
-        node: any
-    }> = new EventEmitter<any>()
+    select: EventEmitter<any> = new EventEmitter<any>()
+    deselect: EventEmitter<any> = new EventEmitter<any>()
+    // activate: EventEmitter<any> = new EventEmitter<any>()
+    // deactivate: EventEmitter<any> = new EventEmitter<any>()
+    check: EventEmitter<any> = new EventEmitter<any>()
+    decheck: EventEmitter<any> = new EventEmitter<any>()
+    initialized: EventEmitter<any> = new EventEmitter<any>()
 
     @ViewChild(NzTreeComponent) nzTree: NzTreeComponent
 
@@ -124,6 +122,36 @@ export class AntdTreeComponent implements OnInit, OnAction, EuTree {
             let node: TreeNode = this.nzTree.treeModel.getFirstRoot();
             node.expand()
         }
+    }
+
+    onCheck(e) {
+        let euTreeNode = this.treeNodeToEuTreeNode(e.node)
+        let event = {
+            checked: e.checked,
+            eventName: e.eventName,
+            euTreeNode: euTreeNode,
+            node: e.node
+        }
+        this.euTreeCheck.emit(event)
+        this.check.emit({ node: euTreeNode, tree: this })
+
+        if (this.euTreeOptions.nodeCheck) {
+            this.euTreeOptions.nodeCheck(this, euTreeNode, e)
+        }
+    }
+
+    onDeCheck(e) {
+        let euTreeNode = this.treeNodeToEuTreeNode(e.node)
+        this.decheck.emit({ node: euTreeNode, tree: this })
+    }
+
+    onActivate(e: any) {
+        let euTreeNode = this.treeNodeToEuTreeNode(e.node)
+        this.select.emit({ node: euTreeNode, tree: this })
+    }
+
+    onDeActivate(e: any) {
+        
     }
 
     onNzLoadNodeChildren($event) {
@@ -243,13 +271,15 @@ export class AntdTreeComponent implements OnInit, OnAction, EuTree {
     }
 
     setActiveNode(idOrNode: string | EuTreeNode): any {
-        if (idOrNode instanceof String) {
+        if (typeof idOrNode == 'string') {
             this.setActiveNode
             let node: any = this.nzTree.treeModel.getNodeById(idOrNode)
             if (node) {
                 this.nzTree.treeModel.setActiveNode(node, true)
             }
-        } else if (idOrNode instanceof EuTreeNode) {
+        } else if (!idOrNode) {
+            this.nzTree.treeModel.setActiveNode({}, false)
+        } else if (idOrNode.id) {
             this.setActiveNode(idOrNode.id)
         }
     }
@@ -335,18 +365,7 @@ export class AntdTreeComponent implements OnInit, OnAction, EuTree {
     private checkedParentNodes: EuTreeNode[] = []
     private checkedNodes: EuTreeNode[] = []
 
-    onCheck(e) {
-        let euTreeNode = this.treeNodeToEuTreeNode(e.node)
-        this.euTreeCheck.emit({
-            checked: e.checked,
-            eventName: e.eventName,
-            euTreeNode: euTreeNode,
-            node: e.node
-        })
-        if (this.euTreeOptions.nodeCheck) {
-            this.euTreeOptions.nodeCheck(this, euTreeNode, e)
-        }
-    }
+
 
     getCheckedNodes(checked?: boolean): Array<EuTreeNode> {
         // return this.checkedLeafNodes.concat(this.checkedParentNodes)

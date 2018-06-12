@@ -12,8 +12,8 @@ import { EuTree } from "ng2-easyui.core";
 export class TreeWrapComponent implements OnInit, AfterContentInit {
 
     @ViewChild(TemplateRef) template: TemplateRef<any>;
-    @ContentChild(AntdTreeComponent) tree: AntdTreeComponent
-    // @ContentChild(AntdTreeComponent) tree: EuTree
+    // @ContentChild(AntdTreeComponent) tree: AntdTreeComponent
+    @ContentChild(AntdTreeComponent) tree: EuTree
 
     constructor() { }
 
