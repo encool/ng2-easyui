@@ -3,40 +3,41 @@ import { ModalConfig } from '../modal/modal-config'
 import { BaseAction } from '../action';
 
 export abstract class EuTree {
-    check: EventEmitter<Event>;
-    decheck: EventEmitter<Event>;
-    toggleExpanded?: EventEmitter<Event>;
-    activate?: EventEmitter<Event>;
-    deactivate?: EventEmitter<Event>;
-    nodeActivate?: EventEmitter<Event>;
-    nodeDeactivate?: EventEmitter<Event>;
-    select: EventEmitter<Event>
-    deselect: EventEmitter<Event>;
-    focus?: EventEmitter<Event>;
-    blur?: EventEmitter<Event>;
-    updateData?: EventEmitter<Event>;
-    initialized: EventEmitter<Event>;
-    moveNode?: EventEmitter<Event>;
-    copyNode?: EventEmitter<Event>;
-    loadNodeChildren?: EventEmitter<Event>;
-    changeFilter?: EventEmitter<Event>;
-    event?: EventEmitter<Event>;
-    stateChange?: EventEmitter<Event>;
+    check: EventEmitter<TreeEmitEvent>;
+    decheck: EventEmitter<TreeEmitEvent>;
+    toggleExpanded?: EventEmitter<TreeEmitEvent>;
+    activate?: EventEmitter<TreeEmitEvent>;
+    deactivate?: EventEmitter<TreeEmitEvent>;
+    nodeActivate?: EventEmitter<TreeEmitEvent>;
+    nodeDeactivate?: EventEmitter<TreeEmitEvent>;
+    select: EventEmitter<TreeEmitEvent>
+    deselect: EventEmitter<TreeEmitEvent>;
+    focus?: EventEmitter<TreeEmitEvent>;
+    blur?: EventEmitter<TreeEmitEvent>;
+    updateData?: EventEmitter<TreeEmitEvent>;
+    initialized: EventEmitter<TreeEmitEvent>;
+    moveNode?: EventEmitter<TreeEmitEvent>;
+    copyNode?: EventEmitter<TreeEmitEvent>;
+    loadNodeChildren?: EventEmitter<TreeEmitEvent>;
+    changeFilter?: EventEmitter<TreeEmitEvent>;
+    event?: EventEmitter<TreeEmitEvent>;
+    stateChange?: EventEmitter<TreeEmitEvent>;
 
     abstract refresh(params, node?: EuTreeNode, openState?, checkState?, selectedState?)
-    abstract refreshActiveNode()
-    abstract refreshActiveNodeParent()
+    abstract refreshSelectedNode()
+    abstract refreshSelectedNodeParent()
     abstract getNodeById(id: string): EuTreeNode
-    abstract getActiveDefNode(): EuTreeNode
-    abstract getActiveDefNodes(): Array<EuTreeNode>
+    abstract getSelectedNode(): EuTreeNode
+    abstract getSelectedNodes(): Array<EuTreeNode>
     abstract getCheckedNodes(checked?: boolean): Array<EuTreeNode>
-    abstract setActiveNode(idOrNode: string | EuTreeNode)
+    abstract setSelectedNode(idOrNode: string | EuTreeNode)
 }
 
-export interface Event {
+export interface TreeEmitEvent {
     name: string
     tree?: EuTree
     node?: EuTreeNode
+    nodes?: EuTreeNode[]
 }
 
 export abstract class EuTreeNode {
