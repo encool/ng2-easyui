@@ -34,6 +34,7 @@ export class DefaultErrorStateMatcher implements ErrorStateMatcher {
             [formControl]="fieldControl" 
             [placeholder]="label"
             [treeTrigger]="tree"
+            [disabled]="field.disabled"
             (treeSelectChange)="onTreeSelectChange($event)">
         </select-tree>
         <mat-error>

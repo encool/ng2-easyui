@@ -151,7 +151,7 @@ export class AntdTreeComponent implements OnInit, OnAction, EuTree {
     }
 
     onDeActivate(e: any) {
-        
+
     }
 
     onNzLoadNodeChildren($event) {
@@ -270,7 +270,11 @@ export class AntdTreeComponent implements OnInit, OnAction, EuTree {
         }
     }
 
-    setActiveNode(idOrNode: string | EuTreeNode): any {
+    setSelectedNode(idOrNode: string | EuTreeNode, selected: boolean) {
+
+    }
+
+    setActiveNode(idOrNode: string | EuTreeNode, selected: boolean): any {
         if (typeof idOrNode == 'string') {
             this.setActiveNode
             let node: any = this.nzTree.treeModel.getNodeById(idOrNode)
@@ -280,7 +284,7 @@ export class AntdTreeComponent implements OnInit, OnAction, EuTree {
         } else if (!idOrNode) {
             this.nzTree.treeModel.setActiveNode({}, false)
         } else if (idOrNode.id) {
-            this.setActiveNode(idOrNode.id)
+            this.setActiveNode(idOrNode.id, selected)
         }
     }
 
@@ -301,6 +305,10 @@ export class AntdTreeComponent implements OnInit, OnAction, EuTree {
 
     }
 
+    refreshSelectedNode() {
+        this.refreshActiveNode()
+    }
+
     refreshActiveNode() {
         var params = this.params
         if (!params) {
@@ -313,6 +321,10 @@ export class AntdTreeComponent implements OnInit, OnAction, EuTree {
             console.warn("refreshActiveNode while no active node")
             this.refresh(params);
         }
+    }
+
+    refreshSelectedNodeParent() {
+        this.refreshActiveNodeParent()
     }
 
     refreshActiveNodeParent() {
@@ -333,6 +345,10 @@ export class AntdTreeComponent implements OnInit, OnAction, EuTree {
         node.loadNodeChildren()
     }
 
+    getSelectedNode(): EuTreeNode {
+        return this.getActiveDefNode()
+    }
+
     /**
      * 获取一个选择的node
      */
@@ -343,6 +359,10 @@ export class AntdTreeComponent implements OnInit, OnAction, EuTree {
         } else {
             return null
         }
+    }
+
+    getSelectedNodes(): Array<EuTreeNode> {
+        return this.getActiveDefNodes()
     }
 
     getActiveDefNodes(): Array<EuTreeNode> {

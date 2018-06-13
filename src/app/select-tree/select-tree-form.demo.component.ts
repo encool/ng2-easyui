@@ -194,6 +194,7 @@ export class SelectTreeFormComponent {
         this.fields[7].disabled = !this.fields[7].disabled
         this.fields[8].disabled = !this.fields[8].disabled
 
+        // this.fields[2].hidden = !this.fields[2].hidden
         // this.fields[0].required = !this.fields[0].required
         // this.fields[1].required = !this.fields[1].required
         // this.fields[2].required = !this.fields[2].required

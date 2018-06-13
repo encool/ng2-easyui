@@ -30,7 +30,7 @@ export abstract class EuTree {
     abstract getSelectedNode(): EuTreeNode
     abstract getSelectedNodes(): Array<EuTreeNode>
     abstract getCheckedNodes(checked?: boolean): Array<EuTreeNode>
-    abstract setSelectedNode(idOrNode: string | EuTreeNode)
+    abstract setSelectedNode(idOrNode: string | EuTreeNode, selected: boolean)
 }
 
 export interface TreeEmitEvent {

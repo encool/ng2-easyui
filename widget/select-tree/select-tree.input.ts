@@ -167,6 +167,8 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
     // @Input('fieldControl') fieldControl: AbstractControl
     @Input('displayValue') displayValue: any
 
+    @Input('disabled') disabled: boolean = false
+
     /** An object used to control when error messages are shown. */
     @Input() errorStateMatcher: ErrorStateMatcher;
 
@@ -524,13 +526,13 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
 
             if (node) {
                 this.triggerValue = node.name
-                this.treeWrap.tree.setActiveNode(node)
+                this.treeWrap.tree.setSelectedNode(node, true)
                 this.value = node.id
             }
         } else if (this.treeWrap && !value) {
             // let treeModal = this.treeWrap.tree.nzTree.treeModel
             // treeModal.setActiveNode({}, false)
-            this.treeWrap.tree.setActiveNode(undefined)
+            this.treeWrap.tree.setSelectedNode(undefined, false)
         }
         // if (this.options) {
         //   this._setSelectionByValue(value);
