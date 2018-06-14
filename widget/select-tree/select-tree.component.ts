@@ -34,7 +34,7 @@ export class DefaultErrorStateMatcher implements ErrorStateMatcher {
             [formControl]="fieldControl" 
             [placeholder]="label"
             [treeTrigger]="tree"
-            [disabled]="field.disabled"
+            [disableControl]="field.disabled"
             (treeSelectChange)="onTreeSelectChange($event)">
         </select-tree>
         <mat-error>
@@ -91,7 +91,7 @@ export class SelectTreeComponent implements OnInit, AfterViewInit {
             if (!this.euTreeOptions) {
                 this.euTreeOptions = this.field.euTreeOptions
             }
-            if (this.field.euTreeNodes && this.field.euTreeNodes.length > 0) {               
+            if (this.field.euTreeNodes && this.field.euTreeNodes.length > 0) {
                 this.euTreeNodes = this.field.euTreeNodes
             }
 

@@ -523,7 +523,6 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
             // let treeModal = this.treeWrap.tree.nzTree.treeModel
             // let node: any = treeModal.getNodeById(value)
             let node: EuTreeNode = this.treeWrap.tree.getNodeById(value)
-
             if (node) {
                 this.triggerValue = node.name
                 this.treeWrap.tree.setSelectedNode(node, true)

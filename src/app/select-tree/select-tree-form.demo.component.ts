@@ -186,7 +186,7 @@ export class SelectTreeFormComponent {
     onClick(e) {
         this.fields[0].disabled = !this.fields[0].disabled
         this.fields[1].disabled = !this.fields[1].disabled
-        this.fields[2].disabled = !this.fields[2].disabled
+        // this.fields[2].disabled = !this.fields[2].disabled
         this.fields[3].disabled = !this.fields[3].disabled
         this.fields[4].disabled = !this.fields[4].disabled
         this.fields[5].disabled = !this.fields[5].disabled
@@ -194,7 +194,7 @@ export class SelectTreeFormComponent {
         this.fields[7].disabled = !this.fields[7].disabled
         this.fields[8].disabled = !this.fields[8].disabled
 
-        // this.fields[2].hidden = !this.fields[2].hidden
+        this.fields[2].hidden = !this.fields[2].hidden
         // this.fields[0].required = !this.fields[0].required
         // this.fields[1].required = !this.fields[1].required
         // this.fields[2].required = !this.fields[2].required

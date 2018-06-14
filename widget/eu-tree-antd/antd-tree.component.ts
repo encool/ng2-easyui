@@ -271,7 +271,7 @@ export class AntdTreeComponent implements OnInit, OnAction, EuTree {
     }
 
     setSelectedNode(idOrNode: string | EuTreeNode, selected: boolean) {
-
+        this.setActiveNode(idOrNode, selected)
     }
 
     setActiveNode(idOrNode: string | EuTreeNode, selected: boolean): any {
