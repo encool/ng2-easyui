@@ -272,7 +272,13 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
     }
 
     ngOnInit() {
-        this.treeWrap
+        this.treeWrap.initialized.subscribe(() => {
+            this.treeWrap.tree.initialized.subscribe(() => {
+                if (this._value) {
+                    this.writeValue(this._value)
+                }
+            })
+        })
     }
 
     ngDoCheck() {
@@ -289,7 +295,6 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
         // if (!this.antTree) {
         // throw getMatAutocompleteMissingPanelError();
         // }
-        // debugger
         if (!this._overlayRef) {
             this.generateProtalAndOverlay()
         } else {
@@ -532,6 +537,8 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
             // let treeModal = this.treeWrap.tree.nzTree.treeModel
             // treeModal.setActiveNode({}, false)
             this.treeWrap.tree.setSelectedNode(undefined, false)
+        } else if (!this.treeWrap && value) {
+            this._value = value
         }
         // if (this.options) {
         //   this._setSelectionByValue(value);

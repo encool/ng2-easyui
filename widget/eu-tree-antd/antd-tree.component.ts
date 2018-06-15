@@ -120,7 +120,10 @@ export class AntdTreeComponent implements OnInit, OnAction, EuTree {
     onEvent(event: any) {
         if (event.eventName == "initialized") {
             let node: TreeNode = this.nzTree.treeModel.getFirstRoot();
-            node.expand()
+            if (node) {
+                node.expand()
+            }
+            this.initialized.emit({ tree: this })
         }
     }
 

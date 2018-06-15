@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ContentChild, TemplateRef, AfterContentInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ContentChild, TemplateRef, AfterContentInit, EventEmitter } from '@angular/core';
 import { AntdTreeComponent } from "../eu-tree-antd/antd-tree.component";
 import { EuTree } from "ng2-easyui.core";
 @Component({
@@ -14,6 +14,7 @@ export class TreeWrapComponent implements OnInit, AfterContentInit {
     @ViewChild(TemplateRef) template: TemplateRef<any>;
     // @ContentChild(AntdTreeComponent) tree: AntdTreeComponent
     @ContentChild(AntdTreeComponent) tree: EuTree
+    initialized: EventEmitter<any> = new EventEmitter<any>()
 
     constructor() { }
 
@@ -22,6 +23,6 @@ export class TreeWrapComponent implements OnInit, AfterContentInit {
     }
 
     ngAfterContentInit() {
-
+        this.initialized.emit({})
     }
 }

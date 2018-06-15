@@ -209,6 +209,7 @@ export class SelectTreeFormComponent {
     }
 
     ngAfterViewInit() {
+        this.form.form.patchValue({ selectTree: "11" })
         this.form.form.valueChanges.subscribe(value => {
             setTimeout(() => {
                 this.formvalue = JSON.stringify(value)
