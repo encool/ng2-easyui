@@ -1,0 +1,11 @@
+{
+  "name": "eu-ag-grid",
+  "description": "eu-ag-grid",
+  "private": true,
+  "repository": "",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "./index.ts"
+    }
+  }
+}

@@ -3,14 +3,14 @@ import { RouterModule } from '@angular/router'
 
 import {
     EasyUIMdModalModule
-    // } from 'ng2-easyui'
-} from '../../../widget'
+} from 'ngx-easyui'
+// } from '../../../widget'
 
-import { EasyUIagGridModule } from "../../../widget/eu-ag-grid";
+import { EasyUIagGridModule } from "ngx-easyui/eu-ag-grid";
 
 import { EuAggridDemoComponent } from './eu-aggrid.demo.component';
 import { ModalInfoComponent } from './modal.info.component'
-import { EasyFormCoreModule, EasyFormMdModule, MdTextinputField } from 'ng2-easyform'
+import { EasyFormCoreModule, EasyFormMdModule, MdTextinputField } from 'ngx-easyform'
 
 @NgModule({
     imports: [

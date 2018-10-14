@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 import {
     ModelInput
-    // } from 'ng2-easyui'
-} from '../../../widget/bpmn2'
+} from 'ngx-easyui/bpmn2'
+// } from '../../../widget/bpmn2'
 
 
 @Component({

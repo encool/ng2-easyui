@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http'
 
 import {
     EuBpmnService
-} from 'ng2-easyui.core'
+} from 'ngx-easyui-core'
 // } from 'ng2-easyui'
 
 @Injectable()

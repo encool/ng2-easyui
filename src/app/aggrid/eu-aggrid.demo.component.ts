@@ -2,19 +2,19 @@ import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import {
     EuGridOptions,
-     EuColModel, 
-     EuGridEvent, 
-     ModalConfig, 
-     CURDAction,
-     EuGridAction,
-     TreeAction,
-     EuTreeNode
+    EuColModel,
+    EuGridEvent,
+    ModalConfig,
+    CURDAction,
+    EuGridAction,
+    TreeAction,
+    EuTreeNode
     // } from 'ng2-easyui'
-} from 'ng2-easyui.core'
+} from 'ngx-easyui-core'
 import {
     AggridComponent, ColDef, ColGroupDef,
-    // } from 'ng2-easyui/eu-ag-grid'
-} from '../../../widget/eu-ag-grid'
+} from 'ngx-easyui/eu-ag-grid'
+// } from '../../../widget/eu-ag-grid'
 
 import { IndexComponent } from "../index.component";
 import { ModalInfoComponent } from './modal.info.component'
@@ -28,7 +28,7 @@ import {
     MdFormComponent,
     MdCheckboxField,
     QueryOperate
-} from 'ng2-easyform'
+} from 'ngx-easyform'
 
 @Component({
     selector: 'eu-aggrid-demo',

@@ -1,16 +1,16 @@
 import { Component, Inject, ViewContainerRef, ViewChild } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable'
+import { Observable } from 'rxjs'
 import {
     OnModalAction, EuGridEvent, CURDAction, EuGridAction, EuPageService
     // } from 'ng2-easyui'
-} from 'ng2-easyui.core'
+} from 'ngx-easyui-core'
 
 // import { EasyUIMdModalModule, MdModalService, ModalConfig } from '../../../'
 
-import { MdTextinputField, FieldBase, MdFormComponent } from 'ng2-easyform'
+import { MdTextinputField, FieldBase, MdFormComponent } from 'ngx-easyform'
 import { MAT_DIALOG_DATA, MatDialog } from "@angular/material"
-import { BaseAction } from '../../../widget/core';
+import { BaseAction } from 'ngx-easyui-core';
 
 @Component({
     selector: 'dialog-data-example-dialog',

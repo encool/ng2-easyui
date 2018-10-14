@@ -3,9 +3,9 @@ import { ActivatedRoute } from "@angular/router";
 
 import {
     EuMatTab, EuTabService
-} from '../../widget'
-// } from 'ng2-easyui'
-import { EuModalService } from "ng2-easyui.core";
+    // } from '../../widget'
+} from 'ngx-easyui'
+import { EuModalService } from "ngx-easyui-core";
 @Component({
     selector: 'index-app',
     template: `

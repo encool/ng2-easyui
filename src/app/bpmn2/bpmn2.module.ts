@@ -3,10 +3,10 @@ import { RouterModule } from '@angular/router'
 
 import {
     EasyUIMdModalModule
-    // } from 'ng2-easyui'
-} from '../../../widget'
+} from 'ngx-easyui'
+// } from '../../../widget'
 
-import { EasyUIBpmnModule } from "../../../widget/bpmn2";
+import { EasyUIBpmnModule } from "ngx-easyui/bpmn2";
 
 import { Bpmn2DemoComponent } from './bpmn2.demo.component';
 

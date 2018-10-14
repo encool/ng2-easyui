@@ -1,0 +1,11 @@
+{
+  "name": "bpmn2",
+  "description": "bpmn2",
+  "private": true,
+  "repository": "",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "./index.ts"
+    }
+  }
+}

@@ -28,34 +28,36 @@ import {
   EasyUIMenuModule,
   EasyUIMatPanelModule,
   // EasyUINg2TreeModule,
-  EasyUIAntTreeModule,
-  EasyUISelectTreeModule,
+  // EasyUIAntTreeModule,
+  // EasyUISelectTreeModule,
   // EuBpmnService,
   TitleGuard,
-  // } from 'ng2-easyui'
-} from '../../widget'
+} from 'ngx-easyui'
+// } from '../../widget'
 import {
   EuPageService,
   EuBpmnService,
-  EuTreeService
-} from "ng2-easyui.core";
+  EuTreeService,
+  EuMenuService
+} from "ngx-easyui-core";
 import { Bootstrap3GridModule } from "ng2-bootstrap3-grid";
-import { EasyFormCoreModule, EasyFormMdModule, EfDictdataService } from 'ng2-easyform'
+import { EasyFormCoreModule, EasyFormMdModule, EfDictdataService, } from 'ngx-easyform'
 
 
 import { PageService } from './page.service';
 import { BpmnService } from './bpmn.service';
 import { TreeService } from "./tree.service";
 import { DictdataService } from "./dictdata.service";
+import { AppMenuService } from "./app.menu.service";
 
 import { RichSwipeDemoComponent } from './rich-swipe-demo/rich-swipe-demo.component';
 import { AngTreeDemoComponent } from './angular-tree/angular-tree.demo.component'
 import { MatPanelDemoComponent } from './mat-panel/mat-panel.demo.component'
 // import { Ng2TreeDemoComponent } from "./ng2-tree/ng2-tree.demo.component";
-import { AntdTreeDemoComponent } from "./antd-tree/antd-tree.demo.component";
-import { SelectTreeDemoComponent } from "./select-tree/select-tree.demo.component";
-import { SelectTreeFormComponent } from "./select-tree/select-tree-form.demo.component";
-import { TreeModalComponent } from "./antd-tree/tree-modal.component";
+// import { AntdTreeDemoComponent } from "./antd-tree/antd-tree.demo.component";
+// import { SelectTreeDemoComponent } from "./select-tree/select-tree.demo.component";
+// import { SelectTreeFormComponent } from "./select-tree/select-tree-form.demo.component";
+// import { TreeModalComponent } from "./antd-tree/tree-modal.component";
 
 import { IndexComponent } from './index.component'
 import { EntryComponent } from "./entry.component";
@@ -66,16 +68,16 @@ import { EntryComponent } from "./entry.component";
     DialogDataExampleDialog,
     MatPanelDemoComponent,
     // Ng2TreeDemoComponent,
-    AntdTreeDemoComponent,
+    // AntdTreeDemoComponent,
 
     RichSwipeDemoComponent,
     AngTreeDemoComponent,
     IndexComponent,
     EntryComponent,
     // ModalInfoComponent,
-    TreeModalComponent,
-    SelectTreeDemoComponent,
-    SelectTreeFormComponent,
+    // TreeModalComponent,
+    // SelectTreeDemoComponent,
+    // SelectTreeFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,10 +94,10 @@ import { EntryComponent } from "./entry.component";
         { path: 'RichSwipeDemoComponent', component: RichSwipeDemoComponent, data: { title: "翻页效果" } },
         { path: 'MatPanelDemoComponent', component: MatPanelDemoComponent, data: { title: "MatPanel" } },
         // { path: 'Ng2TreeDemoComponent', component: Ng2TreeDemoComponent, data: { title: "Ng2Tree" } },
-        { path: 'AntdTreeDemoComponent', component: AntdTreeDemoComponent, data: { title: "AntdTree" } },
+        // { path: 'AntdTreeDemoComponent', component: AntdTreeDemoComponent, data: { title: "AntdTree" } },
         { path: 'AngTreeDemoComponent', component: AngTreeDemoComponent, data: { title: "angular-tree" } },
-        { path: 'SelectTreeDemoComponent', component: SelectTreeDemoComponent, data: { title: "select-tree" } },
-        { path: 'SelectTreeFormComponent', component: SelectTreeFormComponent, data: { title: "select-tree-form" } },
+        // { path: 'SelectTreeDemoComponent', component: SelectTreeDemoComponent, data: { title: "select-tree" } },
+        // { path: 'SelectTreeFormComponent', component: SelectTreeFormComponent, data: { title: "select-tree-form" } },
         { path: 'EntryComponent', component: EntryComponent, data: { title: "entry" } },
         { path: '**', redirectTo: "EntryComponent" },
       ]
@@ -109,7 +111,7 @@ import { EntryComponent } from "./entry.component";
     MatIconModule,
     MatInputModule,
     MatNativeDateModule,
-    
+
     // TreeModule,
     EasyFormCoreModule,
     EasyFormMdModule,
@@ -124,19 +126,21 @@ import { EntryComponent } from "./entry.component";
     EasyUIMatContainerModule.forRoot(),
     EasyUIMatPanelModule,
     // EasyUINg2TreeModule,
-    EasyUIAntTreeModule,
-    EasyUISelectTreeModule.forRoot()
+    // EasyUIAntTreeModule,
+    // EasyUISelectTreeModule.forRoot()
   ],
   providers: [
     { provide: EuPageService, useClass: PageService, },
     { provide: EuBpmnService, useClass: BpmnService, },
-    { provide: EuTreeService, useClass: TreeService, },
     { provide: EfDictdataService, useClass: DictdataService, },
+    { provide: EuTreeService, useClass: TreeService, },
+    { provide: EuMenuService, useClass: AppMenuService, },
+
   ],
   entryComponents: [
     DialogDataExampleDialog,
     // ModalInfoComponent
-    TreeModalComponent,
+    // TreeModalComponent,
   ],
   bootstrap: [AppComponent]
 })

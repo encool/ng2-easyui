@@ -1,11 +1,11 @@
-import { Component, Inject, ViewContainerRef } from '@angular/core';
+import { Component, Inject, ViewContainerRef, OnInit } from '@angular/core';
 
 import {
-  EasyUIMdModalModule, MdModalService
-  // } from 'ng2-easyui'
-} from '../../widget'
-import { ModalConfig } from "ng2-easyui.core";
-import { EuModalService } from "ng2-easyui.core";
+  ModalConfig,
+  EuModalService,
+  EuMenuService
+} from "ngx-easyui-core";
+import { } from "ngx-easyui-core";
 
 import { MAT_DIALOG_DATA, MatDialog } from "@angular/material"
 
@@ -14,11 +14,21 @@ import { MAT_DIALOG_DATA, MatDialog } from "@angular/material"
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'app';
 
-  constructor(private mdModalService: EuModalService, private mdDialog: MatDialog, private viewContainerRef: ViewContainerRef) {
+  constructor(
+    private mdModalService: EuModalService,
+    private mdDialog: MatDialog,
+    private viewContainerRef: ViewContainerRef,
+    private menuService: EuMenuService) {
 
+  }
+
+  ngOnInit() {
+    this.menuService.getApplicationMenus().then((data) => {
+
+    })
   }
 
   openDialog() {
@@ -42,7 +52,7 @@ export class AppComponent {
 
 import {
   OnModalAction
-} from 'ng2-easyui.core'
+} from 'ngx-easyui-core'
 
 @Component({
   selector: 'dialog-data-example-dialog',
@@ -52,7 +62,7 @@ import {
 })
 export class DialogDataExampleDialog implements OnModalAction {
 
-  constructor( @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     // debugger
   }
 

@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+import { Observable } from 'rxjs';
+import { map } from "rxjs/operators";
 
 import {
     EuPageService
-} from 'ng2-easyui.core'
+} from 'ngx-easyui-core'
 // } from 'ng2-easyui'
 
 @Injectable()
@@ -91,10 +90,10 @@ export class PageService extends EuPageService {
         return this.http.get(url, {
             headers: headers,
             params: urlSearchParams
-        }).map((data) => {
+        }).pipe(map((data) => {
             // debugger
             return data
-        })
+        }))
     }
 
     getPageObByOffsetLimit(url: string, offset: number, limit: number,
@@ -114,10 +113,10 @@ export class PageService extends EuPageService {
         return this.http.get(url, {
             headers: headers,
             params: urlSearchParams
-        }).map((data) => {
+        }).pipe(map((data) => {
             // debugger
             return data
-        })
+        }))
     }
 
     getById(id: string) {

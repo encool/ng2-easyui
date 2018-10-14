@@ -1,6 +1,5 @@
 <mat-toolbar color="primary">
-    <button class="hamburger" mat-button
-        (click)="sidenav.toggle()" title="Docs menu">
+    <button class="hamburger" mat-button (click)="sidenav.toggle()" title="Docs menu">
         <mat-icon>menu</mat-icon>
     </button>
     My Application
@@ -31,7 +30,7 @@
     <mat-sidenav #sidenav class="sidenav" [mode]="mode" (openedChange)="onSideChanged($event)">
         <!-- <mat-nav-list>
         </mat-nav-list> -->
-        <eu-menu-list [menus]="menus" (hideMenu)="onHideMenu()"></eu-menu-list>
+        <eu-menu-list [menus]="menuService.appMenus" (hideMenu)="onHideMenu()"></eu-menu-list>
         <!-- <eu-mat-nav-menu [menu]="emenu"></eu-mat-nav-menu> -->
     </mat-sidenav>
     <div cdk-scrollable>

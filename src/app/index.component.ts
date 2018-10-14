@@ -3,106 +3,15 @@ import { MatSidenav } from "@angular/material";
 
 import {
     MatContainerComponent, EuMatTab
-} from '../../widget'
-// } from 'ng2-easyui'
-import { Menu } from "ng2-easyui.core";
+    // } from '../../widget'
+} from 'ngx-easyui'
+import { Menu, EuMenuService } from "ngx-easyui-core";
 
 @Component({
     selector: 'demo-index',
     templateUrl: "./index.component.html"
 })
 export class IndexComponent implements OnInit {
-
-    menus: Menu[] = [
-        {
-            id: "1",
-            t: "feature",
-            i: "",
-            c: [
-                {
-                    id: "1",
-                    t: "demo",
-                    i: "",
-                    c: [
-                        {
-                            id: "1",
-                            t: "aggrid",
-                            l: "/demo/EuAggridDemoComponent",
-                            i: "",
-                        },
-                        {
-                            id: "1",
-                            t: "Bpmn2Demo",
-                            l: "Bpmn2Demo/Bpmn2DemoComponent",
-                            i: "",
-                        },
-                    ]
-                },
-                {
-                    id: "1",
-                    t: "demo",
-                    i: "",
-                    c: [
-                        {
-                            id: "1",
-                            t: "matpanel",
-                            l: "/MatPanelDemoComponent",
-                            i: "",
-                        },
-                        {
-                            id: "1",
-                            t: "ng2Tree",
-                            l: "/Ng2TreeDemoComponent",
-                            i: "",
-                        },
-                        {
-                            id: "1",
-                            t: "antdTree",
-                            l: "/AntdTreeDemoComponent",
-                            i: "",
-                        },
-                        {
-                            id: "1",
-                            t: "SelectTree",
-                            l: "/SelectTreeDemoComponent",
-                            i: "",
-                        },
-                        {
-                            id: "1",
-                            t: "SelectTreeForm",
-                            l: "/SelectTreeFormComponent",
-                            i: "",
-                        },
-                    ]
-                },
-            ]
-        },
-        {
-            id: "1",
-            t: "level1",
-            i: "",
-            c: [
-                {
-                    id: "1",
-                    t: "level2",
-                    l: "ddd",
-                    i: "",
-                },
-                {
-                    id: "1",
-                    t: "demo",
-                    l: "ddd",
-                    i: "",
-                },
-            ]
-        },
-        {
-            id: "1",
-            t: "系统设置",
-            l: "ddd",
-            i: "",
-        },
-    ]
 
     userDTO = {
         userRealname: "测试用户"
@@ -117,7 +26,9 @@ export class IndexComponent implements OnInit {
     @ViewChild(MatContainerComponent) container: MatContainerComponent
     @ViewChild(MatSidenav) sideNav: MatSidenav
 
-    constructor() { }
+    constructor(public menuService: EuMenuService) {
+
+    }
 
     srcMenus = [{ id: "1", t: "11", l: "", i: "" }]
     ngOnInit() {

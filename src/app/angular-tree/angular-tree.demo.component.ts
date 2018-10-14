@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import {
     ITreeOptions, TREE_ACTIONS
-    // } from 'ng2-easyui'
-} from '../../../widget'
+} from 'ngx-easyui'
 import {
     EuTreeNode
     // } from 'ng2-easyui'
-} from 'ng2-easyui.core'
+} from 'ngx-easyui-core'
 
 @Component({
     selector: 'ang-tree-demo',
