@@ -12,7 +12,7 @@ import { Menu } from "ngx-easyui-core";
 export class EuTabService {
 
     navLinks: EuMatTab[] = []
-    breadcrumbMenus: Menu[]
+    // breadcrumbMenus: Menu[]
 
     constructor(private router: Router, private location: Location) {
 
@@ -25,8 +25,6 @@ export class EuTabService {
     }
 
     addEuMatTab(EuMatTab: EuMatTab) {
-        debugger
-        // EuMatTab.hash = this._calculateHash(EuMatTab)
         if (this.existTab(EuMatTab) == -1) {
             this.navLinks.push(EuMatTab)
         }
@@ -55,29 +53,6 @@ export class EuTabService {
     _findNextTab() {
         let length = this.navLinks.length
         return this.navLinks[length - 1]
-    }
-
-    setBreadcrumbArray(target: Menu, menus: Array<Menu>): boolean {
-        for (let m in menus) {
-            let menu: Menu = menus[m]
-            this.breadcrumbMenus.push(menu)
-            //get it
-            if (menu.l == target.l) {
-                return true
-            } else if (menu.c && menu.c.length > 0) { //查詢咨菜單
-                let isInChildren = this.setBreadcrumbArray(target, menu.c)
-                if (isInChildren) {
-                    return true
-                } else {
-                    this.breadcrumbMenus.pop()
-                }
-            } else { //出棧
-                this.breadcrumbMenus.pop()
-            }
-        }
-        menus.forEach(i => {
-
-        })
     }
 
     // _calculateHash(tab: EuMatTab) {

@@ -42,8 +42,9 @@ export class AntdTreeDemoComponent implements OnInit {
             rootNodeName: "root",
             dataUrl: "./nodes.json",
             checkEnable: true,
+            selectedMulti: false,
             defaultActionModalConfig: {
-                // component: TreeModalComponent,
+                component: TreeModalComponent,
                 title: "测试标题"
             }
         }
@@ -82,7 +83,6 @@ export class AntdTreeDemoComponent implements OnInit {
 
     onTreeEvent($event) {
         this
-        debugger
     }
 
     onClick(e) {

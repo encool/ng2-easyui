@@ -10,7 +10,7 @@ import { resolve } from 'path';
 @Injectable()
 export class AppMenuService extends EuMenuService {
 
-    getApplicationMenus(): Promise<Menu[]> {
+    getApplicationMenus(fetch: boolean): Promise<Menu[]> {
         return new Promise((resolve) => {
             this.appMenus = this.menus
             resolve(this.menus)
@@ -89,13 +89,13 @@ export class AppMenuService extends EuMenuService {
                 {
                     id: "1",
                     t: "level2",
-                    l: "ddd",
+                    l: "ddd1",
                     i: "",
                 },
                 {
                     id: "1",
                     t: "demo",
-                    l: "ddd",
+                    l: "ddd2",
                     i: "",
                 },
             ]
@@ -103,7 +103,7 @@ export class AppMenuService extends EuMenuService {
         {
             id: "1",
             t: "系统设置",
-            l: "ddd",
+            l: "ddd3",
             i: "",
         },
     ]

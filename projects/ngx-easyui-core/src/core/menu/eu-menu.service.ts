@@ -7,6 +7,6 @@ export abstract class EuMenuService {
 
     constructor(public http: HttpClient) { }
 
-    abstract getApplicationMenus(): Promise<Menu[]>
+    abstract getApplicationMenus(fetch?: boolean): Promise<Menu[]>
 
 }

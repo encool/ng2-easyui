@@ -23,6 +23,13 @@ export class IndexComponent implements OnInit {
         label: "首页"
     }
 
+    indexMenu: Menu = {
+        id: "id",
+        t: "首页",
+        i: "",
+        l: "EntryComponent"
+    }
+
     @ViewChild(MatContainerComponent) container: MatContainerComponent
     @ViewChild(MatSidenav) sideNav: MatSidenav
 
@@ -30,7 +37,7 @@ export class IndexComponent implements OnInit {
 
     }
 
-    srcMenus = [{ id: "1", t: "11", l: "", i: "" }]
+    srcMenus = [{ id: "1", t: "首页", l: "/index", i: "" }]
     ngOnInit() {
         this.container.breadcrumbMenus = this.srcMenus
     }

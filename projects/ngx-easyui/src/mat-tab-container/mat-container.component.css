@@ -45,7 +45,8 @@ nav .nav-wrapper {
 }
 
 .breadcrumb:before {
-    content: '\\E5CC';
+    /* content: 'U+005CE5CC'; */
+    content: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAARUlEQVR4AWOgGxgFo6ASiOtpZbgWEP8D4v9AXEIrS+KGjSUR9LLkD8wSWlvQQMsg6qZ6JA9Zw7VoZzgCVMIMpz8YBaMAAJ2AHff0cphTAAAAAElFTkSuQmCC');
     color: rgba(255,255,255,0.7);
     vertical-align: top;
     display: inline-block;

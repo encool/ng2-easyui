@@ -14,8 +14,7 @@ import { EuMenuService } from "ngx-easyui-core";
 export class TitleGuard implements CanActivate, CanActivateChild {
 
     constructor(
-        private euTabService: EuTabService,
-        private euMenuService: EuMenuService
+        private euTabService: EuTabService
     ) {
 
     }
@@ -38,8 +37,6 @@ export class TitleGuard implements CanActivate, CanActivateChild {
                     queryParams: queryParams
                 }
                 this.euTabService.addEuMatTab(tab)
-                this.euMenuService
-                // this.euTabService.addMenu()
             }
         }
         return true

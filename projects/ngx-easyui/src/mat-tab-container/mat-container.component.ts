@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive, UrlTree, UrlSegmentGroup } from "@angular/router";
+import { Router, RouterLink, RouterLinkActive, UrlTree, NavigationEnd } from "@angular/router";
 
 import { EuTabService } from "./eu-tab.service";
 
 import { containsTree } from "./angular/url_tree";
 
-import { Menu } from "ngx-easyui-core";
+import { Menu, EuMenuService } from "ngx-easyui-core";
 
 @Component({
     selector: 'eu-mat-container',
@@ -21,14 +21,29 @@ export class MatContainerComponent implements OnInit {
         fullPath: "/",
         label: "首页",
     }
+    @Input() indexMenu: Menu = {
+        id: "id",
+        l: "/",
+        t: "首页",
+        i: ""
+    }
 
     @ViewChild(RouterLink) routerLink: RouterLink
     @ViewChild(RouterLinkActive) routerLinkActive: RouterLinkActive
 
-    @Input() breadcrumbMenus: Menu[] = [new Menu({ id: "$dkiesdf", i: "1", t: "首页", l: "index" })]
+    breadcrumbMenus: Menu[]
 
-    constructor(private router: Router, public euTabService: EuTabService) {
+    constructor(private router: Router, public euTabService: EuTabService, private euMenuService: EuMenuService) {
+        this.router.events.subscribe(event => {
+            if (event instanceof NavigationEnd) {
+                this.breadcrumbMenus = []
+                this.breadcrumbMenus.push(this.indexMenu)
+                let done = this.setBreadcrumbMenus({ l: event.url } as any, this.euMenuService.appMenus)
+                if (!done) {
 
+                }
+            }
+        })
     }
 
     ngOnInit() {
@@ -39,7 +54,26 @@ export class MatContainerComponent implements OnInit {
         this.router
     }
 
-
+    setBreadcrumbMenus(target: Menu, menus: Array<Menu>): boolean {
+        for (let m in menus) {
+            let menu: Menu = menus[m]
+            this.breadcrumbMenus.push(menu)
+            //get it
+            if (menu.l == target.l || '/' + menu.l == target.l) {
+                return true
+            } else if (menu.c && menu.c.length > 0) { //查詢咨菜單
+                let isInChildren = this.setBreadcrumbMenus(target, menu.c)
+                if (isInChildren) {
+                    return true
+                } else {
+                    this.breadcrumbMenus.pop()
+                }
+            } else { //出棧
+                this.breadcrumbMenus.pop()
+            }
+        }
+        return false;
+    }
 
     tabClose(tab: EuMatTab) {
         this.euTabService.removeTab(tab)
