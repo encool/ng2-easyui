@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from "@angular/forms";
 import {
     EuTreeNode, EuTreeOptions
     // } from 'ng2-easyui'
 } from 'ngx-easyui-core'
-import { SelectTreeField, SelectTreeComponent } from "../../../widget/";
+import { SelectTreeField, SelectTreeComponent } from "ngx-easyui";
 
 @Component({
     selector: 'antd-tree-demo',
@@ -37,7 +36,7 @@ export class SelectTreeDemoComponent implements OnInit {
             treeId: "demoTree",
             rootNodeName: "root",
             dataUrl: "./nodes.json",
-            // checkEnable: true,
+            checkEnable: true,
             defaultActionModalConfig: {
                 // component: TreeModalComponent,
                 title: "测试标题"

@@ -8,8 +8,10 @@ export * from './eu-menu/index'
 export * from './mat-panel/index'
 
 export * from './eu-tree-antd/index'
-// export * from './select-tree/index'
+export * from './mat-select-tree/index'
 
 // export * from './eu-ag-grid'
 
 export { ITreeOptions } from 'angular-tree-component'
+
+export * from './ant-select-tree/ant-select-tree.module'

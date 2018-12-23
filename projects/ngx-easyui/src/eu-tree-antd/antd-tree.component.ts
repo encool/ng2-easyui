@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, Optional, Vi
 import { HttpClient } from "@angular/common/http";
 
 import { MatSnackBar } from "@angular/material";
-import { TREE_ACTIONS } from "angular-tree-component";
 import {
     OnAction,
     TreeAction,
@@ -21,7 +20,7 @@ import { NzFormatEmitEvent, NzTreeNode, NzTreeNodeOptions, NzTreeComponent } fro
 @Component({
     selector: 'eu-antd-tree',
     template: `
-    <nz-tree
+    <nz-tree class="eu-antd-tree"
       #treeCom
       [nzData]="_nzNodes"
       [nzShowLine]="nzShowLine"
@@ -31,14 +30,14 @@ import { NzFormatEmitEvent, NzTreeNode, NzTreeNodeOptions, NzTreeComponent } fro
       [nzExpandedKeys]="expandedKeys"
       [nzSelectedKeys]="selectedKeys"
       (nzClick)="onNzClick($event)"
-      (nzCheckBoxChange)="onCheck($event)"
+      (nzCheckBoxChange)="nzEvent($event)"
       nzAsyncData="true"
       (nzClick)="nzEvent($event)"
       (nzExpandChange)="nzEvent($event)">
     </nz-tree>
     `,
     exportAs: "euAntdTree",
-    styles: [`.angular-tree-component{background: white;color: rgba(0, 0, 0, 0.87);}"`],
+    styles: [`.eu-antd-tree{background: white;color: rgba(0, 0, 0, 0.87);}"`],
     encapsulation: ViewEncapsulation.None
 })
 export class AntdTreeComponent implements OnInit, OnAction, EuTree {
@@ -117,10 +116,20 @@ export class AntdTreeComponent implements OnInit, OnAction, EuTree {
                 node: event.node
             }
             this.euTreeCheck.emit(emitevent)
-            this.check.emit({ node: euTreeNode, tree: this })
+            debugger
+            if (euTreeNode.isCheck) {
+                this.check.emit({ node: euTreeNode, tree: this })
+            }
 
             if (this.euTreeOptions.nodeCheck) {
                 this.euTreeOptions.nodeCheck(this, euTreeNode, event)
+            }
+        } else if (event.eventName === 'click') {
+            let euTreeNode = this.treeNodeToEuTreeNode(event.node)
+            if (euTreeNode.selected) {
+                this.select.emit({ node: euTreeNode, tree: this })
+            } else {
+                this.deselect.emit({ node: euTreeNode, tree: this })
             }
         }
     }
@@ -129,15 +138,15 @@ export class AntdTreeComponent implements OnInit, OnAction, EuTree {
 
     }
 
-    onDeCheck(e) {
-        let euTreeNode = this.treeNodeToEuTreeNode(e.node)
-        this.decheck.emit({ node: euTreeNode, tree: this })
-    }
+    // onDeCheck(e) {
+    //     let euTreeNode = this.treeNodeToEuTreeNode(e.node)
+    //     this.decheck.emit({ node: euTreeNode, tree: this })
+    // }
 
-    onActivate(e: any) {
-        let euTreeNode = this.treeNodeToEuTreeNode(e.node)
-        this.select.emit({ node: euTreeNode, tree: this })
-    }
+    // onActivate(e: any) {
+    //     let euTreeNode = this.treeNodeToEuTreeNode(e.node)
+    //     this.select.emit({ node: euTreeNode, tree: this })
+    // }
 
     onDeActivate(e: any) {
 

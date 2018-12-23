@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { ValidationErrors } from "@angular/forms";
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+// import { ValidationErrors } from "@angular/forms";
+// import 'rxjs/add/observable/throw';
+// import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/catch';
 
 import {
     FieldBase,
@@ -16,7 +16,7 @@ import {
     MdFieldGroup
 } from 'ngx-easyform'
 
-import { SelectTreeField } from "../../../widget/";
+import { AntSelectTreeField } from "ngx-easyui";
 
 @Component({
     selector: 'select-tree-form-demo',
@@ -67,7 +67,7 @@ export class SelectTreeFormComponent {
                     // debugger
                 }
             }),
-            new SelectTreeField({
+            new AntSelectTreeField({
                 key: 'selectTree', label: '选择树', required: true, span: 4,
                 euTreeOptions: {
                     treeId: "demoTree",

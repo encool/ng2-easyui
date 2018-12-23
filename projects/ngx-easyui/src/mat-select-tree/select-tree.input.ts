@@ -53,7 +53,7 @@ import { Subscription } from 'rxjs';
 
 import { TreeWrapComponent } from "./tree-wrapper";
 import { AntdTreeComponent } from '../eu-tree-antd';
-import { EuTreeNode } from "ng2-easyui.core";
+import { EuTreeNode } from "ngx-easyui-core";
 
 /** Injection token that determines the scroll handling while the autocomplete panel is open. */
 export const MAT_AUTOCOMPLETE_SCROLL_STRATEGY =
@@ -100,13 +100,13 @@ export const _MatSelectMixinBase = mixinTabIndex(mixinDisabled(mixinErrorState(M
         'role': 'listbox',
         '[attr.id]': 'id',
         '[attr.tabindex]': 'tabIndex',
-        '[attr.aria-label]': '_ariaLabel',
-        '[attr.aria-labelledby]': 'ariaLabelledby',
+        // '[attr.aria-label]': '_ariaLabel',
+        // '[attr.aria-labelledby]': 'ariaLabelledby',
         '[attr.aria-required]': 'required.toString()',
         '[attr.aria-disabled]': 'disabled.toString()',
         '[attr.aria-invalid]': 'errorState',
-        '[attr.aria-owns]': 'panelOpen ? _optionIds : null',
-        '[attr.aria-multiselectable]': 'multiple',
+        // '[attr.aria-owns]': 'panelOpen ? _optionIds : null',
+        // '[attr.aria-multiselectable]': 'multiple',
         '[attr.aria-describedby]': '_ariaDescribedby || null',
         // '[attr.aria-activedescendant]': '_getAriaActiveDescendant()',
         '[class.mat-select-disabled]': 'disabled',
@@ -130,7 +130,31 @@ export const _MatSelectMixinBase = mixinTabIndex(mixinDisabled(mixinErrorState(M
         style="font-size: 14px;height: 18px;width: 18px;display: table-cell;vertical-align: middle;">clear</mat-icon>
         <div class="mat-select-arrow-wrapper"><div class="mat-select-arrow"></div></div>
     </div>`,
-    styles: [`.mat-select{display:inline-block;width:100%;outline:0}.mat-select-trigger{display:inline-table;cursor:pointer;position:relative;box-sizing:border-box}.mat-select-disabled .mat-select-trigger{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}.mat-select-value{display:table-cell;max-width:0;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mat-select-value-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mat-select-arrow-wrapper{display:table-cell;vertical-align:middle}.mat-select-arrow{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:5px solid;margin:0 4px}.mat-select-panel{min-width:112px;max-width:280px;overflow:auto;-webkit-overflow-scrolling:touch;padding-top:0;padding-bottom:0;max-height:256px;min-width:100%}.mat-select-panel:not([class*=mat-elevation-z]){box-shadow:0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12)}@media screen and (-ms-high-contrast:active){.mat-select-panel{outline:solid 1px}}.mat-select-panel .mat-optgroup-label,.mat-select-panel .mat-option{font-size:inherit;line-height:3em;height:3em}.mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex{cursor:pointer}.mat-form-field-type-mat-select .mat-form-field-label{width:calc(100% - 18px)}.mat-select-placeholder{transition:color .4s .133s cubic-bezier(.25,.8,.25,1)}.mat-form-field-hide-placeholder .mat-select-placeholder{color:transparent;transition:none}`],
+    styles: [`.mat-select{display:inline-block;width:100%;outline:0}
+    .mat-select-trigger{display:inline-table;cursor:pointer;position:relative;box-sizing:border-box}.mat-select-disabled 
+    .mat-select-trigger{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}
+    .mat-select-value{display:table-cell;max-width:0;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .mat-select-value-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .mat-select-arrow-wrapper{display:table-cell;vertical-align:middle}
+    .mat-select-arrow{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:5px solid;margin:0 4px}
+    .mat-select-panel{min-width:112px;max-width:280px;overflow:auto;-webkit-overflow-scrolling:touch;padding-top:0;padding-bottom:0;max-height:256px;min-width:100%}
+    .mat-select-panel:not([class*=mat-elevation-z]){box-shadow:0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12)}@media screen and (-ms-high-contrast:active){.mat-select-panel{outline:solid 1px}}
+    .mat-select-panel .mat-optgroup-label,.mat-select-panel .mat-option{font-size:inherit;line-height:3em;height:3em}.mat-form-field-type-mat-select:not(.mat-form-field-disabled) 
+    .mat-form-field-flex{cursor:pointer}.mat-form-field-type-mat-select .mat-form-field-label{width:calc(100% - 18px)}
+    .mat-select-placeholder{transition:color .4s .133s cubic-bezier(.25,.8,.25,1)}.mat-form-field-hide-placeholder 
+    .mat-select-placeholder{color:transparent;transition:none}`,
+        `.eu-antd-tree-panel{    
+        min-width: 112px;
+        max-width: 280px;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-top: 0;
+        padding-bottom: 0;
+        max-height: 300px;
+        border-radius: 4px;
+        background: #fff;
+        box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+    }`],
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: MatFormFieldControl, useExisting: SelectTreeInput }],
 })
@@ -385,7 +409,8 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
             scrollStrategy: this._scrollStrategy(),
             width: this._getHostWidth(),
             // direction: this._dir ? this._dir.value : 'ltr'
-            direction: 'ltr'
+            direction: 'ltr',
+            panelClass: "eu-antd-tree-panel"
         });
     }
 
@@ -431,6 +456,7 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
 
     private _subscribeToClosingActions(): Subscription {
         return this.panelClosingActions.subscribe(event => {
+            debugger
             this._setValueAndClose(event)
         });
     }
@@ -445,6 +471,7 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
      * stemmed from the user.
      */
     private _setValueAndClose(event: any | null): void {
+        debugger
         if (event.node) {
             let data = event.node
             if (this._previousValue !== data.id) {
@@ -471,18 +498,18 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
         return merge(
             this.treeWrap.tree.select,
             this.treeWrap.tree.check,
-            filter((event: any) => {
-                // if (event.eventName = "activate") {
-                //     return true
-                // } else {
-                //     return false
-                // }
-                if (event.node) {
-                    return true
-                } else {
-                    return false
-                }
-            })
+            // filter((event: any) => {
+            //     // if (event.eventName = "activate") {
+            //     //     return true
+            //     // } else {
+            //     //     return false
+            //     // }
+            //     if (event.node) {
+            //         return true
+            //     } else {
+            //         return false
+            //     }
+            // })
         )
     }
 

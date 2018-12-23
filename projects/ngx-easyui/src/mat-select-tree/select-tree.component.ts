@@ -8,9 +8,9 @@ import {
     EuTreeOptions,
     TreeEvent,
     EuTreeService
-} from "ng2-easyui.core";
+} from "ngx-easyui-core";
 import { TreeWrapComponent } from "./tree-wrapper";
-import { FieldBase, UIComponent } from "ng2-easyform";
+import { FieldBase, UIComponent } from "ngx-easyform";
 import { SelectTreeField } from "./select-tree.field";
 import { TreeSelectChange } from "./select-tree.input";
 
@@ -49,7 +49,7 @@ export class DefaultErrorStateMatcher implements ErrorStateMatcher {
         </eu-antd-tree>    
     </tree-wrap>
     `,
-    styles: [`.tree-select .angular-tree-component{
+    styles: [`.tree-select .eu-antd-tree{
         box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);`],
     encapsulation: ViewEncapsulation.None
 

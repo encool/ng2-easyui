@@ -6,4 +6,4 @@
 // export * from './lib/ngx-easyui-core.component';
 // export * from './lib/ngx-easyui-core.module';
 
-export * from './core/index'
+export * from './core'

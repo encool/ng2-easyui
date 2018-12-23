@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ContentChild, TemplateRef, AfterContentInit, EventEmitter } from '@angular/core';
 import { AntdTreeComponent } from "../eu-tree-antd/antd-tree.component";
-import { EuTree } from "ng2-easyui.core";
+import { EuTree } from "ngx-easyui-core";
 @Component({
     selector: 'tree-wrap',
     template: `

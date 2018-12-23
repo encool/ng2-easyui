@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http'
 import {
     EuMenuService, Menu
 } from 'ngx-easyui-core'
-import { resolve } from 'path';
 // } from 'ng2-easyui'
 
 @Injectable()
@@ -75,6 +74,12 @@ export class AppMenuService extends EuMenuService {
                             id: "1",
                             t: "SelectTreeForm",
                             l: "/SelectTreeFormComponent",
+                            i: "",
+                        },
+                        {
+                            id: "1222",
+                            t: "AntSelectTreeDemo",
+                            l: "/AntSelectTreeDemoComponent",
                             i: "",
                         },
                     ]

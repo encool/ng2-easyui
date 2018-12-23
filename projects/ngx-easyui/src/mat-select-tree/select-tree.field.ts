@@ -1,5 +1,5 @@
 import { InputField } from "ngx-easyform";
-import { EuTreeOptions, EuTreeNode } from "ng2-easyui.core";
+import { EuTreeOptions, EuTreeNode } from "ngx-easyui-core";
 
 export class SelectTreeField extends InputField<any>{
 
