@@ -245,7 +245,8 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
     get shouldLabelFloat() {
         // console.log("shouldLabelFloat----", this.focused || !this.empty || this.panelOpen)
         // console.log("focused----", this.focused)
-        // console.log("!empty----", !this.empty)
+        console.log("!empty----", !this.empty)
+        console.log("this.value----", this.value)
         // console.log("panelOpen----", this.panelOpen)
         return this.focused || !this.empty || this.panelOpen;
     }
@@ -296,11 +297,9 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
 
     ngOnInit() {
         this.treeWrap.initialized.subscribe(() => {
-            this.treeWrap.tree.initialized.subscribe(() => {
-                if (this._value) {
-                    this.writeValue(this._value)
-                }
-            })
+            if (this._value) {
+                this.writeValue(this._value)
+            }
         })
     }
 
@@ -456,7 +455,6 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
 
     private _subscribeToClosingActions(): Subscription {
         return this.panelClosingActions.subscribe(event => {
-            debugger
             this._setValueAndClose(event)
         });
     }
@@ -471,10 +469,10 @@ export class SelectTreeInput extends _MatSelectMixinBase implements MatFormField
      * stemmed from the user.
      */
     private _setValueAndClose(event: any | null): void {
-        debugger
         if (event.node) {
             let data = event.node
             if (this._previousValue !== data.id) {
+                this._previousValue = data.id
                 this.triggerValue = data.name
                 this.value = data.id
                 this._onChange(data.id)

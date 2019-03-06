@@ -59,8 +59,10 @@ import { MatPanelDemoComponent } from './mat-panel/mat-panel.demo.component'
 // import { Ng2TreeDemoComponent } from "./ng2-tree/ng2-tree.demo.component";
 import { AntdTreeDemoComponent } from "./antd-tree/antd-tree.demo.component";
 import { TreeModalComponent } from "./antd-tree/tree-modal.component";
-import { SelectTreeDemoComponent } from "./select-tree/select-tree.demo.component";
-import { SelectTreeFormComponent } from "./select-tree/select-tree-form.demo.component";
+import { MatSelectTreeFormComponent } from "./select-tree/mat-select-tree-form.demo.component";
+import { MatSelectTreeDemoComponent } from "./select-tree/mat-select-tree.demo.component";
+
+import { AntSelectTreeFormComponent } from "./select-tree/ant-select-tree-form.demo.component";
 import { AntSelectTreeDemoComponent } from "./select-tree/ant-select-tree.demo.component";
 
 import { IndexComponent } from './index.component'
@@ -80,8 +82,9 @@ import { EntryComponent } from "./entry.component";
     EntryComponent,
     // ModalInfoComponent,
     TreeModalComponent,
-    SelectTreeDemoComponent,
-    SelectTreeFormComponent,
+    MatSelectTreeDemoComponent,
+    AntSelectTreeFormComponent,
+    MatSelectTreeFormComponent,
     AntSelectTreeDemoComponent,
   ],
   imports: [
@@ -101,9 +104,13 @@ import { EntryComponent } from "./entry.component";
         // { path: 'Ng2TreeDemoComponent', component: Ng2TreeDemoComponent, data: { title: "Ng2Tree" } },
         { path: 'AntdTreeDemoComponent', component: AntdTreeDemoComponent, data: { title: "AntdTree" } },
         { path: 'AngTreeDemoComponent', component: AngTreeDemoComponent, data: { title: "angular-tree" } },
-        { path: 'SelectTreeDemoComponent', component: SelectTreeDemoComponent, data: { title: "select-tree" } },
-        { path: 'SelectTreeFormComponent', component: SelectTreeFormComponent, data: { title: "select-tree-form" } },
+
+        { path: 'MatSelectTreeDemoComponent', component: MatSelectTreeDemoComponent, data: { title: "mat-select-tree" } },
+        { path: 'MatSelectTreeFormComponent', component: MatSelectTreeFormComponent, data: { title: "mat-select-tree-form" } },
+
+        { path: 'AntSelectTreeFormComponent', component: AntSelectTreeFormComponent, data: { title: "ant-select-tree-form" } },
         { path: 'AntSelectTreeDemoComponent', component: AntSelectTreeDemoComponent, data: { title: "ant-select-tree-demo" } },
+
         { path: 'EntryComponent', component: EntryComponent, data: { title: "entry" } },
         { path: '**', redirectTo: "EntryComponent" },
       ]

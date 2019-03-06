@@ -3,17 +3,17 @@ import {
     EuTreeNode, EuTreeOptions
     // } from 'ng2-easyui'
 } from 'ngx-easyui-core'
-import { SelectTreeField, SelectTreeComponent } from "ngx-easyui";
+import { MatSelectTreeField, MatSelectTreeComponent } from "ngx-easyui";
 
 @Component({
     selector: 'antd-tree-demo',
     template: `
     <div bsContainer>
         <div bsRow>
-            <eu-tree-select bsCol.sm="4"
+            <mat-select-tree bsCol.sm="4"
                 (treeEvent)="onTreeEvent($event)"
                 [field]="selectTreeField">
-            </eu-tree-select> 
+            </mat-select-tree> 
             <div bsCol.sm="12">
                 <button mat-button (click)="onClick($event)">点击赋值</button>
                 <button mat-button (click)="onCheckClick($event)">点击</button>
@@ -23,14 +23,14 @@ import { SelectTreeField, SelectTreeComponent } from "ngx-easyui";
 
     `
 })
-export class SelectTreeDemoComponent implements OnInit {
+export class MatSelectTreeDemoComponent implements OnInit {
 
     euTreeNodes: EuTreeNode[]
 
     euTreeOptions: EuTreeOptions
-    selectTreeField: SelectTreeField
+    selectTreeField: MatSelectTreeField
 
-    @ViewChild(SelectTreeComponent) selectTree: SelectTreeComponent
+    @ViewChild(MatSelectTreeComponent) selectTree: MatSelectTreeComponent
     constructor() {
         this.euTreeOptions = {
             treeId: "demoTree",
@@ -66,7 +66,7 @@ export class SelectTreeDemoComponent implements OnInit {
                 ]
             }
         ];
-        this.selectTreeField = new SelectTreeField({
+        this.selectTreeField = new MatSelectTreeField({
             key: "test", label: "testname", required: true,
             euTreeOptions: this.euTreeOptions,
             euTreeNodes: this.euTreeNodes

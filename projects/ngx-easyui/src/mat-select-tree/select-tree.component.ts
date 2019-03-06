@@ -11,7 +11,7 @@ import {
 } from "ngx-easyui-core";
 import { TreeWrapComponent } from "./tree-wrapper";
 import { FieldBase, UIComponent } from "ngx-easyform";
-import { SelectTreeField } from "./select-tree.field";
+import { MatSelectTreeField } from "./select-tree.field";
 import { TreeSelectChange } from "./select-tree.input";
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -23,11 +23,11 @@ export class DefaultErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @UIComponent({
-    selector: 'eu-tree-select',
-    component: SelectTreeComponent
+    selector: 'mat-select-tree',
+    component: MatSelectTreeComponent
 })
 @Component({
-    selector: 'eu-tree-select',
+    selector: 'mat-select-tree',
     template: `
     <mat-form-field [bsCol.sm]="span" [bsCol.xs]="12" style="line-height:1" [hidden]="this.field.hidden">
         <select-tree
@@ -54,9 +54,9 @@ export class DefaultErrorStateMatcher implements ErrorStateMatcher {
     encapsulation: ViewEncapsulation.None
 
 })
-export class SelectTreeComponent implements OnInit, AfterViewInit {
+export class MatSelectTreeComponent implements OnInit, AfterViewInit {
     fieldControl: AbstractControl;
-    @Input() field: SelectTreeField
+    @Input() field: MatSelectTreeField
     @Input() form: FormGroup;
 
     label: string

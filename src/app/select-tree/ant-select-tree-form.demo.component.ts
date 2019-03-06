@@ -32,7 +32,7 @@ import { AntSelectTreeField } from "ngx-easyui";
     </div>
 `,
 })
-export class SelectTreeFormComponent {
+export class AntSelectTreeFormComponent {
 
     fields: FieldBase<any>[]
     formvalue: string = "1"

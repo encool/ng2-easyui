@@ -8,7 +8,7 @@ import { EasyFormCoreModule } from "ngx-easyform";
 import { EasyUIAntTreeModule } from "../eu-tree-antd/index";
 import { SelectTreeInput, MAT_AUTOCOMPLETE_SCROLL_STRATEGY_PROVIDER } from './select-tree.input';
 import { AntdTreeComponent } from "../eu-tree-antd/antd-tree.component";
-import { SelectTreeComponent } from "./select-tree.component";
+import { MatSelectTreeComponent } from "./select-tree.component";
 import { TreeWrapComponent } from "./tree-wrapper";
 
 @NgModule({
@@ -24,15 +24,15 @@ import { TreeWrapComponent } from "./tree-wrapper";
         EasyFormCoreModule
     ],
     declarations: [
-        SelectTreeComponent,
+        MatSelectTreeComponent,
         SelectTreeInput,
         TreeWrapComponent
     ],
     exports: [
-        SelectTreeComponent,
+        MatSelectTreeComponent,
         SelectTreeInput
     ],
-    entryComponents: [AntdTreeComponent, SelectTreeComponent]
+    entryComponents: [AntdTreeComponent, MatSelectTreeComponent]
 })
 export class EasyUISelectTreeModule {
     static forRoot(): ModuleWithProviders {
@@ -45,5 +45,5 @@ export class EasyUISelectTreeModule {
     }
 }
 
-export { SelectTreeField } from './select-tree.field'
-export { SelectTreeComponent } from './select-tree.component'
+export { MatSelectTreeField } from './select-tree.field'
+export { MatSelectTreeComponent } from './select-tree.component'

@@ -1,7 +1,7 @@
 import { InputField } from "ngx-easyform";
 import { EuTreeOptions, EuTreeNode } from "ngx-easyui-core";
 
-export class SelectTreeField extends InputField<any>{
+export class MatSelectTreeField extends InputField<any>{
 
     euTreeOptions: EuTreeOptions
     euTreeNodes?: EuTreeNode[]
@@ -10,7 +10,7 @@ export class SelectTreeField extends InputField<any>{
         euTreeNodes?: EuTreeNode[]
     }) {
         super(options)
-        this.selector = "eu-tree-select"
+        this.selector = "mat-select-tree"
         this.euTreeOptions = options.euTreeOptions
         this.euTreeNodes = options.euTreeNodes
     }
