@@ -40,7 +40,7 @@ import { EasyFormMdModule } from 'ngx-easyform'
 
     ],
     entryComponents: [
-
+        AggridComponent
     ]
 })
 export class EasyUIagGridModule { }

@@ -1,0 +1,12 @@
+{
+  "name": "ngx-easyform",
+  "version": "0.0.2",
+  "peerDependencies": {
+    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/material-moment-adapter": "^6.0.0",
+    "moment": "^2.22.2",
+    "ng-zorro-antd": "^1.6.0",
+    "ng2-bootstrap3-grid": "0.0.10"
+  }
+}

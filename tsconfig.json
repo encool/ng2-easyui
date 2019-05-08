@@ -28,7 +28,13 @@
       ],
       "ngx-easyui-core/*": [
         "dist/ngx-easyui-core/*"
-      ]
+      ],
+      "ngx-easyform": [
+        "dist/ngx-easyform"
+      ],
+      "ngx-easyform/*": [
+        "dist/ngx-easyform/*"
+      ],
     }
   }
 }

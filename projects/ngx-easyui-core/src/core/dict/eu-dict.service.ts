@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export abstract class EuDictService {
 
-    constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
     abstract getDictDataMaps(dictNames: string[]): Observable<any>
 

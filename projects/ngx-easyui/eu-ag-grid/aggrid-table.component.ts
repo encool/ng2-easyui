@@ -33,11 +33,15 @@ import { localeText } from './aggrid-local'
 import {
     FieldBase,
     MdFormComponent,
-    QueryOperate
+    QueryOperate,
+    UIComponent
 } from 'ngx-easyform'
 
-// import * as _ from "lodash"
-
+@UIComponent({
+    selector: 'eu-aggrid',
+    component: AggridComponent,
+    name: "表格"
+})
 @Component({
     selector: 'eu-aggrid',
     templateUrl: './aggrid-table.component.html',

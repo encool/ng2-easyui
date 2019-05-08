@@ -1,15 +1,12 @@
-<div [style.width]="tableWidth">
+<div [bsCol.sm]="span" [bsCol.xs]="12" [style.width]="tableWidth">
     <h1>{{euGridOptions.title}}</h1>
     <div style="display: flex;">
         <span style="flex: 1 1 auto;"></span>
-        <button mat-icon-button [color]="action.style"
-            (click)="onAction(action)" *ngFor="let action of euGridOptions.actions">
-            <mat-icon class="mat-24" 
-                [matTooltip]="action.name" 
-                matTooltipPosition="above"
-                [attr.aria-label]="action.name"
-                [attr.title]="action.name">
-                    {{action.icon}}
+        <button mat-icon-button [color]="action.style" (click)="onAction(action)"
+            *ngFor="let action of euGridOptions.actions">
+            <mat-icon class="mat-24" [matTooltip]="action.name" matTooltipPosition="above"
+                [attr.aria-label]="action.name" [attr.title]="action.name">
+                {{action.icon}}
             </mat-icon>
         </button>
     </div>
@@ -22,12 +19,11 @@
     </mat-expansion-panel>
     <!-- class="ag-blue"  -->
     <div class="eu-md-table-container">
-        <ag-grid-angular style="width: 100%;" class="ag-theme-material"
-            [gridOptions]="aggridOptions" (gridReady)="gridReady($event)"
-            (sortChanged)="onSortChanged($event)">
+        <ag-grid-angular style="width: 100%;" class="ag-theme-material" [gridOptions]="aggridOptions"
+            (gridReady)="gridReady($event)" (sortChanged)="onSortChanged($event)">
         </ag-grid-angular>
     </div>
-    <mat-paginator #paginator [length]="length" [pageSize]="pageSize"
-        [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
+    <mat-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+        (page)="pageEvent = $event">
     </mat-paginator>
 </div>

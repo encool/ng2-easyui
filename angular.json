@@ -300,6 +300,41 @@
           }
         }
       }
+    },
+    "ngx-easyform": {
+      "root": "projects/ngx-easyform",
+      "sourceRoot": "projects/ngx-easyform/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-easyform/tsconfig.lib.json",
+            "project": "projects/ngx-easyform/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-easyform/src/test.ts",
+            "tsConfig": "projects/ngx-easyform/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-easyform/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-easyform/tsconfig.lib.json",
+              "projects/ngx-easyform/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "app",
